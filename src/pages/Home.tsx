@@ -14,7 +14,7 @@ export const Home = () => {
         </title>
       </Helmet>
       <LogoWrapper>
-        <StyledLogo src={logo} alt="logo" />
+        {/* <StyledLogo src={logo} alt="logo" /> */}
       </LogoWrapper>
     </>
   );
