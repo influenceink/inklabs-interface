@@ -15,7 +15,7 @@ export const SocialButtonGroup = () => {
           </Typography>
           <Underline />
         </Box>
-        <Box display="flex" gap={3} alignItems='center'>
+        <Box display="flex" gap={3} alignItems="center">
           <SocialButton href="https://twitter.com" target="_blank" rel="noreferrer">
             <img src={twitter} alt="twitter" />
           </SocialButton>
@@ -43,4 +43,4 @@ const Underline = styled('div')`
 const SocialButton = styled('a')`
   display: flex;
   margin: 0 1px;
-`
+`;

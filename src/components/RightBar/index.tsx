@@ -1,13 +1,17 @@
 import { FC, useState } from 'react';
 import { Button, styled } from '@mui/material';
-import arrowLeft from '../../assets/img/arrow-left.png';
+
 import { Roadmap } from './Roadmap';
+
+import arrowLeft from '../../assets/img/arrow-left.png';
 
 export const RightBar: FC = () => {
   const [show, setShow] = useState(false);
+
   const toggleShow = () => {
     setShow((show) => !show);
   };
+
   return (
     <RightBarWrapper>
       <RotatedText>ROADMAP</RotatedText>

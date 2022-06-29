@@ -1,15 +1,18 @@
 import { FC, useState } from 'react';
 import { Button, styled } from '@mui/material';
+
 import playBtn from '../../assets/img/play.png';
 import pauseBtn from '../../assets/img/pause.png';
-import audioBar from '../../assets/img/audio-bar.gif';
 import audioBarStop from '../../assets/img/audio-bar-stop.png';
+import audioBar from '../../assets/img/audio-bar.gif';
 
 export const LeftBar: FC = () => {
   const [play, setPlay] = useState(false);
+
   const togglePlay = () => {
     setPlay((play) => !play);
   };
+
   return (
     <LeftBarWrapper>
       <Playing src={play ? audioBar : audioBarStop} alt="playing" />
@@ -41,6 +44,7 @@ const Line = styled('div')`
   width: 2px;
   background-color: white;
 `;
+
 const RotatedText = styled('p')`
   writing-mode: vertical-rl;
   text-orientation: mixed;

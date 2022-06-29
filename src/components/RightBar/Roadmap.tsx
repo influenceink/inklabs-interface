@@ -1,6 +1,8 @@
 import { Box, styled, Button, Slide, Typography } from '@mui/material';
-import arrowRight from '../../assets/img/arrow-right.png';
+
 import { ROADMAP } from '../../utils/constants';
+
+import arrowRight from '../../assets/img/arrow-right.png';
 
 export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function }) => {
   return (
@@ -8,9 +10,9 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
       <Slide direction="left" in={show} mountOnEnter unmountOnExit>
         <RoadmapWrapper>
           <RotatedLargeText>roadmap</RotatedLargeText>
-          <Box width='500px' display="flex" flexDirection="column" justifyContent="center" gap='2'>
+          <Box width="500px" display="flex" flexDirection="column" justifyContent="center" gap="2">
             {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
-              <Box display="flex" alignItems="center" justifyContent='space-between' key={index}>
+              <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
                 <ul>
                   {step.lists.map((line: string) => (
                     <li key={line}>{line}</li>

@@ -1,15 +1,14 @@
-import { FC } from 'react';
 import { styled } from '@mui/material';
+
 import { SocialButtonGroup } from './SocialButtonGroup';
-import { BottomMenu } from './BottomMenu';
+import { MenuButton } from './MenuButton';
 import { Copyright } from './Copyright';
 
-export const BottomBar = ({lock, setLock}: {lock: boolean, setLock: Function}) => {
-
+export const BottomBar = ({ lock, setLock }: { lock: boolean; setLock: Function }) => {
   return (
     <FootWrapper>
       <SocialButtonGroup />
-      <BottomMenu lock={lock} setLock={setLock} />
+      <MenuButton lock={lock} setLock={setLock} />
       <Copyright />
     </FootWrapper>
   );

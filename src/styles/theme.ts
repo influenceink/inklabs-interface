@@ -36,6 +36,8 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
       },
     },
   });
+
   theme = responsiveFontSizes(theme);
+
   return theme;
 };
