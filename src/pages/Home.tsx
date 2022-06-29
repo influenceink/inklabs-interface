@@ -1,11 +1,9 @@
 import { styled, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
-import logo from '../logo.svg';
 import { APP_TITLE, PAGE_TITLE_HOME } from '../utils/constants';
 
 export const Home = () => {
-
   return (
     <>
       <Helmet>
@@ -13,9 +11,7 @@ export const Home = () => {
           {PAGE_TITLE_HOME} | {APP_TITLE}
         </title>
       </Helmet>
-      <LogoWrapper>
-        {/* <StyledLogo src={logo} alt="logo" /> */}
-      </LogoWrapper>
+      <LogoWrapper>{/* <StyledLogo src={logo} alt="logo" /> */}</LogoWrapper>
     </>
   );
 };
