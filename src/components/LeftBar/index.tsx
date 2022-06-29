@@ -36,6 +36,10 @@ const LeftBarWrapper = styled('div')`
   gap: 12px;
   align-items: center;
   width: 28px;
+  @media screen and (max-width: 660px) {
+    left: 8px;
+    width: 20px;
+  }
 `;
 
 const Line = styled('div')`
@@ -49,14 +53,23 @@ const RotatedText = styled('p')`
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
+  @media screen and (max-width: 660px) {
+    font-size: 8px;
+  }
 `;
 
 const StyledButton = styled(Button)`
   border: none;
   background: transparent;
   cursor: pointer;
+  @media screen and (max-width: 660px) {
+    transform: rotate(-90deg);
+  }
 `;
 
 const Playing = styled('img')`
   width: 28px;
+  @media screen and (max-width: 660px) {
+    transform: rotate(-90deg);
+  }
 `;

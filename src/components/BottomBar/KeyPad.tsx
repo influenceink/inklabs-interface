@@ -126,6 +126,11 @@ const KeyBoard = styled('div')`
   gap: 32px;
   justify-content: center;
   padding: 24px;
+  @media screen and (max-width: 660px) {
+    width: 100%;
+    padding: 12px;
+    gap: 18px;
+  }
 `;
 
 const Key = styled(Button)`
@@ -140,6 +145,15 @@ const Key = styled(Button)`
     max-height: 28px;
     max-width: 28px;
   }
+  // @media screen and (max-width: 660px) {
+  //   min-width: 32px;
+  //   width: 32px;
+  //   height: 32px;
+  //   & > img {
+  //     max-height: 20px;
+  //     max-width: 20px;
+  //   }
+  // }
 `;
 
 const KeyField = styled(TextField)`
@@ -148,6 +162,11 @@ const KeyField = styled(TextField)`
     font-size: 24px;
     padding: 14px;
     text-align: center;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 8px;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+    caret-color: white;
   }
 `;
 

@@ -35,16 +35,27 @@ const RightBarWrapper = styled('div')`
   justify-content: center;
   gap: 12px;
   align-items: flex-end;
+  @media screen and (max-width: 660px) {
+    margin-right: 8px;
+  }
 `;
 
-const RotatedText = styled('p')`
+const RotatedText = styled('span')`
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
+  @media screen and (max-width: 660px) {
+    font-size: 11px;
+  }
 `;
 
 const StyledButton = styled(Button)`
   border: none;
   background: transparent;
   cursor: pointer;
+  @media screen and (max-width: 660px) {
+    img {
+      width: 60px;
+    }
+  }
 `;

@@ -32,6 +32,10 @@ const LogoWrapper = styled('div')`
   display: flex;
   justify-content: center;
   padding-top: 46px;
+  z-index: 10;
+  @media screen and (max-width: 660px) {
+    padding-top: 26px;
+  }
 `;
 const LayoutWrapper = styled('div')`
   min-height: 100vh;

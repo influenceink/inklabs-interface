@@ -22,4 +22,7 @@ const FootWrapper = styled('div')`
   justify-content: space-between;
   align-items: flex-end;
   padding: 0 35px;
+  @media screen and (max-width: 660px) {
+    padding: 0 8px;
+  }
 `;

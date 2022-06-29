@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from '@mui/material';
+import { Box, styled, Typography, useMediaQuery } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
 import { PageContent } from '../components/PageContent';
@@ -16,6 +16,7 @@ const Divider = () => {
 };
 
 export const Mindmap = () => {
+  const xl = useMediaQuery('(max-width: 1660px)');
   return (
     <>
       <Helmet>
@@ -24,7 +25,7 @@ export const Mindmap = () => {
         </title>
       </Helmet>
       <PageContent title={PAGE_TITLE_MINDMAP}>
-        <Box display="flex" gap={6} alignItems="flex-start">
+        <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
           <Box flexGrow={1}>
             <Typography variant="h3">OVERVIEW</Typography>
             <Typography variant="subtitle1">SUB TEXT HERE OR SOME OTHER SUBTITLE</Typography>
@@ -61,12 +62,18 @@ export const Mindmap = () => {
               paid for it.
             </Paragraph>
           </Box>
-          <Box>
+          <Box width="100%" display="flex" justifyContent="center">
             <Image src={mindmap} alt="mindmap" />
           </Box>
         </Box>
-        <Box display="flex" gap={6} alignItems="flex-start" mt={8}>
-          <Box>
+        <Box
+          display="flex"
+          flexDirection={xl ? 'column-reverse' : 'row'}
+          gap={xl ? 2 : 6}
+          alignItems="flex-start"
+          mt={8}
+        >
+          <Box width="100%" display="flex" justifyContent="center">
             <Image src={grayRect} alt="gray" />
           </Box>
           <Box flexGrow={1}>
@@ -114,6 +121,11 @@ export const Mindmap = () => {
 const Image = styled('img')`
   width: 100%;
   min-width: 850px;
+  @media screen and (max-width: 1660px) {
+    width: 100%;
+    max-width: 850px;
+    min-width: 0;
+  }
 `;
 
 const Paragraph = styled(Typography)`
