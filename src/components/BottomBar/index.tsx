@@ -1,15 +1,14 @@
-import { FC } from 'react';
 import { styled } from '@mui/material';
+
 import { SocialButtonGroup } from './SocialButtonGroup';
-import { BottomMenu } from './BottomMenu';
+import { MenuButton } from './MenuButton';
 import { Copyright } from './Copyright';
 
-export const BottomBar = ({lock, setLock}: {lock: boolean, setLock: Function}) => {
-
+export const BottomBar = ({ lock, setLock }: { lock: boolean; setLock: Function }) => {
   return (
     <FootWrapper>
       <SocialButtonGroup />
-      <BottomMenu lock={lock} setLock={setLock} />
+      <MenuButton lock={lock} setLock={setLock} />
       <Copyright />
     </FootWrapper>
   );
@@ -23,4 +22,7 @@ const FootWrapper = styled('div')`
   justify-content: space-between;
   align-items: flex-end;
   padding: 0 35px;
+  @media screen and (max-width: 660px) {
+    padding: 0 8px;
+  }
 `;

@@ -1,20 +1,26 @@
+import React, { useState } from 'react';
 import { Box, styled, TextField, Button, Slide, Snackbar, Alert, SlideProps } from '@mui/material';
+
+import { KEYS } from '../../utils/constants';
+
 import logo from '../../assets/img/logo.png';
 import blueBtn from '../../assets/img/button.png';
 import cross from '../../assets/img/cross.png';
-import { KEYS } from '../../utils/constants';
-import React, { useState } from 'react';
 
 type TransitionProps = Omit<SlideProps, 'direction'>;
+
 const transition = (props: TransitionProps) => {
   return <Slide {...props} direction="left" />;
 };
+
 export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Function; setLock: Function }) => {
   const [code, setCode] = useState('');
+
   const [toastState, setToastState] = useState({
     open: false,
     success: false,
   });
+
   const onKeyClicked = (value: string) => {
     if (value === 'backspace') {
       setCode((code) => code.slice(0, code.length - 1));
@@ -22,6 +28,7 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
     }
     setCode((code) => `${code}${value}`);
   };
+
   const handleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const valid = KEYS.some((key) => key.value === e.key);
     if (e.key !== 'Backspace' && !valid) {
@@ -29,12 +36,14 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
       return;
     }
   };
+
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
     setToastState({ open: false, success: false });
   };
+
   const handleEnter = () => {
     if (code === '123456') {
       setToastState({ open: true, success: true });
@@ -44,13 +53,20 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
       setToastState({ open: true, success: false });
     }
   };
+
   return (
     <>
       <Slide direction="up" in={show} mountOnEnter unmountOnExit>
         <KeyPadWrapper>
           <Box display="flex" flexDirection="column" gap="12px" alignItems="center">
             <img src={logo} alt="logo" />
-            <KeyField id="standard-basic" variant="standard" onChange={(e) => setCode(e.target.value)} onKeyDown={handleChange} value={code} />
+            <KeyField
+              id="standard-basic"
+              variant="standard"
+              onChange={(e) => setCode(e.target.value)}
+              onKeyDown={handleChange}
+              value={code}
+            />
             <KeyBoard>
               {KEYS.map((key: { value: string; image: string }) => (
                 <Key onClick={() => onKeyClicked(key.value)} key={key.value}>
@@ -100,6 +116,7 @@ const KeyPadWrapper = styled('div')`
   position: absolute;
   bottom: -10px;
   left: 0px;
+  z-index: 9999;
 `;
 
 const KeyBoard = styled('div')`
@@ -109,6 +126,11 @@ const KeyBoard = styled('div')`
   gap: 32px;
   justify-content: center;
   padding: 24px;
+  @media screen and (max-width: 660px) {
+    width: 100%;
+    padding: 12px;
+    gap: 18px;
+  }
 `;
 
 const Key = styled(Button)`
@@ -123,6 +145,15 @@ const Key = styled(Button)`
     max-height: 28px;
     max-width: 28px;
   }
+  // @media screen and (max-width: 660px) {
+  //   min-width: 32px;
+  //   width: 32px;
+  //   height: 32px;
+  //   & > img {
+  //     max-height: 20px;
+  //     max-width: 20px;
+  //   }
+  // }
 `;
 
 const KeyField = styled(TextField)`
@@ -131,6 +162,11 @@ const KeyField = styled(TextField)`
     font-size: 24px;
     padding: 14px;
     text-align: center;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 8px;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+    caret-color: white;
   }
 `;
 
