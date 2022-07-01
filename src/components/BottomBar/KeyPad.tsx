@@ -77,9 +77,9 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
               ))}
             </KeyBoard>
             <StyledButton onClick={handleEnter}>ENTER</StyledButton>
-            <Button onClick={() => setShow(false)}>
+            <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
-            </Button>
+            </CloseButton>
           </Box>
         </KeyPadWrapper>
       </Slide>
@@ -105,6 +105,17 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
   );
 };
 
+const CloseButton = styled(Button)`
+  padding: 18px 22px;
+  padding-bottom: 0px;
+  border-radius: 30px 30px 0 0;
+  z-index: 8888;
+  background-color: white;
+  img {
+    filter: invert(1);
+  }
+  margin-top: 12px;
+`;
 const KeyPadWrapper = styled('div')`
   box-sizing: border-box;
   width: 100%;
@@ -113,10 +124,10 @@ const KeyPadWrapper = styled('div')`
   & > div {
     background-color: black;
     border-radius: 15px 15px 0 0;
-    padding: 50px 32px 24px 32px;
+    padding: 50px 32px 0px 32px;
   }
   position: absolute;
-  bottom: -10px;
+  bottom: 0;
   left: 0px;
   z-index: 9999;
 `;

@@ -9,7 +9,7 @@ import background from '../../assets/img/background.png';
 import logo from '../../assets/img/logo-large.png';
 import { Link } from 'react-router-dom';
 export const Layout: FC = ({ children }) => {
-  const [lock, setLock] = useState<boolean>(false);
+  const [lock, setLock] = useState<boolean>(true);
   return (
     <LayoutWrapper>
       {children}
