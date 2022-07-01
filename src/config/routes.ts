@@ -2,16 +2,26 @@ import { Home } from '../pages/Home';
 import { Mindmap } from '../pages/Mindmap';
 import { Platform } from '../pages/Platform';
 import { Vision } from '../pages/Vision';
+import { Enter } from '../pages/Enter';
 
 import { Route } from '../types/Route';
 
 const routes: Array<Route> = [
   {
+    key: 'router-enter',
+    title: 'Enter',
+    description: 'Enter',
+    component: Enter,
+    path: '/',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
     key: 'router-home',
     title: 'Home',
     description: 'Home',
     component: Home,
-    path: '/',
+    path: '/home',
     isEnabled: true,
     appendDivider: true,
   },

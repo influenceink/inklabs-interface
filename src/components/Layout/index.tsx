@@ -14,7 +14,7 @@ export const Layout: FC = ({ children }) => {
     <LayoutWrapper>
       {children}
       <LogoWrapper>
-        <Link to="/">
+        <Link to="/home">
           <img src={logo} alt="logo" />
         </Link>
       </LogoWrapper>
@@ -39,8 +39,10 @@ const LogoWrapper = styled('div')`
 `;
 const LayoutWrapper = styled('div')`
   min-height: 100vh;
-  background: url(${background});
+  background: url(${background}), rgba(0, 0, 0, 0.44);
   background-size: cover;
   position: relative;
   overflow: clip;
+  background-blend-mode: multiply;
+  // background-color: rgba(0, 0, 0, 0.44);
 `;

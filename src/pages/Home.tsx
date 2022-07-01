@@ -1,7 +1,8 @@
-import { styled, Typography } from '@mui/material';
+import { Box, styled, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
 import { APP_TITLE, PAGE_TITLE_HOME } from '../utils/constants';
+import Typewriter from 'typewriter-effect';
 
 export const Home = () => {
   return (
@@ -11,11 +12,51 @@ export const Home = () => {
           {PAGE_TITLE_HOME} | {APP_TITLE}
         </title>
       </Helmet>
-      <LogoWrapper>{/* <StyledLogo src={logo} alt="logo" /> */}</LogoWrapper>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        height="100vh"
+      >
+        <TypeWrapper>
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter.typeString('WELCOME TO INKLABS').pauseFor(3000).deleteAll().start();
+            }}
+            options={{
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </TypeWrapper>
+        <Typography variant="subtitle1">SUBTEXT HERE OR SOME OTHER WELCOME MESSAGE</Typography>
+      </Box>
     </>
   );
 };
-
+const TypeWrapper = styled('div')`
+  & > div {
+    display: flex;
+  }
+  span {
+    font-size: 90px;
+    font-family: 'SuiGeneris';
+    line-height: 90px;
+    font-weight: bold;
+  }
+  padding: 0 120px;
+  text-align: center;
+  @media (max-width: 600px) {
+    span {
+      font-size: 24px;
+      font-family: 'SuiGeneris';
+      line-height: 24px;
+    }
+    padding: 0 96px
+  },
+`;
 const LogoWrapper = styled('div')`
   text-align: center;
   // margin-top: 6rem;

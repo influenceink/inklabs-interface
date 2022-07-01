@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Button, styled } from '@mui/material';
+import { Button, styled, Typography } from '@mui/material';
 
 import { Roadmap } from './Roadmap';
 
@@ -14,11 +14,11 @@ export const RightBar: FC = () => {
 
   return (
     <RightBarWrapper>
-      <RotatedText>ROADMAP</RotatedText>
+      <RotatedText variant="caption">ROADMAP</RotatedText>
       <StyledButton onClick={toggleShow}>
         <img src={arrowLeft} alt="roadmap" />
       </StyledButton>
-      <RotatedText>INKLABS</RotatedText>
+      <RotatedText variant="caption">INKLABS</RotatedText>
       <Roadmap show={show} setShow={toggleShow} />
     </RightBarWrapper>
   );
@@ -40,13 +40,10 @@ const RightBarWrapper = styled('div')`
   }
 `;
 
-const RotatedText = styled('span')`
+const RotatedText = styled(Typography)`
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
-  @media screen and (max-width: 660px) {
-    font-size: 11px;
-  }
 `;
 
 const StyledButton = styled(Button)`
