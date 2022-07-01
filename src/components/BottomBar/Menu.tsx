@@ -1,68 +1,62 @@
 import { Link } from 'react-router-dom';
-import { Box, styled, Button, Slide } from '@mui/material';
+import { Box, styled, Button, Slide, Typography } from '@mui/material';
 import leftBar from '../../assets/img/left-border.png';
 import cross from '../../assets/img/cross.png';
 import logo from '../../assets/img/logo-large.png';
+import { useEffect } from 'react';
+import { Experiences } from './MenuAreas/Experiences';
+import { Games } from './MenuAreas/Games';
+import { Platform } from './MenuAreas/Platform';
+import { Territories } from './MenuAreas/Territories';
+import { Vision } from './MenuAreas/Vision';
+import { Bridge } from './MenuAreas/Bridge';
+import { Coin } from './MenuAreas/Coin';
 
 export const Menu = ({ show, setShow }: { show: boolean; setShow: Function }) => {
   return (
     <>
       <Slide direction="up" in={show} mountOnEnter unmountOnExit>
         <MenuWrapper>
-          <Box position="relative" display="flex" flexDirection="column" gap="12px" alignItems="center">
+          <Box
+            position="relative"
+            display="flex"
+            flexDirection="column"
+            maxWidth="2000px"
+            width="100%"
+            gap="12px"
+            alignItems="center"
+          >
             <LeftBorder src={leftBar} alt="border" />
             <MenuBar>
-              <LogoWrapper>
-                <Link to="/" onClick={() => setShow(false)}>
-                  <img src={logo} alt="logo" />
-                </Link>
-              </LogoWrapper>
-              <Link to="/mindmap">
-                <Button onClick={() => setShow(false)}>MINDMAP</Button>
-              </Link>
-              <Link to="/vision">
-                <Button onClick={() => setShow(false)}>VISION</Button>
-              </Link>
-              <Link to="/platform">
-                <Button onClick={() => setShow(false)}>PLATFORM</Button>
-              </Link>
-              <Link to="/inkcoin">
-                <Button onClick={() => setShow(false)}>INK COIN</Button>
-              </Link>
-              <Link to="/cryptoclub">
-                <Button onClick={() => setShow(false)}>CRYPTO CLUB</Button>
-              </Link>
-              <Link to="/games">
-                <Button onClick={() => setShow(false)}>GAMES</Button>
-              </Link>
-              <Link to="/inkzips">
-                <Button onClick={() => setShow(false)}>INK ZIPS</Button>
-              </Link>
+              <Experiences />
+              <Bridge />
+              <Games />
+              <Platform />
+              <Coin />
+              <Territories />
+              <Vision />
             </MenuBar>
-            <Button onClick={() => setShow(false)}>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <Typography variant="caption">CLICK ON EACH ITEM TO VIEW MORE DETAILS</Typography>
+              <PageTitleText>mindmAp</PageTitleText>
+            </Box>
+            <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
-            </Button>
+            </CloseButton>
           </Box>
         </MenuWrapper>
       </Slide>
     </>
   );
 };
-
-const LogoWrapper = styled('div')`
-  width: 100%;
-  display: none;
-  justify-content: center;
-  padding-top: 46px;
-  z-index: 9999;
-  @media screen and (max-width: 1320px) {
-    border: 0px dotted #a6a6a6;
-    border-bottom-width: 2px;
-    img {
-      width: 110px;
-    }
-    padding: 12px 0;
-    display: flex;
+const CloseButton = styled(Button)`
+  padding: 18px 22px;
+  padding-bottom: 0px;
+  border-radius: 30px 30px 0 0;
+  z-index: 8888;
+  background-color: white;
+  img {
+    filter: invert(1);
   }
 `;
 
@@ -74,10 +68,10 @@ const MenuWrapper = styled('div')`
   & > div {
     background-color: black;
     border-radius: 15px 15px 0 0;
-    padding: 4px 64px 24px 64px;
+    padding: 4px 64px 0px 64px;
   }
   position: absolute;
-  bottom: -10px;
+  bottom: 0px;
   left: 0px;
   z-index: 8888;
   @media screen and (max-width: 1320px) {
@@ -90,7 +84,7 @@ const MenuWrapper = styled('div')`
 const LeftBorder = styled('img')`
   position: absolute;
   left: -22px;
-  top: 0px;
+  bottom: -290px;
   display: block;
   @media screen and (max-width: 1320px) {
     display: none;
@@ -98,29 +92,31 @@ const LeftBorder = styled('img')`
 `;
 
 const MenuBar = styled('div')`
-  border: 0px solid #a6a6a6;
-  border-bottom-width: 2px;
+  max-width: 1350px;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 36px;
+  border: 0px solid white;
+  border-bottom-width: 2px;
   padding: 12px 0;
-  gap: 100px;
-  button,
-  a {
-    text-decoration: none;
-    color: white;
-    font-size: 12px;
-    width: 100%;
-  }
-  @media screen and (max-width: 1320px) {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    border-bottom-width: 0px;
-    button,
-    a {
-      text-align: center;
-      font-size: 16px;
-      font-weight: bold;
-    }
+`;
+
+const PageTitleText = styled('span')`
+  text-align: center;
+  font-size: 90px;
+  color: rgba(0, 0, 0);
+  // text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+  text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
+    -1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 rgba(255, 255, 255, 0.4);
+  font-family: 'Brolink';
+  margin: 0;
+  line-height: 90px;
+  padding-top: 10px;
+  @media screen and (max-width: 660px) {
+    font-size: 50px;
+    line-height: 52px;
+    padding: 0;
   }
 `;

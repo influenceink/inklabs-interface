@@ -11,9 +11,7 @@ export const SocialButtonGroup = () => {
     <>
       <Box display="flex" flexDirection="column" gap={1} mb={3}>
         <Box display="flex" gap={2} mx={1} alignItems="center">
-          <Typography paragraph fontSize={8} mb={0}>
-            FOLLOW US
-          </Typography>
+          <Typography variant="caption">FOLLOW US</Typography>
           <Underline />
         </Box>
         <Box display="flex" gap={sm ? 1.5 : 3} alignItems="center">
@@ -44,6 +42,7 @@ const Underline = styled('div')`
 const SocialButton = styled('a')`
   display: flex;
   margin: 0 1px;
+  z-index: 2222;
   @media screen and (max-width: 660px) {
     img {
       width: 16px;

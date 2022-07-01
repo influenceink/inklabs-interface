@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Button, styled } from '@mui/material';
+import { Button, styled, Typography } from '@mui/material';
 
 import playBtn from '../../assets/img/play.png';
 import pauseBtn from '../../assets/img/pause.png';
@@ -20,7 +20,7 @@ export const LeftBar: FC = () => {
         <img src={play ? pauseBtn : playBtn} alt="play" />
       </StyledButton>
       <Line />
-      <RotatedText>TURN ON SOUNDS</RotatedText>
+      <RotatedText variant="caption">TURN ON SOUNDS</RotatedText>
     </LeftBarWrapper>
   );
 };
@@ -33,7 +33,7 @@ const LeftBarWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
   width: 28px;
   @media screen and (max-width: 660px) {
@@ -49,16 +49,15 @@ const Line = styled('div')`
   background-color: white;
 `;
 
-const RotatedText = styled('p')`
+const RotatedText = styled(Typography)`
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
-  @media screen and (max-width: 660px) {
-    font-size: 8px;
-  }
 `;
 
 const StyledButton = styled(Button)`
+  padding-top: 0;
+  padding-bottom: 0;
   border: none;
   background: transparent;
   cursor: pointer;

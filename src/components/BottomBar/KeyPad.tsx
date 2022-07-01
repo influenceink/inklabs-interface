@@ -6,6 +6,7 @@ import { KEYS } from '../../utils/constants';
 import logo from '../../assets/img/logo.png';
 import blueBtn from '../../assets/img/button.png';
 import cross from '../../assets/img/cross.png';
+import { useHistory } from 'react-router-dom';
 
 type TransitionProps = Omit<SlideProps, 'direction'>;
 
@@ -20,7 +21,7 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
     open: false,
     success: false,
   });
-
+  const history = useHistory();
   const onKeyClicked = (value: string) => {
     if (value === 'backspace') {
       setCode((code) => code.slice(0, code.length - 1));
@@ -49,6 +50,7 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
       setToastState({ open: true, success: true });
       setLock(false);
       setShow(false);
+      history.push('/home');
     } else {
       setToastState({ open: true, success: false });
     }
