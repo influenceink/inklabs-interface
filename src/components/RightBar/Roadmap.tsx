@@ -13,11 +13,11 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
       <Slide direction="left" in={show} mountOnEnter unmountOnExit>
         <RoadmapWrapper>
           <LogoWrapper>
-            <Link to="/" onClick={() => setShow(false)}>
+            <Link to="/home" onClick={() => setShow(false)}>
               <img src={logo} alt="logo" />
             </Link>
           </LogoWrapper>
-          <RotatedLargeText>roadmap</RotatedLargeText>
+          <RotatedLargeText>roAdmAp</RotatedLargeText>
           <Box width={sm ? '100%' : '500px'} display="flex" flexDirection="column" justifyContent="center" gap="2">
             {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
               <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
@@ -31,11 +31,11 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
             ))}
           </Box>
           <RightBarWrapper>
-            <RotatedSmallText>ROADMAP</RotatedSmallText>
+            <RotatedSmallText variant="caption">ROADMAP</RotatedSmallText>
             <StyledButton onClick={() => setShow()}>
               <img src={arrowRight} alt="roadmap" />
             </StyledButton>
-            <RotatedSmallText>INKLABS</RotatedSmallText>
+            <RotatedSmallText variant="caption">INKLABS</RotatedSmallText>
           </RightBarWrapper>
         </RoadmapWrapper>
       </Slide>
@@ -126,9 +126,6 @@ const RotatedSmallText = styled(Typography)`
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
-  @media screen and (max-width: 780px) {
-    font-size: 11px;
-  }
 `;
 
 const StyledButton = styled(Button)`
