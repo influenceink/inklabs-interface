@@ -1,7 +1,8 @@
-import { styled } from '@mui/material';
+import { styled, useMediaQuery } from '@mui/material';
 
-export const Territories = () => {
-  return (
+export const Territories = ({ onMenuClick }: { onMenuClick: Function }) => {
+  const sm = useMediaQuery('(max-width: 1350px)');
+  return !sm ? (
     <SVG
       id="territories"
       xmlns="http://www.w3.org/2000/svg"
@@ -425,6 +426,33 @@ export const Territories = () => {
             TERRITORIES
           </tspan>
         </text>
+      </g>
+    </SVG>
+  ) : (
+    <SVG xmlns="http://www.w3.org/2000/svg" width="128.006" height="85.497" viewBox="0 0 128.006 85.497">
+      <g id="zips" transform="translate(-280.713 -362.217)">
+        <text
+          id="ZIPS-2"
+          data-name="ZIPS"
+          transform="translate(351 406.5)"
+          fill="#fff"
+          fontSize="12"
+          fontFamily="SegoeUI, Segoe UI"
+        >
+          <tspan x="-11.566" y="0">
+            ZIPS
+          </tspan>
+        </text>
+        <path
+          id="Path_476"
+          data-name="Path 476"
+          d="M2081.781,1595.073c27.9-42.2,1.462-83.975,1.462-83.975l125.074.137v84.358s-126.65-.2-126.7-.193A2.933,2.933,0,0,1,2081.781,1595.073Z"
+          transform="translate(-1800.099 -1148.38)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
       </g>
     </SVG>
   );

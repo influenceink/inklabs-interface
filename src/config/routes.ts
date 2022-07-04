@@ -1,7 +1,7 @@
 import { Home } from '../pages/Home';
 import { Mindmap } from '../pages/Mindmap';
 import { Platform } from '../pages/Platform';
-import { Vision } from '../pages/Vision';
+import { Coin } from '../pages/Coin';
 import { Enter } from '../pages/Enter';
 
 import { Route } from '../types/Route';
@@ -35,11 +35,11 @@ const routes: Array<Route> = [
     appendDivider: true,
   },
   {
-    key: 'router-vision',
-    title: 'Vision',
-    description: 'Vision',
-    component: Vision,
-    path: '/vision',
+    key: 'router-coin',
+    title: 'Coin',
+    description: 'Coin',
+    component: Coin,
+    path: '/coin',
     isEnabled: true,
     appendDivider: true,
   },

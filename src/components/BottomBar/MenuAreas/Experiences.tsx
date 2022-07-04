@@ -1,7 +1,8 @@
-import { styled } from '@mui/material';
+import { styled, useMediaQuery } from '@mui/material';
 
-export const Experiences = () => {
-  return (
+export const Experiences = ({ onMenuClick }: { onMenuClick: Function }) => {
+  const sm = useMediaQuery('(max-width: 1350px)');
+  return !sm ? (
     <SVG
       id="experiences"
       xmlns="http://www.w3.org/2000/svg"
@@ -771,6 +772,38 @@ export const Experiences = () => {
             EXPERIENCES
           </tspan>
         </text>
+      </g>
+    </SVG>
+  ) : (
+    <SVG xmlns="http://www.w3.org/2000/svg" width="186.514" height="85.576" viewBox="0 0 186.514 85.576">
+      <g id="cryptoclub" transform="translate(-21.253 -173.664)">
+        <text
+          id="CRYPTO_CLUB"
+          data-name="CRYPTO
+  CLUB"
+          transform="translate(109 216)"
+          fill="#fff"
+          fontSize="12"
+          fontFamily="SegoeUI, Segoe UI"
+          letterSpacing="0.12em"
+        >
+          <tspan x="-24.855" y="0">
+            CRYPTO
+          </tspan>
+          <tspan x="-16.143" y="12.1">
+            CLUB
+          </tspan>
+        </text>
+        <path
+          id="Path_481"
+          data-name="Path 481"
+          d="M189.678,86.115V3.5H4.622V88.077H189.969A7.029,7.029,0,0,1,189.678,86.115Z"
+          transform="translate(17.131 170.663)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
       </g>
     </SVG>
   );

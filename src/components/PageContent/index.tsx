@@ -1,6 +1,6 @@
 import { Box, styled, Slide, useMediaQuery } from '@mui/material';
 import { ReactNode } from 'react';
-import logo from '../../assets/img/logo-large.png';
+import logo from '../../assets/img/logo.png';
 import { Link } from 'react-router-dom';
 
 interface PageProps {
@@ -76,7 +76,7 @@ const PageTitleText = styled('p')`
   text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
     -1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 rgba(255, 255, 255, 0.4);
   font-family: 'Brolink';
-  margin: 10px 0;
+  margin: 14px 0;
   padding: 8px 0;
   line-height: 102px;
   @media screen and (max-width: 660px) {

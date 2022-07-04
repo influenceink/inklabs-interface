@@ -4,7 +4,7 @@ import { ROADMAP } from '../../utils/constants';
 
 import arrowRight from '../../assets/img/arrow-right.png';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/img/logo-large.png';
+import logo from '../../assets/img/logo.png';
 
 export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function }) => {
   const sm = useMediaQuery('(max-width: 780px)');
