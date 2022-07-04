@@ -1,7 +1,8 @@
-import { styled } from '@mui/material';
+import { styled, useMediaQuery } from '@mui/material';
 
-export const Games = () => {
-  return (
+export const Games = ({ onMenuClick }: { onMenuClick: Function }) => {
+  const sm = useMediaQuery('(max-width: 1350px)');
+  return !sm ? (
     <SVG
       xmlns="http://www.w3.org/2000/svg"
       // xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -2615,6 +2616,34 @@ export const Games = () => {
             GAMES
           </tspan>
         </text>
+      </g>
+    </SVG>
+  ) : (
+    <SVG xmlns="http://www.w3.org/2000/svg" width="193.123" height="85.576" viewBox="0 0 193.123 85.576">
+      <g id="games" transform="translate(-215.765 -173.664)">
+        <text
+          id="GAMES-2"
+          data-name="GAMES"
+          transform="translate(313 222)"
+          fill="#fff"
+          fontSize="12"
+          fontFamily="SegoeUI, Segoe UI"
+          letterSpacing="0.12em"
+        >
+          <tspan x="-22.477" y="0">
+            GAMES
+          </tspan>
+        </text>
+        <path
+          id="Path_482"
+          data-name="Path 482"
+          d="M1561.51,3.5V86.114a6.857,6.857,0,0,1-.287,1.961h191.953V3.5Z"
+          transform="translate(-1344.788 170.664)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
       </g>
     </SVG>
   );

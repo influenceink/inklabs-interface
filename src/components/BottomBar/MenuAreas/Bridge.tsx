@@ -1,7 +1,8 @@
-import { styled } from '@mui/material';
+import { styled, useMediaQuery } from '@mui/material';
 
-export const Bridge = () => {
-  return (
+export const Bridge = ({ onMenuClick }: { onMenuClick: Function }) => {
+  const sm = useMediaQuery('(max-width: 1350px)');
+  return !sm ? (
     <SVG
       id="bridge"
       xmlns="http://www.w3.org/2000/svg"
@@ -57,17 +58,43 @@ export const Bridge = () => {
         </text>
       </g>
     </SVG>
+  ) : (
+    <SVG xmlns="http://www.w3.org/2000/svg" width="387.635" height="82.95" viewBox="0 0 387.635 82.95">
+      <g id="bridge" transform="translate(-21.253 -268.175)">
+        <text
+          id="BRIDGE-2"
+          data-name="BRIDGE"
+          transform="translate(214 303)"
+          fill="#fff"
+          fontSize="12"
+          fontFamily="SegoeUI, Segoe UI"
+          letterSpacing="0.12em"
+        >
+          <tspan x="-23.583" y="0">
+            BRIDGE
+          </tspan>
+        </text>
+        <path
+          id="Path_480"
+          data-name="Path 480"
+          d="M259.075,841.1c-.148-.217-23.132-26.6-61.961-26.6-40.15,0-58.741,26.022-59.317,26.6-.042.042-133.174,0-133.174,0V759.17H391.258V841.1S259.108,841.15,259.075,841.1Z"
+          transform="translate(17.13 -490.495)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
+      </g>
+    </SVG>
   );
 };
 
 const SVG = styled('svg')`
-  & > g:hover {
-    path {
-      fill: #ffffff;
-    }
-    text {
-      fill: #000000;
-    }
+  & > g:hover path {
+    fill: #ffffff;
+  }
+  & > g:hover text {
+    fill: #000000;
   }
   & > g {
     cursor: pointer;

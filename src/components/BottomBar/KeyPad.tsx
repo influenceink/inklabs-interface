@@ -141,8 +141,9 @@ const KeyBoard = styled('div')`
   padding: 24px;
   @media screen and (max-width: 660px) {
     width: 100%;
+    max-width: 340px;
     padding: 12px;
-    gap: 18px;
+    gap: 24px;
   }
 `;
 

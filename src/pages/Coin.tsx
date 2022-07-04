@@ -2,7 +2,7 @@ import { Box, styled, Typography, useMediaQuery } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
 import { PageContent } from '../components/PageContent';
-import { APP_TITLE, PAGE_TITLE_VISION } from '../utils/constants';
+import { APP_TITLE, PAGE_TITLE_MINDMAP } from '../utils/constants';
 import grayRect from '../assets/img/gray-rect.png';
 
 const Divider = () => {
@@ -14,19 +14,19 @@ const Divider = () => {
   );
 };
 
-export const Vision = () => {
+export const Coin = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
   return (
     <>
       <Helmet>
         <title>
-          {PAGE_TITLE_VISION} | {APP_TITLE}
+          {PAGE_TITLE_MINDMAP} | {APP_TITLE}
         </title>
       </Helmet>
-      <PageContent title={PAGE_TITLE_VISION}>
+      <PageContent title={PAGE_TITLE_MINDMAP}>
         <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
           <Box flexGrow={1}>
-            <Typography variant="h3">OVERVIEW</Typography>
+            <Typography variant="h1">tokenomics</Typography>
             <Typography variant="subtitle1">SUB TEXT HERE OR SOME OTHER SUBTITLE</Typography>
             <Divider />
             <Paragraph paragraph>
@@ -76,7 +76,7 @@ export const Vision = () => {
             <Image src={grayRect} alt="gray" />
           </Box>
           <Box flexGrow={1}>
-            <Typography variant="h3">NEXT HEADER</Typography>
+            <Typography variant="h1">vision</Typography>
             <Typography variant="subtitle1">SUB TEXT HERE OR SOME OTHER SUBTITLE</Typography>
             <Divider />
             <Paragraph paragraph>

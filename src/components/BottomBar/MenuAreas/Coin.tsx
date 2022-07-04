@@ -1,7 +1,8 @@
-import { styled } from '@mui/material';
+import { styled, useMediaQuery } from '@mui/material';
 
-export const Coin = () => {
-  return (
+export const Coin = ({ onMenuClick }: { onMenuClick: Function }) => {
+  const sm = useMediaQuery('(max-width: 1350px)');
+  return !sm ? (
     <SVG
       id="coin_main"
       data-name="coin main"
@@ -24,7 +25,14 @@ export const Coin = () => {
           />
         </clipPath>
       </defs>
-      <g id="Group_982" data-name="Group 982" clipPath="url(#clip-path-c)">
+      <g
+        id="Group_982"
+        data-name="Group 982"
+        clipPath="url(#clip-path-c)"
+        onClick={() => {
+          onMenuClick('/coin');
+        }}
+      >
         <path
           id="Path_2453"
           data-name="Path 2453"
@@ -49,6 +57,40 @@ export const Coin = () => {
         </text>
       </g>
     </SVG>
+  ) : (
+    <SVG xmlns="http://www.w3.org/2000/svg" width="131.531" height="131.531" viewBox="0 0 131.531 131.531">
+      <g
+        id="coin"
+        transform="translate(-149.143 -339.223)"
+        onClick={() => {
+          onMenuClick('/coin');
+        }}
+      >
+        <text
+          id="COIN-2"
+          data-name="COIN"
+          transform="translate(215 406.5)"
+          fill="#fff"
+          fontSize="12"
+          fontFamily="SegoeUI, Segoe UI"
+          letterSpacing="0.12em"
+        >
+          <tspan x="-16.322" y="0">
+            COIN
+          </tspan>
+        </text>
+        <path
+          id="Path_478"
+          data-name="Path 478"
+          d="M1157.1,1383.531q-.048-.35-.1-.7a65.274,65.274,0,0,0-129.112,0c-.034.233-.068.466-.1.7a66.017,66.017,0,0,0-.609,8.978,65.05,65.05,0,0,0,8.661,32.517c.135.234.274.466.412.7a64.873,64.873,0,0,0,6.034,8.543c.243.291.486.582.735.869q1.567,1.812,3.275,3.521a65.21,65.21,0,0,0,92.3,0q1.708-1.708,3.275-3.521c.248-.287.492-.578.735-.869a64.85,64.85,0,0,0,6.034-8.543c.138-.233.277-.464.412-.7a65.046,65.046,0,0,0,8.661-32.517A66.017,66.017,0,0,0,1157.1,1383.531Z"
+          transform="translate(-877.536 -987.52)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
+      </g>
+    </SVG>
   );
 };
 
@@ -66,4 +108,7 @@ const SVG = styled('svg')`
   }
   margin: -86px 4px -51px 4px;
   z-index: 9999;
+  
+  @media screen and (max-width: 1350px) {
+    margin: -24px -9px -23px -9px;
 `;
