@@ -6,7 +6,7 @@ import { LeftBar } from '../LeftBar';
 import { RightBar } from '../RightBar';
 
 import background from '../../assets/img/background.png';
-import logo from '../../assets/img/logo-large.png';
+import logo from '../../assets/img/logo.png';
 import { Link } from 'react-router-dom';
 export const Layout: FC = ({ children }) => {
   const [lock, setLock] = useState<boolean>(true);

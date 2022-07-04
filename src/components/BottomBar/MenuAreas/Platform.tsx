@@ -1,7 +1,8 @@
-import { styled } from '@mui/material';
+import { styled, useMediaQuery } from '@mui/material';
 
-export const Platform = () => {
-  return (
+export const Platform = ({ onMenuClick }: { onMenuClick: Function }) => {
+  const sm = useMediaQuery('(max-width: 1350px)');
+  return !sm ? (
     <SVG
       id="platform"
       xmlns="http://www.w3.org/2000/svg"
@@ -4505,6 +4506,33 @@ export const Platform = () => {
             PLATFORM
           </tspan>
         </text>
+      </g>
+    </SVG>
+  ) : (
+    <SVG xmlns="http://www.w3.org/2000/svg" width="127.683" height="85.497" viewBox="0 0 127.683 85.497">
+      <g id="platform" transform="translate(-21.112 -362.217)">
+        <text
+          id="PLATFORM-2"
+          data-name="PLATFORM"
+          transform="translate(76 406.5)"
+          fill="#fff"
+          fontSize="12"
+          fontFamily="SegoeUI, Segoe UI"
+        >
+          <tspan x="-29.373" y="0">
+            PLATFORM
+          </tspan>
+        </text>
+        <path
+          id="Path_477"
+          data-name="Path 477"
+          d="M129.713,1595.073c-27.9-42.2-1.462-83.975-1.462-83.975L3.5,1511.235v84.358s126.326-.2,126.375-.193A3.011,3.011,0,0,0,129.713,1595.073Z"
+          transform="translate(18.112 -1148.38)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
       </g>
     </SVG>
   );
