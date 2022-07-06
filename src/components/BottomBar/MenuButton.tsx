@@ -1,5 +1,5 @@
-import { ReactElement, useState } from 'react';
-import { styled, Button, Box } from '@mui/material';
+import { ReactElement, useEffect, useState } from 'react';
+import { styled, Button, Box, Collapse } from '@mui/material';
 
 import { KeyPad } from './KeyPad';
 import { Menu } from './Menu';
@@ -14,7 +14,7 @@ export const MenuButton = ({ lock, setLock }: { lock: boolean; setLock: Function
   const [showKeyPad, setShowKeyPad] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
-  console.log(pathname);
+  const [showLine, setShowLine] = useState(false);
   const handleClick = () => {
     if (lock) {
       setShowKeyPad(true);
@@ -22,17 +22,26 @@ export const MenuButton = ({ lock, setLock }: { lock: boolean; setLock: Function
       setShowMenu(true);
     }
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setShowLine(!showLine);
+    }, 2000);
+  }, [showLine]);
   const Toggler = ({ children }: { children: ReactElement }) => {
     if (pathname === '/' || pathname === '/home') return <MenuToggler onClick={handleClick}>{children}</MenuToggler>;
     else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
   };
   return (
     <MenuButtonWrapper>
-      <Box display="flex" flexDirection="column" gap={1} alignItems="center">
+      <Box display="flex" flexDirection="column" gap={0.5} alignItems="center">
         <Bounce>
           <img src={open} alt="open" />
         </Bounce>
-        <img src={dotLine} alt="dotline" />
+        <Box minHeight={110}>
+          <Collapse in={showLine} timeout={1000}>
+            <img src={dotLine} alt="dotline" />
+          </Collapse>
+        </Box>
         <Toggler>{!lock ? <img src={arrowTop} alt="arrow" /> : <img src={unlock} alt="unlock" />}</Toggler>
       </Box>
       <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} />
@@ -63,20 +72,20 @@ const LightToggler = styled(MenuToggler)`
   }
 `;
 const Bounce = styled('div')`
-  @keyframes bounce2 {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(20px);
-    }
-    60% {
-      transform: translateY(10px);
-    }
-  }
-  animation: bounce2 2s ease infinite;
+  // @keyframes bounce2 {
+  //   0%,
+  //   20%,
+  //   50%,
+  //   80%,
+  //   100% {
+  //     transform: translateY(0);
+  //   }
+  //   40% {
+  //     transform: translateY(20px);
+  //   }
+  //   60% {
+  //     transform: translateY(10px);
+  //   }
+  // }
+  // animation: bounce2 2s ease infinite;
 `;

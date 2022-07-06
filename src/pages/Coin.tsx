@@ -25,7 +25,7 @@ export const Coin = () => {
       </Helmet>
       <PageContent title={PAGE_TITLE_MINDMAP}>
         <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
-          <Box flexGrow={1}>
+          <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
             <Typography variant="h1">tokenomics</Typography>
             <Typography variant="subtitle1">SUB TEXT HERE OR SOME OTHER SUBTITLE</Typography>
             <Divider />

@@ -68,6 +68,7 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
               onChange={(e) => setCode(e.target.value)}
               onKeyDown={handleChange}
               value={code}
+              placeholder="default: 123456"
             />
             <KeyBoard>
               {KEYS.map((key: { value: string; image: string }) => (
@@ -181,6 +182,11 @@ const KeyField = styled(TextField)`
     letter-spacing: 8px;
     text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
     caret-color: white;
+  }
+  input::placeholder {
+    text-shadow: none;
+    color: white;
+    font-weight: normal;
   }
 `;
 

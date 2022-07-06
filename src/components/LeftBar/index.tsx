@@ -1,26 +1,33 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect, useMemo } from 'react';
 import { Button, styled, Typography } from '@mui/material';
 
 import playBtn from '../../assets/img/play.png';
 import pauseBtn from '../../assets/img/pause.png';
 import audioBarStop from '../../assets/img/audio-bar-stop.png';
 import audioBar from '../../assets/img/audio-bar.gif';
+import backSound from '../../assets/audio/atmospheric-tech.mp3';
 
 export const LeftBar: FC = () => {
   const [play, setPlay] = useState(false);
-
+  const audio = useMemo(() => new Audio(backSound), []);
   const togglePlay = () => {
     setPlay((play) => !play);
   };
+  useEffect(() => {
+    play ? audio.play() : audio.pause();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [play]);
 
   return (
     <LeftBarWrapper>
-      <Playing src={play ? audioBar : audioBarStop} alt="playing" />
       <StyledButton onClick={togglePlay}>
-        <img src={play ? pauseBtn : playBtn} alt="play" />
+        <Playing src={play ? audioBar : audioBarStop} alt="playing" />
+        <StyledImg>
+          <img src={play ? pauseBtn : playBtn} alt="play" />
+        </StyledImg>
+        <Line />
+        <RotatedText variant="caption">TURN {!play ? 'ON' : 'OFF'} SOUNDS</RotatedText>
       </StyledButton>
-      <Line />
-      <RotatedText variant="caption">TURN ON SOUNDS</RotatedText>
     </LeftBarWrapper>
   );
 };
@@ -41,7 +48,15 @@ const LeftBarWrapper = styled('div')`
     width: 20px;
   }
 `;
-
+const StyledButton = styled(Button)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  padding: 24px 0;
+  color: white;
+`;
 const Line = styled('div')`
   max-height: 40px;
   height: 40px;
@@ -55,12 +70,15 @@ const RotatedText = styled(Typography)`
   transform: rotate(180deg);
 `;
 
-const StyledButton = styled(Button)`
+const StyledImg = styled('div')`
   padding-top: 0;
   padding-bottom: 0;
   border: none;
   background: transparent;
-  cursor: pointer;
+  // cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media screen and (max-width: 660px) {
     transform: rotate(-90deg);
   }
