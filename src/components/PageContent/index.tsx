@@ -22,7 +22,7 @@ export const PageContent = (props: PageProps) => {
               {children}
             </Box>
             <Divider />
-            <PageTitleText>{title?.toLowerCase()}</PageTitleText>
+            <PageTitleText>{title?.toLowerCase().replaceAll('a', 'A')}</PageTitleText>
           </PageWrapper>
         </Box>
       </Slide>

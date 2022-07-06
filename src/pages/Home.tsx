@@ -23,15 +23,17 @@ export const Home = () => {
         <TypeWrapper>
           <Typewriter
             onInit={(typewriter) => {
-              typewriter.typeString('WELCOME TO INKLABS').pauseFor(3000).deleteAll().start();
+              typewriter.typeString('WELCOME TO INKLABS').start();
             }}
             options={{
               autoStart: true,
-              loop: true,
+              loop: false,
             }}
           />
         </TypeWrapper>
-        <Typography variant="subtitle1">SUBTEXT HERE OR SOME OTHER WELCOME MESSAGE</Typography>
+        <Typography px="80px" textAlign="center" variant="subtitle1">
+          SUBTEXT HERE OR SOME OTHER WELCOME MESSAGE
+        </Typography>
       </Box>
     </>
   );
@@ -42,7 +44,6 @@ const TypeWrapper = styled('div')`
   }
   span {
     font-size: 90px;
-    font-family: 'SuiGeneris';
     line-height: 90px;
     font-weight: bold;
   }
@@ -50,11 +51,10 @@ const TypeWrapper = styled('div')`
   text-align: center;
   @media (max-width: 600px) {
     span {
-      font-size: 24px;
-      font-family: 'SuiGeneris';
-      line-height: 24px;
+      font-size: 42px;
+      line-height: 42px;
     }
-    padding: 0 96px
+    padding: 0 80px
   },
 `;
 const LogoWrapper = styled('div')`

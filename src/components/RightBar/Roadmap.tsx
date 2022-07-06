@@ -70,6 +70,7 @@ const RoadmapWrapper = styled('div')`
   li {
     font-size: 18px;
   }
+  padding-left: 32px;
   @media screen and (max-width: 780px) {
     li {
       font-size: 11px;
@@ -77,6 +78,7 @@ const RoadmapWrapper = styled('div')`
     width: 100vw;
     position: fixed;
     left: 0px;
+    padding-left: 0;
   }
 `;
 
