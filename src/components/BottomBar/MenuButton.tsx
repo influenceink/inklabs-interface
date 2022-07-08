@@ -37,7 +37,7 @@ export const MenuButton = ({ lock, setLock }: { lock: boolean; setLock: Function
         <Bounce>
           <img src={open} alt="open" />
         </Bounce>
-        <Box minHeight={110}>
+        <Box minHeight={112}>
           <Collapse in={showLine} timeout={1000}>
             <img src={dotLine} alt="dotline" />
           </Collapse>
@@ -61,7 +61,7 @@ const MenuButtonWrapper = styled('div')`
 
 const MenuToggler = styled(Button)`
   padding: 18px 22px;
-  border-radius: 30px 30px 0 0;
+  border-radius: 35px 35px 0 0;
   background-color: black;
   z-index: 8888;
 `;

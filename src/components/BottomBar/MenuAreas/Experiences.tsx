@@ -777,23 +777,6 @@ export const Experiences = ({ onMenuClick }: { onMenuClick: Function }) => {
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="186.514" height="85.576" viewBox="0 0 186.514 85.576">
       <g id="cryptoclub" transform="translate(-21.253 -173.664)">
-        <text
-          id="CRYPTO_CLUB"
-          data-name="CRYPTO
-  CLUB"
-          transform="translate(109 216)"
-          fill="#fff"
-          fontSize="12"
-          fontFamily="SegoeUI, Segoe UI"
-          letterSpacing="0.12em"
-        >
-          <tspan x="-24.855" y="0">
-            CRYPTO
-          </tspan>
-          <tspan x="-16.143" y="12.1">
-            CLUB
-          </tspan>
-        </text>
         <path
           id="Path_481"
           data-name="Path 481"
@@ -804,6 +787,19 @@ export const Experiences = ({ onMenuClick }: { onMenuClick: Function }) => {
           strokeMiterlimit="10"
           strokeWidth="1"
         />
+        <text
+          id="CRYPTO_CLUB"
+          data-name="CRYPTO CLUB"
+          transform="translate(109 216)"
+          fill="#fff"
+          fontSize="12"
+          fontFamily="SegoeUI, Segoe UI"
+          letterSpacing="0.12em"
+        >
+          <tspan x="-34" y="5">
+            EXPERIENCES
+          </tspan>
+        </text>
       </g>
     </SVG>
   );
@@ -814,9 +810,6 @@ const SVG = styled('svg')`
     fill: #ffffff;
   }
   & > g:hover text {
-    fill: #000000;
-  }
-  & > g {
-    cursor: pointer;
+    fill: #000000 !important;
   }
 `;
