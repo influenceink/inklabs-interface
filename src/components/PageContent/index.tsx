@@ -22,7 +22,7 @@ export const PageContent = (props: PageProps) => {
               {children}
             </Box>
             <Divider />
-            <PageTitleText>{title?.toLowerCase().replaceAll('a', 'A')}</PageTitleText>
+            <PageTitleText>{title?.toUpperCase().replaceAll('A', 'a')}</PageTitleText>
           </PageWrapper>
         </Box>
       </Slide>
@@ -70,7 +70,7 @@ const Divider = styled('div')`
 
 const PageTitleText = styled('p')`
   text-align: center;
-  font-size: 100px;
+  font-size: 90px;
   color: rgba(0, 0, 0);
   // text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
   text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
@@ -78,9 +78,9 @@ const PageTitleText = styled('p')`
   font-family: 'Brolink';
   margin: 14px 0;
   padding: 8px 0;
-  line-height: 102px;
+  line-height: 90px;
   @media screen and (max-width: 660px) {
-    font-size: 50px;
+    font-size: 42px;
     line-height: 52px;
     padding: 0;
   }

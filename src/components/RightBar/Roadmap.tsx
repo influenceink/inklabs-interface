@@ -17,7 +17,7 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
               <img src={logo} alt="logo" />
             </Link>
           </LogoWrapper>
-          <RotatedLargeText>roAdmAp</RotatedLargeText>
+          <RotatedLargeText>ROaDMaP</RotatedLargeText>
           <Box width={sm ? '100%' : '500px'} display="flex" flexDirection="column" justifyContent="center" gap="2">
             {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
               <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
@@ -87,10 +87,10 @@ const RotatedLargeText = styled('p')`
   text-orientation: mixed;
   transform: rotate(180deg);
   text-align: center;
-  font-size: 110px;
+  font-size: 90px;
+  line-height: 90px;
   margin: 0;
   color: black;
-  // text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
   text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
     -1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 rgba(255, 255, 255, 0.4);
   font-family: 'Brolink';

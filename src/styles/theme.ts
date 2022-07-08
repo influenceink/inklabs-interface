@@ -62,21 +62,22 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
     fontWeight: 900,
     textTransform: 'uppercase',
     overflowWrap: 'anywhere',
+    lineHeight: '90px',
     '@media (max-width: 660px)': {
       fontSize: '42px',
+      lineHeight: '42px'
     },
   }
   theme.typography.subtitle1 = {
-    fontSize: '13px',
+    fontSize: '15px',
     fontFamily: 'Montserrat',
-    fontWeight: 900,
+    fontWeight: 'bold',
+    lineHeight: '17px',
     textTransform: 'uppercase',
-    fontKerning: 'none',
     '@media (max-width: 660px)': {
-      fontSize: '15px',
+      fontSize: '13px',
       fontWeight: 'bold',
       lineHeight: '20px',
-      fontKerning: 'normal'
     },
   }
   theme.typography.caption = {
@@ -91,11 +92,10 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
   theme.typography.body1 = {
     fontSize: '13px',
     fontFamily: 'Montserrat',
-    fontKerning: 'normal',
+    lineHeight: '23px',
     '@media (max-width: 660px)': {
-      fontSize: '13px',
-      linkHeight: '20px',
-      fontWeight: 'bold'
+      fontSize: '12px',
+      linkHeight: '19px',
     },
   }
 

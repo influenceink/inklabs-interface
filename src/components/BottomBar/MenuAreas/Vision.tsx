@@ -345,6 +345,16 @@ export const Vision = ({ onMenuClick }: { onMenuClick: Function }) => {
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="387.635" height="100.317" viewBox="0 0 387.635 100.317">
       <g id="vision" transform="translate(-21.253 -457.017)">
+        <path
+          id="Path_479"
+          data-name="Path 479"
+          d="M259.075,2269.069c-.148.217-23.132,26.6-61.961,26.6-40.15,0-58.741-26.022-59.317-26.6-.042-.042-133.174,0-133.174,0v99.3H391.258v-99.3S259.108,2269.021,259.075,2269.069Z"
+          transform="translate(17.13 -1811.534)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
         <text
           id="VISION-2"
           data-name="VISION"
@@ -358,16 +368,6 @@ export const Vision = ({ onMenuClick }: { onMenuClick: Function }) => {
             VISION
           </tspan>
         </text>
-        <path
-          id="Path_479"
-          data-name="Path 479"
-          d="M259.075,2269.069c-.148.217-23.132,26.6-61.961,26.6-40.15,0-58.741-26.022-59.317-26.6-.042-.042-133.174,0-133.174,0v99.3H391.258v-99.3S259.108,2269.021,259.075,2269.069Z"
-          transform="translate(17.13 -1811.534)"
-          fill="none"
-          stroke="#fff"
-          strokeMiterlimit="10"
-          strokeWidth="1"
-        />
       </g>
     </SVG>
   );
@@ -379,9 +379,6 @@ const SVG = styled('svg')`
   }
   & > g:hover text {
     fill: #000000;
-  }
-  & > g {
-    cursor: pointer;
   }
   margin-top: 12px;
   @media screen and (max-width: 1350px) {

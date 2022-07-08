@@ -109,7 +109,7 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
 const CloseButton = styled(Button)`
   padding: 18px 22px;
   padding-bottom: 0px;
-  border-radius: 30px 30px 0 0;
+  border-radius: 35px 35px 0 0;
   z-index: 8888;
   background-color: white;
   img {

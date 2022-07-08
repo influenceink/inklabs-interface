@@ -423,7 +423,7 @@ export const Territories = ({ onMenuClick }: { onMenuClick: Function }) => {
           letterSpacing="0.12em"
         >
           <tspan x="-61.425" y="0">
-            TERRITORIES
+            INK ZIPS
           </tspan>
         </text>
       </g>
@@ -431,6 +431,16 @@ export const Territories = ({ onMenuClick }: { onMenuClick: Function }) => {
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="128.006" height="85.497" viewBox="0 0 128.006 85.497">
       <g id="zips" transform="translate(-280.713 -362.217)">
+        <path
+          id="Path_476"
+          data-name="Path 476"
+          d="M2081.781,1595.073c27.9-42.2,1.462-83.975,1.462-83.975l125.074.137v84.358s-126.65-.2-126.7-.193A2.933,2.933,0,0,1,2081.781,1595.073Z"
+          transform="translate(-1800.099 -1148.38)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
         <text
           id="ZIPS-2"
           data-name="ZIPS"
@@ -443,16 +453,6 @@ export const Territories = ({ onMenuClick }: { onMenuClick: Function }) => {
             ZIPS
           </tspan>
         </text>
-        <path
-          id="Path_476"
-          data-name="Path 476"
-          d="M2081.781,1595.073c27.9-42.2,1.462-83.975,1.462-83.975l125.074.137v84.358s-126.65-.2-126.7-.193A2.933,2.933,0,0,1,2081.781,1595.073Z"
-          transform="translate(-1800.099 -1148.38)"
-          fill="none"
-          stroke="#fff"
-          strokeMiterlimit="10"
-          strokeWidth="1"
-        />
       </g>
     </SVG>
   );
@@ -464,8 +464,5 @@ const SVG = styled('svg')`
   }
   & > g:hover text {
     fill: #000000;
-  }
-  & > g {
-    cursor: pointer;
   }
 `;
