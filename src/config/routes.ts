@@ -1,27 +1,27 @@
-import {
-  Home as HomeIcon,
-  BarChartOutlined as DashboardIcon,
-  CodeOutlined as CodeIcon,
-  GitHub as GitHubIcon,
-  Public as PublicIcon,
-  PublicOff as PrivateIcon,
-  AccountBoxRounded as UserIcon,
-  SettingsOutlined as SettingsIcon,
-  ListAlt as ListIcon,
-  CreditCard as BillingIcon,
-} from '@mui/icons-material';
-
 import { Home } from '../pages/Home';
+import { Mindmap } from '../pages/Mindmap';
+import { Platform } from '../pages/Platform';
+import { Coin } from '../pages/Coin';
+import { Enter } from '../pages/Enter';
 
 import { Route } from '../types/Route';
 
 const routes: Array<Route> = [
   {
+    key: 'router-enter',
+    title: 'Enter',
+    description: 'Enter',
+    component: Enter,
+    path: '/',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
     key: 'router-home',
     title: 'Home',
     description: 'Home',
     component: Home,
-    path: '/',
+    path: '/home',
     isEnabled: true,
     appendDivider: true,
   },
@@ -29,7 +29,26 @@ const routes: Array<Route> = [
     key: 'router-mind',
     title: 'Mindmap',
     description: 'Mindmap',
+    component: Mindmap,
     path: '/mindmap',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-coin',
+    title: 'Coin',
+    description: 'Coin',
+    component: Coin,
+    path: '/coin',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-platform',
+    title: 'Platform',
+    description: 'Platform',
+    component: Platform,
+    path: '/platform',
     isEnabled: true,
     appendDivider: true,
   },

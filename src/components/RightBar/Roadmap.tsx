@@ -1,16 +1,26 @@
-import { Box, styled, Button, Slide, Typography } from '@mui/material';
-import arrowRight from '../../assets/img/arrow-right.png';
+import { Box, styled, Button, Slide, Typography, useMediaQuery } from '@mui/material';
+
 import { ROADMAP } from '../../utils/constants';
 
+import arrowRight from '../../assets/img/arrow-right.png';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/img/logo.png';
+
 export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function }) => {
+  const sm = useMediaQuery('(max-width: 780px)');
   return (
     <>
       <Slide direction="left" in={show} mountOnEnter unmountOnExit>
         <RoadmapWrapper>
-          <RotatedLargeText>roadmap</RotatedLargeText>
-          <Box width='500px' display="flex" flexDirection="column" justifyContent="center" gap='2'>
+          <LogoWrapper>
+            <Link to="/home" onClick={() => setShow(false)}>
+              <img src={logo} alt="logo" />
+            </Link>
+          </LogoWrapper>
+          <RotatedLargeText>ROaDMaP</RotatedLargeText>
+          <Box width={sm ? '100%' : '500px'} display="flex" flexDirection="column" justifyContent="center" gap="2">
             {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
-              <Box display="flex" alignItems="center" justifyContent='space-between' key={index}>
+              <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
                 <ul>
                   {step.lists.map((line: string) => (
                     <li key={line}>{line}</li>
@@ -21,11 +31,11 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
             ))}
           </Box>
           <RightBarWrapper>
-            <RotatedSmallText>ROADMAP</RotatedSmallText>
+            <RotatedSmallText variant="caption">ROADMAP</RotatedSmallText>
             <StyledButton onClick={() => setShow()}>
               <img src={arrowRight} alt="roadmap" />
             </StyledButton>
-            <RotatedSmallText>INKLABS</RotatedSmallText>
+            <RotatedSmallText variant="caption">INKLABS</RotatedSmallText>
           </RightBarWrapper>
         </RoadmapWrapper>
       </Slide>
@@ -33,8 +43,23 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
   );
 };
 
+const LogoWrapper = styled('div')`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  padding-top: 46px;
+  z-index: 10;
+  @media screen and (max-width: 780px) {
+    padding-top: 26px;
+    display: flex;
+  }
+`;
+
 const RoadmapWrapper = styled('div')`
-  box-sizing: border-box;
+  // box-sizing: border-box;
   height: 100vh;
   display: flex;
   position: absolute;
@@ -45,6 +70,16 @@ const RoadmapWrapper = styled('div')`
   li {
     font-size: 18px;
   }
+  padding-left: 32px;
+  @media screen and (max-width: 780px) {
+    li {
+      font-size: 11px;
+    }
+    width: 100vw;
+    position: fixed;
+    left: 0px;
+    padding-left: 0;
+  }
 `;
 
 const RotatedLargeText = styled('p')`
@@ -52,11 +87,16 @@ const RotatedLargeText = styled('p')`
   text-orientation: mixed;
   transform: rotate(180deg);
   text-align: center;
-  font-size: 110px;
+  font-size: 90px;
+  line-height: 90px;
   margin: 0;
   color: black;
-  text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+  text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
+    -1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 rgba(255, 255, 255, 0.4);
   font-family: 'Brolink';
+  @media screen and (max-width: 780px) {
+    display: none;
+  }
 `;
 
 const RotatedBaseText = styled(Typography)`
@@ -66,6 +106,10 @@ const RotatedBaseText = styled(Typography)`
   text-align: center;
   font-size: 17px;
   margin: 0;
+  font-weight: bold;
+  @media screen and (max-width: 780px) {
+    font-size: 11px;
+  }
 `;
 
 const RightBarWrapper = styled('div')`
@@ -75,6 +119,9 @@ const RightBarWrapper = styled('div')`
   justify-content: center;
   gap: 12px;
   align-items: flex-end;
+  @media screen and (max-width: 780px) {
+    margin-right: 8px;
+  }
 `;
 
 const RotatedSmallText = styled(Typography)`
@@ -87,4 +134,9 @@ const StyledButton = styled(Button)`
   border: none;
   background: transparent;
   cursor: pointer;
+  @media screen and (max-width: 780px) {
+    img {
+      width: 60px;
+    }
+  }
 `;
