@@ -16,7 +16,6 @@ const transition = (props: TransitionProps) => {
 
 export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Function; setLock: Function }) => {
   const [code, setCode] = useState('');
-
   const [toastState, setToastState] = useState({
     open: false,
     success: false,
@@ -68,7 +67,7 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
               onChange={(e) => setCode(e.target.value)}
               onKeyDown={handleChange}
               value={code}
-              placeholder="default: 123456"
+              placeholder={process.env.NODE_ENV === 'development' ? "default: 123456" : ""}
             />
             <KeyBoard>
               {KEYS.map((key: { value: string; image: string }) => (
