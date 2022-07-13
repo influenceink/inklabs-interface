@@ -25,13 +25,9 @@ jobs:
       - uses: actions/checkout@v2
 
       # Step 2 : verification yarn install
-      - name: yarn install for Server
-        run: |
-          yarn ci
 
       - name: yarn install and build
         run: |
-          yarn ci
           yarn run build
           echo 'CLIENT DONE'
           ls
