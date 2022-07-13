@@ -1,11 +1,10 @@
-import { styled, Typography } from '@mui/material';
+import { Box, styled, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
-import logo from '../logo.svg';
 import { APP_TITLE, PAGE_TITLE_HOME } from '../utils/constants';
+import Typewriter from 'typewriter-effect';
 
 export const Home = () => {
-
   return (
     <>
       <Helmet>
@@ -13,30 +12,48 @@ export const Home = () => {
           {PAGE_TITLE_HOME} | {APP_TITLE}
         </title>
       </Helmet>
-      <LogoWrapper>
-        <StyledLogo src={logo} alt="logo" />
-      </LogoWrapper>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        height="100vh"
+      >
+        <TypeWrapper>
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter.typeString('WELCOME TO INKLABS').start();
+            }}
+            options={{
+              autoStart: true,
+              loop: false,
+            }}
+          />
+        </TypeWrapper>
+        <Typography px="80px" textAlign="center" variant="subtitle1">
+          SUBTEXT HERE OR SOME OTHER WELCOME MESSAGE
+        </Typography>
+      </Box>
     </>
   );
 };
-
-const LogoWrapper = styled('div')`
+const TypeWrapper = styled('div')`
+  & > div {
+    display: flex;
+  }
+  span {
+    font-size: 90px;
+    line-height: 90px;
+    font-weight: bold;
+  }
+  padding: 0 120px;
   text-align: center;
-  // margin-top: 6rem;
-`;
-
-const StyledLogo = styled('img')`
-  height: 40vmin;
-  pointer-events: none;
-  @media (prefers-reduced-motion: no-preference) {
-    animation: App-logo-spin infinite 15s linear;
-  }
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
+  @media (max-width: 600px) {
+    span {
+      font-size: 42px;
+      line-height: 42px;
     }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+    padding: 0 80px
+  },
 `;
