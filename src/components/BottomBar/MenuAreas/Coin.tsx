@@ -1,6 +1,8 @@
 import { styled, useMediaQuery } from '@mui/material';
-
-export const Coin = ({ onMenuClick }: { onMenuClick: Function }) => {
+interface Props {
+  onMenuClick: (path: string) => void
+}
+export const Coin = ({ onMenuClick }: Props) => {
   const sm = useMediaQuery('(max-width: 1350px)');
   return !sm ? (
     <SVG

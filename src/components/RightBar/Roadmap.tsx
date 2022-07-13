@@ -6,7 +6,11 @@ import arrowRight from '../../assets/img/arrow-right.png';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 
-export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function }) => {
+interface Props {
+  show: boolean
+  setShow: (value: boolean) => void
+}
+export const Roadmap = ({ show, setShow }: Props) => {
   const sm = useMediaQuery('(max-width: 780px)');
   return (
     <>
@@ -32,7 +36,7 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
           </Box>
           <RightBarWrapper>
             <RotatedSmallText variant="caption">ROADMAP</RotatedSmallText>
-            <StyledButton onClick={() => setShow()}>
+            <StyledButton onClick={() => setShow(false)}>
               <img src={arrowRight} alt="roadmap" />
             </StyledButton>
             <RotatedSmallText variant="caption">INKLABS</RotatedSmallText>

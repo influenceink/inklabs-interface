@@ -4,7 +4,15 @@
         "plugin:import/errors",
         "plugin:react/recommended",
         "plugin:jsx-a11y/recommended",
-        "plugin:react-hooks/recommended"       
+        "plugin:react-hooks/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint",
+        "react",
+        "import",
+        "jsx-a11y"
     ],
     "rules": {
         "react/prop-types": 0,
@@ -12,13 +20,6 @@
         "import/no-unresolved": 0,
         "no-unused-vars": 0
     },
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "react",
-        "import",
-        "jsx-a11y",
-        "@typescript-eslint"
-    ],
     "parserOptions": {
         "ecmaVersion": 2021,
         "sourceType": "module",
