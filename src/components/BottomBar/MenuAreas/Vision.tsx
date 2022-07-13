@@ -1,6 +1,9 @@
-import { Box, styled, useMediaQuery } from '@mui/material';
+import { styled, useMediaQuery } from '@mui/material';
+interface Props {
+  onMenuClick: (path: string) => void
+}
 
-export const Vision = ({ onMenuClick }: { onMenuClick: Function }) => {
+export const Vision = ({ onMenuClick }: Props) => {
   const sm = useMediaQuery('(max-width: 1350px)');
   return !sm ? (
     <SVG
