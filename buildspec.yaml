@@ -6,6 +6,7 @@ phases:
   pre_build:
     commands:
       #installs dependencies into the node_modules/ directory
+      - node -v
       - yarn
   build:
     commands:
