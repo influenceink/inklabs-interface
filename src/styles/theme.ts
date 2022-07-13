@@ -5,7 +5,7 @@ import { DARK_MODE_THEME, LIGHT_MODE_THEME } from '../utils/constants';
 import Montserrat from '../assets/font/Montserrat-Regular.ttf';
 import MontserratExtraBold from '../assets/font/Montserrat-ExtraBold.ttf';
 import Brolink from '../assets/font/Brolink-Regular.otf';
-import SuiGeneris from '../assets/font/sui-generis-rg.otf'
+import SuiGeneris from '../assets/font/sui-generis-rg.otf';
 
 export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THEME) => {
   let theme = createTheme({
@@ -13,7 +13,7 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
       mode,
     },
     typography: {
-      fontFamily: 'Montserrat'
+      fontFamily: 'Montserrat',
     },
     components: {
       MuiCssBaseline: {
@@ -65,9 +65,9 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
     lineHeight: '90px',
     '@media (max-width: 660px)': {
       fontSize: '42px',
-      lineHeight: '42px'
+      lineHeight: '42px',
     },
-  }
+  };
   theme.typography.subtitle1 = {
     fontSize: '15px',
     fontFamily: 'Montserrat',
@@ -79,7 +79,7 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
       fontWeight: 'bold',
       lineHeight: '20px',
     },
-  }
+  };
   theme.typography.caption = {
     fontSize: '10px',
     fontFamily: 'Montserrat',
@@ -88,7 +88,7 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
     '@media (max-width: 660px)': {
       fontSize: '8px',
     },
-  }
+  };
   theme.typography.body1 = {
     fontSize: '13px',
     fontFamily: 'Montserrat',
@@ -97,7 +97,7 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
       fontSize: '12px',
       linkHeight: '19px',
     },
-  }
+  };
 
   return theme;
 };

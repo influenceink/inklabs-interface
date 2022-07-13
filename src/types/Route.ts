@@ -52,7 +52,8 @@ export type Route = {
    * @example
    * "<Dashboard />"
    */
-  component?: FC<{}>;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  component?: FC;
 
   /**
    * The status of the route

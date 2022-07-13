@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 
 interface Props {
-  show: boolean
-  setShow: (value: boolean) => void
+  show: boolean;
+  setShow: (value: boolean) => void;
 }
 export const Roadmap = ({ show, setShow }: Props) => {
   const sm = useMediaQuery('(max-width: 780px)');
