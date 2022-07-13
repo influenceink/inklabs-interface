@@ -1,5 +1,8 @@
 version: 0.2
 phases:
+  install:
+    runtime-version:
+      nodejs: 16
   pre_build:
     commands:
       #installs dependencies into the node_modules/ directory
