@@ -10,8 +10,8 @@ import dotLine from '../../assets/img/dot-line.png';
 import open from '../../assets/img/open.png';
 import { useLocation } from 'react-router-dom';
 interface Props {
-  lock: boolean
-  setLock: (value: boolean) => void
+  lock: boolean;
+  setLock: (value: boolean) => void;
 }
 
 export const MenuButton = ({ lock, setLock }: Props) => {

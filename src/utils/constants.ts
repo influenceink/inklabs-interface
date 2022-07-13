@@ -1,4 +1,3 @@
-
 import one from '../assets/img/1.png';
 import two from '../assets/img/2.png';
 import three from '../assets/img/3.png';
@@ -29,53 +28,53 @@ export const LIGHT_MODE_THEME = 'light';
 export const KEYS = [
   {
     value: '1',
-    image: one
+    image: one,
   },
   {
     value: '2',
-    image: two
+    image: two,
   },
   {
     value: '3',
-    image: three
+    image: three,
   },
   {
     value: '0',
-    image: zero
+    image: zero,
   },
   {
     value: '4',
-    image: four
+    image: four,
   },
   {
     value: '5',
-    image: five
+    image: five,
   },
   {
     value: '6',
-    image: six
+    image: six,
   },
   {
     value: '-',
-    image: minus
+    image: minus,
   },
   {
     value: '7',
-    image: seven
+    image: seven,
   },
   {
     value: '8',
-    image: eight
+    image: eight,
   },
   {
     value: '9',
-    image: nine
+    image: nine,
   },
   {
     value: 'backspace',
-    image: cross
+    image: cross,
   },
-]
+];
 
 export const ROADMAP = [
   {
@@ -85,8 +84,8 @@ export const ROADMAP = [
       'INK white paper',
       'INK District NFTs private pre-sale',
       '$INK (coin) private offering',
-      'Prize Kingdoms (P2E) technical launch'
-    ]
+      'Prize Kingdoms (P2E) technical launch',
+    ],
   },
   {
     status: 'IN PROGRESS',
@@ -98,16 +97,15 @@ export const ROADMAP = [
       'INK Crypto Club (alpha)',
       'Prize Kingdoms (P2E) worldwide launch',
       'In-house NFT collections development',
-      'NFT project partnerships'
-
-    ]
+      'NFT project partnerships',
+    ],
   },
   {
     status: 'PLANNED',
     lists: [
       'INK Districts functionality expansion',
       'New game project (TBA)',
-      'Advanced platform analytics & gamification'
+      'Advanced platform analytics & gamification',
     ],
-  }
-]
+  },
+];

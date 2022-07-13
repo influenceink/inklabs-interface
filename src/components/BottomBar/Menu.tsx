@@ -12,8 +12,8 @@ import { Vision } from './MenuAreas/Vision';
 import { Bridge } from './MenuAreas/Bridge';
 import { Coin } from './MenuAreas/Coin';
 interface Props {
-  show: boolean
-  setShow: (value: boolean) => void
+  show: boolean;
+  setShow: (value: boolean) => void;
 }
 
 export const Menu = ({ show, setShow }: Props) => {

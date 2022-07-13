@@ -14,9 +14,9 @@ const transition = (props: TransitionProps) => {
   return <Slide {...props} direction="left" />;
 };
 interface Props {
-  show: boolean
-  setShow: (value: boolean) => void
-  setLock: (value: boolean) => void
+  show: boolean;
+  setShow: (value: boolean) => void;
+  setLock: (value: boolean) => void;
 }
 export const KeyPad = ({ show, setShow, setLock }: Props) => {
   const [code, setCode] = useState('');
@@ -71,7 +71,7 @@ export const KeyPad = ({ show, setShow, setLock }: Props) => {
               onChange={(e) => setCode(e.target.value)}
               onKeyDown={handleChange}
               value={code}
-              placeholder={process.env.NODE_ENV === 'development' ? "default: 123456" : ""}
+              placeholder={process.env.NODE_ENV === 'development' ? 'default: 123456' : ''}
             />
             <KeyBoard>
               {KEYS.map((key: { value: string; image: string }) => (
