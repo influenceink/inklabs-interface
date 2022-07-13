@@ -13,8 +13,12 @@ type TransitionProps = Omit<SlideProps, 'direction'>;
 const transition = (props: TransitionProps) => {
   return <Slide {...props} direction="left" />;
 };
-
-export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Function; setLock: Function }) => {
+interface Props {
+  show: boolean
+  setShow: (value: boolean) => void
+  setLock: (value: boolean) => void
+}
+export const KeyPad = ({ show, setShow, setLock }: Props) => {
   const [code, setCode] = useState('');
   const [toastState, setToastState] = useState({
     open: false,

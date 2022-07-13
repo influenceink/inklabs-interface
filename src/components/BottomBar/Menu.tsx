@@ -11,8 +11,12 @@ import { Territories } from './MenuAreas/Territories';
 import { Vision } from './MenuAreas/Vision';
 import { Bridge } from './MenuAreas/Bridge';
 import { Coin } from './MenuAreas/Coin';
+interface Props {
+  show: boolean
+  setShow: (value: boolean) => void
+}
 
-export const Menu = ({ show, setShow }: { show: boolean; setShow: Function }) => {
+export const Menu = ({ show, setShow }: Props) => {
   const mobile = useMediaQuery('(max-width: 1350px)');
   const history = useHistory();
   const goTo = (path: string) => {

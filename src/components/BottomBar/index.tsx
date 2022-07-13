@@ -3,8 +3,12 @@ import { styled } from '@mui/material';
 import { SocialButtonGroup } from './SocialButtonGroup';
 import { MenuButton } from './MenuButton';
 import { Copyright } from './Copyright';
+interface Props {
+  lock: boolean
+  setLock: (value: boolean) => void
+}
 
-export const BottomBar = ({ lock, setLock }: { lock: boolean; setLock: Function }) => {
+export const BottomBar = ({ lock, setLock }: Props) => {
   return (
     <FootWrapper>
       <SocialButtonGroup />

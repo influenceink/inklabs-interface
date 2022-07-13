@@ -9,8 +9,12 @@ import unlock from '../../assets/img/unlock.png';
 import dotLine from '../../assets/img/dot-line.png';
 import open from '../../assets/img/open.png';
 import { useLocation } from 'react-router-dom';
+interface Props {
+  lock: boolean
+  setLock: (value: boolean) => void
+}
 
-export const MenuButton = ({ lock, setLock }: { lock: boolean; setLock: Function }) => {
+export const MenuButton = ({ lock, setLock }: Props) => {
   const [showKeyPad, setShowKeyPad] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
