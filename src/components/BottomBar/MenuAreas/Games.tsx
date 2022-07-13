@@ -1,6 +1,6 @@
 import { styled, useMediaQuery } from '@mui/material';
 interface Props {
-  onMenuClick: (path: string) => void
+  onMenuClick: (path: string) => void;
 }
 export const Games = ({ onMenuClick }: Props) => {
   const sm = useMediaQuery('(max-width: 1350px)');

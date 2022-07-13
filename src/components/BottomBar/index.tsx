@@ -4,8 +4,8 @@ import { SocialButtonGroup } from './SocialButtonGroup';
 import { MenuButton } from './MenuButton';
 import { Copyright } from './Copyright';
 interface Props {
-  lock: boolean
-  setLock: (value: boolean) => void
+  lock: boolean;
+  setLock: (value: boolean) => void;
 }
 
 export const BottomBar = ({ lock, setLock }: Props) => {
