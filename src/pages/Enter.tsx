@@ -23,7 +23,7 @@ export const Enter = () => {
         <TypeWrapper>
           <Typewriter
             onInit={(typewriter) => {
-              typewriter.typeString('ENTER THE INKLABS').start();
+              typewriter.typeString('ENTER THE LAB').start();
             }}
             options={{
               autoStart: true,
