@@ -5,11 +5,6 @@ on:
     branches:
       - staging
 
-env:
-  applicationfolder: spring-boot-hello-world-example
-  AWS_REGION: ##region##
-  S3BUCKET: ##s3-bucket##
-
 jobs:
   build:
     # The type of runner that the job will run on
