@@ -6,7 +6,7 @@ on:
       - staging
 
 jobs:
-  build:
+  Deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -27,19 +27,11 @@ jobs:
           ls
         env:
           CI: false
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout the code
-        uses: actions/checkout@v1
-
       - name: Deploy to my EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: "/home/ec2-user/sample-upload"
+          TARGET: "/home/ec2-user/inklabs-build"
+          SOURCE: "./build"
