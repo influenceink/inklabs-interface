@@ -37,8 +37,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
