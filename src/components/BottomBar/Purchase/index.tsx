@@ -37,9 +37,9 @@ export const Purchase = ({ show, setShow }: Props) => {
             {/* <CreateId /> */}
             {/* <CreateAccount /> */}
             {/* <AccessGranted /> */}
-            {/* <ReserveInk /> */}
+            <ReserveInk />
             {/* <Preview /> */}
-            <Complete />
+            {/* <Complete /> */}
             {/* <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
             </CloseButton> */}
