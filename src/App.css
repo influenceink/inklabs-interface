@@ -2,3 +2,7 @@ html {
   cursor: url(assets/img/cursor.svg) 20 20, pointer;
   -webkit-tap-highlight-color: transparent !important;
 }
+
+.MuiSelect-select > div {
+  justify-content: center !important;
+}

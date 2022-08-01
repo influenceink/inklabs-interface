@@ -9,6 +9,7 @@ import unlock from '../../assets/img/unlock.png';
 import dotLine from '../../assets/img/dot-line.png';
 import open from '../../assets/img/open.png';
 import { useLocation } from 'react-router-dom';
+import { Purchase } from './Purchase';
 interface Props {
   lock: boolean;
   setLock: (value: boolean) => void;
@@ -17,6 +18,7 @@ interface Props {
 export const MenuButton = ({ lock, setLock }: Props) => {
   const [showKeyPad, setShowKeyPad] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showPurchase, setPurchase] = useState(false);
   const { pathname } = useLocation();
   const [showLine, setShowLine] = useState(false);
   const handleClick = () => {
@@ -32,7 +34,7 @@ export const MenuButton = ({ lock, setLock }: Props) => {
     }, 2000);
   }, [showLine]);
   const Toggler = ({ children }: { children: ReactElement }) => {
-    if (pathname === '/' || pathname === '/home') return <MenuToggler onClick={handleClick}>{children}</MenuToggler>;
+    if (pathname === '/' || pathname === '/home') return <StyledButton onClick={handleClick}>{children}</StyledButton>;
     else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
   };
   return (
@@ -46,10 +48,19 @@ export const MenuButton = ({ lock, setLock }: Props) => {
             <img src={dotLine} alt="dotline" />
           </Collapse>
         </Box>
-        <Toggler>{!lock ? <img src={arrowTop} alt="arrow" /> : <img src={unlock} alt="unlock" />}</Toggler>
+        <Box display="flex" alignItems="flex-end" mb={2} gap={2}>
+          {!lock && (
+            <StyledButton sx={{ minWidth: 120 }} onClick={() => setPurchase((value) => !value)}>
+              buy ink
+            </StyledButton>
+          )}
+          <Toggler>{!lock ? <img src={arrowTop} alt="arrow" /> : <img src={unlock} alt="unlock" />}</Toggler>
+          {!lock && <StyledButton sx={{ minWidth: 120 }}>roadmap</StyledButton>}
+        </Box>
       </Box>
       <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} />
       <Menu show={showMenu} setShow={setShowMenu} />
+      <Purchase show={showPurchase} setShow={setPurchase} />
     </MenuButtonWrapper>
   );
 };
@@ -59,17 +70,22 @@ const MenuButtonWrapper = styled('div')`
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
+  align-items: flex-end;
   left: 0;
 `;
 
-const MenuToggler = styled(Button)`
+const StyledButton = styled(Button)`
   padding: 18px 22px;
-  border-radius: 35px 35px 0 0;
-  background-color: black;
+  border-radius: 11px;
+  background-color: transparent;
+  border: 3px solid #ff1aba;
   z-index: 8888;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
 `;
-const LightToggler = styled(MenuToggler)`
+const LightToggler = styled(StyledButton)`
   background-color: white;
   img {
     filter: invert(1);
