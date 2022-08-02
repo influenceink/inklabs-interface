@@ -10,6 +10,7 @@ import { routes } from './config';
 import { Route as AppRoute } from './types';
 import { getAppTheme } from './styles/theme';
 import { DARK_MODE_THEME, LIGHT_MODE_THEME } from './utils/constants';
+import { Web3Provider } from './contexts';
 import './App.css';
 
 function App() {
@@ -34,11 +35,13 @@ function App() {
     <ThemeModeContext.Provider value={themeMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Router>
-          <Switch>
-            <Layout>{routes.map((route: AppRoute) => addRoute(route))}</Layout>
-          </Switch>
-        </Router>
+        <Web3Provider>
+          <Router>
+            <Switch>
+              <Layout>{routes.map((route: AppRoute) => addRoute(route))}</Layout>
+            </Switch>
+          </Router>
+        </Web3Provider>
       </ThemeProvider>
     </ThemeModeContext.Provider>
   );
