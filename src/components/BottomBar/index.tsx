@@ -1,6 +1,5 @@
 import { styled } from '@mui/material';
 
-import { SocialButtonGroup } from './SocialButtonGroup';
 import { MenuButton } from './MenuButton';
 import { Copyright } from './Copyright';
 interface Props {
@@ -11,7 +10,6 @@ interface Props {
 export const BottomBar = ({ lock, setLock }: Props) => {
   return (
     <FootWrapper>
-      <SocialButtonGroup />
       <MenuButton lock={lock} setLock={setLock} />
       <Copyright />
     </FootWrapper>
@@ -23,7 +21,7 @@ const FootWrapper = styled('div')`
   bottom: 0px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
   padding: 0 35px;
   @media screen and (max-width: 660px) {

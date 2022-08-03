@@ -1,4 +1,4 @@
-import { Box, styled, Button, Slide, Typography, useMediaQuery } from '@mui/material';
+import { Box, styled, Button, Slide, Typography, useMediaQuery, Fade } from '@mui/material';
 
 import { ROADMAP } from '../../utils/constants';
 
@@ -14,7 +14,7 @@ export const Roadmap = ({ show, setShow }: Props) => {
   const sm = useMediaQuery('(max-width: 780px)');
   return (
     <>
-      <Slide direction="left" in={show} mountOnEnter unmountOnExit>
+      <Fade in={show} mountOnEnter unmountOnExit>
         <RoadmapWrapper>
           <LogoWrapper>
             <Link to="/home" onClick={() => setShow(false)}>
@@ -42,7 +42,7 @@ export const Roadmap = ({ show, setShow }: Props) => {
             <RotatedSmallText variant="caption">INKLABS</RotatedSmallText>
           </RightBarWrapper>
         </RoadmapWrapper>
-      </Slide>
+      </Fade>
     </>
   );
 };
@@ -66,7 +66,7 @@ const RoadmapWrapper = styled('div')`
   // box-sizing: border-box;
   height: 100vh;
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0px;
   right: -25px;
   background: black;

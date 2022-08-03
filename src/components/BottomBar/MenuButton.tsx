@@ -10,6 +10,7 @@ import dotLine from '../../assets/img/dot-line.png';
 import open from '../../assets/img/open.png';
 import { useLocation } from 'react-router-dom';
 import { Purchase } from './Purchase';
+import { Roadmap } from './Roadmap';
 interface Props {
   lock: boolean;
   setLock: (value: boolean) => void;
@@ -19,6 +20,10 @@ export const MenuButton = ({ lock, setLock }: Props) => {
   const [showKeyPad, setShowKeyPad] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showPurchase, setPurchase] = useState(false);
+  const [showRoadmap, setShowRoadmap] = useState(false);
+  const toggleShowRoadmap = () => {
+    setShowRoadmap((show) => !show);
+  };
   const { pathname } = useLocation();
   const [showLine, setShowLine] = useState(false);
   const handleClick = () => {
@@ -55,12 +60,17 @@ export const MenuButton = ({ lock, setLock }: Props) => {
             </StyledButton>
           )}
           <Toggler>{!lock ? <img src={arrowTop} alt="arrow" /> : <img src={unlock} alt="unlock" />}</Toggler>
-          {!lock && <StyledButton sx={{ minWidth: 120 }}>roadmap</StyledButton>}
+          {!lock && (
+            <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 120 }}>
+              roadmap
+            </StyledButton>
+          )}
         </Box>
       </Box>
       <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} />
       <Menu show={showMenu} setShow={setShowMenu} />
       <Purchase show={showPurchase} setShow={setPurchase} />
+      <Roadmap show={showRoadmap} setShow={toggleShowRoadmap} />
     </MenuButtonWrapper>
   );
 };
@@ -80,7 +90,7 @@ const StyledButton = styled(Button)`
   border-radius: 11px;
   background-color: transparent;
   border: 3px solid #ff1aba;
-  z-index: 8888;
+  // z-index: 8888;
   color: white;
   font-size: 11px;
   font-weight: bold;
