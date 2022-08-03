@@ -4,12 +4,15 @@ import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 
-export const Preview = () => {
+export const Preview = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
+  const handleClick = () => {
+    onNext();
+  };
   return (
     <>
       <FormTitle>
-        RESERVE <br />
-        INK
+        PREVIEW <br />
+        SWaP
       </FormTitle>
       <Box
         display="flex"
@@ -20,12 +23,6 @@ export const Preview = () => {
         flexGrow={1}
         gap="12px"
       >
-        <Typography fontWeight="bold" color="#ffffff88" textAlign="center">
-          WHAT CURRENCY WOULD YOU LIKE TO SWAP?
-        </Typography>
-        <Typography fontWeight="bold" color="#ffffff88" textAlign="center">
-          HOW MUCH WOULD YOU KIKE TO CONVERT TO INK?
-        </Typography>
         <Typography variant="subtitle2" fontWeight="bold" fontSize="14px" lineHeight="14px">
           YOU ARE SENDING
         </Typography>
@@ -56,7 +53,7 @@ export const Preview = () => {
             WE WILL EMAIL YOU WITH PROJECT AND LAUNCH UPDATES.
           </Typography>
           <Box width="100%" mt={1}>
-            <FormButton>confirm</FormButton>
+            <FormButton onClick={handleClick}>confirm</FormButton>
           </Box>
         </Box>
       </Box>

@@ -1,7 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 
-export const CreateAccount = () => {
+export const CreateAccount = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
+  const handleClick = () => {
+    onNext();
+  };
   return (
     <>
       <FormTitle>
@@ -23,7 +26,7 @@ export const CreateAccount = () => {
             Who Sent You?
           </Typography>
           <Input placeholder="enter ink id" />
-          <FormButton>enter</FormButton>
+          <FormButton onClick={handleClick}>enter</FormButton>
         </Box>
         <Divider />
         <Typography variant="subtitle2" fontWeight="bold" py={0} mt={2}>

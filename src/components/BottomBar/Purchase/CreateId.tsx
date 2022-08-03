@@ -1,7 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 
-export const CreateId = () => {
+export const CreateId = ({ onNext }: { onNext: () => void }) => {
+  const handleClick = () => {
+    onNext();
+  };
   return (
     <>
       <FormTitle>
@@ -28,7 +31,7 @@ export const CreateId = () => {
         <Input placeholder="password" />
         <Input placeholder="confirm password" />
         <Box my={1} width="100%">
-          <FormButton>create ink id</FormButton>
+          <FormButton onClick={handleClick}>create ink id</FormButton>
         </Box>
         <Typography variant="subtitle2" fontWeight="bold" py={0}>
           ALREADY HAVE AN INK ID?
