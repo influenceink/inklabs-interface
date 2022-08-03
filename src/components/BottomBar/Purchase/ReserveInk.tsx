@@ -1,12 +1,13 @@
 import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
+import { Web3Context } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
-  const [account, setAccount] = useState('');
   const [currency, setCurrency] = useState('sushi');
+  const { connected, account, connect } = useContext(Web3Context);
   const handleCurrencyChange = (e: any) => {
     setCurrency(e.target.value);
   };
@@ -19,7 +20,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
         RESERVE <br />
         INK
       </FormTitle>
-      {account === '' ? (
+      {account === null && connected === false ? (
         <Box
           display="flex"
           flexDirection="column"
@@ -34,7 +35,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
             $0.002 / $INK
           </Typography>
           <Box width="100%" mt={3}>
-            <FormButton onClick={() => setAccount('0xMichael12')}>connect wallet</FormButton>
+            <FormButton onClick={() => connect!()}>connect wallet</FormButton>
           </Box>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
             <Divider>
