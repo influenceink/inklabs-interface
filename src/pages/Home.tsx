@@ -23,7 +23,7 @@ export const Home = () => {
         <TypeWrapper>
           <Typewriter
             onInit={(typewriter) => {
-              typewriter.typeString('WELCOME TO INKLABS').start();
+              typewriter.typeString('WELCOME TO INKTOKEN').start();
             }}
             options={{
               autoStart: true,

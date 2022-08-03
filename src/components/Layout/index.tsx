@@ -41,8 +41,9 @@ const LayoutWrapper = styled('div')`
   min-height: 100vh;
   background: url(${background}), rgba(0, 0, 0, 0.44);
   background-size: cover;
+  background-position: center;
   position: relative;
   overflow: clip;
-  background-blend-mode: multiply;
+  // background-blend-mode: multiply;
   // background-color: rgba(0, 0, 0, 0.44);
 `;
