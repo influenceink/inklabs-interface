@@ -1,6 +1,8 @@
 import { styled, useMediaQuery } from '@mui/material';
-
-export const Games = ({ onMenuClick }: { onMenuClick: Function }) => {
+interface Props {
+  onMenuClick: (path: string) => void;
+}
+export const Games = ({ onMenuClick }: Props) => {
   const sm = useMediaQuery('(max-width: 1350px)');
   return !sm ? (
     <SVG
@@ -2621,6 +2623,16 @@ export const Games = ({ onMenuClick }: { onMenuClick: Function }) => {
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="193.123" height="85.576" viewBox="0 0 193.123 85.576">
       <g id="games" transform="translate(-215.765 -173.664)">
+        <path
+          id="Path_482"
+          data-name="Path 482"
+          d="M1561.51,3.5V86.114a6.857,6.857,0,0,1-.287,1.961h191.953V3.5Z"
+          transform="translate(-1344.788 170.664)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
         <text
           id="GAMES-2"
           data-name="GAMES"
@@ -2634,16 +2646,6 @@ export const Games = ({ onMenuClick }: { onMenuClick: Function }) => {
             GAMES
           </tspan>
         </text>
-        <path
-          id="Path_482"
-          data-name="Path 482"
-          d="M1561.51,3.5V86.114a6.857,6.857,0,0,1-.287,1.961h191.953V3.5Z"
-          transform="translate(-1344.788 170.664)"
-          fill="none"
-          stroke="#fff"
-          strokeMiterlimit="10"
-          strokeWidth="1"
-        />
       </g>
     </SVG>
   );
@@ -2655,8 +2657,5 @@ const SVG = styled('svg')`
   }
   & > g:hover text {
     fill: #000000;
-  }
-  & > g {
-    cursor: pointer;
   }
 `;

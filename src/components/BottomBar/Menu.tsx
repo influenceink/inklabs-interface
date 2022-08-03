@@ -11,8 +11,12 @@ import { Territories } from './MenuAreas/Territories';
 import { Vision } from './MenuAreas/Vision';
 import { Bridge } from './MenuAreas/Bridge';
 import { Coin } from './MenuAreas/Coin';
+interface Props {
+  show: boolean;
+  setShow: (value: boolean) => void;
+}
 
-export const Menu = ({ show, setShow }: { show: boolean; setShow: Function }) => {
+export const Menu = ({ show, setShow }: Props) => {
   const mobile = useMediaQuery('(max-width: 1350px)');
   const history = useHistory();
   const goTo = (path: string) => {
@@ -63,8 +67,8 @@ export const Menu = ({ show, setShow }: { show: boolean; setShow: Function }) =>
               </MenuBar>
             )}
             <Box display="flex" flexDirection="column" alignItems="center">
-              <Typography variant="caption">CLICK ON EACH ITEM TO VIEW MORE DETAILS</Typography>
-              <PageTitleText>mindmAp</PageTitleText>
+              <Typography variant="subtitle1">CLICK ON EACH ITEM TO VIEW MORE DETAILS</Typography>
+              <PageTitleText>MINDMaP</PageTitleText>
             </Box>
             <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
@@ -76,9 +80,9 @@ export const Menu = ({ show, setShow }: { show: boolean; setShow: Function }) =>
   );
 };
 const CloseButton = styled(Button)`
-  padding: 18px 22px;
-  padding-bottom: 0px;
-  border-radius: 30px 30px 0 0;
+  padding: 16px 22px;
+  padding-bottom: 10px;
+  border-radius: 35px 35px 0 0;
   z-index: 8888;
   background-color: white;
   img {
@@ -151,7 +155,7 @@ const PageTitleText = styled('span')`
   line-height: 90px;
   padding-top: 10px;
   @media screen and (max-width: 660px) {
-    font-size: 50px;
+    font-size: 42px;
     line-height: 52px;
     padding-top: 6px;
   }

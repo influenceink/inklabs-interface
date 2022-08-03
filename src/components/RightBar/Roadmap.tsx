@@ -6,7 +6,11 @@ import arrowRight from '../../assets/img/arrow-right.png';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 
-export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function }) => {
+interface Props {
+  show: boolean;
+  setShow: (value: boolean) => void;
+}
+export const Roadmap = ({ show, setShow }: Props) => {
   const sm = useMediaQuery('(max-width: 780px)');
   return (
     <>
@@ -17,7 +21,7 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
               <img src={logo} alt="logo" />
             </Link>
           </LogoWrapper>
-          <RotatedLargeText>roAdmAp</RotatedLargeText>
+          <RotatedLargeText>ROaDMaP</RotatedLargeText>
           <Box width={sm ? '100%' : '500px'} display="flex" flexDirection="column" justifyContent="center" gap="2">
             {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
               <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
@@ -32,7 +36,7 @@ export const Roadmap = ({ show, setShow }: { show: boolean; setShow: Function })
           </Box>
           <RightBarWrapper>
             <RotatedSmallText variant="caption">ROADMAP</RotatedSmallText>
-            <StyledButton onClick={() => setShow()}>
+            <StyledButton onClick={() => setShow(false)}>
               <img src={arrowRight} alt="roadmap" />
             </StyledButton>
             <RotatedSmallText variant="caption">INKLABS</RotatedSmallText>
@@ -70,6 +74,7 @@ const RoadmapWrapper = styled('div')`
   li {
     font-size: 18px;
   }
+  padding-left: 32px;
   @media screen and (max-width: 780px) {
     li {
       font-size: 11px;
@@ -77,6 +82,7 @@ const RoadmapWrapper = styled('div')`
     width: 100vw;
     position: fixed;
     left: 0px;
+    padding-left: 0;
   }
 `;
 
@@ -85,10 +91,10 @@ const RotatedLargeText = styled('p')`
   text-orientation: mixed;
   transform: rotate(180deg);
   text-align: center;
-  font-size: 110px;
+  font-size: 90px;
+  line-height: 90px;
   margin: 0;
   color: black;
-  // text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
   text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
     -1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 rgba(255, 255, 255, 0.4);
   font-family: 'Brolink';

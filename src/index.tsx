@@ -20,4 +20,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-reportWebVitals(console.log);
+if (process.env.NODE_ENV === 'development') reportWebVitals(console.log);

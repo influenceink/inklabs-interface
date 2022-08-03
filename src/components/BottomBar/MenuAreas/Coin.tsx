@@ -1,6 +1,8 @@
 import { styled, useMediaQuery } from '@mui/material';
-
-export const Coin = ({ onMenuClick }: { onMenuClick: Function }) => {
+interface Props {
+  onMenuClick: (path: string) => void;
+}
+export const Coin = ({ onMenuClick }: Props) => {
   const sm = useMediaQuery('(max-width: 1350px)');
   return !sm ? (
     <SVG
@@ -66,6 +68,16 @@ export const Coin = ({ onMenuClick }: { onMenuClick: Function }) => {
           onMenuClick('/coin');
         }}
       >
+        <path
+          id="Path_478"
+          data-name="Path 478"
+          d="M1157.1,1383.531q-.048-.35-.1-.7a65.274,65.274,0,0,0-129.112,0c-.034.233-.068.466-.1.7a66.017,66.017,0,0,0-.609,8.978,65.05,65.05,0,0,0,8.661,32.517c.135.234.274.466.412.7a64.873,64.873,0,0,0,6.034,8.543c.243.291.486.582.735.869q1.567,1.812,3.275,3.521a65.21,65.21,0,0,0,92.3,0q1.708-1.708,3.275-3.521c.248-.287.492-.578.735-.869a64.85,64.85,0,0,0,6.034-8.543c.138-.233.277-.464.412-.7a65.046,65.046,0,0,0,8.661-32.517A66.017,66.017,0,0,0,1157.1,1383.531Z"
+          transform="translate(-877.536 -987.52)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
         <text
           id="COIN-2"
           data-name="COIN"
@@ -79,16 +91,6 @@ export const Coin = ({ onMenuClick }: { onMenuClick: Function }) => {
             COIN
           </tspan>
         </text>
-        <path
-          id="Path_478"
-          data-name="Path 478"
-          d="M1157.1,1383.531q-.048-.35-.1-.7a65.274,65.274,0,0,0-129.112,0c-.034.233-.068.466-.1.7a66.017,66.017,0,0,0-.609,8.978,65.05,65.05,0,0,0,8.661,32.517c.135.234.274.466.412.7a64.873,64.873,0,0,0,6.034,8.543c.243.291.486.582.735.869q1.567,1.812,3.275,3.521a65.21,65.21,0,0,0,92.3,0q1.708-1.708,3.275-3.521c.248-.287.492-.578.735-.869a64.85,64.85,0,0,0,6.034-8.543c.138-.233.277-.464.412-.7a65.046,65.046,0,0,0,8.661-32.517A66.017,66.017,0,0,0,1157.1,1383.531Z"
-          transform="translate(-877.536 -987.52)"
-          fill="none"
-          stroke="#fff"
-          strokeMiterlimit="10"
-          strokeWidth="1"
-        />
       </g>
     </SVG>
   );
@@ -102,9 +104,6 @@ const SVG = styled('svg')`
     text {
       fill: #000000;
     }
-  }
-  & > g {
-    cursor: pointer;
   }
   margin: -86px 4px -51px 4px;
   z-index: 9999;

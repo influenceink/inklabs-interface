@@ -1,6 +1,8 @@
 import { styled, useMediaQuery } from '@mui/material';
-
-export const Platform = ({ onMenuClick }: { onMenuClick: Function }) => {
+interface Props {
+  onMenuClick: (path: string) => void;
+}
+export const Platform = ({ onMenuClick }: Props) => {
   const sm = useMediaQuery('(max-width: 1350px)');
   return !sm ? (
     <SVG
@@ -4511,6 +4513,16 @@ export const Platform = ({ onMenuClick }: { onMenuClick: Function }) => {
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="127.683" height="85.497" viewBox="0 0 127.683 85.497">
       <g id="platform" transform="translate(-21.112 -362.217)">
+        <path
+          id="Path_477"
+          data-name="Path 477"
+          d="M129.713,1595.073c-27.9-42.2-1.462-83.975-1.462-83.975L3.5,1511.235v84.358s126.326-.2,126.375-.193A3.011,3.011,0,0,0,129.713,1595.073Z"
+          transform="translate(18.112 -1148.38)"
+          fill="none"
+          stroke="#fff"
+          strokeMiterlimit="10"
+          strokeWidth="1"
+        />
         <text
           id="PLATFORM-2"
           data-name="PLATFORM"
@@ -4523,16 +4535,6 @@ export const Platform = ({ onMenuClick }: { onMenuClick: Function }) => {
             PLATFORM
           </tspan>
         </text>
-        <path
-          id="Path_477"
-          data-name="Path 477"
-          d="M129.713,1595.073c-27.9-42.2-1.462-83.975-1.462-83.975L3.5,1511.235v84.358s126.326-.2,126.375-.193A3.011,3.011,0,0,0,129.713,1595.073Z"
-          transform="translate(18.112 -1148.38)"
-          fill="none"
-          stroke="#fff"
-          strokeMiterlimit="10"
-          strokeWidth="1"
-        />
       </g>
     </SVG>
   );
@@ -4544,8 +4546,5 @@ const SVG = styled('svg')`
   }
   & > g:hover text {
     fill: #000000;
-  }
-  & > g {
-    cursor: pointer;
   }
 `;

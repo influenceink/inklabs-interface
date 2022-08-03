@@ -13,10 +13,13 @@ type TransitionProps = Omit<SlideProps, 'direction'>;
 const transition = (props: TransitionProps) => {
   return <Slide {...props} direction="left" />;
 };
-
-export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Function; setLock: Function }) => {
+interface Props {
+  show: boolean;
+  setShow: (value: boolean) => void;
+  setLock: (value: boolean) => void;
+}
+export const KeyPad = ({ show, setShow, setLock }: Props) => {
   const [code, setCode] = useState('');
-
   const [toastState, setToastState] = useState({
     open: false,
     success: false,
@@ -68,6 +71,7 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
               onChange={(e) => setCode(e.target.value)}
               onKeyDown={handleChange}
               value={code}
+              placeholder={process.env.NODE_ENV === 'development' ? 'default: 123456' : ''}
             />
             <KeyBoard>
               {KEYS.map((key: { value: string; image: string }) => (
@@ -106,9 +110,9 @@ export const KeyPad = ({ show, setShow, setLock }: { show: boolean; setShow: Fun
 };
 
 const CloseButton = styled(Button)`
-  padding: 18px 22px;
-  padding-bottom: 0px;
-  border-radius: 30px 30px 0 0;
+  padding: 16px 22px;
+  padding-bottom: 10px;
+  border-radius: 35px 35px 0 0;
   z-index: 8888;
   background-color: white;
   img {
@@ -181,6 +185,11 @@ const KeyField = styled(TextField)`
     letter-spacing: 8px;
     text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
     caret-color: white;
+  }
+  input::placeholder {
+    text-shadow: none;
+    color: white;
+    font-weight: normal;
   }
 `;
 
