@@ -4,7 +4,7 @@ import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 
-export const Complete = () => {
+export const Complete = ({ onPrev }: { onPrev: () => void }) => {
   return (
     <>
       <FormTitle>

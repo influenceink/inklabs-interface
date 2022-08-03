@@ -2,7 +2,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Box, styled, Button, Fade, Typography, useMediaQuery } from '@mui/material';
 import cross from '../../../assets/img/cross.png';
 import logo from '../../../assets/img/logo.png';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { CreateId } from './CreateId';
 import { CreateAccount } from './CreateAccount';
 import { AccessGranted } from './AccessGranted';
@@ -21,6 +21,10 @@ export const Purchase = ({ show, setShow }: Props) => {
     setShow(false);
     history.push(path);
   };
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (show) setIndex(0);
+  }, [show]);
   return (
     <>
       <Fade in={show} mountOnEnter unmountOnExit>
@@ -34,15 +38,29 @@ export const Purchase = ({ show, setShow }: Props) => {
             alignItems="center"
             minHeight="820px"
           >
-            {/* <CreateId /> */}
-            {/* <CreateAccount /> */}
-            {/* <AccessGranted /> */}
-            <ReserveInk />
-            {/* <Preview /> */}
-            {/* <Complete /> */}
-            {/* <CloseButton onClick={() => setShow(false)}>
+            {index === 0 && <CreateId onNext={() => setIndex((value) => value + 1)} />}
+            {index === 1 && (
+              <CreateAccount
+                onNext={() => setIndex((value) => value + 1)}
+                onPrev={() => setIndex((value) => value - 1)}
+              />
+            )}
+            {index === 2 && (
+              <AccessGranted
+                onNext={() => setIndex((value) => value + 1)}
+                onPrev={() => setIndex((value) => value - 1)}
+              />
+            )}
+            {index === 3 && (
+              <ReserveInk onNext={() => setIndex((value) => value + 1)} onPrev={() => setIndex((value) => value - 1)} />
+            )}
+            {index === 4 && (
+              <Preview onNext={() => setIndex((value) => value + 1)} onPrev={() => setIndex((value) => value - 1)} />
+            )}
+            {index === 5 && <Complete onPrev={() => setIndex((value) => value - 1)} />}
+            <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
-            </CloseButton> */}
+            </CloseButton>
           </Box>
         </ModalWrapper>
       </Fade>
@@ -50,14 +68,10 @@ export const Purchase = ({ show, setShow }: Props) => {
   );
 };
 const CloseButton = styled(Button)`
-  padding: 16px 22px;
-  padding-bottom: 10px;
-  border-radius: 35px 35px 0 0;
+  position: absolute;
+  top: 12px;
+  right: 5px;
   z-index: 8888;
-  background-color: white;
-  img {
-    filter: invert(1);
-  }
 `;
 
 const ModalWrapper = styled('div')`

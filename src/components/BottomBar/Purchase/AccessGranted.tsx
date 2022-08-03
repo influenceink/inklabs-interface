@@ -1,7 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 
-export const AccessGranted = () => {
+export const AccessGranted = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
+  const handleClick = () => {
+    onNext();
+  };
   return (
     <>
       <FormTitle>
@@ -26,7 +29,7 @@ export const AccessGranted = () => {
             @SKYBURN
           </Typography>
           <Box width="100%" mt={3}>
-            <FormButton>enter</FormButton>
+            <FormButton onClick={handleClick}>enter</FormButton>
           </Box>
         </Box>
         <Divider />

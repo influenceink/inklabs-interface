@@ -5,11 +5,14 @@ import { Web3Context } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 
-export const ReserveInk = () => {
+export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
   const [currency, setCurrency] = useState('sushi');
   const { connected, account, connect } = useContext(Web3Context);
   const handleCurrencyChange = (e: any) => {
     setCurrency(e.target.value);
+  };
+  const handleClick = () => {
+    onNext();
   };
   return (
     <>
@@ -69,7 +72,7 @@ export const ReserveInk = () => {
           </Typography>
           <FormControl sx={{ width: '100%' }}>
             <CustomSelect value={currency} onChange={handleCurrencyChange} displayEmpty>
-              <MenuItem value={'shshi'}>
+              <MenuItem value={'sushi'}>
                 <Box width="100%" display="flex" gap={1} justifyContent="fles-start">
                   <img src={SushiIcon} alt="sushi" />
                   SUSHI
@@ -104,7 +107,7 @@ export const ReserveInk = () => {
           </CustomInputWrapper>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
             <Divider sx={{ marginTop: 3, marginBottom: 3 }}>
-              <DividerContent sx={{ fontSize: 22, fontWeight: 'bold' }}>=</DividerContent>
+              <DividerContent sx={{ color: 'white', fontSize: 22, fontWeight: 'bold' }}>=</DividerContent>
             </Divider>{' '}
           </Box>
           <Typography variant="subtitle2" fontWeight="bold" fontSize="14px" lineHeight="14px">
@@ -118,7 +121,7 @@ export const ReserveInk = () => {
               </Typography>
             </Box>
             <Box width="100%" mt={3}>
-              <FormButton>PREVIEW SWAP</FormButton>
+              <FormButton onClick={handleClick}>PREVIEW SWAP</FormButton>
             </Box>
           </Box>
         </Box>
