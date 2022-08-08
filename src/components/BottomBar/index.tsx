@@ -2,15 +2,11 @@ import { styled } from '@mui/material';
 
 import { MenuButton } from './MenuButton';
 import { Copyright } from './Copyright';
-interface Props {
-  lock: boolean;
-  setLock: (value: boolean) => void;
-}
 
-export const BottomBar = ({ lock, setLock }: Props) => {
+export const BottomBar = () => {
   return (
     <FootWrapper>
-      <MenuButton lock={lock} setLock={setLock} />
+      <MenuButton />
       <Copyright />
     </FootWrapper>
   );
@@ -25,6 +21,6 @@ const FootWrapper = styled('div')`
   align-items: flex-end;
   padding: 0 35px;
   @media screen and (max-width: 660px) {
-    padding: 0 8px;
+    padding: 0;
   }
 `;

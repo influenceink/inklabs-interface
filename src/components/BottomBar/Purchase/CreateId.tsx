@@ -28,8 +28,8 @@ export const CreateId = ({ onNext }: { onNext: () => void }) => {
         <Input placeholder="first name" />
         <Input placeholder="last name" />
         <Input placeholder="email" />
-        <Input placeholder="password" />
-        <Input placeholder="confirm password" />
+        <Input type="password" placeholder="password" />
+        <Input type="password" placeholder="confirm password" />
         <Box my={1} width="100%">
           <FormButton onClick={handleClick}>create ink id</FormButton>
         </Box>
