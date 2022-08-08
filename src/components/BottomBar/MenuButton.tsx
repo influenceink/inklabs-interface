@@ -46,13 +46,13 @@ export const MenuButton = () => {
           </Collapse>
         </Box>
         <Box display="flex" alignItems="flex-end" mb={sm ? '42px' : 2} gap={2}>
-          <StyledButton sx={{ minWidth: 115 }} onClick={() => setPurchase((value) => !value)}>
+          <StyledButton sx={{ minWidth: 110 }} onClick={() => setPurchase((value) => !value)}>
             buy ink
           </StyledButton>
           <Toggler>
             <img src={arrowTop} alt="arrow" />
           </Toggler>
-          <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 115 }}>
+          <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
             roadmap
           </StyledButton>
         </Box>
@@ -86,6 +86,9 @@ const StyledButton = styled(Button)`
   font-weight: bold;
   img {
     margin: 8px 0;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 18px;
   }
 `;
 const LightToggler = styled(StyledButton)`

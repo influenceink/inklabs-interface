@@ -23,7 +23,7 @@ export const CreateId = ({ onNext }: { onNext: () => void }) => {
         <Typography variant="subtitle2" fontWeight="bold">
           Enter Your Desired INK ID
         </Typography>
-        <Input placeholder="@username" />
+        <Input placeholder="username" />
         <Divider />
         <Input placeholder="first name" />
         <Input placeholder="last name" />

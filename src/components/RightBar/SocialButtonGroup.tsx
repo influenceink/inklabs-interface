@@ -41,7 +41,6 @@ const SocialWrapper = styled(Box)`
   }
 `;
 const SocialButton = styled('a')`
-  transform: rotate(-90deg);
   display: flex;
   margin: 0 1px;
   @media screen and (max-width: 660px) {
