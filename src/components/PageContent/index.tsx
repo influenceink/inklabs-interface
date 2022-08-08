@@ -6,23 +6,26 @@ import { Link } from 'react-router-dom';
 interface PageProps {
   children?: ReactNode;
   title?: string;
+  type?: string;
 }
 export const PageContent = (props: PageProps) => {
-  const { children, title } = props;
+  const { children, title, type } = props;
   const sm = useMediaQuery('(max-width: 660px)');
   return (
     <>
       <Slide timeout={{ appear: 1000 }} direction={'right'} in={true} mountOnEnter unmountOnExit>
         <Box display="flex" justifyContent="center">
-          <PageWrapper>
-            <Link to="/">
-              <img src={logo} alt="logo" />
-            </Link>
+          <PageWrapper sx={type === 'secondary' ? { backgroundColor: 'rgba(0,0,0,0.6)' } : null}>
+            {type === 'primary' && (
+              <Link to="/">
+                <img src={logo} alt="logo" />
+              </Link>
+            )}
             <Box width="100%" mt="24px" py={3} flexGrow={1} overflow="hidden auto">
               {children}
             </Box>
-            <Divider />
-            <PageTitleText>{title?.toUpperCase().replaceAll('A', 'a')}</PageTitleText>
+            {type === 'primary' && <Divider />}
+            {type === 'primary' && <PageTitleText>{title?.toUpperCase().replaceAll('A', 'a')}</PageTitleText>}
           </PageWrapper>
         </Box>
       </Slide>
@@ -54,7 +57,7 @@ const PageWrapper = styled('div')`
   @media screen and (max-width: 660px) {
     -webkit-clip-path: none;
     clip-path: none;
-    padding: 26px 42px 40px 42px;
+    padding: 26px 24px 40px 24px;
     position: fixed;
     left: 0;
   }

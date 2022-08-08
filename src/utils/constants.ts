@@ -18,6 +18,7 @@ export const APP_DESCRIPTION = 'React, TypeScript, Material-UI.';
 export const PAGE_TITLE_ENTER = 'Enter';
 export const PAGE_TITLE_HOME = 'Home';
 export const PAGE_TITLE_MINDMAP = 'Mindmap';
+export const PAGE_TITLE_PROFILE = 'Profile';
 export const PAGE_TITLE_VISION = 'Vision';
 export const PAGE_TITLE_PLATFORM = 'Platform';
 // export const PAGE_TITLE_HOME = 'Home';
