@@ -1,6 +1,7 @@
 import { Box, styled, Button, Slide, Typography, useMediaQuery, Fade } from '@mui/material';
 
 import { ROADMAP } from '../../utils/constants';
+import cross from '../../assets/img/cross.png';
 
 import arrowRight from '../../assets/img/arrow-right.png';
 import { Link } from 'react-router-dom';
@@ -15,37 +16,53 @@ export const Roadmap = ({ show, setShow }: Props) => {
   return (
     <>
       <Fade in={show} mountOnEnter unmountOnExit>
-        <RoadmapWrapper>
-          <LogoWrapper>
-            <Link to="/home" onClick={() => setShow(false)}>
-              <img src={logo} alt="logo" />
-            </Link>
-          </LogoWrapper>
-          <RotatedLargeText>ROaDMaP</RotatedLargeText>
-          <Box width={sm ? '100%' : '500px'} display="flex" flexDirection="column" justifyContent="center" gap="2">
-            {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
-              <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
-                <ul>
-                  {step.lists.map((line: string) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-                <RotatedBaseText>{step.status}</RotatedBaseText>
-              </Box>
-            ))}
-          </Box>
-          <RightBarWrapper>
-            <RotatedSmallText variant="caption">ROADMAP</RotatedSmallText>
-            <StyledButton onClick={() => setShow(false)}>
-              <img src={arrowRight} alt="roadmap" />
-            </StyledButton>
-            <RotatedSmallText variant="caption">INKLABS</RotatedSmallText>
-          </RightBarWrapper>
-        </RoadmapWrapper>
+        <ModalWrapper>
+          <RoadmapWrapper>
+            {/* <LogoWrapper>
+              <Link to="/" onClick={() => setShow(false)}>
+                <img src={logo} alt="logo" />
+              </Link>
+            </LogoWrapper> */}
+            <RotatedLargeText>ROaDMaP</RotatedLargeText>
+            <Box
+              width={sm ? '100%' : 'auto'}
+              display="flex"
+              flexGrow={1}
+              flexDirection="column"
+              justifyContent="center"
+              gap="2"
+            >
+              {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
+                <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
+                  <ul>
+                    {step.lists.map((line: string) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                  <RotatedBaseText>{step.status}</RotatedBaseText>
+                </Box>
+              ))}
+            </Box>
+            <CloseButton onClick={() => setShow(false)}>
+              <img src={cross} alt="cross" />
+            </CloseButton>
+          </RoadmapWrapper>
+        </ModalWrapper>
       </Fade>
     </>
   );
 };
+
+const CloseButton = styled(Button)`
+  position: absolute;
+  top: 12px;
+  right: 5px;
+  z-index: 8888;
+  @media screen and (max-width: 600px) {
+    position: relative;
+    right: 0px;
+  }
+`;
 
 const LogoWrapper = styled('div')`
   position: absolute;
@@ -62,19 +79,47 @@ const LogoWrapper = styled('div')`
   }
 `;
 
-const RoadmapWrapper = styled('div')`
-  // box-sizing: border-box;
-  height: 100vh;
+const ModalWrapper = styled('div')`
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  & > div {
+    background-color: black;
+    border-radius: 15px;
+    padding: 60px 80px;
+  }
   position: fixed;
   top: 0px;
-  right: -25px;
+  left: 0px;
+  height: 100vh;
+  // z-index: 8888;
+  @media screen and (max-width: 600px) {
+    align-items: flex-start;
+    & > div {
+      width: 100%;
+      padding: 40px 24px 24px 24px;
+      height: 100vh;
+      min-height: 0px;
+      overflow-y: auto;
+      border-radius: 0px;
+    }
+  }
+`;
+
+const RoadmapWrapper = styled('div')`
+  display: flex;
+  flex-direction: column;
   background: black;
+  position: relative;
   z-index: 9999;
   li {
     font-size: 18px;
   }
-  padding-left: 32px;
+  max-width: 600px;
+  min-height: 820px;
   @media screen and (max-width: 780px) {
     li {
       font-size: 11px;
@@ -87,20 +132,14 @@ const RoadmapWrapper = styled('div')`
 `;
 
 const RotatedLargeText = styled('p')`
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
   text-align: center;
-  font-size: 90px;
-  line-height: 90px;
-  margin: 0;
-  color: black;
+  font-size: 51px;
+  color: rgba(0, 0, 0);
   text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
     -1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 rgba(255, 255, 255, 0.4);
   font-family: 'Brolink';
-  @media screen and (max-width: 780px) {
-    display: none;
-  }
+  margin: 0;
+  line-height: 51px;
 `;
 
 const RotatedBaseText = styled(Typography)`

@@ -7,21 +7,21 @@ import { Enter } from '../pages/Enter';
 import { Route } from '../types/Route';
 
 const routes: Array<Route> = [
-  {
-    key: 'router-enter',
-    title: 'Enter',
-    description: 'Enter',
-    component: Enter,
-    path: '/',
-    isEnabled: true,
-    appendDivider: true,
-  },
+  // {
+  //   key: 'router-enter',
+  //   title: 'Enter',
+  //   description: 'Enter',
+  //   component: Enter,
+  //   path: '/',
+  //   isEnabled: true,
+  //   appendDivider: true,
+  // },
   {
     key: 'router-home',
     title: 'Home',
     description: 'Home',
     component: Home,
-    path: '/home',
+    path: '/',
     isEnabled: true,
     appendDivider: true,
   },

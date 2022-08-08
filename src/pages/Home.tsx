@@ -49,11 +49,12 @@ const TypeWrapper = styled('div')`
   }
   padding: 0 120px;
   text-align: center;
-  @media (max-width: 600px) {
+  @media (max-width: 660px) {
     span {
-      font-size: 42px;
+      font-size: 38px;
       line-height: 42px;
+      letter-spacing: -2px;
     }
-    padding: 0 80px
+    padding: 0 40px
   },
 `;

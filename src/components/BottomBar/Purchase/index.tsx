@@ -72,6 +72,10 @@ const CloseButton = styled(Button)`
   top: 12px;
   right: 5px;
   z-index: 8888;
+  @media screen and (max-width: 600px) {
+    position: relative;
+    right: 0px;
+  }
 `;
 
 const ModalWrapper = styled('div')`
@@ -89,12 +93,17 @@ const ModalWrapper = styled('div')`
   position: fixed;
   top: 0px;
   left: 0px;
-  height: 100vh;
+  min-height: 100vh;
   // z-index: 8888;
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 600px) {
+    align-items: flex-start;
     & > div {
       width: 100%;
-      padding: 4px 32px 0px 32px;
+      padding: 40px 24px 24px 24px;
+      height: 100vh;
+      min-height: 0px;
+      overflow-y: auto;
+      border-radius: 0px;
     }
   }
 `;
@@ -102,6 +111,7 @@ const ModalWrapper = styled('div')`
 export const FormTitle = styled('span')`
   text-align: center;
   font-size: 51px;
+  // width: 100%;
   color: rgba(0, 0, 0);
   // text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
   text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
@@ -109,9 +119,8 @@ export const FormTitle = styled('span')`
   font-family: 'Brolink';
   margin: 0;
   line-height: 51px;
-  @media screen and (max-width: 660px) {
-    font-size: 36px;
-    line-height: 36px;
+  @media screen and (max-width: 600px) {
+    font-size: 44px;
   }
 `;
 
@@ -125,7 +134,8 @@ export const Input = styled('input')`
   text-align: center;
   color: white;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
   ::placeholder {
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.15);

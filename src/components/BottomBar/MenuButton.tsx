@@ -1,23 +1,18 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { styled, Button, Box, Collapse } from '@mui/material';
+import { styled, Button, Box, Collapse, useMediaQuery } from '@mui/material';
 
-import { KeyPad } from './KeyPad';
+// import { KeyPad } from './KeyPad';
 import { Menu } from './Menu';
 
 import arrowTop from '../../assets/img/arrow-up.png';
-import unlock from '../../assets/img/unlock.png';
+// import unlock from '../../assets/img/unlock.png';
 import dotLine from '../../assets/img/dot-line.png';
 import open from '../../assets/img/open.png';
 import { useLocation } from 'react-router-dom';
 import { Purchase } from './Purchase';
 import { Roadmap } from './Roadmap';
-interface Props {
-  lock: boolean;
-  setLock: (value: boolean) => void;
-}
 
-export const MenuButton = ({ lock, setLock }: Props) => {
-  const [showKeyPad, setShowKeyPad] = useState(false);
+export const MenuButton = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showPurchase, setPurchase] = useState(false);
   const [showRoadmap, setShowRoadmap] = useState(false);
@@ -27,11 +22,7 @@ export const MenuButton = ({ lock, setLock }: Props) => {
   const { pathname } = useLocation();
   const [showLine, setShowLine] = useState(false);
   const handleClick = () => {
-    if (lock) {
-      setShowKeyPad(true);
-    } else {
-      setShowMenu(true);
-    }
+    setShowMenu(true);
   };
   useEffect(() => {
     setTimeout(() => {
@@ -39,9 +30,10 @@ export const MenuButton = ({ lock, setLock }: Props) => {
     }, 2000);
   }, [showLine]);
   const Toggler = ({ children }: { children: ReactElement }) => {
-    if (pathname === '/' || pathname === '/home') return <StyledButton onClick={handleClick}>{children}</StyledButton>;
+    if (pathname === '/') return <StyledButton onClick={handleClick}>{children}</StyledButton>;
     else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
   };
+  const sm = useMediaQuery('(max-width: 660px)');
   return (
     <MenuButtonWrapper>
       <Box display="flex" flexDirection="column" gap={0.5} alignItems="center">
@@ -53,21 +45,19 @@ export const MenuButton = ({ lock, setLock }: Props) => {
             <img src={dotLine} alt="dotline" />
           </Collapse>
         </Box>
-        <Box display="flex" alignItems="flex-end" mb={2} gap={2}>
-          {!lock && (
-            <StyledButton sx={{ minWidth: 120 }} onClick={() => setPurchase((value) => !value)}>
-              buy ink
-            </StyledButton>
-          )}
-          <Toggler>{!lock ? <img src={arrowTop} alt="arrow" /> : <img src={unlock} alt="unlock" />}</Toggler>
-          {!lock && (
-            <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 120 }}>
-              roadmap
-            </StyledButton>
-          )}
+        <Box display="flex" alignItems="flex-end" mb={sm ? '42px' : 2} gap={2}>
+          <StyledButton sx={{ minWidth: 110 }} onClick={() => setPurchase((value) => !value)}>
+            buy ink
+          </StyledButton>
+          <Toggler>
+            <img src={arrowTop} alt="arrow" />
+          </Toggler>
+          <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
+            roadmap
+          </StyledButton>
         </Box>
       </Box>
-      <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} />
+      {/* <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} /> */}
       <Menu show={showMenu} setShow={setShowMenu} />
       <Purchase show={showPurchase} setShow={setPurchase} />
       <Roadmap show={showRoadmap} setShow={toggleShowRoadmap} />
@@ -94,6 +84,12 @@ const StyledButton = styled(Button)`
   color: white;
   font-size: 11px;
   font-weight: bold;
+  img {
+    margin: 8px 0;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 18px;
+  }
 `;
 const LightToggler = styled(StyledButton)`
   background-color: white;
