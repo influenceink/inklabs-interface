@@ -107,7 +107,7 @@ const MenuWrapper = styled('div')`
   @media screen and (max-width: 1320px) {
     & > div {
       width: 100%;
-      padding: 4px 32px 0px 32px;
+      padding: 4px 24px 0px 24px;
     }
   }
 `;

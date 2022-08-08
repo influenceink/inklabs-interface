@@ -3,7 +3,7 @@ import { Button, styled, Typography } from '@mui/material';
 
 import playBtn from '../../assets/img/play.png';
 import pauseBtn from '../../assets/img/pause.png';
-import audioBarStop from '../../assets/img/audio-bar-stop.png';
+import audioBarStop from '../../assets/img/audio-bar-stop-mobile.png';
 import audioBar from '../../assets/img/audio-bar.gif';
 import backSound from '../../assets/audio/atmospheric-tech.mp3';
 
@@ -85,7 +85,7 @@ const StyledImg = styled('div')`
 `;
 
 const Playing = styled('img')`
-  width: 28px;
+  width: 22px;
   @media screen and (max-width: 660px) {
     transform: rotate(-90deg);
   }

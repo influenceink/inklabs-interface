@@ -34,9 +34,13 @@ const SocialWrapper = styled(Box)`
   align-items: center;
   gap: 20px;
   padding: 40px 20px;
+  @media screen and (max-width: 660px) {
+    padding: 20px 10px;
+    border-radius: 10px 0 0 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 `;
 const SocialButton = styled('a')`
-  transform: rotate(-90deg);
   display: flex;
   margin: 0 1px;
   @media screen and (max-width: 660px) {

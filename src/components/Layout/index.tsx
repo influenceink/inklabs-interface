@@ -9,18 +9,17 @@ import background from '../../assets/img/background.png';
 import logo from '../../assets/img/logo.png';
 import { Link } from 'react-router-dom';
 export const Layout: FC = ({ children }) => {
-  const [lock, setLock] = useState<boolean>(true);
   return (
     <LayoutWrapper>
       {children}
       <LogoWrapper>
-        <Link to="/home">
+        <Link to="/">
           <img src={logo} alt="logo" />
         </Link>
       </LogoWrapper>
-      {!lock && <LeftBar />}
-      {!lock && <RightBar />}
-      <BottomBar lock={lock} setLock={setLock} />
+      <LeftBar />
+      <RightBar />
+      <BottomBar />
     </LayoutWrapper>
   );
 };

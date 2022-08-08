@@ -15,7 +15,7 @@ export const PageContent = (props: PageProps) => {
       <Slide timeout={{ appear: 1000 }} direction={'right'} in={true} mountOnEnter unmountOnExit>
         <Box display="flex" justifyContent="center">
           <PageWrapper>
-            <Link to="/home">
+            <Link to="/">
               <img src={logo} alt="logo" />
             </Link>
             <Box width="100%" mt="24px" py={3} flexGrow={1} overflow="hidden auto">
