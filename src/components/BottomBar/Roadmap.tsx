@@ -122,12 +122,8 @@ const RoadmapWrapper = styled('div')`
   min-height: 820px;
   @media screen and (max-width: 780px) {
     li {
-      font-size: 11px;
+      font-size: 14px;
     }
-    width: 100vw;
-    position: fixed;
-    left: 0px;
-    padding-left: 0;
   }
 `;
 
