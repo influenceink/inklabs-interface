@@ -6,24 +6,33 @@ import { Link } from 'react-router-dom';
 interface PageProps {
   children?: ReactNode;
   title?: string;
+  type?: string;
 }
 export const PageContent = (props: PageProps) => {
-  const { children, title } = props;
+  const { children, title, type } = props;
   const sm = useMediaQuery('(max-width: 660px)');
   return (
     <>
       <Slide timeout={{ appear: 1000 }} direction={'right'} in={true} mountOnEnter unmountOnExit>
         <Box display="flex" justifyContent="center">
-          <PageWrapper>
-            <Link to="/">
-              <img src={logo} alt="logo" />
-            </Link>
-            <Box width="100%" mt="24px" py={3} flexGrow={1} overflow="hidden auto">
-              {children}
-            </Box>
-            <Divider />
-            <PageTitleText>{title?.toUpperCase().replaceAll('A', 'a')}</PageTitleText>
-          </PageWrapper>
+          {type === 'primary' ? (
+            <PageWrapper>
+              <Link to="/">
+                <img src={logo} alt="logo" />
+              </Link>
+              <Box width="100%" mt="24px" py={3} flexGrow={1} overflow="hidden auto">
+                {children}
+              </Box>
+              <Divider />
+              <PageTitleText>{title?.toUpperCase().replaceAll('A', 'a')}</PageTitleText>
+            </PageWrapper>
+          ) : (
+            <PageWrapperFluid>
+              <Box width="100%" flexGrow={1} overflow="hidden auto">
+                {children}
+              </Box>
+            </PageWrapperFluid>
+          )}
         </Box>
       </Slide>
     </>
@@ -54,12 +63,38 @@ const PageWrapper = styled('div')`
   @media screen and (max-width: 660px) {
     -webkit-clip-path: none;
     clip-path: none;
-    padding: 26px 42px 40px 42px;
+    padding: 26px 24px 40px 24px;
     position: fixed;
     left: 0;
   }
 `;
-
+const PageWrapperFluid = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.72);
+  max-width: 2000px;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
+  // & > div {
+  //   ::-webkit-scrollbar {
+  //     width: 0; /* Remove scrollbar space */
+  //     background: transparent;
+  //   }
+  //   ::-webkit-scrollbar-thumb {
+  //     background: #ff0000;
+  //   }
+  // }
+  @media screen and (max-width: 660px) {
+    -webkit-clip-path: none;
+    clip-path: none;
+    position: fixed;
+    left: 0;
+  }
+`;
 const Divider = styled('div')`
   margin-top: 16px;
   width: 100%;

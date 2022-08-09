@@ -5,6 +5,7 @@ import { Coin } from '../pages/Coin';
 import { Enter } from '../pages/Enter';
 
 import { Route } from '../types/Route';
+import { Profile } from '../pages/Profile';
 
 const routes: Array<Route> = [
   // {
@@ -22,6 +23,15 @@ const routes: Array<Route> = [
     description: 'Home',
     component: Home,
     path: '/',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-profile',
+    title: 'Profile',
+    description: 'Profile',
+    component: Profile,
+    path: '/profile',
     isEnabled: true,
     appendDivider: true,
   },

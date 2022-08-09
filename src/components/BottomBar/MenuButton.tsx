@@ -30,8 +30,8 @@ export const MenuButton = () => {
     }, 2000);
   }, [showLine]);
   const Toggler = ({ children }: { children: ReactElement }) => {
-    if (pathname === '/') return <StyledButton onClick={handleClick}>{children}</StyledButton>;
-    else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
+    return <StyledButton onClick={handleClick}>{children}</StyledButton>;
+    // else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
   };
   const sm = useMediaQuery('(max-width: 660px)');
   return (

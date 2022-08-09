@@ -95,7 +95,7 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
     lineHeight: '23px',
     '@media (max-width: 660px)': {
       fontSize: '12px',
-      linkHeight: '19px',
+      lineHeight: '19px',
     },
   };
 
