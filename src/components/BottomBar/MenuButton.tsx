@@ -30,8 +30,8 @@ export const MenuButton = () => {
     }, 2000);
   }, [showLine]);
   const Toggler = ({ children }: { children: ReactElement }) => {
-    if (pathname === '/') return <StyledButton onClick={handleClick}>{children}</StyledButton>;
-    else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
+    return <StyledButton onClick={handleClick}>{children}</StyledButton>;
+    // else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
   };
   const sm = useMediaQuery('(max-width: 660px)');
   return (
@@ -46,13 +46,13 @@ export const MenuButton = () => {
           </Collapse>
         </Box>
         <Box display="flex" alignItems="flex-end" mb={sm ? '42px' : 2} gap={2}>
-          <StyledButton sx={{ minWidth: 115 }} onClick={() => setPurchase((value) => !value)}>
+          <StyledButton sx={{ minWidth: 110 }} onClick={() => setPurchase((value) => !value)}>
             buy ink
           </StyledButton>
           <Toggler>
             <img src={arrowTop} alt="arrow" />
           </Toggler>
-          <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 115 }}>
+          <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
             roadmap
           </StyledButton>
         </Box>
@@ -86,6 +86,9 @@ const StyledButton = styled(Button)`
   font-weight: bold;
   img {
     margin: 8px 0;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 18px;
   }
 `;
 const LightToggler = styled(StyledButton)`

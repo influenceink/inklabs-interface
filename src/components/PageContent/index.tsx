@@ -15,18 +15,24 @@ export const PageContent = (props: PageProps) => {
     <>
       <Slide timeout={{ appear: 1000 }} direction={'right'} in={true} mountOnEnter unmountOnExit>
         <Box display="flex" justifyContent="center">
-          <PageWrapper sx={type === 'secondary' ? { backgroundColor: 'rgba(0,0,0,0.6)' } : null}>
-            {type === 'primary' && (
+          {type === 'primary' ? (
+            <PageWrapper>
               <Link to="/">
                 <img src={logo} alt="logo" />
               </Link>
-            )}
-            <Box width="100%" mt="24px" py={3} flexGrow={1} overflow="hidden auto">
-              {children}
-            </Box>
-            {type === 'primary' && <Divider />}
-            {type === 'primary' && <PageTitleText>{title?.toUpperCase().replaceAll('A', 'a')}</PageTitleText>}
-          </PageWrapper>
+              <Box width="100%" mt="24px" py={3} flexGrow={1} overflow="hidden auto">
+                {children}
+              </Box>
+              <Divider />
+              <PageTitleText>{title?.toUpperCase().replaceAll('A', 'a')}</PageTitleText>
+            </PageWrapper>
+          ) : (
+            <PageWrapperFluid>
+              <Box width="100%" flexGrow={1} overflow="hidden auto">
+                {children}
+              </Box>
+            </PageWrapperFluid>
+          )}
         </Box>
       </Slide>
     </>
@@ -62,7 +68,33 @@ const PageWrapper = styled('div')`
     left: 0;
   }
 `;
-
+const PageWrapperFluid = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.72);
+  max-width: 2000px;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
+  // & > div {
+  //   ::-webkit-scrollbar {
+  //     width: 0; /* Remove scrollbar space */
+  //     background: transparent;
+  //   }
+  //   ::-webkit-scrollbar-thumb {
+  //     background: #ff0000;
+  //   }
+  // }
+  @media screen and (max-width: 660px) {
+    -webkit-clip-path: none;
+    clip-path: none;
+    position: fixed;
+    left: 0;
+  }
+`;
 const Divider = styled('div')`
   margin-top: 16px;
   width: 100%;
