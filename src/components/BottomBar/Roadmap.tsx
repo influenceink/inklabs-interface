@@ -64,21 +64,6 @@ const CloseButton = styled(Button)`
   }
 `;
 
-const LogoWrapper = styled('div')`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  display: none;
-  justify-content: center;
-  padding-top: 46px;
-  z-index: 10;
-  @media screen and (max-width: 780px) {
-    padding-top: 26px;
-    display: flex;
-  }
-`;
-
 const ModalWrapper = styled('div')`
   box-sizing: border-box;
   width: 100%;
@@ -95,7 +80,7 @@ const ModalWrapper = styled('div')`
   top: 0px;
   left: 0px;
   height: 100vh;
-  // z-index: 8888;
+  z-index: 5;
   @media screen and (max-width: 600px) {
     align-items: flex-start;
     & > div {

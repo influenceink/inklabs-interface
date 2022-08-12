@@ -3,7 +3,7 @@ export const Copyright = () => {
   const sm = useMediaQuery('(max-width: 660px)');
   return (
     <>
-      <Box display="flex" gap={2} mb={sm ? 0 : 3} alignItems="center" width={sm ? '100%' : 'auto'}>
+      <Box display="flex" gap={2} mb={sm ? 0 : 3} alignItems="center" width={sm ? '100%' : 'auto'} zIndex={sm ? 2 : 0}>
         {/* {!sm && <img height="70px" src={cursor} alt="favicon" />} */}
         <Box display="flex" flexDirection="column" width={sm ? '100%' : 'auto'}>
           <Typography
