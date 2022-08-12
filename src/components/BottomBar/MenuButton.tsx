@@ -80,7 +80,7 @@ const StyledButton = styled(Button)`
   border-radius: 11px;
   background-color: transparent;
   border: 3px solid #ff1aba;
-  // z-index: 8888;
+  z-index: 2;
   color: white;
   font-size: 11px;
   font-weight: bold;
