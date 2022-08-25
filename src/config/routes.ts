@@ -6,6 +6,8 @@ import { Enter } from '../pages/Enter';
 
 import { Route } from '../types/Route';
 import { Profile } from '../pages/Profile';
+import { Vision } from '../pages/Vision';
+import { Convergence } from '../pages/Convergence';
 
 const routes: Array<Route> = [
   // {
@@ -59,6 +61,24 @@ const routes: Array<Route> = [
     description: 'Platform',
     component: Platform,
     path: '/platform',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-vision',
+    title: 'Vision',
+    description: 'Vision',
+    component: Vision,
+    path: '/vision',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-convergence',
+    title: 'Convergence',
+    description: 'Convergence',
+    component: Convergence,
+    path: '/convergence',
     isEnabled: true,
     appendDivider: true,
   },

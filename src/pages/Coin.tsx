@@ -8,7 +8,7 @@ import grayRect from '../assets/img/gray-rect.png';
 const Divider = () => {
   return (
     <Box maxWidth={520} height="1px" display="flex" my={3}>
-      <Box width={100} bgcolor="white" />
+      <Box width={150} bgcolor="white" />
       <Box bgcolor="#707070" flexGrow={1} />
     </Box>
   );

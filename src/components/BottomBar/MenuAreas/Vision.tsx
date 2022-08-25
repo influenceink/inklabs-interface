@@ -147,7 +147,14 @@ export const Vision = ({ onMenuClick }: Props) => {
           />
         </clipPath>
       </defs>
-      <g id="VISION_MAIN" data-name="VISION MAIN" transform="translate(22.821 1)">
+      <g
+        id="VISION_MAIN"
+        data-name="VISION MAIN"
+        transform="translate(22.821 1)"
+        onClick={() => {
+          onMenuClick('/vision');
+        }}
+      >
         <g id="Group_979" data-name="Group 979" transform="translate(-22.821 -1)" clipPath="url(#clip-path-v)">
           <g id="Group_978" data-name="Group 978">
             <g id="Group_977" data-name="Group 977" clipPath="url(#clip-path-v)">
@@ -347,7 +354,13 @@ export const Vision = ({ onMenuClick }: Props) => {
     </SVG>
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="387.635" height="100.317" viewBox="0 0 387.635 100.317">
-      <g id="vision" transform="translate(-21.253 -457.017)">
+      <g
+        id="vision"
+        transform="translate(-21.253 -457.017)"
+        onClick={() => {
+          onMenuClick('/vision');
+        }}
+      >
         <path
           id="Path_479"
           data-name="Path 479"

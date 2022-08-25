@@ -770,8 +770,8 @@ export const Experiences = ({ onMenuClick }: Props) => {
           fontFamily="SegoeUI, Segoe UI"
           letterSpacing="0.12em"
         >
-          <tspan x="-64.224" y="0">
-            EXPERIENCES
+          <tspan x="-104.224" y="0">
+            WORLD OF INFLUENCE
           </tspan>
         </text>
       </g>
@@ -798,8 +798,8 @@ export const Experiences = ({ onMenuClick }: Props) => {
           fontFamily="SegoeUI, Segoe UI"
           letterSpacing="0.12em"
         >
-          <tspan x="-34" y="5">
-            EXPERIENCES
+          <tspan x="-70" y="5">
+            WORLD OF INFLUENCE
           </tspan>
         </text>
       </g>
