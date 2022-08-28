@@ -10,16 +10,16 @@ export const SocialButtonGroup = () => {
   return (
     <>
       <SocialWrapper>
-        <SocialButton href="https://twitter.com" target="_blank" rel="noreferrer">
+        <SocialButton href="https://www.twitter.com/inkgames" target="_blank" rel="noreferrer">
           <img src={twitter} alt="twitter" />
         </SocialButton>
-        <SocialButton href="https://facebook.com" target="_blank" rel="noreferrer">
+        <SocialButton href="https://www.facebook.com/INKGamesOfficial" target="_blank" rel="noreferrer">
           <img src={facebook} alt="facebook" />
         </SocialButton>
-        <SocialButton href="https://instagram.com" target="_blank" rel="noreferrer">
+        <SocialButton href="https://www.instagram.com/inkgamesofficial" target="_blank" rel="noreferrer">
           <img src={instagram} alt="instagram" />
         </SocialButton>
-        <SocialButton href="https://youtube.com" target="_blank" rel="noreferrer">
+        <SocialButton href="https://www.youtube.com/channel/UCzu24Zhl-t2Fw2gEG5sGLGg" target="_blank" rel="noreferrer">
           <img src={youtube} alt="youtube" />
         </SocialButton>
       </SocialWrapper>

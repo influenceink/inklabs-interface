@@ -1,8 +1,8 @@
 import { Link, useHistory } from 'react-router-dom';
-import { Box, styled, Button, Fade, Typography, useMediaQuery } from '@mui/material';
+import { Box, styled, Button, Fade, Typography, useMediaQuery, Dialog, DialogContent } from '@mui/material';
 import cross from '../../../assets/img/cross.png';
 import logo from '../../../assets/img/logo.png';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CreateId } from './CreateId';
 import { CreateAccount } from './CreateAccount';
 import { AccessGranted } from './AccessGranted';
@@ -17,27 +17,22 @@ interface Props {
 export const Purchase = ({ show, setShow }: Props) => {
   const mobile = useMediaQuery('(max-width: 1350px)');
   const history = useHistory();
-  const goTo = (path: string) => {
-    setShow(false);
-    history.push(path);
-  };
   const [index, setIndex] = useState(0);
   useEffect(() => {
     if (show) setIndex(0);
   }, [show]);
+
+  const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
+    if (reason !== 'backdropClick') {
+      setShow(false);
+    }
+  };
   return (
     <>
-      <Fade in={show} mountOnEnter unmountOnExit>
-        <ModalWrapper>
-          <Box
-            position="relative"
-            display="flex"
-            flexDirection="column"
-            maxWidth="600px"
-            width="100%"
-            alignItems="center"
-            minHeight="820px"
-          >
+      {/* <Fade in={show} mountOnEnter unmountOnExit> */}
+      <ModalWrapper open={show} onClose={handleClose}>
+        <DialogContent>
+          <Box position="relative" display="flex" flexDirection="column" alignItems="center">
             {index === 0 && <CreateId onNext={() => setIndex((value) => value + 1)} />}
             {index === 1 && (
               <CreateAccount
@@ -62,8 +57,9 @@ export const Purchase = ({ show, setShow }: Props) => {
               <img src={cross} alt="cross" />
             </CloseButton>
           </Box>
-        </ModalWrapper>
-      </Fade>
+        </DialogContent>
+      </ModalWrapper>
+      {/* </Fade> */}
     </>
   );
 };
@@ -78,32 +74,47 @@ const CloseButton = styled(Button)`
   }
 `;
 
-const ModalWrapper = styled('div')`
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  & > div {
-    background-color: black;
-    border-radius: 15px;
-    padding: 60px 115px;
-  }
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  min-height: 100vh;
-  // z-index: 8888;
-  @media screen and (max-width: 600px) {
-    align-items: flex-start;
+const ModalWrapper = styled(Dialog)`
+  .MuiDialog-container {
     & > div {
+      background: transparent;
+      margin: 0;
+      & > div {
+        padding: 0;
+        display: flex;
+        & > div {
+          border-radius: 20px;
+          min-height: 825px;
+          background: black;
+          padding: 60px 115px;
+          max-width: 600px;
+          min-width: 600px;
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .MuiDialog-container {
+      background: black;
       width: 100%;
-      padding: 40px 24px 24px 24px;
       height: 100vh;
-      min-height: 0px;
-      overflow-y: auto;
-      border-radius: 0px;
+      display: flex;
+      align-items: flex-start;
+      & > div {
+        max-height: 100vh;
+        width: 100%;
+        & > div {
+          height: 100vh;
+          width: 100%;
+          & > div {
+            min-width: 0px;
+            max-width: 100%;
+            min-height: unset;
+            padding: 40px 24px 24px 24px;
+          }
+        }
+      }
     }
   }
 `;

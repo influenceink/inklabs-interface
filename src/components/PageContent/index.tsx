@@ -40,7 +40,7 @@ export const PageContent = (props: PageProps) => {
 };
 
 const PageWrapper = styled('div')`
-  padding: 46px 100px 40px 100px;
+  padding: 46px 100px 72px 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +48,7 @@ const PageWrapper = styled('div')`
   max-width: 2000px;
   width: 100%;
   height: 100vh;
-  z-index: 6666;
+  z-index: 1;
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
   clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
   & > div {
@@ -63,7 +63,7 @@ const PageWrapper = styled('div')`
   @media screen and (max-width: 660px) {
     -webkit-clip-path: none;
     clip-path: none;
-    padding: 26px 24px 40px 24px;
+    padding: 26px 24px 112px 24px;
     position: fixed;
     left: 0;
   }
@@ -76,7 +76,7 @@ const PageWrapperFluid = styled('div')`
   max-width: 2000px;
   width: 100%;
   height: 100vh;
-  z-index: 1;
+  z-index: 3;
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
   clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
   // & > div {
@@ -115,7 +115,7 @@ const PageTitleText = styled('p')`
   padding: 8px 0;
   line-height: 90px;
   @media screen and (max-width: 660px) {
-    font-size: 42px;
+    font-size: 38px;
     line-height: 52px;
     padding: 0;
   }

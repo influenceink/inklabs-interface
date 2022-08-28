@@ -31,7 +31,7 @@ export const Bridge = ({ onMenuClick }: Props) => {
         data-name="Group 985"
         clipPath="url(#clipPathb)"
         onClick={() => {
-          console.log('bridge');
+          onMenuClick('/convergence');
         }}
       >
         <path
@@ -53,16 +53,22 @@ export const Bridge = ({ onMenuClick }: Props) => {
           fontFamily="SegoeUI, Segoe UI"
           letterSpacing="0.059em"
         >
-          <tspan x="-55.873" y="0" xmlSpace="preserve">
+          <tspan x="-75.873" y="0" xmlSpace="preserve">
             {' '}
-            THE BRIDGE
+            CONVERGENCE
           </tspan>
         </text>
       </g>
     </SVG>
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="387.635" height="82.95" viewBox="0 0 387.635 82.95">
-      <g id="bridge" transform="translate(-21.253 -268.175)">
+      <g
+        id="bridge"
+        transform="translate(-21.253 -268.175)"
+        onClick={() => {
+          onMenuClick('/convergence');
+        }}
+      >
         <path
           id="Path_480"
           data-name="Path 480"
@@ -82,8 +88,8 @@ export const Bridge = ({ onMenuClick }: Props) => {
           fontFamily="SegoeUI, Segoe UI"
           letterSpacing="0.12em"
         >
-          <tspan x="-23.583" y="0">
-            BRIDGE
+          <tspan x="-48.583" y="0">
+            CONVERGENCE
           </tspan>
         </text>
       </g>

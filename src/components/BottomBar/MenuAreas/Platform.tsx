@@ -37,7 +37,14 @@ export const Platform = ({ onMenuClick }: Props) => {
           />
         </clipPath>
       </defs>
-      <g id="Group_993" data-name="Group 993" clipPath="url(#clip-path)">
+      <g
+        id="Group_993"
+        data-name="Group 993"
+        clipPath="url(#clip-path)"
+        onClick={() => {
+          onMenuClick('/platform');
+        }}
+      >
         <g id="Group_992" data-name="Group 992">
           <g id="Group_991" data-name="Group 991" clipPath="url(#clip-path)">
             <path
@@ -4504,15 +4511,21 @@ export const Platform = ({ onMenuClick }: Props) => {
           fontFamily="SegoeUI, Segoe UI"
           letterSpacing="0.12em"
         >
-          <tspan x="-51.62" y="0">
-            PLATFORM
+          <tspan x="-71.62" y="0">
+            PLATFORM TECH
           </tspan>
         </text>
       </g>
     </SVG>
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="127.683" height="85.497" viewBox="0 0 127.683 85.497">
-      <g id="platform" transform="translate(-21.112 -362.217)">
+      <g
+        id="platform"
+        transform="translate(-21.112 -362.217)"
+        onClick={() => {
+          onMenuClick('/platform');
+        }}
+      >
         <path
           id="Path_477"
           data-name="Path 477"
@@ -4531,8 +4544,8 @@ export const Platform = ({ onMenuClick }: Props) => {
           fontSize="12"
           fontFamily="SegoeUI, Segoe UI"
         >
-          <tspan x="-29.373" y="0">
-            PLATFORM
+          <tspan x="-45.373" y="0">
+            PLATFORM TECH
           </tspan>
         </text>
       </g>

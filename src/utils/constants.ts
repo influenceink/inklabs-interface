@@ -21,6 +21,10 @@ export const PAGE_TITLE_MINDMAP = 'Mindmap';
 export const PAGE_TITLE_PROFILE = 'Profile';
 export const PAGE_TITLE_VISION = 'Vision';
 export const PAGE_TITLE_PLATFORM = 'Platform';
+export const PAGE_TITLE_CONVERGENCE = 'Convergence';
+export const PAGE_TITLE_INFLUENCE = 'World of Influence';
+export const PAGE_TITLE_GAMES = 'Games';
+export const PAGE_TITLE_COIN = 'INK Coin';
 // export const PAGE_TITLE_HOME = 'Home';
 // APP THEME
 export const DARK_MODE_THEME = 'dark';
