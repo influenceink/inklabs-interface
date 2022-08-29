@@ -1,18 +1,14 @@
-import { Box, styled, Typography, useMediaQuery } from '@mui/material';
+import { Box, Typography, useMediaQuery, styled, Grid } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
 import { PageContent } from '../components/PageContent';
-import { APP_TITLE, PAGE_TITLE_MINDMAP } from '../utils/constants';
+import { APP_TITLE, PAGE_TITLE_COIN } from '../utils/constants';
+import coinImg from '../assets/img/coin.png';
 import grayRect from '../assets/img/gray-rect.png';
-
-const Divider = () => {
-  return (
-    <Box maxWidth={520} height="1px" display="flex" my={3}>
-      <Box width={100} bgcolor="white" />
-      <Box bgcolor="#707070" flexGrow={1} />
-    </Box>
-  );
-};
+import symbolImg from '../assets/img/symbol.png';
+import completeImg from '../assets/img/complete.png';
+import hereImg from '../assets/img/here.png';
+import { Divider, Image, Paragraph, RedButton } from './Components';
 
 export const Coin = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
@@ -20,49 +16,172 @@ export const Coin = () => {
     <>
       <Helmet>
         <title>
-          {PAGE_TITLE_MINDMAP} | {APP_TITLE}
+          {PAGE_TITLE_COIN} | {APP_TITLE}
         </title>
       </Helmet>
-      <PageContent title={PAGE_TITLE_MINDMAP} type="primary">
+      <PageContent title={PAGE_TITLE_COIN} type="primary">
         <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
           <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
-            <Typography variant="h1">tokenomics</Typography>
-            <Typography variant="subtitle1">SUB TEXT HERE OR SOME OTHER SUBTITLE</Typography>
+            <Typography variant="h1">ink token</Typography>
             <Divider />
+            <Box display="flex" width="100%" justifyContent="space-between" flexWrap="wrap">
+              <TokenWrapper>
+                <Typography variant="h6">TOKEN NAME:</Typography>
+                <Typography variant="h6">INK</Typography>
+              </TokenWrapper>
+              <TokenWrapper>
+                <Typography variant="h6">TOKEN SUPPLY:</Typography>
+                <Typography variant="h6">350,000,000,000</Typography>
+              </TokenWrapper>
+              <TokenWrapper>
+                <Typography variant="h6">NETWORK:</Typography>
+                <Typography variant="h6">POLYGON &amp; ETHEREUM</Typography>
+              </TokenWrapper>
+              <TokenWrapper>
+                <Typography variant="h6">PRIVATE OFFERING PRICE:</Typography>
+                <Typography variant="h6">$0.002/INK</Typography>
+              </TokenWrapper>
+            </Box>
+            <Divider />
+            <Grid container mb={3} spacing={4}>
+              <Grid item xs={12} xl={4}>
+                <CardBox>
+                  <Typography fontSize={18}>PRIVATE - RD. 1</Typography>
+                  <Box display="flex" justifyContent="space-between" alignItems="start">
+                    <Typography fontSize={14} color="#787878">
+                      Series A &amp; B Investors
+                    </Typography>
+                    <Box display="flex" flexDirection="column" alignItems="end" color="#29FF3E">
+                      <Typography fontSize={10} lineHeight="12px">
+                        18 MONTHS VEST
+                      </Typography>
+                      <Typography fontSize={5} lineHeight="8px">
+                        DAILY BLOCK
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box borderRadius={20} bgcolor="#2E2E40" height="15px" mt={3} mb={3}>
+                    <Box width="28px" bgcolor="#1D92DF" height="15px" borderRadius={20}></Box>
+                  </Box>
+                  <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Box display="flex" alignItems="center">
+                      <SymbolImg src={symbolImg} height="19px" />
+                      <Typography fontSize={14} lineHeight="18px" ml={1}>
+                        20,000,000,000
+                      </Typography>
+                    </Box>
+                    <Box display="flex" alignItems="end" flexDirection="column">
+                      <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">
+                        5.7%
+                      </Typography>
+                      <Typography fontSize={5} lineHeight="8px" pr="10px" color="#707070">
+                        OF TOTAL SUPPLY
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    position="absolute"
+                    top={0}
+                    left={0}
+                    right={0}
+                    bottom={0}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <SymbolImg src={completeImg} alt="complete" />
+                  </Box>
+                </CardBox>
+              </Grid>
+              <Grid item xs={12} xl={4}>
+                <Box display="flex" flexDirection="column" alignItems="center" minWidth="290px" width="100%">
+                  <Box borderRadius="20px" padding="18px 15px 30px" bgcolor="#212130" width="100%">
+                    <Typography fontSize={18}>PRIVATE - RD. 2</Typography>
+                    <Box display="flex" justifyContent="space-between" alignItems="start">
+                      <Typography fontSize={14} color="#787878">
+                        Institutional
+                      </Typography>
+                      <Box display="flex" flexDirection="column" alignItems="end" color="#29FF3E">
+                        <Typography fontSize={10} lineHeight="12px">
+                          18 MONTHS VEST
+                        </Typography>
+                        <Typography fontSize={5} lineHeight="8px">
+                          DAILY BLOCK
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box borderRadius={20} bgcolor="#2E2E40" height="15px" mt={3} mb={3}>
+                      <Box width="28px" bgcolor="#F90F95" height="15px" borderRadius={20}></Box>
+                    </Box>
+                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        <SymbolImg src={symbolImg} height="19px" />
+                        <Typography fontSize={14} lineHeight="18px" ml={1}>
+                          15,000,000,000
+                        </Typography>
+                      </Box>
+                      <Box display="flex" alignItems="end" flexDirection="column">
+                        <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">
+                          4.3%
+                        </Typography>
+                        <Typography fontSize={5} lineHeight="8px" pr="10px" color="#707070">
+                          OF TOTAL SUPPLY
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box>
+                    <SymbolImg src={hereImg} alt="you are here" />
+                  </Box>
+                  <Typography color="#11FF60" fontSize="10px">
+                    YOU ARE HERE
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} xl={4}>
+                <CardBox>
+                  <Typography fontSize={18}>PUBLIC SALE</Typography>
+                  <Typography fontSize={14} color="#787878">
+                    {'(liquidity bootstrap)*'}
+                  </Typography>
+                  <Box borderRadius={20} bgcolor="#2E2E40" height="15px" mt={3} mb={3}>
+                    <Box width="64px" bgcolor="#29FF3E" height="15px" borderRadius={20}></Box>
+                  </Box>
+                  <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Box display="flex" alignItems="center">
+                      <SymbolImg src={symbolImg} height="19px" />
+                      <Typography fontSize={14} lineHeight="18px" ml={1}>
+                        43,750,000,000
+                      </Typography>
+                    </Box>
+                    <Box display="flex" alignItems="end" flexDirection="column">
+                      <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">
+                        12.5%
+                      </Typography>
+                      <Typography fontSize={5} lineHeight="8px" pr="10px" color="#707070">
+                        OF TOTAL SUPPLY
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardBox>
+              </Grid>
+            </Grid>
             <Paragraph paragraph>
-              The most valuable assets a user can bring to any platform are their personal engagement followed by their
-              viral connectivity. Harvesting this value has enabled tech platforms across entertainment, gaming and web3
-              to dominate the landscape.
+              INK is an ERC-20 compliant utility token for INK Games and our suite of game and platform projects. With
+              this standard, we ensure interoperability with popular decentralized applications, digital assets, and
+              wallet services. INK holders will be able to unlock exclusive perks and upgrades on the platform through
+              two primary methods: (a) upgrading World of Influence membership by spending INK, or (b) staking INK to
+              unlock rewards. While INK is not necessary for basic platform participation, we’ve designed the World of
+              Influence in such a way that token holders enjoy enhanced experiences and distinct perks leading to token
+              demand.
             </Paragraph>
-            <Paragraph paragraph>
-              While users are inherently responsible for this platform growth, they historically haven’t participated
-              economically. No platform has ever endeavored to track and quantify each user’s marginal value, and then
-              compensate them perpetually for that value. Until now. Until INK Labs.
-            </Paragraph>
-            <Paragraph paragraph>
-              INK was founded in 2018 on the premise that every user should be able to “INK” a livelihood by monetizing
-              their owned connectivity and viral reach. This value has traditionally been hidden behind closed
-              algorithms, and harvested exclusively by the major tech platforms.
-            </Paragraph>
-            <Paragraph paragraph>
-              For years, we have been developing a revolutionary Payment &amp; Tracking engine that will, for the first
-              time, unmask a user’s true connectivity and viral reach. Once unmasked, this value can be shared back to
-              the user on a perpetual basis. The INK platform will mark the first shift toward community-incentivized
-              platform growth, while unlocking new income opportunities for 6.6B smartphone users globally.
-            </Paragraph>
-            <Paragraph paragraph>
-              While we have been developing our technology for years, the recent advent of web3 has allowed us to
-              augment our model. We’ve taken a responsible approach to web3 development, only implementing aspects that
-              improve the user experience on the INK platform and provide true value, such as asset liquidity and crypto
-              payouts.
-            </Paragraph>
-            <Paragraph paragraph>
-              We’re already living in a present where users create all the value. INK is building a future where they’re
-              paid for it.
-            </Paragraph>
+            <Box display="flex" gap="24px" justifyContent="start" mt={8} mb={4}>
+              <RedButton>reserve ink</RedButton>
+              <RedButton>read our litepaper</RedButton>
+            </Box>
           </Box>
-          <Box width="100%" display="flex" justifyContent="center">
-            <Image src={grayRect} alt="gray" />
+          <Box display="flex" justifyContent="center" width="100%">
+            <CustomImage src={coinImg} alt="gray" height="100%" width="100%" />
           </Box>
         </Box>
         <Box
@@ -70,46 +189,38 @@ export const Coin = () => {
           flexDirection={xl ? 'column-reverse' : 'row'}
           gap={xl ? 2 : 6}
           alignItems="flex-start"
-          mt={8}
+          mt={12}
         >
           <Box width="100%" display="flex" justifyContent="center">
             <Image src={grayRect} alt="gray" />
           </Box>
-          <Box flexGrow={1}>
-            <Typography variant="h1">vision</Typography>
-            <Typography variant="subtitle1">SUB TEXT HERE OR SOME OTHER SUBTITLE</Typography>
+          <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
             <Divider />
-            <Paragraph paragraph>
-              The most valuable assets a user can bring to any platform are their personal engagement followed by their
-              viral connectivity. Harvesting this value has enabled tech platforms across entertainment, gaming and web3
-              to dominate the landscape.
+            <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
+              Supply
+            </Typography>
+            <Paragraph paragraph mt="20px">
+              The INK project is designed to ensure a balance of token supply and demand. On the supply side, outside of
+              the initial token sales, the primary way INK will be distributed is as a reward currency for platform
+              activities.
             </Paragraph>
             <Paragraph paragraph>
-              While users are inherently responsible for this platform growth, they historically haven’t participated
-              economically. No platform has ever endeavored to track and quantify each user’s marginal value, and then
-              compensate them perpetually for that value. Until now. Until INK Labs.
+              When a user{"'"}s social network generates revenue on our platform, we will reward the originating user a
+              fixed number of tokens for a corresponding amount of $USD (or equivalent) spend. In this way, INK
+              distribution happens as a result of real economic value creation.
             </Paragraph>
+            <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
+              Proceeds
+            </Typography>
             <Paragraph paragraph>
-              INK was founded in 2018 on the premise that ev ery user should be able to “INK” a livelihood by monetizing
-              their owned connectivity and viral reach. This value has traditionally been hidden behind closed
-              algorithms, and harvested exclusively by the major tech platforms.
+              Token sale proceeds will fund the roadmap of platform functionality (discussed below). For security and to
+              efficiently fund future operating costs, we expect to continuously rebalance currency holdings to achieve
+              an approximate 75% exposure to fiat currency (USD held in corporate accounts) and 25% cryptocurrency.
             </Paragraph>
-            <Paragraph paragraph>
-              For years, we have been developing a revolutionary Payment &amp; Tracking engine that will, for the first
-              time, unmask a user’s true connectivity and viral reach. Once unmasked, this value can be shared back to
-              the user on a perpetual basis. The INK platform will mark the first shift toward community-incentivized
-              platform growth, while unlocking new income opportunities for 6.6B smartphone users globally.
-            </Paragraph>
-            <Paragraph paragraph>
-              While we have been developing our technology for years, the recent advent of web3 has allowed us to
-              augment our model. We’ve taken a responsible approach to web3 development, only implementing aspects that
-              improve the user experience on the INK platform and provide true value, such as asset liquidity and crypto
-              payouts.
-            </Paragraph>
-            <Paragraph paragraph>
-              We’re already living in a present where users create all the value. INK is building a future where they’re
-              paid for it.
-            </Paragraph>
+            <Box display="flex" gap="24px" justifyContent="start" mt={8}>
+              <RedButton>reserve ink</RedButton>
+              <RedButton>read our litepaper</RedButton>
+            </Box>
           </Box>
         </Box>
       </PageContent>
@@ -117,16 +228,45 @@ export const Coin = () => {
   );
 };
 
-const Image = styled('img')`
+const TokenWrapper = styled('div')`
+  & h6 {
+    font-weight: bold;
+  }
+  width: fit-content;
+  & > :last-child {
+    color: #11ff60;
+  }
+  @media screen and (max-width: 1024px) {
+    & h6 {
+      font-size: 16px;
+    }
+  }
+  @media screen and (max-width: 780px) {
+    & h6 {
+      font-size: 14px;
+    }
+  }
+  margin-right: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+`;
+
+const CardBox = styled(Grid)`
+  position: relative;
+  border-radius: 20px;
+  padding: 18px 15px 30px;
+  background-color: #47475f38;
+  min-width: 290px;
   width: 100%;
-  min-width: 850px;
+`;
+
+const CustomImage = styled('img')`
+  min-width: 600px;
   @media screen and (max-width: 1660px) {
     width: 100%;
-    max-width: 850px;
+    max-width: 608px;
     min-width: 0;
   }
 `;
 
-const Paragraph = styled(Typography)`
-  font-size: 13px;
-`;
+const SymbolImg = styled('img')``;

@@ -115,7 +115,7 @@ const PageTitleText = styled('p')`
   padding: 8px 0;
   line-height: 90px;
   @media screen and (max-width: 660px) {
-    font-size: 42px;
+    font-size: 38px;
     line-height: 52px;
     padding: 0;
   }

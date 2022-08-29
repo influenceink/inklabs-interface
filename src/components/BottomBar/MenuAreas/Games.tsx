@@ -36,7 +36,13 @@ export const Games = ({ onMenuClick }: Props) => {
           />
         </clipPath>
       </defs>
-      <g id="main" transform="translate(-1001 -96)">
+      <g
+        id="main"
+        transform="translate(-1001 -96)"
+        onClick={() => {
+          onMenuClick('/games');
+        }}
+      >
         <g id="Group_1122" data-name="Group 1122" transform="translate(1001 96)" clipPath="url(#clip-path-g)">
           <g id="Group_1121" data-name="Group 1121">
             <g id="Group_1120" data-name="Group 1120" clipPath="url(#clip-path-g)">
@@ -2622,7 +2628,13 @@ export const Games = ({ onMenuClick }: Props) => {
     </SVG>
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="193.123" height="85.576" viewBox="0 0 193.123 85.576">
-      <g id="games" transform="translate(-215.765 -173.664)">
+      <g
+        id="games"
+        transform="translate(-215.765 -173.664)"
+        onClick={() => {
+          onMenuClick('/games');
+        }}
+      >
         <path
           id="Path_482"
           data-name="Path 482"

@@ -37,7 +37,14 @@ export const Experiences = ({ onMenuClick }: Props) => {
           />
         </clipPath>
       </defs>
-      <g id="Group_1114" data-name="Group 1114" clipPath="url(#clipPath)">
+      <g
+        id="Group_1114"
+        data-name="Group 1114"
+        clipPath="url(#clipPath)"
+        onClick={() => {
+          onMenuClick('/woi');
+        }}
+      >
         <g id="Group_1113" data-name="Group 1113">
           <g id="Group_1112" data-name="Group 1112" clipPath="url(#clipPath)">
             <path
@@ -770,15 +777,21 @@ export const Experiences = ({ onMenuClick }: Props) => {
           fontFamily="SegoeUI, Segoe UI"
           letterSpacing="0.12em"
         >
-          <tspan x="-64.224" y="0">
-            EXPERIENCES
+          <tspan x="-104.224" y="0">
+            WORLD OF INFLUENCE
           </tspan>
         </text>
       </g>
     </SVG>
   ) : (
     <SVG xmlns="http://www.w3.org/2000/svg" width="186.514" height="85.576" viewBox="0 0 186.514 85.576">
-      <g id="cryptoclub" transform="translate(-21.253 -173.664)">
+      <g
+        id="cryptoclub"
+        transform="translate(-21.253 -173.664)"
+        onClick={() => {
+          onMenuClick('/woi');
+        }}
+      >
         <path
           id="Path_481"
           data-name="Path 481"
@@ -798,8 +811,8 @@ export const Experiences = ({ onMenuClick }: Props) => {
           fontFamily="SegoeUI, Segoe UI"
           letterSpacing="0.12em"
         >
-          <tspan x="-34" y="5">
-            EXPERIENCES
+          <tspan x="-70" y="5">
+            WORLD OF INFLUENCE
           </tspan>
         </text>
       </g>
