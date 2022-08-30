@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 
-export const CreateId = ({ onNext }: { onNext: () => void }) => {
+export const CreateId = ({ onNext, onSignIn }: { onNext: () => void; onSignIn: () => void }) => {
   const handleClick = () => {
     onNext();
   };
@@ -36,7 +36,12 @@ export const CreateId = ({ onNext }: { onNext: () => void }) => {
         <Typography variant="subtitle2" fontWeight="bold" py={0}>
           ALREADY HAVE AN INK ID?
         </Typography>
-        <Typography variant="subtitle1" color="#2984FF">
+        <Typography
+          variant="subtitle1"
+          color="#2984FF"
+          sx={{ cursor: 'pointer', ':hover': { textDecoration: 'underline' } }}
+          onClick={onSignIn}
+        >
           Sign-in
         </Typography>
       </Box>

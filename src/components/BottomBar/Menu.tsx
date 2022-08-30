@@ -82,7 +82,7 @@ export const Menu = ({ show, setShow }: Props) => {
 const CloseButton = styled(Button)`
   padding: 16px 22px;
   padding-bottom: 10px;
-  border-radius: 35px 35px 0 0;
+  border-radius: 10px 10px 0 0;
   z-index: 8888;
   background-color: white;
   img {

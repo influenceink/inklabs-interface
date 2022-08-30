@@ -1,7 +1,10 @@
 import { Box, Typography } from '@mui/material';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts';
 import { FormButton, FormTitle, Input, Divider } from '.';
 
 export const AccessGranted = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
+  const { inkId } = useContext(AuthContext);
   const handleClick = () => {
     onNext();
   };
@@ -26,7 +29,7 @@ export const AccessGranted = ({ onNext, onPrev }: { onNext: () => void; onPrev: 
             YOUR USERNAME/INK ID
           </Typography>
           <Typography variant="subtitle2" fontWeight="semibold" fontSize="36px" lineHeight="36px">
-            @SKYBURN
+            @{inkId}
           </Typography>
           <Box width="100%" mt={3}>
             <FormButton onClick={handleClick}>enter</FormButton>
