@@ -9,9 +9,13 @@ import pinkCard from '../../assets/img/card1.png';
 import blueCard from '../../assets/img/card2.png';
 import greenCard from '../../assets/img/card3.png';
 import yellowCard from '../../assets/img/card4.png';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { ZipCodes } from './ZipCodes';
 import { Connections } from './Connections';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../contexts';
+import { numberWithCommas } from '../../utils';
+import cross from '../../assets/img/cross.png';
 
 export const zipData = [
   {
@@ -434,6 +438,16 @@ export const Profile = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
   const [showZip, setShowZip] = useState(false);
   const [showConnection, setShowConnection] = useState(false);
+  const history = useHistory();
+  const { avatar, viralCount, directCount, totalCount, authorized, inkId } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!authorized) history.push('/');
+  }, [authorized, history]);
+
+  const handleClose = () => {
+    history.push('/');
+  };
 
   return (
     <>
@@ -451,11 +465,12 @@ export const Profile = () => {
           gap="12px"
           alignItems="center"
           flexDirection="column"
+          position="relative"
           pb={3}
         >
-          <Avatar src={profilePic} alt="" />
+          <Avatar src={avatar} alt="" />
           <Typography variant="subtitle2" mt={1} fontWeight="semibold" fontSize="18px" lineHeight="18px">
-            @Cryticalmass
+            @{inkId}
           </Typography>
           <Typography variant="subtitle2" fontWeight="semibold" fontSize="12px" color="#fff7">
             Austin, Texas
@@ -463,7 +478,7 @@ export const Profile = () => {
           <Box display="flex" alignItems="center" width="100%" mt={2}>
             <StatCard>
               <Typography variant="subtitle2" fontWeight="bold" fontSize="19px" lineHeight="19px">
-                2,736
+                {numberWithCommas(directCount)}
               </Typography>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
                 Direct Connections
@@ -472,7 +487,7 @@ export const Profile = () => {
             <RoundedText>+</RoundedText>
             <StatCard>
               <Typography variant="subtitle2" fontWeight="bold" fontSize="19px" lineHeight="19px">
-                163
+                {numberWithCommas(viralCount)}
               </Typography>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
                 Viral Connections
@@ -481,7 +496,7 @@ export const Profile = () => {
             <RoundedText>=</RoundedText>
             <StatCard sx={{ cursor: 'pointer' }} onClick={() => setShowConnection(true)}>
               <Typography variant="subtitle2" fontWeight="bold" fontSize="19px" lineHeight="19px">
-                2,889
+                {numberWithCommas(totalCount)}
               </Typography>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
                 Total Connections
@@ -526,6 +541,9 @@ export const Profile = () => {
             </Typography>
             <StyledButton>faq&lsquo;s</StyledButton>
           </Box>
+          <CloseButton onClick={handleClose}>
+            <img src={cross} alt="cross" />
+          </CloseButton>
         </Box>
       </PageContent>
       <ZipCodes show={showZip} setShow={setShowZip} />
@@ -625,5 +643,16 @@ const StyledButton = styled(Button)`
   color: white;
   :hover {
     background-color: #314fff;
+  }
+`;
+
+const CloseButton = styled(Button)`
+  position: absolute;
+  top: -120px;
+  right: 5px;
+  z-index: 8888;
+  @media screen and (max-width: 600px) {
+    position: relative;
+    right: 0px;
   }
 `;

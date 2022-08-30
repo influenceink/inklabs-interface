@@ -32,7 +32,12 @@ export const CreateAccount = ({ onNext, onPrev }: { onNext: () => void; onPrev: 
         <Typography variant="subtitle2" fontWeight="bold" py={0} mt={2}>
           ALREADY HAVE AN INK ID?
         </Typography>
-        <Typography variant="subtitle1" color="#2984FF">
+        <Typography
+          variant="subtitle1"
+          color="#2984FF"
+          sx={{ cursor: 'pointer', ':hover': { textDecoration: 'underline' } }}
+          onClick={onPrev}
+        >
           Sign-in
         </Typography>
       </Box>

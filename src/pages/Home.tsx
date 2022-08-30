@@ -39,9 +39,6 @@ export const Home = () => {
   );
 };
 const TypeWrapper = styled('div')`
-  & > div {
-    display: flex;
-  }
   span {
     font-size: 90px;
     line-height: 90px;

@@ -1,26 +1,31 @@
-import { Link, useHistory } from 'react-router-dom';
-import { Box, styled, Button, Fade, Typography, useMediaQuery, Dialog, DialogContent } from '@mui/material';
+import { useHistory } from 'react-router-dom';
+import { Box, styled, Button, useMediaQuery, Dialog, DialogContent } from '@mui/material';
 import cross from '../../../assets/img/cross.png';
-import logo from '../../../assets/img/logo.png';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { CreateId } from './CreateId';
 import { CreateAccount } from './CreateAccount';
 import { AccessGranted } from './AccessGranted';
 import { ReserveInk } from './ReserveInk';
 import { Preview } from './Preview';
 import { Complete } from './Complete';
+import { SignIn } from './SignIn';
+import { AuthContext } from '../../../contexts';
 interface Props {
   show: boolean;
   setShow: (value: boolean) => void;
 }
 
 export const Purchase = ({ show, setShow }: Props) => {
+  const { authorized } = useContext(AuthContext);
   const mobile = useMediaQuery('(max-width: 1350px)');
   const history = useHistory();
   const [index, setIndex] = useState(0);
   useEffect(() => {
-    if (show) setIndex(0);
-  }, [show]);
+    if (show) {
+      if (authorized) setIndex(3);
+      else setIndex(0);
+    }
+  }, [show, authorized]);
 
   const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
     if (reason !== 'backdropClick') {
@@ -33,26 +38,29 @@ export const Purchase = ({ show, setShow }: Props) => {
       <ModalWrapper open={show} onClose={handleClose}>
         <DialogContent>
           <Box position="relative" display="flex" flexDirection="column" alignItems="center">
-            {index === 0 && <CreateId onNext={() => setIndex((value) => value + 1)} />}
-            {index === 1 && (
+            {index === 0 && (
+              <CreateId onNext={() => setIndex((value) => value + 2)} onSignIn={() => setIndex((value) => value + 1)} />
+            )}
+            {index == 1 && <SignIn onPrev={() => setIndex((value) => value - 1)} />}
+            {index === 2 && (
               <CreateAccount
                 onNext={() => setIndex((value) => value + 1)}
                 onPrev={() => setIndex((value) => value - 1)}
               />
             )}
-            {index === 2 && (
+            {index === 3 && (
               <AccessGranted
                 onNext={() => setIndex((value) => value + 1)}
                 onPrev={() => setIndex((value) => value - 1)}
               />
             )}
-            {index === 3 && (
+            {index === 4 && (
               <ReserveInk onNext={() => setIndex((value) => value + 1)} onPrev={() => setIndex((value) => value - 1)} />
             )}
-            {index === 4 && (
+            {index === 5 && (
               <Preview onNext={() => setIndex((value) => value + 1)} onPrev={() => setIndex((value) => value - 1)} />
             )}
-            {index === 5 && <Complete onPrev={() => setIndex((value) => value - 1)} />}
+            {index === 6 && <Complete onPrev={() => setIndex((value) => value - 1)} />}
             <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
             </CloseButton>
