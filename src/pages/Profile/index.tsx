@@ -14,7 +14,6 @@ import { ZipCodes } from './ZipCodes';
 import { Connections } from './Connections';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts';
-import { numberWithCommas } from '../../utils';
 import cross from '../../assets/img/cross.png';
 
 export const zipData = [
@@ -478,7 +477,7 @@ export const Profile = () => {
           <Box display="flex" alignItems="center" width="100%" mt={2}>
             <StatCard>
               <Typography variant="subtitle2" fontWeight="bold" fontSize="19px" lineHeight="19px">
-                {numberWithCommas(directCount)}
+                {directCount.toLocaleString()}
               </Typography>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
                 Direct Connections
@@ -487,7 +486,7 @@ export const Profile = () => {
             <RoundedText>+</RoundedText>
             <StatCard>
               <Typography variant="subtitle2" fontWeight="bold" fontSize="19px" lineHeight="19px">
-                {numberWithCommas(viralCount)}
+                {viralCount.toLocaleString()}
               </Typography>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
                 Viral Connections
@@ -496,7 +495,7 @@ export const Profile = () => {
             <RoundedText>=</RoundedText>
             <StatCard sx={{ cursor: 'pointer' }} onClick={() => setShowConnection(true)}>
               <Typography variant="subtitle2" fontWeight="bold" fontSize="19px" lineHeight="19px">
-                {numberWithCommas(totalCount)}
+                {totalCount.toLocaleString()}
               </Typography>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
                 Total Connections
@@ -651,8 +650,4 @@ const CloseButton = styled(Button)`
   top: -120px;
   right: 5px;
   z-index: 8888;
-  @media screen and (max-width: 600px) {
-    position: relative;
-    right: 0px;
-  }
 `;
