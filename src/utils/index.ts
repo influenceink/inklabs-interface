@@ -5,7 +5,3 @@ export const passwordToHash = (password: string) => {
   const hash = btoa(String.fromCharCode.apply(null, bytes));
   return hash;
 };
-
-export function numberWithCommas(x: number) {
-  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-}
