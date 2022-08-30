@@ -1,18 +1,24 @@
 import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
-import { useState, useContext } from 'react';
-import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
+import { useState, useContext, createRef, ChangeEvent } from 'react';
+import NumberFormat from 'react-number-format';
+import { FormButton, FormTitle, Divider, DividerContent } from '.';
 import { Web3Context } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
   const [currency, setCurrency] = useState('sushi');
+  const [tokenAmount, setTokenAmount] = useState<number>(0);
   const { connected, account, connect } = useContext(Web3Context);
   const handleCurrencyChange = (e: any) => {
     setCurrency(e.target.value);
   };
   const handleClick = () => {
     onNext();
+  };
+  const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
+    const amount = ev.target.value.replaceAll(',', '');
+    setTokenAmount(Number(amount));
   };
   return (
     <>
@@ -97,7 +103,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
           </Typography>
           <CustomInputWrapper>
             <Box width="100%" display="flex" justifyContent="center">
-              $5,143.00
+              <AmountInput value={tokenAmount} onChange={handleChange} thousandSeparator={true} />
             </Box>
             <Typography>/</Typography>
             <Box width="100%" display="flex" gap={1} justifyContent="center">
@@ -129,6 +135,17 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
     </>
   );
 };
+
+const AmountInput = styled(NumberFormat)`
+  background-color: transparent;
+  width: 120px;
+  font-size: 16px;
+  border: none;
+  color: white;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  outline: none;
+`;
 
 const CustomSelect = styled(Select)`
   border-radius: 15px;
@@ -166,5 +183,8 @@ const CustomInputWrapper = styled('div')`
   ::placeholder {
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.15);
+  }
+  [contenteditable] {
+    outline: 0px solid transparent;
   }
 `;

@@ -1,7 +1,9 @@
 import { Box, styled, Slide, useMediaQuery } from '@mui/material';
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts';
 
 interface PageProps {
   children?: ReactNode;
@@ -11,20 +13,30 @@ interface PageProps {
 export const PageContent = (props: PageProps) => {
   const { children, title, type } = props;
   const sm = useMediaQuery('(max-width: 660px)');
+  const { authorized, avatar } = useContext(AuthContext);
+  const history = useHistory();
   return (
     <>
       <Slide timeout={{ appear: 1000 }} direction={'right'} in={true} mountOnEnter unmountOnExit>
         <Box display="flex" justifyContent="center">
           {type === 'primary' ? (
             <PageWrapper>
-              <Link to="/">
-                <img src={logo} alt="logo" />
-              </Link>
-              <Box width="100%" mt="24px" py={3} flexGrow={1} overflow="hidden auto">
-                {children}
+              <Box width="100%" pb={3} flexGrow={1} overflow="hidden auto" position={'relative'}>
+                <Box position={'absolute'}>
+                  <Link to="/">
+                    <img src={logo} alt="logo" />
+                  </Link>
+                </Box>
+                {authorized && avatar !== '' && (
+                  <ProfileWrapper onClick={() => history.push('/profile')}>
+                    <img src={avatar} alt="profile logo" width="100%" height="100%" />
+                  </ProfileWrapper>
+                )}
+                <Box mt="160px" flexGrow={1} display="flex" alignItems="center">
+                  {children}
+                </Box>
               </Box>
               <Divider />
-              <PageTitleText>{title?.toUpperCase().replaceAll('A', 'a')}</PageTitleText>
             </PageWrapper>
           ) : (
             <PageWrapperFluid>
@@ -38,19 +50,37 @@ export const PageContent = (props: PageProps) => {
     </>
   );
 };
-
+const ProfileWrapper = styled('div')`
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  right: 5px;
+  & img {
+    border-radius: 100%;
+  }
+  &:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-color: #ff225e;
+    position: absolute;
+    border-radius: 100%;
+    transform: translateX(-8px);
+  }
+  cursor: pointer;
+`;
 const PageWrapper = styled('div')`
-  padding: 46px 100px 72px 100px;
+  padding: 46px 100px 110px 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.92);
-  max-width: 2000px;
+  background-color: rgb(0, 0, 0);
   width: 100%;
   height: 100vh;
   z-index: 1;
-  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
-  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
   & > div {
     ::-webkit-scrollbar {
       width: 0; /* Remove scrollbar space */
@@ -60,10 +90,13 @@ const PageWrapper = styled('div')`
       background: #ff0000;
     }
   }
+  & a > img {
+    width: 65%;
+  }
   @media screen and (max-width: 660px) {
     -webkit-clip-path: none;
     clip-path: none;
-    padding: 26px 24px 112px 24px;
+    padding: 26px 24px 136px 24px;
     position: fixed;
     left: 0;
   }
@@ -73,12 +106,9 @@ const PageWrapperFluid = styled('div')`
   flex-direction: column;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.72);
-  max-width: 2000px;
   width: 100%;
   height: 100vh;
   z-index: 3;
-  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
-  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0% 100%, 0% 0%);
   // & > div {
   //   ::-webkit-scrollbar {
   //     width: 0; /* Remove scrollbar space */
@@ -101,22 +131,4 @@ const Divider = styled('div')`
   height: 0;
   border: 0px dotted rgba(255, 255, 255, 0.3);
   border-top-width: 1px;
-`;
-
-const PageTitleText = styled('p')`
-  text-align: center;
-  font-size: 90px;
-  color: rgba(0, 0, 0);
-  // text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
-  text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4),
-    -1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 rgba(255, 255, 255, 0.4);
-  font-family: 'Brolink';
-  margin: 14px 0;
-  padding: 8px 0;
-  line-height: 90px;
-  @media screen and (max-width: 660px) {
-    font-size: 38px;
-    line-height: 52px;
-    padding: 0;
-  }
 `;

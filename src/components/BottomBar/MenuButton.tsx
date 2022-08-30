@@ -78,8 +78,8 @@ const MenuButtonWrapper = styled('div')`
 const StyledButton = styled(Button)`
   padding: 18px 22px;
   border-radius: 11px;
-  background-color: transparent;
-  border: 3px solid #ff1aba;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 3px solid white;
   z-index: 2;
   color: white;
   font-size: 11px;
