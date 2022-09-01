@@ -30,6 +30,8 @@ export const PAGE_TITLE_COIN = 'INK Coin';
 export const DARK_MODE_THEME = 'dark';
 export const LIGHT_MODE_THEME = 'light';
 
+export const OPTIMISM_TOKENLIST_URL = 'https://static.optimism.io/optimism.tokenlist.json';
+
 export const KEYS = [
   {
     value: '1',

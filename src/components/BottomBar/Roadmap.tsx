@@ -32,7 +32,6 @@ export const Roadmap = ({ show, setShow }: Props) => {
               justifyContent="center"
               gap="2"
               overflow={'auto'}
-              pt={2}
             >
               {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
                 <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
@@ -62,6 +61,9 @@ const RoadmapTextWrapper = styled(Box)`
   }
   ::-webkit-scrollbar-thumb {
     background: #ff0000;
+  }
+  @media screen and (max-width: 660px) {
+    justify-content: normal;
   }
 `;
 
