@@ -12,12 +12,6 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
   const [tokenAmount, setTokenAmount] = useState<number>(0);
   const { connected, account, connect, chainId } = useContext(Web3Context);
   const { tokens } = useContext(TokenListContext);
-  useEffect(() => {
-    console.log(
-      tokens.filter((token) => Number(token.chainId) === Number(chainId)),
-      chainId
-    );
-  }, [tokens, chainId]);
   const handleCurrencyChange = (e: any) => {
     setCurrency(e.target.value);
   };

@@ -5,9 +5,12 @@ import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_CONVERGENCE } from '../utils/constants';
 import convergenceImg from '../assets/img/convergence.png';
 import { Divider, Image, Paragraph, RedButton } from './Components';
+import { PurchaseFlowContext } from '../contexts';
+import { useContext } from 'react';
 
 export const Convergence = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
+  const { setShowModal } = useContext(PurchaseFlowContext);
   return (
     <>
       <Helmet>
@@ -17,7 +20,7 @@ export const Convergence = () => {
       </Helmet>
       <PageContent title={PAGE_TITLE_CONVERGENCE} type="primary">
         <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
-          <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
+          <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
             <Typography variant="h1">convergence</Typography>
             <Divider />
             <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" my={3}>
@@ -50,8 +53,12 @@ export const Convergence = () => {
               </li>
             </ul>
             <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-              <RedButton>reserve ink</RedButton>
-              <RedButton>read our litepaper</RedButton>
+              <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+              <RedButton
+                onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
+              >
+                read our litepaper
+              </RedButton>
             </Box>
           </Box>
           <Box width="100%" display="flex" justifyContent="center">

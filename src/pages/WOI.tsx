@@ -5,9 +5,12 @@ import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_INFLUENCE } from '../utils/constants';
 import influenceImg from '../assets/img/influence.png';
 import { Divider, Image, Paragraph, RedButton } from './Components';
+import { PurchaseFlowContext } from '../contexts';
+import { useContext } from 'react';
 
 export const WOI = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
+  const { setShowModal } = useContext(PurchaseFlowContext);
   return (
     <>
       <Helmet>
@@ -17,7 +20,7 @@ export const WOI = () => {
       </Helmet>
       <PageContent title={PAGE_TITLE_INFLUENCE} type="primary">
         <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
-          <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
+          <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
             <Typography variant="h1">world of influence</Typography>
             <Divider />
             <Paragraph paragraph>
@@ -38,8 +41,12 @@ export const WOI = () => {
               We’re living in a world where users create all the value. INK ensures they’re now paid for it.
             </Paragraph>
             <Box display="flex" gap="24px" justifyContent="start" mb={4} sx={{ marginTop: { md: '64px' } }}>
-              <RedButton>reserve ink</RedButton>
-              <RedButton>read our litepaper</RedButton>
+              <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+              <RedButton
+                onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
+              >
+                read our litepaper
+              </RedButton>
             </Box>
           </Box>
           <Box width="100%" display="flex" justifyContent="center">
