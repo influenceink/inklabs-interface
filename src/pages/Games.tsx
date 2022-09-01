@@ -46,7 +46,7 @@ export const Games = () => {
               licensable or available to other game developers.
             </Paragraph>
 
-            <Box display="flex" gap="24px" justifyContent="start" mt={8} mb={4}>
+            <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
               <RedButton>reserve ink</RedButton>
               <RedButton>read our litepaper</RedButton>
             </Box>

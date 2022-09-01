@@ -37,7 +37,7 @@ export const WOI = () => {
             <Paragraph paragraph>
               We’re living in a world where users create all the value. INK ensures they’re now paid for it.
             </Paragraph>
-            <Box display="flex" gap="24px" justifyContent="start" mt={8} mb={4}>
+            <Box display="flex" gap="24px" justifyContent="start" mb={4} sx={{ marginTop: { md: '64px' } }}>
               <RedButton>reserve ink</RedButton>
               <RedButton>read our litepaper</RedButton>
             </Box>

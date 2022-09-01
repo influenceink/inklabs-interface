@@ -37,30 +37,45 @@ export const Purchase = ({ show, setShow }: Props) => {
       {/* <Fade in={show} mountOnEnter unmountOnExit> */}
       <ModalWrapper open={show} onClose={handleClose}>
         <DialogContent>
-          <Box position="relative" display="flex" flexDirection="column" alignItems="center">
-            {index === 0 && (
-              <CreateId onNext={() => setIndex((value) => value + 2)} onSignIn={() => setIndex((value) => value + 1)} />
-            )}
-            {index == 1 && <SignIn onPrev={() => setIndex((value) => value - 1)} />}
-            {index === 2 && (
-              <CreateAccount
-                onNext={() => setIndex((value) => value + 1)}
-                onPrev={() => setIndex((value) => value - 1)}
-              />
-            )}
-            {index === 3 && (
-              <AccessGranted
-                onNext={() => setIndex((value) => value + 1)}
-                onPrev={() => setIndex((value) => value - 1)}
-              />
-            )}
-            {index === 4 && (
-              <ReserveInk onNext={() => setIndex((value) => value + 1)} onPrev={() => setIndex((value) => value - 1)} />
-            )}
-            {index === 5 && (
-              <Preview onNext={() => setIndex((value) => value + 1)} onPrev={() => setIndex((value) => value - 1)} />
-            )}
-            {index === 6 && <Complete onPrev={() => setIndex((value) => value - 1)} />}
+          <Box
+            position="relative"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="space-between"
+            maxHeight="100vh"
+          >
+            <ContentWrapper>
+              {index === 0 && (
+                <CreateId
+                  onNext={() => setIndex((value) => value + 2)}
+                  onSignIn={() => setIndex((value) => value + 1)}
+                />
+              )}
+              {index == 1 && <SignIn onPrev={() => setIndex((value) => value - 1)} />}
+              {index === 2 && (
+                <CreateAccount
+                  onNext={() => setIndex((value) => value + 1)}
+                  onPrev={() => setIndex((value) => value - 1)}
+                />
+              )}
+              {index === 3 && (
+                <AccessGranted
+                  onNext={() => setIndex((value) => value + 1)}
+                  onPrev={() => setIndex((value) => value - 1)}
+                />
+              )}
+              {index === 4 && (
+                <ReserveInk
+                  onNext={() => setIndex((value) => value + 1)}
+                  onPrev={() => setIndex((value) => value - 1)}
+                />
+              )}
+              {index === 5 && (
+                <Preview onNext={() => setIndex((value) => value + 1)} onPrev={() => setIndex((value) => value - 1)} />
+              )}
+              {index === 6 && <Complete onPrev={() => setIndex((value) => value - 1)} />}
+            </ContentWrapper>
             <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
             </CloseButton>
@@ -71,6 +86,22 @@ export const Purchase = ({ show, setShow }: Props) => {
     </>
   );
 };
+const ContentWrapper = styled(Box)`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  overflow: hidden auto;
+  align-items: center;
+  ::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ff0000;
+  }
+`;
 const CloseButton = styled(Button)`
   position: absolute;
   top: 12px;
@@ -79,6 +110,7 @@ const CloseButton = styled(Button)`
   @media screen and (max-width: 600px) {
     position: relative;
     right: 0px;
+    margin-bottom: 32px;
   }
 `;
 

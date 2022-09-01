@@ -176,7 +176,7 @@ export const Coin = () => {
                 Influence in such a way that token holders enjoy enhanced experiences and distinct perks leading to
                 token demand.
               </Paragraph>
-              <Box display="flex" gap="24px" justifyContent="start" mt={8} mb={4}>
+              <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
                 <RedButton>reserve ink</RedButton>
                 <RedButton>read our litepaper</RedButton>
               </Box>
@@ -219,7 +219,7 @@ export const Coin = () => {
                 achieve an approximate 75% exposure to fiat currency (USD held in corporate accounts) and 25%
                 cryptocurrency.
               </Paragraph>
-              <Box display="flex" gap="24px" justifyContent="start" mt={8}>
+              <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
                 <RedButton>reserve ink</RedButton>
                 <RedButton>read our litepaper</RedButton>
               </Box>

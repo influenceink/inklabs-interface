@@ -50,7 +50,7 @@ export const Platform = () => {
                 identifier, as well as their permanent referral code. Importantly, users may invite an unlimited number
                 of users, expanding their earning potential.
               </Paragraph>
-              <Box display="flex" gap="24px" justifyContent="start" mt={2}>
+              <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
                 <RedButton>reserve ink</RedButton>
                 <RedButton>read our litepaper</RedButton>
               </Box>
@@ -99,7 +99,7 @@ export const Platform = () => {
                 quickly share products and services with their unique INK IDs automatically embedded. We quickly turn
                 web3 projects, games, and other platform experiences into monetizable campaigns.
               </Paragraph>
-              <Box display="flex" gap="24px" justifyContent="start" mt={2}>
+              <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
                 <RedButton>reserve ink</RedButton>
                 <RedButton>read our litepaper</RedButton>
               </Box>
