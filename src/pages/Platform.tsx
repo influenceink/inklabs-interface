@@ -6,9 +6,12 @@ import { APP_TITLE, PAGE_TITLE_PLATFORM } from '../utils/constants';
 import platformImg from '../assets/img/platform.png';
 import grayRect from '../assets/img/gray-rect.png';
 import { Divider, Image, Paragraph, RedButton } from './Components';
+import { PurchaseFlowContext } from '../contexts';
+import { useContext } from 'react';
 
 export const Platform = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
+  const { setShowModal } = useContext(PurchaseFlowContext);
   return (
     <>
       <Helmet>
@@ -19,7 +22,7 @@ export const Platform = () => {
       <PageContent title={PAGE_TITLE_PLATFORM} type="primary">
         <Box>
           <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
-            <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
+            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
               <Typography variant="h1">platform</Typography>
               <Paragraph paragraph mt="40px">
                 On World of Influence, users get paid for bringing their connections and social following into game and
@@ -51,8 +54,12 @@ export const Platform = () => {
                 of users, expanding their earning potential.
               </Paragraph>
               <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton>reserve ink</RedButton>
-                <RedButton>read our litepaper</RedButton>
+                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+                <RedButton
+                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
+                >
+                  read our litepaper
+                </RedButton>
               </Box>
             </Box>
             <Box width="100%" display="flex" justifyContent="center">
@@ -69,7 +76,7 @@ export const Platform = () => {
             <Box width="100%" display="flex" justifyContent="center">
               <Image src={grayRect} alt="gray" />
             </Box>
-            <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
+            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
               <Divider />
               <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
                 PAYMENT &amp; TRACKING
@@ -100,8 +107,12 @@ export const Platform = () => {
                 web3 projects, games, and other platform experiences into monetizable campaigns.
               </Paragraph>
               <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton>reserve ink</RedButton>
-                <RedButton>read our litepaper</RedButton>
+                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+                <RedButton
+                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
+                >
+                  read our litepaper
+                </RedButton>
               </Box>
             </Box>
           </Box>

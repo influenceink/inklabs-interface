@@ -1,23 +1,17 @@
-import { Link, useHistory } from 'react-router-dom';
-import { Box, styled, Button, Slide, Typography, useMediaQuery } from '@mui/material';
-import leftBar from '../../assets/img/left-border.png';
-import cross from '../../assets/img/cross1.png';
-import logo from '../../assets/img/logo.png';
-import { useEffect } from 'react';
-import { Experiences } from './MenuAreas/Experiences';
-import { Games } from './MenuAreas/Games';
-import { Platform } from './MenuAreas/Platform';
-import { Territories } from './MenuAreas/Territories';
-import { Vision } from './MenuAreas/Vision';
-import { Bridge } from './MenuAreas/Bridge';
-import { Coin } from './MenuAreas/Coin';
+import { useHistory } from 'react-router-dom';
+import { Box, styled, Button, Slide, useMediaQuery } from '@mui/material';
+import cross from '../../assets/img/cross.png';
+import instagram from '../../assets/img/instagram.png';
+import twitter from '../../assets/img/twitter.png';
+import facebook from '../../assets/img/facebook.png';
+import youtube from '../../assets/img/youtube.png';
 interface Props {
   show: boolean;
   setShow: (value: boolean) => void;
 }
 
 export const Menu = ({ show, setShow }: Props) => {
-  const mobile = useMediaQuery('(max-width: 1350px)');
+  const mobile = useMediaQuery('(max-width: 600px)');
   const history = useHistory();
   const goTo = (path: string) => {
     setShow(false);
@@ -31,20 +25,32 @@ export const Menu = ({ show, setShow }: Props) => {
             position="relative"
             display="flex"
             flexDirection="column"
-            maxWidth="2000px"
             width="100%"
             gap="12px"
             alignItems="center"
+            height="100vh"
           >
-            <LeftBorder src={leftBar} alt="border" />
             <MenuBar>
-              <Box display="flex" flexDirection="column" gap={4}>
-                <Row onClick={() => goTo('/woi')}>world of influence</Row>
-                <Row onClick={() => goTo('/games')}>games</Row>
-                <Row onClick={() => goTo('/platform')}>platform tech</Row>
-                <Row onClick={() => goTo('/coin')}>ink token</Row>
-                <Row onClick={() => goTo('/convergence')}>convergence</Row>
-                <Row onClick={() => goTo('/vision')}>vision</Row>
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                sx={{ gap: { xs: '24px', md: '32px' } }}
+              >
+                <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem>
+                <MenuItem onClick={() => goTo('/games')}>games</MenuItem>
+                <MenuItem onClick={() => goTo('/platform')}>platform tech</MenuItem>
+                <MenuItem onClick={() => goTo('/coin')}>ink token</MenuItem>
+                <MenuItem onClick={() => goTo('/convergence')}>convergence</MenuItem>
+                <MenuItem onClick={() => goTo('/vision')}>vision</MenuItem>
+                {mobile && (
+                  <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} px={2}>
+                    <img src={twitter} alt="twitter" />
+                    <img src={facebook} alt="facebook" />
+                    <img src={instagram} alt="instagram" />
+                    <img src={youtube} alt="youtube" />
+                  </Box>
+                )}
               </Box>
             </MenuBar>
             <CloseButton onClick={() => setShow(false)}>
@@ -67,7 +73,7 @@ const CloseButton = styled(Button)`
       width: 100%;
       padding: 4px 24px 0px 24px;
     }
-    margin-bottom: 30px;
+    margin-bottom: 36px;
   }
 `;
 
@@ -111,14 +117,13 @@ const LeftBorder = styled('img')`
 `;
 
 const MenuBar = styled('div')`
-  max-width: 1350px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  flex-grow: 1;
+  align-items: flex-center;
   justify-content: center;
   margin-top: 36px;
-  border: 0px solid white;
-  border-bottom-width: 2px;
   padding: 12px 0;
   @media screen and (max-width: 1351px) {
     max-width: 700px;
@@ -153,12 +158,13 @@ const PageTitleText = styled('span')`
   }
 `;
 
-const Row = styled('div')`
+const MenuItem = styled('div')`
   width: 100%;
   font-size: 60px;
   line-height: 60px;
   text-transform: uppercase;
   font-family: 'Poppins';
+  font-weight: bolder;
   color: white;
   &:nth-child(2n + 1) {
     -webkit-text-fill-color: black;
@@ -166,6 +172,9 @@ const Row = styled('div')`
     -webkit-text-stroke-color: white;
   }
   cursor: pointer;
+  :hover {
+    -webkit-text-stroke-width: 4px;
+  }
   @media screen and (max-width: 660px) {
     font-size: 40px;
     line-height: 40px;

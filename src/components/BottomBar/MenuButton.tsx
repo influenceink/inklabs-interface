@@ -1,9 +1,10 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState, useContext } from 'react';
 import { styled, Button, Box, Collapse, useMediaQuery } from '@mui/material';
 
 // import { KeyPad } from './KeyPad';
 import { Menu } from './Menu';
 
+import { PurchaseFlowContext, AuthContext } from '../../contexts';
 import arrowTop from '../../assets/img/arrow-up.png';
 // import unlock from '../../assets/img/unlock.png';
 import dotLine from '../../assets/img/dot-line.png';
@@ -11,11 +12,13 @@ import open from '../../assets/img/open.png';
 import { useLocation } from 'react-router-dom';
 import { Purchase } from './Purchase';
 import { Roadmap } from './Roadmap';
+import { Auth } from './Auth';
 
 export const MenuButton = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const [showPurchase, setPurchase] = useState(false);
   const [showRoadmap, setShowRoadmap] = useState(false);
+  const { showModal: showAuth, setShowModal: setAuth } = useContext(AuthContext);
+  const { showModal: showPurchase, setShowModal: setPurchase } = useContext(PurchaseFlowContext);
   const toggleShowRoadmap = () => {
     setShowMenu(false);
     setShowRoadmap((show) => !show);
@@ -30,7 +33,7 @@ export const MenuButton = () => {
   const toggleShowPurchaseFlow = () => {
     setShowRoadmap(false);
     setShowMenu(false);
-    setPurchase((value) => !value);
+    setPurchase((value: boolean) => !value);
   };
   useEffect(() => {
     setTimeout(() => {
@@ -80,6 +83,7 @@ export const MenuButton = () => {
       <Menu show={showMenu} setShow={setShowMenu} />
       <Purchase show={showPurchase} setShow={setPurchase} />
       <Roadmap show={showRoadmap} setShow={toggleShowRoadmap} />
+      <Auth show={showAuth} setShow={setAuth} />
     </MenuButtonWrapper>
   );
 };

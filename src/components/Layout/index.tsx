@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { styled } from '@mui/material';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
@@ -12,8 +12,15 @@ import background from '../../assets/img/background.png';
 import logo from '../../assets/img/logo.png';
 import { AuthContext } from '../../contexts';
 export const Layout: FC = ({ children }) => {
-  const { authorized, avatar } = useContext(AuthContext);
+  const { authorized, avatar, setShowModal } = useContext(AuthContext);
   const history = useHistory();
+  const handleProfileClick = () => {
+    if (authorized) {
+      history.push('/profile');
+    } else {
+      setShowModal(true);
+    }
+  };
   return (
     <LayoutWrapper>
       {children}
@@ -22,11 +29,15 @@ export const Layout: FC = ({ children }) => {
           <img src={logo} alt="logo" />
         </Link>
       </LogoWrapper>
-      {authorized && avatar !== '' && (
-        <ProfileWrapper onClick={() => history.push('/profile')}>
-          <img src={avatar} alt="profile logo" width="100%" height="100%" />
-        </ProfileWrapper>
-      )}
+      <ProfileWrapper onClick={handleProfileClick}>
+        <img
+          src={avatar}
+          alt="profile logo"
+          width="100%"
+          height="100%"
+          style={{ visibility: `${authorized ? 'visible' : 'hidden'}` as any }}
+        />
+      </ProfileWrapper>
       <LeftBar />
       <RightBar />
       <BottomBar />
@@ -38,14 +49,15 @@ const LogoWrapper = styled('div')`
   top: 0;
   left: 0;
   padding-top: 46px;
-  padding-left: 120px;
+  padding-left: 8px;
   & img {
     width: 65%;
   }
   @media screen and (max-width: 660px) {
     padding-top: 26px;
-    padding-left: 40px;
+    padding-left: 8px;
   }
+  z-index: 1;
 `;
 const ProfileWrapper = styled('div')`
   width: 45px;
@@ -56,10 +68,10 @@ const ProfileWrapper = styled('div')`
   top: 0;
   right: 0;
   margin-top: 46px;
-  margin-right: 120px;
+  margin-right: 8px;
   @media screen and (max-width: 660px) {
     margin-top: 26px;
-    margin-right: 40px;
+    margin-right: 8px;
   }
   & img {
     border-radius: 100%;
@@ -73,6 +85,7 @@ const ProfileWrapper = styled('div')`
     border-radius: 100%;
     transform: translateX(-8px);
   }
+  z-index: 1;
   cursor: pointer;
 `;
 const LayoutWrapper = styled('div')`

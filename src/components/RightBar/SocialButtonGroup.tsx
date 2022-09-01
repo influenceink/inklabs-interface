@@ -1,9 +1,9 @@
 import { Typography, Box, styled, useMediaQuery } from '@mui/material';
 
-import twitter from '../../assets/img/twitter.png';
-import facebook from '../../assets/img/facebook.png';
-import instagram from '../../assets/img/instagram.png';
-import youtube from '../../assets/img/youtube.png';
+import twitter from '../../assets/img/twitter_with_circle.png';
+import facebook from '../../assets/img/facebook_with_circle.png';
+import instagram from '../../assets/img/instagram_with_circle.png';
+import youtube from '../../assets/img/youtube_with_circle.png';
 
 export const SocialButtonGroup = () => {
   const sm = useMediaQuery('(max-width: 660px)');
