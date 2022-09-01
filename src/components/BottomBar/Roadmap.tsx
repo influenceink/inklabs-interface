@@ -32,6 +32,7 @@ export const Roadmap = ({ show, setShow }: Props) => {
               justifyContent="center"
               gap="2"
               overflow={'auto'}
+              pt={2}
             >
               {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
                 <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
