@@ -600,6 +600,7 @@ const ProfileWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   padding-bottom: 126px;
+  background-color: black;
 `;
 const TokenImg = styled('img')`
   height: 24px;
