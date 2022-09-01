@@ -28,7 +28,7 @@ export const Purchase = ({ show, setShow }: Props) => {
     if (!authorized && show) {
       setAuth(true);
     }
-  }, [authorized, show]);
+  }, [authorized, show, setAuth]);
 
   const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
     if (reason !== 'backdropClick') {

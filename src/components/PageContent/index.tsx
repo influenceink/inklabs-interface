@@ -115,10 +115,10 @@ const PageWrapperFluid = styled('div')`
     left: 0;
   }
 `;
-const Divider = styled('div')`
-  margin-top: 16px;
-  width: 100%;
-  height: 0;
-  border: 0px dotted rgba(255, 255, 255, 0.3);
-  border-top-width: 1px;
-`;
+// const Divider = styled('div')`
+//   margin-top: 16px;
+//   width: 100%;
+//   height: 0;
+//   border: 0px dotted rgba(255, 255, 255, 0.3);
+//   border-top-width: 1px;
+// `;
