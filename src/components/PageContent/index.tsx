@@ -1,9 +1,9 @@
-import { Box, styled, Slide, useMediaQuery } from '@mui/material';
+import { Box, Button, styled, Slide, useMediaQuery } from '@mui/material';
 import { ReactNode, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts';
+import cross from '../../assets/img/cross.png';
 
 interface PageProps {
   children?: ReactNode;
@@ -13,7 +13,6 @@ interface PageProps {
 export const PageContent = (props: PageProps) => {
   const { children, title, type } = props;
   const sm = useMediaQuery('(max-width: 660px)');
-  const { authorized, avatar } = useContext(AuthContext);
   const history = useHistory();
   return (
     <>
@@ -28,16 +27,13 @@ export const PageContent = (props: PageProps) => {
                       <img src={logo} alt="logo" />
                     </Link>
                   </Box>
-                  {authorized && avatar !== '' && (
-                    <ProfileWrapper onClick={() => history.push('/profile')}>
-                      <img src={avatar} alt="profile logo" width="100%" height="100%" />
-                    </ProfileWrapper>
-                  )}
+                  <CloseButton onClick={() => history.push('/')}>
+                    <img src={cross} alt="cross" />
+                  </CloseButton>
                   <Box sx={{ marginTop: { xs: '80px', md: '120px' } }} flexGrow={1} display="flex" alignItems="center">
                     {children}
                   </Box>
                 </Box>
-                <Divider />
               </Box>
             </PageWrapper>
           ) : (
@@ -52,37 +48,29 @@ export const PageContent = (props: PageProps) => {
     </>
   );
 };
-const ProfileWrapper = styled('div')`
-  width: 45px;
-  height: 45px;
-  border-radius: 100%;
-  background-color: black;
+const CloseButton = styled(Button)`
   position: absolute;
-  top: 0;
-  right: 5px;
-  & img {
-    border-radius: 100%;
+  right: 0;
+  z-index: 8888;
+  flex: 0 1 auto;
+  margin-bottom: 8px;
+  @media screen and (max-width: 660px) {
+    & > div {
+      width: 100%;
+      padding: 4px 24px 0px 24px;
+    }
+    margin-bottom: 30px;
   }
-  &:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background-color: #ff225e;
-    position: absolute;
-    border-radius: 100%;
-    transform: translateX(-8px);
-  }
-  cursor: pointer;
 `;
 const PageWrapper = styled('div')`
-  padding: 46px 100px 110px 100px;
+  padding: 120px 150px 110px 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgb(0, 0, 0);
   width: 100%;
   height: 100vh;
-  z-index: 1;
+  z-index: 2;
   & > div > div {
     ::-webkit-scrollbar {
       width: 0; /* Remove scrollbar space */
@@ -98,7 +86,7 @@ const PageWrapper = styled('div')`
   @media screen and (max-width: 660px) {
     -webkit-clip-path: none;
     clip-path: none;
-    padding: 26px 24px 136px 24px;
+    padding: 60px 24px 136px 24px;
     position: fixed;
     left: 0;
   }
@@ -127,10 +115,10 @@ const PageWrapperFluid = styled('div')`
     left: 0;
   }
 `;
-const Divider = styled('div')`
-  margin-top: 16px;
-  width: 100%;
-  height: 0;
-  border: 0px dotted rgba(255, 255, 255, 0.3);
-  border-top-width: 1px;
-`;
+// const Divider = styled('div')`
+//   margin-top: 16px;
+//   width: 100%;
+//   height: 0;
+//   border: 0px dotted rgba(255, 255, 255, 0.3);
+//   border-top-width: 1px;
+// `;

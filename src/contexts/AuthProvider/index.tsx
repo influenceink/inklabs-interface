@@ -13,6 +13,8 @@ interface IAuthContext {
   viralCount: number;
   directCount: number;
   totalCount: number;
+  showModal: boolean;
+  setShowModal: Function;
 }
 
 export const AuthContext = createContext<IAuthContext>({
@@ -27,6 +29,8 @@ export const AuthContext = createContext<IAuthContext>({
   viralCount: 0,
   directCount: 0,
   totalCount: 0,
+  showModal: false,
+  setShowModal: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -40,6 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [viralCount, setViralCount] = useState<number>(0);
   const [directCount, setDirectCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false);
   axios.defaults.baseURL = 'https://ip-api.ip.d.inksrv.com';
   useEffect(() => {
     const initialize = async () => {
@@ -93,6 +98,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setDirectCount(res.data.direct_count);
             setTotalCount(res.data.total_count);
           });
+          setShowModal(false);
           return true;
         }
         return false;
@@ -116,6 +122,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         directCount,
         totalCount,
         signIn,
+        showModal,
+        setShowModal,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import { Box, Typography, useMediaQuery, styled, Grid } from '@mui/material';
 import { Helmet } from 'react-helmet';
-
+import { useContext } from 'react';
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_COIN } from '../utils/constants';
 import coinImg from '../assets/img/coin.png';
@@ -9,9 +9,11 @@ import symbolImg from '../assets/img/symbol.png';
 import completeImg from '../assets/img/complete.png';
 import hereImg from '../assets/img/here.png';
 import { Divider, Image, Paragraph, RedButton } from './Components';
+import { PurchaseFlowContext } from '../contexts';
 
 export const Coin = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
+  const { setShowModal } = useContext(PurchaseFlowContext);
   return (
     <>
       <Helmet>
@@ -22,7 +24,7 @@ export const Coin = () => {
       <PageContent title={PAGE_TITLE_COIN} type="primary">
         <Box>
           <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
-            <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
+            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
               <Typography variant="h1">ink token</Typography>
               <Divider />
               <Box display="flex" width="100%" justifyContent="space-between" flexWrap="wrap">
@@ -177,8 +179,12 @@ export const Coin = () => {
                 token demand.
               </Paragraph>
               <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton>reserve ink</RedButton>
-                <RedButton>read our litepaper</RedButton>
+                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+                <RedButton
+                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
+                >
+                  read our litepaper
+                </RedButton>
               </Box>
             </Box>
             <Box display="flex" justifyContent="center" width="100%">
@@ -195,7 +201,7 @@ export const Coin = () => {
             <Box width="100%" display="flex" justifyContent="center">
               <Image src={grayRect} alt="gray" />
             </Box>
-            <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
+            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
               <Divider />
               <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
                 Supply
@@ -220,8 +226,12 @@ export const Coin = () => {
                 cryptocurrency.
               </Paragraph>
               <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton>reserve ink</RedButton>
-                <RedButton>read our litepaper</RedButton>
+                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+                <RedButton
+                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
+                >
+                  read our litepaper
+                </RedButton>
               </Box>
             </Box>
           </Box>

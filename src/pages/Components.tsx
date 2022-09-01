@@ -12,7 +12,7 @@ export const Divider = () => {
 
 export const Image = styled('img')`
   width: 100%;
-  min-width: 850px;
+  min-width: 600px;
   object-fit: cover;
   aspect-ratio: 1.4;
   border-radius: 12px;
