@@ -20,7 +20,7 @@ export const Convergence = () => {
           <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
             <Typography variant="h1">convergence</Typography>
             <Divider />
-            <Typography variant="subtitle2" fontSize={xl ? "34px" : "40px"} fontWeight="bold" my={3}>
+            <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" my={3}>
               OVERVIEW
             </Typography>
             <Paragraph paragraph>
@@ -49,7 +49,7 @@ export const Convergence = () => {
                 </Paragraph>
               </li>
             </ul>
-            <Box display="flex" gap="24px" justifyContent="start" mt={2} mb={4}>
+            <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
               <RedButton>reserve ink</RedButton>
               <RedButton>read our litepaper</RedButton>
             </Box>

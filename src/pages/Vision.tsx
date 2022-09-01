@@ -20,7 +20,7 @@ export const Vision = () => {
           <Box flexGrow={1} width={xl ? '100%' : 'auto'} display="flex" flexDirection="column">
             <Typography variant="h1">vision</Typography>
             <Divider />
-            <Typography variant="subtitle2" fontSize={xl ? "34px" : "40px"} fontWeight="bold" my={3}>
+            <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" my={3}>
               A PLATFORM REVOLUTION
             </Typography>
             <Paragraph paragraph>
@@ -36,7 +36,14 @@ export const Vision = () => {
               for it. Until now. With World of Influence, our proprietary payment and tracking engine, we are building
               the only true web3 economy – one with the potential for unmatched user growth and retention.
             </Paragraph>
-            <Box display="flex" gap="24px" justifyContent="start" mt={8} mb={4}>
+            <Box
+              display="flex"
+              gap="24px"
+              justifyContent="start"
+              mt={8}
+              mb={4}
+              sx={{ marginTop: { xs: '16px', md: '64px' } }}
+            >
               <RedButton>reserve ink</RedButton>
               <RedButton>read our litepaper</RedButton>
             </Box>
