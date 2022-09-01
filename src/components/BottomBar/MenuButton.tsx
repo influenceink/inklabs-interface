@@ -17,12 +17,20 @@ export const MenuButton = () => {
   const [showPurchase, setPurchase] = useState(false);
   const [showRoadmap, setShowRoadmap] = useState(false);
   const toggleShowRoadmap = () => {
+    setShowMenu(false);
     setShowRoadmap((show) => !show);
+    setPurchase(false);
   };
+  type visibilityType = 'hidden' | 'visible' | 'collapse';
   const { pathname } = useLocation();
   const [showLine, setShowLine] = useState(false);
   const handleClick = () => {
     setShowMenu(true);
+  };
+  const toggleShowPurchaseFlow = () => {
+    setShowRoadmap(false);
+    setShowMenu(false);
+    setPurchase((value) => !value);
   };
   useEffect(() => {
     setTimeout(() => {
@@ -30,7 +38,18 @@ export const MenuButton = () => {
     }, 2000);
   }, [showLine]);
   const Toggler = ({ children }: { children: ReactElement }) => {
-    return <StyledButton onClick={handleClick}>{children}</StyledButton>;
+    return (
+      <StyledButton
+        onClick={handleClick}
+        sx={{
+          visibility: `${
+            showMenu || (sm && showRoadmap) || (sm && showPurchase) ? 'hidden' : 'visible'
+          }` as visibilityType,
+        }}
+      >
+        {children}
+      </StyledButton>
+    );
     // else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
   };
   const sm = useMediaQuery('(max-width: 660px)');
@@ -46,7 +65,7 @@ export const MenuButton = () => {
           </Collapse>
         </Box>
         <Box display="flex" alignItems="flex-end" mb={sm ? '42px' : 2} gap={2}>
-          <StyledButton sx={{ minWidth: 110 }} onClick={() => setPurchase((value) => !value)}>
+          <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
             buy ink
           </StyledButton>
           <Toggler>
@@ -80,7 +99,7 @@ const StyledButton = styled(Button)`
   border-radius: 11px;
   background-color: rgba(0, 0, 0, 0.5);
   border: 3px solid white;
-  z-index: 2;
+  z-index: 9999;
   color: white;
   font-size: 11px;
   font-weight: bold;

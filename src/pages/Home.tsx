@@ -31,9 +31,6 @@ export const Home = () => {
             }}
           />
         </TypeWrapper>
-        <Typography px="80px" textAlign="center" variant="subtitle1">
-          SUBTEXT HERE OR SOME OTHER WELCOME MESSAGE
-        </Typography>
       </Box>
     </>
   );

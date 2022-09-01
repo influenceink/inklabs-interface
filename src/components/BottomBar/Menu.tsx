@@ -1,7 +1,7 @@
 import { Link, useHistory } from 'react-router-dom';
 import { Box, styled, Button, Slide, Typography, useMediaQuery } from '@mui/material';
 import leftBar from '../../assets/img/left-border.png';
-import cross from '../../assets/img/cross.png';
+import cross from '../../assets/img/cross1.png';
 import logo from '../../assets/img/logo.png';
 import { useEffect } from 'react';
 import { Experiences } from './MenuAreas/Experiences';
@@ -37,39 +37,16 @@ export const Menu = ({ show, setShow }: Props) => {
             alignItems="center"
           >
             <LeftBorder src={leftBar} alt="border" />
-            {!mobile ? (
-              <MenuBar>
-                <Experiences onMenuClick={goTo} />
-                <Bridge onMenuClick={goTo} />
-                <Games onMenuClick={goTo} />
-                <Platform onMenuClick={goTo} />
-                <Coin onMenuClick={goTo} />
-                <Territories onMenuClick={goTo} />
-                <Vision onMenuClick={goTo} />
-              </MenuBar>
-            ) : (
-              <MenuBar>
-                <Row>
-                  <Experiences onMenuClick={goTo} />
-                  <Games onMenuClick={goTo} />
-                </Row>
-                <Row>
-                  <Bridge onMenuClick={goTo} />
-                </Row>
-                <Row>
-                  <Platform onMenuClick={goTo} />
-                  <Coin onMenuClick={goTo} />
-                  <Territories onMenuClick={goTo} />
-                </Row>
-                <Row>
-                  <Vision onMenuClick={goTo} />
-                </Row>
-              </MenuBar>
-            )}
-            <Box display="flex" flexDirection="column" alignItems="center">
-              <Typography variant="subtitle1">CLICK ON EACH ITEM TO VIEW MORE DETAILS</Typography>
-              <PageTitleText>MINDMaP</PageTitleText>
-            </Box>
+            <MenuBar>
+              <Box display="flex" flexDirection="column" gap={4}>
+                <Row onClick={() => goTo('/woi')}>world of influence</Row>
+                <Row onClick={() => goTo('/games')}>games</Row>
+                <Row onClick={() => goTo('/platform')}>platform tech</Row>
+                <Row onClick={() => goTo('/coin')}>ink token</Row>
+                <Row onClick={() => goTo('/convergence')}>convergence</Row>
+                <Row onClick={() => goTo('/vision')}>vision</Row>
+              </Box>
+            </MenuBar>
             <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
             </CloseButton>
@@ -82,11 +59,15 @@ export const Menu = ({ show, setShow }: Props) => {
 const CloseButton = styled(Button)`
   padding: 16px 22px;
   padding-bottom: 10px;
-  border-radius: 10px 10px 0 0;
   z-index: 8888;
-  background-color: white;
-  img {
-    filter: invert(1);
+  flex: 0 1 auto;
+  margin-bottom: 8px;
+  @media screen and (max-width: 660px) {
+    & > div {
+      width: 100%;
+      padding: 4px 24px 0px 24px;
+    }
+    margin-bottom: 30px;
   }
 `;
 
@@ -105,6 +86,13 @@ const MenuWrapper = styled('div')`
   left: 0px;
   z-index: 8888;
   @media screen and (max-width: 1320px) {
+    & > div {
+      width: 100%;
+      padding: 4px 24px 0px 24px;
+    }
+  }
+  @media screen and (max-width: 660px) {
+    height: 100vh;
     & > div {
       width: 100%;
       padding: 4px 24px 0px 24px;
@@ -133,13 +121,17 @@ const MenuBar = styled('div')`
   border-bottom-width: 2px;
   padding: 12px 0;
   @media screen and (max-width: 1351px) {
-    max-width: 388px;
+    max-width: 700px;
     min-width: 300px;
     gap: 9px;
     width: 100%;
     svg {
       width: 100%;
     }
+  }
+  @media screen and (max-width: 660px) {
+    flex: 1 0 auto;
+    align-items: center;
   }
 `;
 
@@ -162,9 +154,20 @@ const PageTitleText = styled('span')`
 `;
 
 const Row = styled('div')`
-  display: flex;
-  gap: 9px;
-  // margin-top: 9px;
   width: 100%;
-  justify-content: center;
+  font-size: 60px;
+  line-height: 60px;
+  text-transform: uppercase;
+  font-family: 'Poppins';
+  color: white;
+  &:nth-child(2n + 1) {
+    -webkit-text-fill-color: black;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+  }
+  cursor: pointer;
+  @media screen and (max-width: 660px) {
+    font-size: 40px;
+    line-height: 40px;
+  }
 `;

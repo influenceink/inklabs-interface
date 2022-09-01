@@ -24,13 +24,14 @@ export const Roadmap = ({ show, setShow }: Props) => {
               </Link>
             </LogoWrapper> */}
             <RotatedLargeText>ROaDMaP</RotatedLargeText>
-            <Box
+            <RoadmapTextWrapper
               width={sm ? '100%' : 'auto'}
               display="flex"
               flexGrow={1}
               flexDirection="column"
               justifyContent="center"
               gap="2"
+              overflow={'auto'}
             >
               {ROADMAP.map((step: { status: string; lists: string[] }, index: number) => (
                 <Box display="flex" alignItems="center" justifyContent="space-between" key={index}>
@@ -42,7 +43,7 @@ export const Roadmap = ({ show, setShow }: Props) => {
                   <RotatedBaseText>{step.status}</RotatedBaseText>
                 </Box>
               ))}
-            </Box>
+            </RoadmapTextWrapper>
             <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
             </CloseButton>
@@ -53,6 +54,16 @@ export const Roadmap = ({ show, setShow }: Props) => {
   );
 };
 
+const RoadmapTextWrapper = styled(Box)`
+  ::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ff0000;
+  }
+`;
+
 const CloseButton = styled(Button)`
   position: absolute;
   top: 12px;
@@ -61,6 +72,7 @@ const CloseButton = styled(Button)`
   @media screen and (max-width: 600px) {
     position: relative;
     right: 0px;
+    margin-bottom: 32px;
   }
 `;
 
@@ -104,7 +116,7 @@ const RoadmapWrapper = styled('div')`
     font-size: 18px;
   }
   max-width: 600px;
-  min-height: 820px;
+  min-height: 100vh;
   @media screen and (max-width: 780px) {
     li {
       font-size: 14px;
