@@ -34,7 +34,6 @@ export const PageContent = (props: PageProps) => {
                     {children}
                   </Box>
                 </Box>
-                <Divider />
               </Box>
             </PageWrapper>
           ) : (
