@@ -1,15 +1,23 @@
 import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
-import { useState, useContext, createRef, ChangeEvent } from 'react';
+import { useState, useContext, createRef, ChangeEvent, useEffect } from 'react';
 import NumberFormat from 'react-number-format';
 import { FormButton, FormTitle, Divider, DividerContent } from '.';
 import { Web3Context } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
+import { TokenListContext } from '../../../contexts';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
   const [currency, setCurrency] = useState('sushi');
   const [tokenAmount, setTokenAmount] = useState<number>(0);
-  const { connected, account, connect } = useContext(Web3Context);
+  const { connected, account, connect, chainId } = useContext(Web3Context);
+  const { tokens } = useContext(TokenListContext);
+  useEffect(() => {
+    console.log(
+      tokens.filter((token) => Number(token.chainId) === Number(chainId)),
+      chainId
+    );
+  }, [tokens, chainId]);
   const handleCurrencyChange = (e: any) => {
     setCurrency(e.target.value);
   };

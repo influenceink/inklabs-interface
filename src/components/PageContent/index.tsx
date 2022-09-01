@@ -21,22 +21,24 @@ export const PageContent = (props: PageProps) => {
         <Box display="flex" justifyContent="center">
           {type === 'primary' ? (
             <PageWrapper>
-              <Box width="100%" pb={3} flexGrow={1} overflow="hidden auto" position={'relative'}>
-                <Box position={'absolute'}>
-                  <Link to="/">
-                    <img src={logo} alt="logo" />
-                  </Link>
+              <Box maxWidth={2000} height={'100%'} display="flex" alignItems="space-between" flexDirection="column">
+                <Box width="100%" pb={3} flexGrow={1} overflow="hidden auto" position={'relative'}>
+                  <Box position={'absolute'}>
+                    <Link to="/">
+                      <img src={logo} alt="logo" />
+                    </Link>
+                  </Box>
+                  {authorized && avatar !== '' && (
+                    <ProfileWrapper onClick={() => history.push('/profile')}>
+                      <img src={avatar} alt="profile logo" width="100%" height="100%" />
+                    </ProfileWrapper>
+                  )}
+                  <Box sx={{ marginTop: { xs: '80px', md: '120px' } }} flexGrow={1} display="flex" alignItems="center">
+                    {children}
+                  </Box>
                 </Box>
-                {authorized && avatar !== '' && (
-                  <ProfileWrapper onClick={() => history.push('/profile')}>
-                    <img src={avatar} alt="profile logo" width="100%" height="100%" />
-                  </ProfileWrapper>
-                )}
-                <Box mt="160px" flexGrow={1} display="flex" alignItems="center">
-                  {children}
-                </Box>
+                <Divider />
               </Box>
-              <Divider />
             </PageWrapper>
           ) : (
             <PageWrapperFluid>
@@ -81,7 +83,7 @@ const PageWrapper = styled('div')`
   width: 100%;
   height: 100vh;
   z-index: 1;
-  & > div {
+  & > div > div {
     ::-webkit-scrollbar {
       width: 0; /* Remove scrollbar space */
       background: transparent;
