@@ -27,8 +27,9 @@ export const Purchase = ({ show, setShow }: Props) => {
   useEffect(() => {
     if (!authorized && show) {
       setAuth(true);
+      setShow(!show);
     }
-  }, [authorized, show, setAuth]);
+  }, [authorized, show, setAuth, setShow]);
 
   const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
     if (reason !== 'backdropClick') {
@@ -101,6 +102,12 @@ const CloseButton = styled(Button)`
     position: relative;
     right: 0px;
     margin-bottom: 32px;
+    padding: 16px 22px;
+    border-radius: 15px 15px 0 0;
+    background-color: white;
+    img {
+      filter: invert(1);
+    }
   }
 `;
 
@@ -122,6 +129,13 @@ const ModalWrapper = styled(Dialog)`
           flex-grow: 1;
         }
       }
+    }
+    ::-webkit-scrollbar {
+      width: 0; /* Remove scrollbar space */
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff0000;
     }
   }
   @media screen and (max-width: 600px) {

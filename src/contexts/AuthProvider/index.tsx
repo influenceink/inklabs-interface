@@ -15,12 +15,14 @@ interface IAuthContext {
   totalCount: number;
   showModal: boolean;
   setShowModal: Function;
+  setAvatar: Function;
 }
 
 export const AuthContext = createContext<IAuthContext>({
   sessionToken: '',
   authorized: false,
   avatar: '',
+  setAvatar: () => {},
   email: '',
   fullName: '',
   inkId: '',
@@ -124,6 +126,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signIn,
         showModal,
         setShowModal,
+        setAvatar,
       }}
     >
       {children}

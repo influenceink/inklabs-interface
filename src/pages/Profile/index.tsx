@@ -9,12 +9,13 @@ import pinkCard from '../../assets/img/card1.png';
 import blueCard from '../../assets/img/card2.png';
 import greenCard from '../../assets/img/card3.png';
 import yellowCard from '../../assets/img/card4.png';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, ChangeEvent } from 'react';
 import { ZipCodes } from './ZipCodes';
 import { Connections } from './Connections';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts';
 import cross from '../../assets/img/cross.png';
+import { ImageUpload } from '../../components/ImageUpload';
 
 export const zipData = [
   {
@@ -438,15 +439,13 @@ export const Profile = () => {
   const [showZip, setShowZip] = useState(false);
   const [showConnection, setShowConnection] = useState(false);
   const history = useHistory();
-  const { avatar, viralCount, directCount, totalCount, authorized, inkId } = useContext(AuthContext);
-
+  const { avatar, viralCount, directCount, setAvatar, totalCount, authorized, inkId } = useContext(AuthContext);
+  const handleAvatarUpload = (ev: ChangeEvent<HTMLInputElement>) => {
+    if (ev.target && ev.target.files) setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
+  };
   useEffect(() => {
     if (!authorized) history.push('/');
   }, [authorized, history]);
-
-  const handleClose = () => {
-    history.push('/');
-  };
 
   return (
     <>
@@ -469,7 +468,11 @@ export const Profile = () => {
             overflow="auto"
             pb={3}
           >
-            <Avatar src={avatar} alt="" />
+            <AvatarWrapper htmlFor="upload_avatar">
+              <Avatar src={avatar} alt="" />
+              <ImageUpload />
+              <input type="file" id="upload_avatar" accept="image/png, image/jpeg" onChange={handleAvatarUpload} />
+            </AvatarWrapper>
             <Typography variant="subtitle2" mt={1} fontWeight="semibold" fontSize="18px" lineHeight="18px">
               @{inkId}
             </Typography>
@@ -542,9 +545,6 @@ export const Profile = () => {
               </Typography>
               <StyledButton>faq&lsquo;s</StyledButton>
             </Box>
-            <CloseButton onClick={handleClose}>
-              <img src={cross} alt="cross" />
-            </CloseButton>
           </ScrollWrapper>
         </ProfileWrapper>
       </PageContent>
@@ -615,7 +615,25 @@ const Avatar = styled('img')`
   border-radius: 10px;
   margin-top: -90px;
 `;
-
+const AvatarWrapper = styled('label')`
+  position: relative;
+  & > input {
+    display: none;
+  }
+  & > svg {
+    position: absolute;
+    display: none;
+    top: -24px;
+    left: calc(50% - 16px);
+  }
+  &:hover > svg {
+    display: block;
+  }
+  &:hover > img {
+    opacity: 0.5;
+  }
+  cursor: pointer;
+`;
 const StatCard = styled('div')`
   display: flex;
   flex-direction: column;

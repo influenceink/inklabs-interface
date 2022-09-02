@@ -23,6 +23,7 @@ export const MenuButton = () => {
     setShowMenu(false);
     setShowRoadmap((show) => !show);
     setPurchase(false);
+    setAuth(false);
   };
   type visibilityType = 'hidden' | 'visible' | 'collapse';
   const { pathname } = useLocation();
@@ -34,6 +35,7 @@ export const MenuButton = () => {
     setShowRoadmap(false);
     setShowMenu(false);
     setPurchase((value: boolean) => !value);
+    setAuth(false);
   };
   useEffect(() => {
     setTimeout(() => {
@@ -46,7 +48,7 @@ export const MenuButton = () => {
         onClick={handleClick}
         sx={{
           visibility: `${
-            showMenu || (sm && showRoadmap) || (sm && showPurchase) ? 'hidden' : 'visible'
+            showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'hidden' : 'visible'
           }` as visibilityType,
         }}
       >
