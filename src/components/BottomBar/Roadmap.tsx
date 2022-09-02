@@ -72,10 +72,17 @@ const CloseButton = styled(Button)`
   top: 12px;
   right: 5px;
   z-index: 8888;
+  width: fit-content;
   @media screen and (max-width: 600px) {
     position: relative;
     right: 0px;
     margin-bottom: 32px;
+    padding: 16px 22px;
+    border-radius: 15px 15px 0 0;
+    background-color: white;
+    img {
+      filter: invert(1);
+    }
   }
 `;
 
@@ -111,6 +118,7 @@ const ModalWrapper = styled('div')`
 
 const RoadmapWrapper = styled('div')`
   display: flex;
+  width: 100%;
   flex-direction: column;
   background: black;
   position: relative;
@@ -118,8 +126,8 @@ const RoadmapWrapper = styled('div')`
   li {
     font-size: 18px;
   }
-  max-width: 600px;
   min-height: 100vh;
+  align-items: center;
   @media screen and (max-width: 780px) {
     li {
       font-size: 14px;

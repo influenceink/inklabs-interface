@@ -49,13 +49,16 @@ const LogoWrapper = styled('div')`
   top: 0;
   left: 0;
   padding-top: 46px;
-  padding-left: 8px;
+  padding-left: 16px;
   & img {
     width: 65%;
   }
   @media screen and (max-width: 660px) {
     padding-top: 26px;
     padding-left: 8px;
+    & img {
+      width: 35%;
+    }
   }
   z-index: 1;
 `;
@@ -69,21 +72,27 @@ const ProfileWrapper = styled('div')`
   right: 0;
   margin-top: 46px;
   margin-right: 8px;
-  @media screen and (max-width: 660px) {
-    margin-top: 26px;
-    margin-right: 8px;
-  }
-  & img {
-    border-radius: 100%;
-  }
-  &:after {
+  &:before {
+    right: 0;
     content: '';
     width: 12px;
     height: 12px;
     background-color: #ff225e;
     position: absolute;
     border-radius: 100%;
-    transform: translateX(-8px);
+    transform: translate(0px, -2px);
+  }
+  @media screen and (max-width: 660px) {
+    margin-top: 26px;
+    margin-right: 8px;
+    width: 30px;
+    height: 30px;
+    &:before {
+      transform: translate(6px, -2px);
+    }
+  }
+  & img {
+    border-radius: 100%;
   }
   z-index: 1;
   cursor: pointer;

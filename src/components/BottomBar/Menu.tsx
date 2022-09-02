@@ -67,13 +67,18 @@ const CloseButton = styled(Button)`
   padding-bottom: 10px;
   z-index: 8888;
   flex: 0 1 auto;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  border-radius: 15px 15px 0 0;
+  background-color: white;
+  img {
+    filter: invert(1);
+  }
   @media screen and (max-width: 660px) {
     & > div {
       width: 100%;
       padding: 4px 24px 0px 24px;
     }
-    margin-bottom: 36px;
+    margin-bottom: 40px;
   }
 `;
 
@@ -174,9 +179,11 @@ const MenuItem = styled('div')`
   cursor: pointer;
   :hover {
     -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: #ff225e;
+    color: #ff225e;
   }
   @media screen and (max-width: 660px) {
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 25px;
+    line-height: 25px;
   }
 `;

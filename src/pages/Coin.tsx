@@ -187,7 +187,7 @@ export const Coin = () => {
                 </RedButton>
               </Box>
             </Box>
-            <Box display="flex" justifyContent="center" width="100%">
+            <Box display="flex" justifyContent="center">
               <CustomImage src={coinImg} alt="gray" height="100%" width="100%" />
             </Box>
           </Box>
@@ -275,6 +275,7 @@ const CardBox = styled(Grid)`
 
 const CustomImage = styled('img')`
   min-width: 600px;
+  max-width: 800px;
   @media screen and (max-width: 1660px) {
     width: 100%;
     max-width: 608px;
