@@ -465,7 +465,7 @@ export const Profile = () => {
             alignItems="center"
             flexDirection="column"
             position="relative"
-            overflow="auto"
+            overflow="hidden auto"
             pb={3}
           >
             <AvatarWrapper htmlFor="upload_avatar">
@@ -545,6 +545,9 @@ export const Profile = () => {
               </Typography>
               <StyledButton>faq&lsquo;s</StyledButton>
             </Box>
+            <CloseButton onClick={() => history.push('/')}>
+              <img src={cross} alt="close" />
+            </CloseButton>
           </ScrollWrapper>
         </ProfileWrapper>
       </PageContent>
@@ -599,7 +602,7 @@ const ProfileWrapper = styled(Box)`
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-bottom: 126px;
+  padding-bottom: 110px;
   background-color: black;
 `;
 const TokenImg = styled('img')`
@@ -686,7 +689,17 @@ const StyledButton = styled(Button)`
 
 const CloseButton = styled(Button)`
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 46px;
+  right: 8px;
+  min-width: unset;
+  width: fit-content;
   z-index: 8888;
+  padding: 0;
+  @media screen and (max-width: 660px) {
+    top: 26px;
+    & > img {
+      width: 26px;
+      height: 26px;
+    }
+  }
 `;

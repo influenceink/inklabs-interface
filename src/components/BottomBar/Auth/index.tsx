@@ -79,6 +79,9 @@ const ContentWrapper = styled(Box)`
   ::-webkit-scrollbar-thumb {
     background: #ff0000;
   }
+  @media screen and (max-width: 660px) {
+    margin-bottom: 110px;
+  }
 `;
 const CloseButton = styled(Button)`
   position: absolute;
@@ -86,15 +89,7 @@ const CloseButton = styled(Button)`
   right: 5px;
   z-index: 8888;
   @media screen and (max-width: 600px) {
-    position: relative;
-    right: 0px;
-    margin-bottom: 32px;
-    padding: 16px 22px;
-    border-radius: 15px 15px 0 0;
-    background-color: white;
-    img {
-      filter: invert(1);
-    }
+    display: none;
   }
 `;
 
@@ -106,6 +101,7 @@ const ModalWrapper = styled(Dialog)`
       & > div {
         padding: 0;
         display: flex;
+
         ::-webkit-scrollbar {
           width: 0; /* Remove scrollbar space */
           background: transparent;
@@ -182,7 +178,6 @@ export const Input = styled('input')`
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.15);
   }
-  outline: none;
 `;
 
 export const FormButton = styled(Button)`

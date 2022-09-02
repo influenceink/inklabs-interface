@@ -9,6 +9,7 @@ import arrowTop from '../../assets/img/arrow-up.png';
 // import unlock from '../../assets/img/unlock.png';
 import dotLine from '../../assets/img/dot-line.png';
 import open from '../../assets/img/open.png';
+import cross from '../../assets/img/cross.png';
 import { useLocation } from 'react-router-dom';
 import { Purchase } from './Purchase';
 import { Roadmap } from './Roadmap';
@@ -29,7 +30,12 @@ export const MenuButton = () => {
   const { pathname } = useLocation();
   const [showLine, setShowLine] = useState(false);
   const handleClick = () => {
-    setShowMenu(true);
+    if (showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth)) {
+      setShowMenu(false);
+      setShowRoadmap(false);
+      setPurchase(false);
+      setAuth(false);
+    } else setShowMenu(true);
   };
   const toggleShowPurchaseFlow = () => {
     setShowRoadmap(false);
@@ -46,11 +52,7 @@ export const MenuButton = () => {
     return (
       <StyledButton
         onClick={handleClick}
-        sx={{
-          visibility: `${
-            showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'hidden' : 'visible'
-          }` as visibilityType,
-        }}
+        className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
       >
         {children}
       </StyledButton>
@@ -64,17 +66,31 @@ export const MenuButton = () => {
         <Bounce>
           <img src={open} alt="open" />
         </Bounce>
-        <Box minHeight={112}>
+        <Box minHeight={112} mb={sm ? '110px' : '100px'}>
           <Collapse in={showLine} timeout={1000}>
             <img src={dotLine} alt="dotline" />
           </Collapse>
         </Box>
-        <Box display="flex" alignItems="flex-end" mb={sm ? '42px' : 2} gap={2}>
+        <Box
+          position="fixed"
+          display="flex"
+          alignItems="flex-end"
+          mb={sm ? '42px' : 2}
+          bottom={0}
+          gap={2}
+          zIndex={9999}
+        >
           <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
             buy ink
           </StyledButton>
           <Toggler>
-            <img src={arrowTop} alt="arrow" />
+            <img
+              src={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? cross : arrowTop}
+              className={
+                showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'closeBtnAnimation' : ''
+              }
+              alt="arrow"
+            />
           </Toggler>
           <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
             roadmap
@@ -101,7 +117,7 @@ const MenuButtonWrapper = styled('div')`
 `;
 
 const StyledButton = styled(Button)`
-  padding: 18px 22px;
+  padding: 14px 18px;
   border-radius: 11px;
   background-color: rgba(0, 0, 0, 0.5);
   border: 3px solid white;
@@ -113,7 +129,19 @@ const StyledButton = styled(Button)`
     margin: 8px 0;
   }
   @media screen and (max-width: 400px) {
-    padding: 18px;
+    padding: 14px 18px;
+  }
+  &.close {
+    transition: all 0.3s;
+    padding: 8px 14px;
+    img {
+      width: 80%;
+      filter: invert(1);
+    }
+    :hover {
+      opacity: 0.2;
+    }
+    background-color: white;
   }
 `;
 const LightToggler = styled(StyledButton)`

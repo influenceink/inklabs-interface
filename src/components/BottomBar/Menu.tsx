@@ -21,42 +21,24 @@ export const Menu = ({ show, setShow }: Props) => {
     <>
       <Slide direction="up" in={show} mountOnEnter unmountOnExit>
         <MenuWrapper>
-          <Box
-            position="relative"
-            display="flex"
-            flexDirection="column"
-            width="100%"
-            gap="12px"
-            alignItems="center"
-            height="100vh"
-          >
-            <MenuBar>
-              <Box
-                display="flex"
-                flexDirection="column"
-                justifyContent="center"
-                sx={{ gap: { xs: '24px', md: '32px' } }}
-              >
-                <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem>
-                <MenuItem onClick={() => goTo('/games')}>games</MenuItem>
-                <MenuItem onClick={() => goTo('/platform')}>platform tech</MenuItem>
-                <MenuItem onClick={() => goTo('/coin')}>ink token</MenuItem>
-                <MenuItem onClick={() => goTo('/convergence')}>convergence</MenuItem>
-                <MenuItem onClick={() => goTo('/vision')}>vision</MenuItem>
-                {mobile && (
-                  <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} px={2}>
-                    <img src={twitter} alt="twitter" />
-                    <img src={facebook} alt="facebook" />
-                    <img src={instagram} alt="instagram" />
-                    <img src={youtube} alt="youtube" />
-                  </Box>
-                )}
-              </Box>
-            </MenuBar>
-            <CloseButton onClick={() => setShow(false)}>
-              <img src={cross} alt="cross" />
-            </CloseButton>
-          </Box>
+          <MenuBar>
+            <Box display="flex" flexDirection="column" justifyContent="center" sx={{ gap: { xs: '24px', md: '32px' } }}>
+              <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem>
+              <MenuItem onClick={() => goTo('/games')}>games</MenuItem>
+              <MenuItem onClick={() => goTo('/platform')}>platform tech</MenuItem>
+              <MenuItem onClick={() => goTo('/coin')}>ink token</MenuItem>
+              <MenuItem onClick={() => goTo('/convergence')}>convergence</MenuItem>
+              <MenuItem onClick={() => goTo('/vision')}>vision</MenuItem>
+              {mobile && (
+                <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} px={2}>
+                  <img src={twitter} alt="twitter" />
+                  <img src={facebook} alt="facebook" />
+                  <img src={instagram} alt="instagram" />
+                  <img src={youtube} alt="youtube" />
+                </Box>
+              )}
+            </Box>
+          </MenuBar>
         </MenuWrapper>
       </Slide>
     </>
@@ -85,30 +67,12 @@ const CloseButton = styled(Button)`
 const MenuWrapper = styled('div')`
   box-sizing: border-box;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  & > div {
-    background-color: black;
-    border-radius: 15px 15px 0 0;
-    padding: 4px 64px 0px 64px;
-  }
   position: absolute;
   bottom: 0px;
   left: 0px;
   z-index: 8888;
-  @media screen and (max-width: 1320px) {
-    & > div {
-      width: 100%;
-      padding: 4px 24px 0px 24px;
-    }
-  }
-  @media screen and (max-width: 660px) {
-    height: 100vh;
-    & > div {
-      width: 100%;
-      padding: 4px 24px 0px 24px;
-    }
-  }
+  height: 100vh;
+  background-color: black;
 `;
 
 const LeftBorder = styled('img')`
@@ -123,6 +87,10 @@ const LeftBorder = styled('img')`
 
 const MenuBar = styled('div')`
   width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
@@ -138,10 +106,12 @@ const MenuBar = styled('div')`
     svg {
       width: 100%;
     }
+    padding-bottom: 140px;
   }
   @media screen and (max-width: 660px) {
     flex: 1 0 auto;
     align-items: center;
+    padding-bottom: 160px;
   }
 `;
 
