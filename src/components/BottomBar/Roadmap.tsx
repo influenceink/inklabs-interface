@@ -25,7 +25,8 @@ export const Roadmap = ({ show, setShow }: Props) => {
             </LogoWrapper> */}
             <RotatedLargeText>ROaDMaP</RotatedLargeText>
             <RoadmapTextWrapper
-              width={sm ? '100%' : 'auto'}
+              width={'100%'}
+              maxWidth={600}
               display="flex"
               flexGrow={1}
               flexDirection="column"
@@ -69,20 +70,14 @@ const RoadmapTextWrapper = styled(Box)`
 
 const CloseButton = styled(Button)`
   position: absolute;
-  top: 12px;
-  right: 5px;
+  top: 0;
+  right: 0;
   z-index: 8888;
   width: fit-content;
+  margin-top: 46px;
+  margin-right: 8px;
   @media screen and (max-width: 600px) {
-    position: relative;
-    right: 0px;
-    margin-bottom: 32px;
-    padding: 16px 22px;
-    border-radius: 15px 15px 0 0;
-    background-color: white;
-    img {
-      filter: invert(1);
-    }
+    display: none;
   }
 `;
 
@@ -96,7 +91,7 @@ const ModalWrapper = styled('div')`
   & > div {
     background-color: black;
     border-radius: 15px;
-    padding: 60px 80px;
+    padding: 60px 80px 120px 80px;
   }
   position: fixed;
   top: 0px;
@@ -107,7 +102,7 @@ const ModalWrapper = styled('div')`
     align-items: flex-start;
     & > div {
       width: 100%;
-      padding: 40px 24px 24px 24px;
+      padding: 40px 24px 130px 24px;
       height: 100vh;
       min-height: 0px;
       overflow-y: auto;

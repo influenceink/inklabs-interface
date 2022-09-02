@@ -12,7 +12,7 @@ import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 
 export const Coin = () => {
-  const xl = useMediaQuery('(max-width: 1660px)');
+  const xl = useMediaQuery('(max-width: 1820px)');
   const { setShowModal } = useContext(PurchaseFlowContext);
   return (
     <>
@@ -187,7 +187,7 @@ export const Coin = () => {
                 </RedButton>
               </Box>
             </Box>
-            <Box display="flex" justifyContent="center">
+            <Box display="flex" justifyContent="center" width={!xl ? 'auto' : '100%'}>
               <CustomImage src={coinImg} alt="gray" height="100%" width="100%" />
             </Box>
           </Box>
