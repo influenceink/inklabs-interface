@@ -18,19 +18,19 @@ export const PageContent = (props: PageProps) => {
     <>
       <Slide timeout={{ appear: 1000 }} direction={'right'} in={true} mountOnEnter unmountOnExit>
         <Box display="flex" justifyContent="center">
+          <HeadWrapper>
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
+            <CloseButton onClick={() => history.push('/')}>
+              <img src={cross} alt="cross" />
+            </CloseButton>
+          </HeadWrapper>
           {type === 'primary' ? (
             <PageWrapper>
-              <Box maxWidth={2000} height={'100%'} display="flex" alignItems="space-between" flexDirection="column">
-                <Box width="100%" pb={3} flexGrow={1} overflow="hidden auto" position={'relative'}>
-                  <Box position={'absolute'}>
-                    <Link to="/">
-                      <img src={logo} alt="logo" />
-                    </Link>
-                  </Box>
-                  <CloseButton onClick={() => history.push('/')}>
-                    <img src={cross} alt="cross" />
-                  </CloseButton>
-                  <Box sx={{ marginTop: { xs: '80px', md: '120px' } }} flexGrow={1} display="flex" alignItems="center">
+              <Box maxWidth={2000} height={'100%'} display="flex" justifyContent="center" flexDirection="column">
+                <Box width="100%" pb={3} overflow="hidden auto" position={'relative'}>
+                  <Box sx={{ marginTop: { xs: '40px', md: '60px' } }} flexGrow={1} display="flex" alignItems="center">
                     {children}
                   </Box>
                 </Box>
@@ -48,22 +48,41 @@ export const PageContent = (props: PageProps) => {
     </>
   );
 };
-const CloseButton = styled(Button)`
+const HeadWrapper = styled(Box)`
+  display: flex;
   position: absolute;
-  right: 0;
-  z-index: 8888;
-  flex: 0 1 auto;
-  margin-bottom: 8px;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 3;
+  padding: 46px 8px 0px 16px;
+  & > a > img {
+    width: 45.5px;
+    height: 48.75px;
+  }
   @media screen and (max-width: 660px) {
+    padding: 26px 8px 0px 8px;
+    & > a > img {
+      width: 24.5px;
+      height: 26.25px;
+    }
+  }
+`;
+const CloseButton = styled(Button)`
+  @media screen and (max-width: 660px) {
+    padding: 0;
+    width: fit-content;
+    min-width: unset;
     & > div {
       width: 100%;
-      padding: 4px 24px 0px 24px;
     }
-    margin-bottom: 30px;
+    & > img {
+      width: 26px;
+      height: 26px;
+    }
   }
 `;
 const PageWrapper = styled('div')`
-  padding: 120px 150px 110px 150px;
+  padding: 80px 150px 110px 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,7 +105,7 @@ const PageWrapper = styled('div')`
   @media screen and (max-width: 660px) {
     -webkit-clip-path: none;
     clip-path: none;
-    padding: 60px 24px 136px 24px;
+    padding: 80px 24px 136px 24px;
     position: fixed;
     left: 0;
   }

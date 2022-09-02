@@ -20,4 +20,7 @@ const RightBarWrapper = styled('div')`
   justify-content: center;
   gap: 12px;
   align-items: flex-end;
+  @media screen and (max-width: 660px) {
+    visibility: hidden;
+  }
 `;
