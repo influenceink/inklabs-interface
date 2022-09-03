@@ -12,7 +12,7 @@ import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 
 export const Coin = () => {
-  const xl = useMediaQuery('(max-width: 1820px)');
+  const xl = useMediaQuery('(max-width: 1200px)');
   const { setShowModal } = useContext(PurchaseFlowContext);
   return (
     <>
@@ -23,7 +23,7 @@ export const Coin = () => {
       </Helmet>
       <PageContent title={PAGE_TITLE_COIN} type="primary">
         <Box>
-          <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
+          <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-center">
             <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
               <Typography variant="h1">ink token</Typography>
               <Divider />
@@ -46,7 +46,7 @@ export const Coin = () => {
                 </TokenWrapper>
               </Box>
               <Divider />
-              <Grid container mb={3} spacing={4}>
+              <Grid container mb={3} spacing={4} flexWrap="wrap">
                 <Grid item xs={12} xl={4}>
                   <CardBox>
                     <Typography fontSize={18}>PRIVATE - RD. 1</Typography>
@@ -187,7 +187,7 @@ export const Coin = () => {
                 </RedButton>
               </Box>
             </Box>
-            <Box display="flex" justifyContent="center" width={!xl ? 'auto' : '100%'}>
+            <Box display="flex" justifyContent="center" alignItems="center" width={!xl ? 'auto' : '100%'}>
               <CustomImage src={coinImg} alt="gray" height="100%" width="100%" />
             </Box>
           </Box>
@@ -195,13 +195,13 @@ export const Coin = () => {
             display="flex"
             flexDirection={xl ? 'column-reverse' : 'row'}
             gap={xl ? 2 : 6}
-            alignItems="flex-start"
+            alignItems="flex-center"
             mt={12}
           >
             <Box width="100%" display="flex" justifyContent="center">
               <Image src={grayRect} alt="gray" />
             </Box>
-            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
+            <Box flexGrow={1} width="100%" display="flex" flexDirection="column" justifyContent="center">
               <Divider />
               <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
                 Supply
@@ -274,8 +274,9 @@ const CardBox = styled(Grid)`
 `;
 
 const CustomImage = styled('img')`
-  min-width: 600px;
+  min-width: 320px;
   max-width: 800px;
+  height: auto;
   @media screen and (max-width: 1660px) {
     width: 100%;
     max-width: 608px;

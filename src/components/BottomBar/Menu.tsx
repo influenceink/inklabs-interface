@@ -22,7 +22,13 @@ export const Menu = ({ show, setShow }: Props) => {
       <Slide direction="up" in={show} mountOnEnter unmountOnExit>
         <MenuWrapper>
           <MenuBar>
-            <Box display="flex" flexDirection="column" justifyContent="center" sx={{ gap: { xs: '24px', md: '32px' } }}>
+            <Box
+              overflow="hidden auto"
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              sx={{ gap: { xs: '24px', md: '32px' } }}
+            >
               <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem>
               <MenuItem onClick={() => goTo('/games')}>games</MenuItem>
               <MenuItem onClick={() => goTo('/platform')}>platform tech</MenuItem>
@@ -98,6 +104,15 @@ const MenuBar = styled('div')`
   justify-content: center;
   margin-top: 36px;
   padding: 12px 0;
+  & > div {
+    ::-webkit-scrollbar {
+      width: 0; /* Remove scrollbar space */
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff0000;
+    }
+  }
   @media screen and (max-width: 1351px) {
     max-width: 700px;
     min-width: 300px;

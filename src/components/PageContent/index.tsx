@@ -82,7 +82,7 @@ const CloseButton = styled(Button)`
   }
 `;
 const PageWrapper = styled('div')`
-  padding: 80px 150px 110px 150px;
+  padding: 80px 120px 110px 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
