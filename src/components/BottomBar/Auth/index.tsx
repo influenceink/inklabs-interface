@@ -178,6 +178,7 @@ export const Input = styled('input')`
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.15);
   }
+  outline: none;
 `;
 
 export const FormButton = styled(Button)`

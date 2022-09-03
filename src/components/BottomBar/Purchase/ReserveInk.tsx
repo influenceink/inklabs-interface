@@ -5,13 +5,14 @@ import { FormButton, FormTitle, Divider, DividerContent } from '.';
 import { Web3Context } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
-import { TokenListContext } from '../../../contexts';
+import ethTopTokens from '../../../utils/eth-top-50-tokens.json';
+import polyTopTokens from '../../../utils/poly-top-50-tokens.json';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
+  const [tokensList] = useState<{ [key: number]: Array<any> }>({ 1: ethTopTokens, 137: polyTopTokens });
   const [currency, setCurrency] = useState('sushi');
   const [tokenAmount, setTokenAmount] = useState<number>(0);
-  const { connected, account, connect, chainId } = useContext(Web3Context);
-  const { tokens } = useContext(TokenListContext);
+  const { connected, account, connect, chainId, web3 } = useContext(Web3Context);
   const handleCurrencyChange = (e: any) => {
     setCurrency(e.target.value);
   };
@@ -80,24 +81,26 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
           </Typography>
           <FormControl sx={{ width: '100%' }}>
             <CustomSelect value={currency} onChange={handleCurrencyChange} displayEmpty>
-              <MenuItem value={'sushi'}>
-                <Box width="100%" display="flex" gap={1} justifyContent="fles-start">
-                  <img src={SushiIcon} alt="sushi" />
-                  SUSHI
-                </Box>
-              </MenuItem>
-              <MenuItem value={'cake'}>
-                <Box width="100%" display="flex" gap={1} justifyContent="fles-start">
-                  <img src={SushiIcon} alt="sushi" />
-                  CAKE
-                </Box>
-              </MenuItem>
-              <MenuItem value={'uni'}>
-                <Box width="100%" display="flex" gap={1} justifyContent="fles-start">
-                  <img src={SushiIcon} alt="sushi" />
-                  UNI
-                </Box>
-              </MenuItem>
+              {chainId &&
+                tokensList[Number(chainId)].map((token) => (
+                  <MenuItem value={token.id} key={token.id}>
+                    <Box width="100%" display="flex" gap={1} justifyContent="flex-start">
+                      <img
+                        src={`https://raw.githubusercontent.com/${
+                          Number(chainId) === 1 ? 'uniswap' : 'trustwallet'
+                        }/assets/master/blockchains/ethereum/assets/${web3!.utils.toChecksumAddress(
+                          token.id
+                        )}/logo.png`}
+                        alt={token.symbol}
+                        width="22px"
+                        height="22px"
+                        style={{ borderRadius: 24 }}
+                        onError={(ev) => (ev.currentTarget.style.visibility = 'hidden')}
+                      />
+                      {`${token.name} (${token.symbol})`}
+                    </Box>
+                  </MenuItem>
+                ))}
             </CustomSelect>
           </FormControl>
           <Typography mt={3} fontWeight="bold" color="#ffffff88" textAlign="center">

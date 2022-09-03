@@ -10,7 +10,7 @@ import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';
 
 export const Platform = () => {
-  const xl = useMediaQuery('(max-width: 1660px)');
+  const xl = useMediaQuery('(max-width: 1200px)');
   const { setShowModal } = useContext(PurchaseFlowContext);
   return (
     <>
@@ -21,7 +21,7 @@ export const Platform = () => {
       </Helmet>
       <PageContent title={PAGE_TITLE_PLATFORM} type="primary">
         <Box>
-          <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-start">
+          <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="center">
             <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
               <Typography variant="h1">platform</Typography>
               <Paragraph paragraph mt="40px">
@@ -70,7 +70,7 @@ export const Platform = () => {
             display="flex"
             flexDirection={xl ? 'column-reverse' : 'row'}
             gap={xl ? 2 : 6}
-            alignItems="flex-start"
+            alignItems="center"
             mt={12}
           >
             <Box width="100%" display="flex" justifyContent="center">
