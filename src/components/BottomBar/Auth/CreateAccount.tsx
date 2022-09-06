@@ -1,9 +1,24 @@
+import { useState, useContext } from 'react';
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
+import { AuthContext } from '../../../contexts';
 
-export const CreateAccount = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
-  const handleClick = () => {
-    onNext();
+export const CreateAccount = ({
+  onNext,
+  onPrev,
+  account,
+}: {
+  account: any;
+  onNext: () => void;
+  onPrev: () => void;
+}) => {
+  const { signUp } = useContext(AuthContext);
+  const [referrer, setReferrer] = useState<string>('');
+  const handleClick = async () => {
+    const status = await signUp({ ...account, referrer_id: referrer });
+    if (status !== 0) {
+      onPrev();
+    }
   };
   return (
     <>
@@ -25,8 +40,10 @@ export const CreateAccount = ({ onNext, onPrev }: { onNext: () => void; onPrev: 
           <Typography variant="subtitle2" fontWeight="bold" fontSize={16}>
             Who Sent You?
           </Typography>
-          <Input placeholder="enter ink id" />
-          <FormButton onClick={handleClick}>enter</FormButton>
+          <Input placeholder="enter ink id" value={referrer} onChange={(ev) => setReferrer(ev.target.value)} />
+          <FormButton onClick={handleClick} disabled={referrer === ''}>
+            enter
+          </FormButton>
         </Box>
         <Divider />
         <Typography variant="subtitle2" fontWeight="bold" py={0} mt={2}>

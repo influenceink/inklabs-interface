@@ -17,12 +17,13 @@ export const Auth = ({ show, setShow }: Props) => {
   const mobile = useMediaQuery('(max-width: 1350px)');
   const history = useHistory();
   const [index, setIndex] = useState(0);
+  const [account, setAccount] = useState<any>({});
   useEffect(() => {
     if (show) {
-      if (authorized) setIndex(3);
+      if (authorized) setShowModal(false);
       else setIndex(0);
     }
-  }, [show, authorized]);
+  }, [show, authorized, setShowModal]);
 
   const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
     if (reason !== 'backdropClick') {
@@ -46,12 +47,22 @@ export const Auth = ({ show, setShow }: Props) => {
               {index == 0 && <SignIn onPrev={() => setIndex((value) => value + 1)} />}
               {index === 1 && (
                 <CreateId
-                  onNext={() => setIndex((value) => value + 1)}
+                  onNext={(account) => {
+                    setIndex((value) => value + 1);
+                    setAccount(account);
+                  }}
                   onSignIn={() => setIndex((value) => value - 1)}
                 />
               )}
               {index === 2 && (
-                <CreateAccount onNext={() => setShowModal(false)} onPrev={() => setIndex((value) => value - 1)} />
+                <CreateAccount
+                  account={account}
+                  onNext={() => setShowModal(false)}
+                  onPrev={() => {
+                    setIndex((value) => value - 1);
+                    setAccount(null);
+                  }}
+                />
               )}
             </ContentWrapper>
             <CloseButton onClick={() => setShow(false)}>
@@ -178,6 +189,7 @@ export const Input = styled('input')`
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.15);
   }
+  outline: none;
 `;
 
 export const FormButton = styled(Button)`

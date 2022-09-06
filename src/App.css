@@ -6,3 +6,7 @@ html {
 .MuiSelect-select > div {
   justify-content: center !important;
 }
+
+.MuiMenu-paper.MuiPopover-paper {
+  max-height: calc(100% - 400px);
+}

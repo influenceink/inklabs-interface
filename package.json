@@ -27,6 +27,7 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/react-helmet": "^6.1.0",
+    "bignumber.js": "^9.1.0",
     "dotenv": "^8.2.0",
     "hamburger-react": "^2.4.1",
     "js-sha512": "^0.8.0",

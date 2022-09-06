@@ -31,8 +31,12 @@ export const PAGE_TITLE_COIN = 'INK Coin';
 export const DARK_MODE_THEME = 'dark';
 export const LIGHT_MODE_THEME = 'light';
 
-export const ETHEREUM_TOKENS_URI = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3';
-export const POLYGON_TOKENS_URI = 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-polygon';
+export const QUOTER_CONTRACT_ADDRESS = '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6';
+
+export const TOP_TOKENS_URI: { [key: number]: string } = {
+  1: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
+  137: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-polygon',
+};
 
 export const KEYS = [
   {
@@ -85,35 +89,10 @@ export const KEYS = [
   },
 ];
 
-export const INITIAL_TOKENS: { [key: number]: Array<Token> } = {
-  [1]: [
-    {
-      name: 'USD Coin',
-      symbol: 'USDC',
-      address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-      chainId: 1,
-    },
-    {
-      name: 'Wrapped Ether',
-      symbol: 'WETH',
-      address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-      chainId: 1,
-    },
-  ],
-  [137]: [
-    {
-      name: 'USD Coin (PoS)',
-      symbol: 'USDC',
-      address: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
-      chainId: 137,
-    },
-    {
-      name: 'Wrapped Ether',
-      symbol: 'WETH',
-      address: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
-      chainId: 137,
-    },
-  ],
+export const USDC_ADDRESS: { [key: number]: string } = {
+  1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+  4: '0x8a1f7023c743E3d2149FfeA0EBcc685af0e8e9b6',
+  137: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
 };
 
 export const ROADMAP = [

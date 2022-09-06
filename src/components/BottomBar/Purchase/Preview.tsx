@@ -1,11 +1,36 @@
 import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import BigNumber from 'bignumber.js';
 import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
+import { ContractContext } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 
-export const Preview = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
-  const handleClick = () => {
+export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPrev: () => void; preview: any }) => {
+  const { contracts, getTokenDecimals, tokenApprove } = useContext(ContractContext);
+  const handleClick = async () => {
+    if (contracts !== null) {
+      const decimals = await getTokenDecimals(preview.token.address);
+      if (preview.token.symbol === 'USDC') {
+        await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)));
+        await contracts['inkpurchase'].send(
+          'purchaseForUSDC',
+          null,
+          BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
+        );
+      } else if (preview.token.symbol === 'WETH') {
+        await contracts['inkpurchase'].send('purchaseForETH', {
+          value: BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)),
+        });
+      } else {
+        await contracts['inkpurchase'].send(
+          'purchaseForToken',
+          null,
+          preview.token.address,
+          BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
+        );
+      }
+    }
     onNext();
   };
   return (
@@ -30,7 +55,7 @@ export const Preview = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => 
           <Box display="flex" alignItems="center" gap={2}>
             <img src={SushiIcon} alt="sushi" />
             <Typography variant="subtitle2" color="#fff" fontWeight="bold" fontSize="25px" lineHeight="25px">
-              1.045
+              {preview.tokenAmount}
             </Typography>
           </Box>
         </Box>
@@ -42,7 +67,7 @@ export const Preview = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => 
           <Box display="flex" alignItems="center" gap={2}>
             <img src={InkIcon} alt="ink" />
             <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
-              2,674,934
+              {preview.inkAmount.toFixed(4)}
             </Typography>
           </Box>
 
