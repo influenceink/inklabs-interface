@@ -153,7 +153,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     [setLocalStore]
   );
   const purchase = useCallback(
-    async (props: { txId: string; usdAmount: number; reservedInk: number; paidCoin: string; paidNetwork: string }) => {
+    async (props: {
+      transaction_id: string;
+      usd_amount: number;
+      reserved_ink: number;
+      paid_coin: string;
+      paid_network: string;
+    }) => {
       try {
         return await axios.post('/web3/purchase', props).then((res) => res.data);
       } catch (err) {

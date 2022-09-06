@@ -2,21 +2,31 @@ import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/mat
 import { useState, useContext } from 'react';
 import BigNumber from 'bignumber.js';
 import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
-import { ContractContext } from '../../../contexts';
+import { ContractContext, AuthContext } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 
 export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPrev: () => void; preview: any }) => {
   const { contracts, getTokenDecimals, tokenApprove } = useContext(ContractContext);
+  const { purchase } = useContext(AuthContext);
   const handleClick = async () => {
     if (contracts !== null) {
       const decimals = await getTokenDecimals(preview.token.address);
       if (preview.token.symbol === 'USDC') {
         await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)));
-        await contracts['inkpurchase'].send(
+        const tx: any = await contracts['inkpurchase'].send(
           'purchaseForUSDC',
           null,
           BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
+        );
+        console.log(
+          await purchase({
+            transaction_id: tx.transactionHash,
+            usd_amount: BigNumber(preview.inkAmount).dividedBy(6.05),
+            reserved_ink: preview.inkAmount,
+            paid_coin: preview.token.symbol,
+            paid_network: 'Metamask',
+          })
         );
       } else if (preview.token.symbol === 'WETH') {
         await contracts['inkpurchase'].send('purchaseForETH', {

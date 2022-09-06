@@ -4,7 +4,7 @@ import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 
-export const Complete = ({ onPrev }: { onPrev: () => void }) => {
+export const Complete = ({ preview, onPrev }: { preview: any; onPrev: () => void }) => {
   return (
     <>
       <FormTitle>
@@ -27,7 +27,7 @@ export const Complete = ({ onPrev }: { onPrev: () => void }) => {
           <Box display="flex" alignItems="center" gap={2}>
             <img src={InkIcon} alt="ink" />
             <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
-              2,674,934
+              {preview.inkAmount.toFixed(3)}
             </Typography>
           </Box>
           <Divider sx={{ marginTop: 2, marginBottom: 2 }} />
