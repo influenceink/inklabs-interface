@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_COIN } from '../utils/constants';
 import coinImg from '../assets/img/coin.png';
-import grayRect from '../assets/img/gray-rect.png';
+import coin2 from '../assets/img/coin1.png';
 import symbolImg from '../assets/img/symbol.png';
 import completeImg from '../assets/img/complete.png';
 import hereImg from '../assets/img/here.png';
@@ -199,7 +199,7 @@ export const Coin = () => {
             mt={12}
           >
             <Box width="100%" display="flex" justifyContent="center">
-              <Image src={grayRect} alt="gray" />
+              <Image src={coin2} alt="gray" />
             </Box>
             <Box flexGrow={1} width="100%" display="flex" flexDirection="column" justifyContent="center">
               <Divider />

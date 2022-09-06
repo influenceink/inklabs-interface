@@ -16,226 +16,8 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts';
 import cross from '../../assets/img/cross.png';
 import { ImageUpload } from '../../components/ImageUpload';
+import { getState } from '../../utils';
 
-export const zipData = [
-  {
-    id: 0,
-    image: yellowCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 1,
-    image: greenCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 2,
-    image: blueCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 3,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 4,
-    image: blueCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 5,
-    image: yellowCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 6,
-    image: greenCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 7,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 8,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 9,
-    image: yellowCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 10,
-    image: blueCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 11,
-    image: greenCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 12,
-    image: greenCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 13,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 14,
-    image: yellowCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 15,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 16,
-    image: blueCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 17,
-    image: blueCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 18,
-    image: greenCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 19,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 20,
-    image: yellowCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 21,
-    image: greenCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 22,
-    image: blueCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 23,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 24,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 25,
-    image: greenCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 26,
-    image: blueCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 27,
-    image: blueCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 28,
-    image: greenCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 29,
-    image: yellowCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-  {
-    id: 30,
-    image: pinkCard,
-    zip: 10001,
-    area: 'Hollywood, CA',
-    type: 'Legendary',
-  },
-];
 export const connectionData = [
   {
     id: 0,
@@ -439,7 +221,8 @@ export const Profile = () => {
   const [showZip, setShowZip] = useState(false);
   const [showConnection, setShowConnection] = useState(false);
   const history = useHistory();
-  const { avatar, viralCount, directCount, setAvatar, totalCount, authorized, inkId } = useContext(AuthContext);
+  const { avatar, balances, viralCount, directCount, setAvatar, totalCount, authorized, inkId, zipCodes } =
+    useContext(AuthContext);
   const handleAvatarUpload = (ev: ChangeEvent<HTMLInputElement>) => {
     if (ev.target && ev.target.files) setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
   };
@@ -511,7 +294,7 @@ export const Profile = () => {
               <Box display="flex" alignItems="center" gap="8px">
                 <TokenImg src={logo} alt="" />
                 <Typography variant="subtitle2" fontWeight="bold" fontSize="23px" lineHeight="23px">
-                  253,945.01
+                  {balances.reserved_ink}
                 </Typography>
               </Box>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
@@ -523,7 +306,7 @@ export const Profile = () => {
                 YOUR ZIP CODES
               </Typography>
               <CardListWrapper>
-                <Cards data={zipData.slice(0, 6)} />
+                <Cards data={zipCodes.slice(0, 6)} />
               </CardListWrapper>
               <Box mt={1} px="6px" width="100%">
                 <StyledButton onClick={() => setShowZip(true)}>view all</StyledButton>
@@ -558,10 +341,16 @@ export const Profile = () => {
 };
 
 export const Cards = ({ data }: any) => {
-  return data.map((card: any) => {
+  const randomCardImg = () => {
+    if (Math.random() < 0.25) return pinkCard;
+    if (Math.random() < 0.5) return blueCard;
+    if (Math.random() < 0.75) return greenCard;
+    return yellowCard;
+  };
+  return data.map((code: any, index: number) => {
     return (
       <Box
-        key={card.id}
+        key={index}
         display="flex"
         justifyContent="center"
         // flexWrap="wrap"
@@ -571,16 +360,16 @@ export const Cards = ({ data }: any) => {
         bgcolor="#111"
         borderRadius="11px"
       >
-        <CardImage src={card.image} alt="" />
+        <CardImage src={randomCardImg()} alt="" />
         <Box display="flex" flexDirection="column" alignItems="center">
           <Typography variant="subtitle2" fontSize="19px" fontWeight="bold" color="#fff">
-            {card.zip}
+            {code}
           </Typography>
           <Typography variant="subtitle2" fontSize="9px" color="#fff">
-            {card.area}
+            {getState(code)}
           </Typography>
           <Typography variant="subtitle2" fontSize="9px" color="#FF9318">
-            {card.type}
+            Legendary
           </Typography>
         </Box>
       </Box>

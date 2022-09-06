@@ -19,6 +19,7 @@ interface IAuthContext {
   setAvatar: Function;
   purchase: Function;
   resetPassword: Function;
+  balances: any;
 }
 
 export const AuthContext = createContext<IAuthContext>({
@@ -39,6 +40,7 @@ export const AuthContext = createContext<IAuthContext>({
   setShowModal: () => {},
   purchase: () => {},
   resetPassword: () => {},
+  balances: null,
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -53,6 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [directCount, setDirectCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [balances, setBalances] = useState<any>(null);
   axios.defaults.baseURL = 'https://ip-api.ip.d.inksrv.com';
   useEffect(() => {
     const initialize = async () => {
@@ -74,6 +77,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setViralCount(res.data.viral_count);
                 setDirectCount(res.data.direct_count);
                 setTotalCount(res.data.total_count);
+                setBalances(res.data.balances);
               });
           }
         }
@@ -92,19 +96,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const data = await axios.post('/auth/login', { email, password }).then((res) => res.data);
         if (data.status === 0) {
-          setAuthorized(true);
           setSessionToken(data.session_token);
-          setInkId(data.ink_id);
           setEmail(email);
           setLocalStore({ session_token: data.session_token });
           axios.defaults.headers.common['Authorization'] = 'SessionToken=' + data.session_token;
           await axios.post('/user/info').then((res) => {
             setAvatar(res.data.avatar);
+            setInkId(res.data.ink_id);
+            setAuthorized(true);
             setZipCodes(res.data.zip_codes);
             setFullName(res.data.full_name);
             setViralCount(res.data.viral_count);
             setDirectCount(res.data.direct_count);
             setTotalCount(res.data.total_count);
+            setBalances(res.data.balances);
           });
           setShowModal(false);
           return true;
@@ -121,7 +126,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const data = await axios.post('/auth/create', props).then((res) => res.data);
         if (data.status === 0) {
-          setAuthorized(true);
           setSessionToken(data.session_token);
           setFullName(data.display_name);
           setEmail(data.email);
@@ -129,11 +133,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           axios.defaults.headers.common['Authorization'] = 'SessionToken=' + data.session_token;
           await axios.post('/user/info').then((res) => {
             setAvatar(res.data.avatar);
+            setInkId(res.data.ink_id);
+            setAuthorized(true);
             setZipCodes(res.data.zip_codes);
             setFullName(res.data.full_name);
             setViralCount(res.data.viral_count);
             setDirectCount(res.data.direct_count);
             setTotalCount(res.data.total_count);
+            setBalances(res.data.balances);
           });
           setShowModal(false);
           return { status: 0 };
@@ -182,6 +189,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setAvatar,
         purchase,
         resetPassword,
+        balances,
       }}
     >
       {children}
