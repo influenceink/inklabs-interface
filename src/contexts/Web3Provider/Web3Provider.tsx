@@ -1,5 +1,6 @@
-import { createContext, ReactElement, useState, useCallback } from 'react';
+import { createContext, ReactElement, useState, useCallback, useEffect } from 'react';
 import Web3 from 'web3';
+import { ContractProvider } from '../ContractProvider';
 
 interface IWeb3Context {
   account: string | null;
@@ -74,7 +75,7 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
 
   return (
     <Web3Context.Provider value={{ account, connect, disconnect, chainId, connected, web3 }}>
-      {children}
+      <ContractProvider>{children}</ContractProvider>
     </Web3Context.Provider>
   );
 };
