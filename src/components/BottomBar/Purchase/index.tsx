@@ -17,6 +17,7 @@ export const Purchase = ({ show, setShow }: Props) => {
   const mobile = useMediaQuery('(max-width: 1350px)');
   const history = useHistory();
   const [index, setIndex] = useState(0);
+  const [preview, setPreview] = useState<any>(null);
   // useEffect(() => {
   //   if (show) {
   //     if (authorized) setIndex(3);
@@ -29,8 +30,14 @@ export const Purchase = ({ show, setShow }: Props) => {
       setAuth(true);
       setShow(!show);
     }
+    if (!show) {
+      setIndex(0);
+      setPreview(null);
+    }
   }, [authorized, show, setAuth, setShow]);
-
+  useEffect(() => {
+    if (preview !== null) setIndex((value) => value + 1);
+  }, [preview]);
   const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
     if (reason !== 'backdropClick') {
       setShow(false);
@@ -58,12 +65,18 @@ export const Purchase = ({ show, setShow }: Props) => {
               )}
               {index === 1 && (
                 <ReserveInk
-                  onNext={() => setIndex((value) => value + 1)}
+                  onNext={(value: any) => {
+                    setPreview(value);
+                  }}
                   onPrev={() => setIndex((value) => value - 1)}
                 />
               )}
               {index === 2 && (
-                <Preview onNext={() => setIndex((value) => value + 1)} onPrev={() => setIndex((value) => value - 1)} />
+                <Preview
+                  preview={preview}
+                  onNext={() => setIndex((value) => value + 1)}
+                  onPrev={() => setIndex((value) => value - 1)}
+                />
               )}
               {index === 3 && <Complete onPrev={() => setIndex((value) => value - 1)} />}
             </ContentWrapper>

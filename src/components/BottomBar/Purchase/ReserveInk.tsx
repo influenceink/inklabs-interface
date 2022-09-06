@@ -1,28 +1,63 @@
 import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
-import { useState, useContext, createRef, ChangeEvent, useEffect } from 'react';
+import { useState, useContext, createRef, ChangeEvent, useEffect, useCallback } from 'react';
 import NumberFormat from 'react-number-format';
+import BigNumber from 'bignumber.js';
 import { FormButton, FormTitle, Divider, DividerContent } from '.';
-import { Web3Context } from '../../../contexts';
+import { ContractContext, Web3Context } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
-import ethTopTokens from '../../../utils/eth-top-50-tokens.json';
-import polyTopTokens from '../../../utils/poly-top-50-tokens.json';
+import { getTopTokensList } from '../../../utils';
+import { USDC_ADDRESS } from '../../../utils/constants';
 
-export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
-  const [tokensList] = useState<{ [key: number]: Array<any> }>({ 1: ethTopTokens, 137: polyTopTokens });
-  const [currency, setCurrency] = useState('sushi');
+export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () => void }) => {
   const [tokenAmount, setTokenAmount] = useState<number>(0);
-  const { connected, account, connect, chainId, web3 } = useContext(Web3Context);
-  const handleCurrencyChange = (e: any) => {
+  const { contracts, getTokenDecimals } = useContext(ContractContext);
+  const { account, connected, connect, chainId } = useContext(Web3Context);
+  const [currency, setCurrency] = useState<number>(0);
+  const [tokensList, setTokensList] = useState<Array<any>>([]);
+  const [tokenDecimals, setTokenDecimals] = useState<number>(18);
+  const [usdcAddr, setUsdcAddr] = useState<string>(USDC_ADDRESS[1]);
+  const [reservedInk, setReservedInk] = useState<BigNumber>(BigNumber(0));
+  const handleCurrencyChange = async (e: any) => {
     setCurrency(e.target.value);
+    setTokenDecimals(await getTokenDecimals(tokensList[e.target.value].address));
   };
   const handleClick = () => {
-    onNext();
+    onNext({ tokenAmount, token: tokensList[currency], inkAmount: reservedInk });
   };
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const amount = ev.target.value.replaceAll(',', '');
     setTokenAmount(Number(amount));
   };
+  useEffect(() => {
+    const topTokensWrapper = async () => {
+      setTokensList(await getTopTokensList(chainId || 4));
+    };
+    if (connected && chainId) {
+      topTokensWrapper();
+      setUsdcAddr(USDC_ADDRESS[chainId]);
+    }
+  }, [connected, chainId]);
+  useEffect(() => {
+    if (connected && tokenAmount && contracts && usdcAddr !== tokensList[currency].address) {
+      contracts.quoter
+        .call(
+          'quoteExactInputSingle',
+          tokensList[currency].address,
+          usdcAddr,
+          3000,
+          BigNumber(tokenAmount).times(BigNumber(10).pow(tokenDecimals)),
+          0
+        )
+        .then((res: any) => {
+          setReservedInk(BigNumber(res).times(BigNumber(6.05)).dividedBy(1000000));
+        });
+    }
+    if (connected && tokenAmount && usdcAddr === tokensList[currency].address) {
+      setReservedInk(BigNumber(tokenAmount).times(BigNumber(6.05)));
+    }
+    if (tokenAmount === 0) setReservedInk(BigNumber(0));
+  }, [currency, contracts, connected, tokenAmount, usdcAddr, tokenDecimals]);
   return (
     <>
       <FormTitle>
@@ -80,17 +115,13 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
             WHAT CURRENCY WOULD YOU LIKE TO SWAP?
           </Typography>
           <FormControl sx={{ width: '100%' }}>
-            <CustomSelect value={currency} onChange={handleCurrencyChange} displayEmpty>
+            <CustomSelect value={currency} onChange={handleCurrencyChange}>
               {chainId &&
-                tokensList[Number(chainId)].map((token) => (
-                  <MenuItem value={token.id} key={token.id}>
+                tokensList.map((token, index) => (
+                  <MenuItem value={index} key={token.address}>
                     <Box width="100%" display="flex" gap={1} justifyContent="flex-start">
                       <img
-                        src={`https://raw.githubusercontent.com/${
-                          Number(chainId) === 1 ? 'uniswap' : 'trustwallet'
-                        }/assets/master/blockchains/ethereum/assets/${web3!.utils.toChecksumAddress(
-                          token.id
-                        )}/logo.png`}
+                        src={token.logoURI}
                         alt={token.symbol}
                         width="22px"
                         height="22px"
@@ -128,7 +159,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
             <Box display="flex" alignItems="center" gap={2}>
               <img src={InkIcon} alt="ink" />
               <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
-                2,674,934
+                {reservedInk.toFixed(4)}
               </Typography>
             </Box>
             <Box width="100%" mt={3}>

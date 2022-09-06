@@ -113,6 +113,7 @@ const MenuBar = styled('div')`
       background: #ff0000;
     }
   }
+  padding-bottom: 130px;
   @media screen and (max-width: 1351px) {
     max-width: 700px;
     min-width: 300px;
