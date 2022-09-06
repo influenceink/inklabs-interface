@@ -57,7 +57,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
       setReservedInk(BigNumber(tokenAmount).times(BigNumber(6.05)));
     }
     if (tokenAmount === 0) setReservedInk(BigNumber(0));
-  }, [currency, contracts, connected, tokenAmount, usdcAddr, tokenDecimals]);
+  }, [currency, contracts, connected, tokenAmount, usdcAddr, tokenDecimals, tokensList]);
   return (
     <>
       <FormTitle>
