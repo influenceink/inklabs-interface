@@ -78,7 +78,7 @@ export const Purchase = ({ show, setShow }: Props) => {
                   onPrev={() => setIndex((value) => value - 1)}
                 />
               )}
-              {index === 3 && <Complete onPrev={() => setIndex((value) => value - 1)} />}
+              {index === 3 && <Complete preview={preview} onPrev={() => setIndex((value) => value - 1)} />}
             </ContentWrapper>
             <CloseButton onClick={() => setShow(false)}>
               <img src={cross} alt="cross" />
