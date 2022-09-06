@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_PLATFORM } from '../utils/constants';
 import platformImg from '../assets/img/platform.png';
-import grayRect from '../assets/img/gray-rect.png';
+import platformImg1 from '../assets/img/platform1.png';
 import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';
@@ -74,7 +74,7 @@ export const Platform = () => {
             mt={12}
           >
             <Box width="100%" display="flex" justifyContent="center">
-              <Image src={grayRect} alt="gray" />
+              <Image src={platformImg1} alt="gray" />
             </Box>
             <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
               <Divider />

@@ -24,7 +24,7 @@ export const Pagination = ({ page, total, onChange }: Props) => {
   return (
     <Box display="flex" justifyContent="space-between" gap="12px">
       <ActionButton onClick={handlePrev}>Prev</ActionButton>
-      <Box borderRadius={40} bgcolor="#2E2E40" display="flex" alignItems="center" flexGrow={1}>
+      <Box borderRadius={40} bgcolor="#2E2E40" display="flex" alignItems="center" flexGrow={1} justifyContent="center">
         {pageArray.map((value) => (
           <PageButton
             onClick={() => onChange(value)}
@@ -49,6 +49,7 @@ const ActionButton = styled(Button)`
   font-size: 14px;
   min-width: 80px;
   padding: 11px;
+  max-width: 80px;
   :hover {
     background: #0babf948;
   }
@@ -56,9 +57,11 @@ const ActionButton = styled(Button)`
 
 const PageButton = styled(Button)`
   border-radius: 40px;
+  max-height: 40px;
   font-size: 14px;
   color: white;
   aspect-ratio: 1;
   min-width: 20px;
+  max-width: 40px;
   width: 100%;
 `;

@@ -10,12 +10,13 @@ import {
   DialogContent,
   Select,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import cross from '../../assets/img/cross.png';
 import React from 'react';
-import { Cards, zipData } from '.';
+import { Cards } from '.';
 import { Pagination } from '../../components/Pagination';
+import { AuthContext } from '../../contexts';
 
 interface Props {
   show: boolean;
@@ -24,7 +25,7 @@ interface Props {
 export const ZipCodes = ({ show, setShow }: Props) => {
   const [type, setType] = useState('Newest');
   const [page, setPage] = useState(1);
-
+  const { zipCodes } = useContext(AuthContext);
   const handleChange = (event: any) => {
     setType(event.target.value as string);
   };
@@ -59,15 +60,15 @@ export const ZipCodes = ({ show, setShow }: Props) => {
               </CloseButton>
             </Box>
             <CardsWrapper>
-              <Cards data={zipData.slice(6 * (page - 1), 6 * page)} />
+              <Cards data={zipCodes.slice(6 * (page - 1), 6 * page)} />
             </CardsWrapper>
             <Pagination
               page={page}
-              total={Math.ceil(zipData.length / 6)}
+              total={Math.ceil(zipCodes.length / 6)}
               onChange={(value: number) => setPage(value)}
             />
             <Typography textAlign="center" fontSize="8px" fontWeight="semibold" mt={1}>
-              PAGE {`${page}/${Math.ceil(zipData.length / 6)}`}
+              PAGE {`${page}/${Math.ceil(zipCodes.length / 6)}`}
             </Typography>
           </Box>
         </DialogContent>
