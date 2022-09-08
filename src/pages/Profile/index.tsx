@@ -259,9 +259,9 @@ export const Profile = () => {
             <Typography variant="subtitle2" mt={1} fontWeight="semibold" fontSize="18px" lineHeight="18px">
               @{inkId}
             </Typography>
-            <Typography variant="subtitle2" fontWeight="semibold" fontSize="12px" color="#fff7">
+            {/* <Typography variant="subtitle2" fontWeight="semibold" fontSize="12px" color="#fff7">
               Austin, Texas
-            </Typography>
+            </Typography> */}
             <Box display="flex" alignItems="center" width="100%" mt={2}>
               <StatCard>
                 <Typography variant="subtitle2" fontWeight="bold" fontSize="19px" lineHeight="19px">
@@ -388,7 +388,7 @@ const ScrollWrapper = styled(Box)`
 `;
 
 const ProfileWrapper = styled(Box)`
-  max-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding-bottom: 110px;
