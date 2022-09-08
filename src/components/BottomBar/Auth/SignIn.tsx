@@ -46,8 +46,23 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
           <>
             <Divider />
             <Box my={8} display="flex" flexDirection="column" alignItems="center" gap="20px" width="100%">
-              <Input placeholder="Email" value={email} onChange={handleEmailChange} />
-              <Input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+              <Input
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+                onKeyUp={(e) => {
+                  if (e.key === 'Enter' || e.keyCode === 13) handleClick();
+                }}
+              />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+                onKeyUp={(e) => {
+                  if (e.key === 'Enter' || e.keyCode === 13) handleClick();
+                }}
+              />
               <FormButton onClick={handleClick}>Sign In</FormButton>
               <Typography sx={{ color: 'red' }} display={`${errorEmitted ? 'block' : 'none'}`}>
                 Email or password must be wrong.
