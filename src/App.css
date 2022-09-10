@@ -2,3 +2,11 @@ html {
   cursor: url(assets/img/cursor.svg) 20 20, pointer;
   -webkit-tap-highlight-color: transparent !important;
 }
+
+.MuiSelect-select > div {
+  justify-content: center !important;
+}
+
+.MuiMenu-paper.MuiPopover-paper {
+  max-height: calc(100% - 400px);
+}

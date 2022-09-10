@@ -3,13 +3,22 @@ export const Copyright = () => {
   const sm = useMediaQuery('(max-width: 660px)');
   return (
     <>
-      <Box display="flex" gap={2} mb={3} alignItems="center">
+      <Box display="flex" gap={2} mb={sm ? 0 : 3} alignItems="center" width={sm ? '100%' : 'auto'} zIndex={sm ? 2 : 0}>
         {/* {!sm && <img height="70px" src={cursor} alt="favicon" />} */}
-        <Box zIndex={10} display="flex" flexDirection="column" width={sm ? '110px' : 'auto'}>
-          <Typography variant="caption">© 2022 INK Games™. All Rights Reserved.</Typography>
-          <Typography variant="caption" mt={sm ? 0 : 1}>
-            Reproduction without permission is prohibited.
+        <Box display="flex" flexDirection="column" width={sm ? '100%' : 'auto'}>
+          <Typography
+            bgcolor={sm ? 'black' : 'none'}
+            py={sm ? '4px' : 0}
+            textAlign={sm ? 'center' : 'left'}
+            variant="caption"
+          >
+            © 2022 INK Games™. All Rights Reserved.
           </Typography>
+          {!sm && (
+            <Typography variant="caption" mt={sm ? 0 : 1}>
+              Reproduction without permission is prohibited.
+            </Typography>
+          )}
         </Box>
       </Box>
     </>

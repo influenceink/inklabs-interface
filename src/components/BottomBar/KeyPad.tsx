@@ -53,7 +53,7 @@ export const KeyPad = ({ show, setShow, setLock }: Props) => {
       setToastState({ open: true, success: true });
       setLock(false);
       setShow(false);
-      history.push('/home');
+      history.push('/');
     } else {
       setToastState({ open: true, success: false });
     }
