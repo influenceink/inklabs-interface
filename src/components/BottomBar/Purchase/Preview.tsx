@@ -33,6 +33,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           value: BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)),
         });
       } else {
+        await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)));
         await contracts['inkpurchase'].send(
           'purchaseForToken',
           null,
