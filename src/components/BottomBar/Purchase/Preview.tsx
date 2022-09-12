@@ -33,12 +33,20 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           value: BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)),
         });
       } else {
-        await contracts['inkpurchase'].send(
+        await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)));
+        const tx:any = await contracts['inkpurchase'].send(
           'purchaseForToken',
           null,
           preview.token.address,
           BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
         );
+        await purchase({
+          transaction_id: tx.transactionHash,
+          usd_amount: tx.events.Purchased.returnValues.amount,
+          reserved_ink: preview.inkAmount,
+          paid_coin: preview.token.symbol,
+          paid_network: 'Metamask'
+        })
       }
     }
     onNext();
