@@ -1,6 +1,6 @@
 import { Box, styled, Typography, useMediaQuery, Button } from '@mui/material';
 import { Helmet } from 'react-helmet';
-
+import {Logout} from '@mui/icons-material'
 import { PageContent } from '../../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_PROFILE } from '../../utils/constants';
 import profilePic from '../../assets/img/profile.png';
@@ -221,7 +221,7 @@ export const Profile = () => {
   const [showZip, setShowZip] = useState(false);
   const [showConnection, setShowConnection] = useState(false);
   const history = useHistory();
-  const { avatar, balances, viralCount, directCount, setAvatar, totalCount, authorized, inkId, zipCodes } =
+  const { avatar, balances, viralCount, directCount, setAvatar, totalCount, authorized, inkId, zipCodes, signOut } =
     useContext(AuthContext);
   const handleAvatarUpload = (ev: ChangeEvent<HTMLInputElement>) => {
     if (ev.target && ev.target.files) setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
@@ -328,6 +328,7 @@ export const Profile = () => {
               </Typography>
               <StyledButton>faq&lsquo;s</StyledButton>
             </Box>
+            <SignOutButton onClick={() => {signOut();history.push('/')}}><Logout/></SignOutButton>
             <CloseButton onClick={() => history.push('/')}>
               <img src={cross} alt="close" />
             </CloseButton>
@@ -392,7 +393,7 @@ const ProfileWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   padding-bottom: 110px;
-  background-color: black;
+  background-color: #111111;
 `;
 const TokenImg = styled('img')`
   height: 24px;
@@ -484,6 +485,26 @@ const CloseButton = styled(Button)`
   width: fit-content;
   z-index: 8888;
   padding: 0;
+  @media screen and (max-width: 660px) {
+    top: 26px;
+    & > img {
+      width: 26px;
+      height: 26px;
+    }
+  }
+`;
+
+const SignOutButton = styled(Button)`
+  position: absolute;
+  top: 46px;
+  right: 88px;
+  min-width: unset;
+  width: fit-content;
+  z-index: 8888;
+  padding: 0;
+  & > svg {
+    font-size: 2.8rem;
+  }
   @media screen and (max-width: 660px) {
     top: 26px;
     & > img {

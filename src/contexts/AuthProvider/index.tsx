@@ -11,6 +11,7 @@ interface IAuthContext {
   zipCodes: Array<any>;
   signIn: Function;
   signUp: Function;
+  signOut: Function;
   viralCount: number;
   directCount: number;
   totalCount: number;
@@ -33,6 +34,7 @@ export const AuthContext = createContext<IAuthContext>({
   zipCodes: [],
   signIn: () => {},
   signUp: () => {},
+  signOut: () => {},
   viralCount: 0,
   directCount: 0,
   totalCount: 0,
@@ -175,6 +177,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log(err);
     }
   }, []);
+  const signOut = useCallback(async () => {
+    setSessionToken('');
+    setAuthorized(false);
+    setAvatar('');
+    setInkId('');
+    setZipCodes([]);
+    setFullName('');
+    setEmail('');
+    setViralCount(0);
+    setDirectCount(0);
+    setTotalCount(0);
+    setShowModal(false);
+    setBalances(null);
+    setLocalStore({});
+  }, [setLocalStore])
   return (
     <AuthContext.Provider
       value={{
@@ -190,6 +207,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         totalCount,
         signIn,
         signUp,
+        signOut,
         showModal,
         setShowModal,
         setAvatar,
