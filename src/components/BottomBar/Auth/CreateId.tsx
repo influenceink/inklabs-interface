@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
+import { passwordToHash } from '../../../utils';
 
 export const CreateId = ({ onNext, onSignIn }: { onNext: (_: any) => void; onSignIn: () => void }) => {
   const [username, setUsername] = useState<string>('');
@@ -24,7 +25,7 @@ export const CreateId = ({ onNext, onSignIn }: { onNext: (_: any) => void; onSig
     );
   };
   const handleClick = () => {
-    onNext({ email, password, display_name: `${firstname} ${lastname}`, ink_id: username });
+    onNext({ email, password: passwordToHash(password), display_name: `${firstname} ${lastname}`, ink_id: username });
   };
   return (
     <>
