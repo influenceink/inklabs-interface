@@ -1,6 +1,6 @@
 import { Box, styled, Typography, useMediaQuery, Button } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import {Logout} from '@mui/icons-material'
+import { Logout } from '@mui/icons-material';
 import { PageContent } from '../../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_PROFILE } from '../../utils/constants';
 import profilePic from '../../assets/img/profile.png';
@@ -221,8 +221,18 @@ export const Profile = () => {
   const [showZip, setShowZip] = useState(false);
   const [showConnection, setShowConnection] = useState(false);
   const history = useHistory();
-  const { avatar, balances, viralCount, directCount, setAvatar, totalCount, authorized, inkId, zipCodes, signOut } =
-    useContext(AuthContext);
+  const {
+    avatar,
+    balances,
+    viralCount,
+    directCount,
+    setAvatar,
+    totalCount,
+    authorized,
+    inkId,
+    zipCodes,
+    signOut,
+  } = useContext(AuthContext);
   const handleAvatarUpload = (ev: ChangeEvent<HTMLInputElement>) => {
     if (ev.target && ev.target.files) setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
   };
@@ -328,7 +338,14 @@ export const Profile = () => {
               </Typography>
               <StyledButton>faq&lsquo;s</StyledButton>
             </Box>
-            <SignOutButton onClick={() => {signOut();history.push('/')}}><Logout/></SignOutButton>
+            <SignOutButton
+              onClick={() => {
+                signOut();
+                history.push('/');
+              }}
+            >
+              <Logout sx={{ color: 'white' }} />
+            </SignOutButton>
             <CloseButton onClick={() => history.push('/')}>
               <img src={cross} alt="close" />
             </CloseButton>
@@ -503,7 +520,7 @@ const SignOutButton = styled(Button)`
   z-index: 8888;
   padding: 0;
   & > svg {
-    font-size: 2.8rem;
+    font-size: 3rem;
   }
   @media screen and (max-width: 660px) {
     top: 26px;

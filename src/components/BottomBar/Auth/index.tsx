@@ -17,6 +17,7 @@ export const Auth = ({ show, setShow }: Props) => {
   const mobile = useMediaQuery('(max-width: 1350px)');
   const history = useHistory();
   const [index, setIndex] = useState(0);
+  const [errorMsg, setErrorMsg] = useState<string>('');
   const [account, setAccount] = useState<any>({});
   useEffect(() => {
     if (show) {
@@ -51,6 +52,7 @@ export const Auth = ({ show, setShow }: Props) => {
                     setIndex((value) => value + 1);
                     setAccount(account);
                   }}
+                  error={errorMsg}
                   onSignIn={() => setIndex((value) => value - 1)}
                 />
               )}
@@ -58,9 +60,10 @@ export const Auth = ({ show, setShow }: Props) => {
                 <CreateAccount
                   account={account}
                   onNext={() => setShowModal(false)}
-                  onPrev={() => {
+                  onPrev={(msg?:string) => {
                     setIndex((value) => value - 1);
                     setAccount(null);
+                    if(msg !== undefined) setErrorMsg(msg)
                   }}
                 />
               )}

@@ -47,7 +47,6 @@ export const Menu = ({ show, setShow }: Props) => {
           </MenuBar>
           {!mobile && (
             <Box position="absolute" right={0} bottom={0} display="flex" gap={2} mb={2} mr={2} color={'#a0a0a0'}>
-              <Typography>TERMS OF SERVICE</Typography>|
               <Typography onClick={() => history.push('/faqs')}>FAQ&apos;s</Typography>|
               <Link href="mailto: support@inktoken.com" style={{ textDecoration: 'none', color: '#a0a0a0' }}>
                 SUPPORT
