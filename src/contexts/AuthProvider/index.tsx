@@ -21,6 +21,7 @@ interface IAuthContext {
   purchase: Function;
   resetPassword: Function;
   balances: any;
+  userInfo: Function;
 }
 
 export const AuthContext = createContext<IAuthContext>({
@@ -43,6 +44,7 @@ export const AuthContext = createContext<IAuthContext>({
   purchase: () => {},
   resetPassword: () => {},
   balances: null,
+  userInfo: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -69,6 +71,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             await axios
               .post('/user/info', {}, { headers: { Authorization: 'SessionToken=' + sessionToken } })
               .then((res) => {
+                if (res.data.status) return;
                 axios.defaults.headers.common['Authorization'] = 'SessionToken=' + sessionToken;
                 setAvatar(res.data.avatar);
                 setSessionToken(sessionToken);
@@ -89,6 +92,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
     initialize();
   }, []);
+  const userInfo = useCallback(async () => {
+    await axios.post('/user/info', {}, { headers: { Authorization: 'SessionToken=' + sessionToken } }).then((res) => {
+      if (res.data.status) return;
+      axios.defaults.headers.common['Authorization'] = 'SessionToken=' + sessionToken;
+      setAvatar(res.data.avatar);
+      setSessionToken(sessionToken);
+      setInkId(res.data.ink_id);
+      setAuthorized(true);
+      setZipCodes(res.data.zip_codes);
+      setFullName(res.data.full_name);
+      setViralCount(res.data.viral_count);
+      setDirectCount(res.data.direct_count);
+      setTotalCount(res.data.total_count);
+      setBalances(res.data.balances);
+    });
+  }, [sessionToken]);
   const setLocalStore = useCallback(({ session_token }) => {
     const store = JSON.stringify({ session_token });
     localStorage.setItem('ink', store);
@@ -191,7 +210,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setShowModal(false);
     setBalances(null);
     setLocalStore({});
-  }, [setLocalStore])
+  }, [setLocalStore]);
   return (
     <AuthContext.Provider
       value={{
@@ -214,6 +233,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         purchase,
         resetPassword,
         balances,
+        userInfo,
       }}
     >
       {children}
