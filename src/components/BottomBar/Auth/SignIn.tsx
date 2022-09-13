@@ -1,12 +1,14 @@
 import { Box, Typography } from '@mui/material';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { FormButton, FormTitle, Input, Divider } from '.';
+import Loading from '../../../assets/img/loading.gif';
 import { AuthContext } from '../../../contexts';
 import { passwordToHash } from '../../../utils';
 
 export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
   const { signIn, resetPassword } = useContext(AuthContext);
   const [email, setEmail] = useState<string>('');
+  const [loadingStatus, setLoading] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
   const [errorEmitted, setErrorEmitted] = useState<boolean>(false);
   const [forgot, setForgot] = useState<boolean>(false);
@@ -18,12 +20,14 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
   const handleForgot = async () => {
     setForgot(true);
   };
-  const handleClick = async () => {
+  const handleClick = useCallback(async () => {
+    setLoading(true);
     if (!(await signIn(email, passwordToHash(password)))) {
       setErrorEmitted(true);
       setTimeout(() => setErrorEmitted(false), 3000);
     }
-  };
+    setLoading(false);
+  }, [setLoading, email, password, signIn]);
   const handleEmailChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(ev.target.value);
   };
@@ -63,7 +67,9 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
                   if (e.key === 'Enter' || e.keyCode === 13) handleClick();
                 }}
               />
-              <FormButton onClick={handleClick}>Sign In</FormButton>
+              <FormButton onClick={handleClick} disabled={loadingStatus}>
+                Sign In{loadingStatus && <img src={Loading} alt="" style={{marginLeft: '10px'}} width="25px" />}
+              </FormButton>
               <Typography sx={{ color: 'red' }} display={`${errorEmitted ? 'block' : 'none'}`}>
                 Email or password must be wrong.
               </Typography>

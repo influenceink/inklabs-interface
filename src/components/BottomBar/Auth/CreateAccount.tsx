@@ -1,7 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useCallback } from 'react';
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 import { AuthContext } from '../../../contexts';
+import Loading from '../../../assets/img/loading.gif';
 
 export const CreateAccount = ({
   onNext,
@@ -10,16 +11,19 @@ export const CreateAccount = ({
 }: {
   account: any;
   onNext: () => void;
-  onPrev: () => void;
+  onPrev: (_?:string) => void;
 }) => {
   const { signUp } = useContext(AuthContext);
+  const [loadingStatus, setLoadingStatus] = useState<boolean>(false);
   const [referrer, setReferrer] = useState<string>('');
-  const handleClick = async () => {
-    const status = await signUp({ ...account, referrer_id: referrer });
-    if (status !== 0) {
-      onPrev();
+  const handleClick = useCallback(async () => {
+    setLoadingStatus(true);
+    const data = await signUp({ ...account, referrer_id: referrer });
+    setLoadingStatus(false);
+    if (data.status !== 0) {
+      onPrev(data.error);
     }
-  };
+  }, [setLoadingStatus, account, onPrev, referrer, signUp]);
   return (
     <>
       <FormTitle>
@@ -40,9 +44,16 @@ export const CreateAccount = ({
           <Typography variant="subtitle2" fontWeight="bold" fontSize={16}>
             Who Sent You?
           </Typography>
-          <Input placeholder="enter ink id" value={referrer} onChange={(ev) => setReferrer(ev.target.value)} />
-          <FormButton onClick={handleClick} disabled={referrer === ''}>
-            enter
+          <Input
+            placeholder="enter ink id"
+            value={referrer}
+            onChange={(ev) => setReferrer(ev.target.value)}
+            onKeyUp={(e) => {
+              if (referrer !== '' && (e.key === 'Enter' || e.keyCode === 13)) handleClick();
+            }}
+          />
+          <FormButton onClick={handleClick} disabled={referrer === '' || loadingStatus}>
+            enter{loadingStatus && <img src={Loading} alt="" width={'15px'} style={{ marginLeft: '10px' }} />}
           </FormButton>
         </Box>
         <Divider />
@@ -53,7 +64,7 @@ export const CreateAccount = ({
           variant="subtitle1"
           color="#2984FF"
           sx={{ cursor: 'pointer', ':hover': { textDecoration: 'underline' } }}
-          onClick={onPrev}
+          onClick={() => onPrev()}
         >
           Sign-in
         </Typography>

@@ -135,7 +135,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             </CustomSelect>
           </FormControl>
           <Typography mt={3} fontWeight="bold" color="#ffffff88" textAlign="center">
-            HOW MUCH WOULD YOU KIKE TO CONVERT TO INK?
+            HOW MUCH WOULD YOU LIKE TO CONVERT TO INK?
           </Typography>
           <CustomInputWrapper>
             <Box width="100%" display="flex" justifyContent="center">
