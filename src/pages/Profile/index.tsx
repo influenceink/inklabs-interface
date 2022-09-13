@@ -232,13 +232,15 @@ export const Profile = () => {
     inkId,
     zipCodes,
     signOut,
+    userInfo,
   } = useContext(AuthContext);
   const handleAvatarUpload = (ev: ChangeEvent<HTMLInputElement>) => {
     if (ev.target && ev.target.files) setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
   };
   useEffect(() => {
     if (!authorized) history.push('/');
-  }, [authorized, history]);
+    else userInfo();
+  }, [authorized, history, userInfo]);
 
   return (
     <>

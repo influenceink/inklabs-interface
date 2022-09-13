@@ -19,22 +19,27 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           null,
           BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
         );
-        console.log(
-          await purchase({
-            transaction_id: tx.transactionHash,
-            usd_amount: BigNumber(preview.inkAmount).dividedBy(6.05),
-            reserved_ink: preview.inkAmount,
-            paid_coin: preview.token.symbol,
-            paid_network: 'Metamask',
-          })
-        );
+        await purchase({
+          transaction_id: tx.transactionHash,
+          usd_amount: preview.usdcAmount,
+          reserved_ink: preview.inkAmount,
+          paid_coin: preview.token.symbol,
+          paid_network: 'Metamask',
+        });
       } else if (preview.token.symbol === 'WETH') {
-        await contracts['inkpurchase'].send('purchaseForETH', {
+        const tx: any = await contracts['inkpurchase'].send('purchaseForETH', {
           value: BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)),
+        });
+        await purchase({
+          transaction_id: tx.transactionHash,
+          usd_amount: tx.events.Purchased.returnValues.amount,
+          reserved_ink: preview.inkAmount,
+          paid_coin: preview.token.symbol,
+          paid_network: 'Metamask',
         });
       } else {
         await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)));
-        const tx:any = await contracts['inkpurchase'].send(
+        const tx: any = await contracts['inkpurchase'].send(
           'purchaseForToken',
           null,
           preview.token.address,
@@ -45,8 +50,8 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           usd_amount: tx.events.Purchased.returnValues.amount,
           reserved_ink: preview.inkAmount,
           paid_coin: preview.token.symbol,
-          paid_network: 'Metamask'
-        })
+          paid_network: 'Metamask',
+        });
       }
     }
     onNext();
@@ -71,7 +76,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
         </Typography>
         <Box display="flex" flexDirection="column" alignItems="center" gap="12px" width="100%">
           <Box display="flex" alignItems="center" gap={2}>
-            <img src={SushiIcon} alt="sushi" />
+            <img src={preview.token.logoURI} alt="" width="22px" height="22px" style={{ borderRadius: 24 }} />
             <Typography variant="subtitle2" color="#fff" fontWeight="bold" fontSize="25px" lineHeight="25px">
               {preview.tokenAmount}
             </Typography>

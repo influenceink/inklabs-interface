@@ -4,60 +4,85 @@ import NumberFormat from 'react-number-format';
 import BigNumber from 'bignumber.js';
 import { FormButton, FormTitle, Divider, DividerContent } from '.';
 import { ContractContext, Web3Context } from '../../../contexts';
-import SushiIcon from '../../../assets/img/sushi.png';
 import InkIcon from '../../../assets/img/ink.png';
 import { getTopTokensList } from '../../../utils';
-import { USDC_ADDRESS } from '../../../utils/constants';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () => void }) => {
-  const [tokenAmount, setTokenAmount] = useState<number>(0);
   const { contracts, getTokenDecimals } = useContext(ContractContext);
   const { account, connected, connect, chainId } = useContext(Web3Context);
   const [currency, setCurrency] = useState<number>(0);
+  const handleCurrencyChange = (ev: any) => {
+    setCurrency(Number(ev.target.value));
+  };
   const [tokensList, setTokensList] = useState<Array<any>>([]);
-  const [tokenDecimals, setTokenDecimals] = useState<number>(18);
-  const [usdcAddr, setUsdcAddr] = useState<string>(USDC_ADDRESS[1]);
-  const [reservedInk, setReservedInk] = useState<BigNumber>(BigNumber(0));
-  const handleCurrencyChange = async (e: any) => {
-    setCurrency(e.target.value);
-    setTokenDecimals(await getTokenDecimals(tokensList[e.target.value].address));
-  };
-  const handleClick = () => {
-    onNext({ tokenAmount, token: tokensList[currency], inkAmount: reservedInk });
-  };
-  const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
-    const amount = ev.target.value.replaceAll(',', '');
-    setTokenAmount(Number(amount));
-  };
   useEffect(() => {
-    const topTokensWrapper = async () => {
-      setTokensList(await getTopTokensList(chainId || 4));
+    const topTokensListWrapper = async () => {
+      setTokensList(await getTopTokensList(chainId || 1));
     };
-    if (connected && chainId) {
-      topTokensWrapper();
-      setUsdcAddr(USDC_ADDRESS[chainId]);
-    }
-  }, [connected, chainId]);
+    if (connected) topTokensListWrapper();
+  }, [chainId, connected]);
+  const [USDCAmount, setUSDCAmount] = useState<string>('0');
+  const handleUSDCChange = (ev: any) => {
+    const USDCAmount = ev.target.value.replaceAll(',', '').replaceAll('$', '').replaceAll(' ', '');
+    setUSDCAmount(USDCAmount);
+    const quoterWrapper = async () => {
+      if (contracts !== null)
+        contracts.quoter
+          .call(
+            'quoteExactInputSingle',
+            tokensList[0].address,
+            tokensList[currency].address,
+            3000,
+            BigNumber(USDCAmount).times(BigNumber(10).pow(6)),
+            0
+          )
+          .then((res: any) => {
+            setTokenAmount(BigNumber(res).dividedBy(BigNumber(10).pow(tokenDecimals)).toFixed(3));
+          });
+    };
+    if (currency === 0) setTokenAmount(ev.target.value.replaceAll(',', ''));
+    else quoterWrapper();
+  };
+  const [tokenAmount, setTokenAmount] = useState<string>('0');
+  const handleTokenChange = (ev: any) => {
+    setTokenAmount(ev.target.value);
+  };
+  const [reservedInk, setReservedInk] = useState<number>(0);
+  const handleClick = () => {
+    onNext({ tokenAmount, token: tokensList[currency], inkAmount: reservedInk, usdcAmount: USDCAmount });
+  };
+  const [tokenDecimals, setTokenDecimals] = useState<number>(18);
   useEffect(() => {
-    if (connected && tokenAmount && contracts && usdcAddr !== tokensList[currency].address) {
-      contracts.quoter
-        .call(
-          'quoteExactInputSingle',
-          tokensList[currency].address,
-          usdcAddr,
-          3000,
-          BigNumber(tokenAmount).times(BigNumber(10).pow(tokenDecimals)),
-          0
-        )
-        .then((res: any) => {
-          setReservedInk(BigNumber(res).times(BigNumber(6.05)).dividedBy(1000000));
-        });
+    if (tokensList.length > 0 && contracts !== null) {
+      if (Number(tokenAmount) === 0) {
+        setUSDCAmount('0');
+      } else if (tokensList[currency].symbol === 'USDC') {
+        setUSDCAmount(tokenAmount);
+      } else {
+        const quoterWrapper = async () => {
+          const tokenDecimals = await getTokenDecimals(tokensList[currency].address);
+          setTokenDecimals(tokenDecimals);
+          contracts.quoter
+            .call(
+              'quoteExactInputSingle',
+              tokensList[currency].address,
+              tokensList[0].address,
+              3000,
+              BigNumber(tokenAmount).times(BigNumber(10).pow(tokenDecimals)),
+              0
+            )
+            .then((res: any) => {
+              setUSDCAmount(BigNumber(res).dividedBy(1000000).toFixed(3));
+            });
+        };
+        quoterWrapper();
+      }
     }
-    if (connected && tokenAmount && usdcAddr === tokensList[currency].address) {
-      setReservedInk(BigNumber(tokenAmount).times(BigNumber(6.05)));
-    }
-    if (tokenAmount === 0) setReservedInk(BigNumber(0));
-  }, [currency, contracts, connected, tokenAmount, usdcAddr, tokenDecimals, tokensList]);
+  }, [currency, tokenAmount, tokensList, contracts, getTokenDecimals]);
+  useEffect(() => {
+    console.log(USDCAmount);
+    setReservedInk(Number(USDCAmount) * 3);
+  }, [USDCAmount]);
   return (
     <>
       <FormTitle>
@@ -139,12 +164,25 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           </Typography>
           <CustomInputWrapper>
             <Box width="100%" display="flex" justifyContent="center">
-              <AmountInput value={tokenAmount} onChange={handleChange} thousandSeparator={true} />
+              <AmountInput
+                value={USDCAmount.toString()}
+                onChange={handleUSDCChange}
+                thousandSeparator={true}
+                prefix="$  "
+              />
             </Box>
             <Typography>/</Typography>
             <Box width="100%" display="flex" gap={1} justifyContent="center">
-              <img src={SushiIcon} alt="sushi" />
-              6.005
+              {tokensList.length > 0 && (
+                <img
+                  src={tokensList[currency].logoURI}
+                  alt=""
+                  width="22px"
+                  height="22px"
+                  style={{ borderRadius: 24 }}
+                />
+              )}
+              <AmountInput value={tokenAmount.toString()} onChange={handleTokenChange} thousandSeparator={true} />
             </Box>
           </CustomInputWrapper>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
@@ -159,7 +197,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             <Box display="flex" alignItems="center" gap={2}>
               <img src={InkIcon} alt="ink" />
               <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
-                {reservedInk.toFixed(4)}
+                {reservedInk.toLocaleString()}
               </Typography>
             </Box>
             <Box width="100%" mt={3}>
