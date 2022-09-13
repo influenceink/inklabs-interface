@@ -1,6 +1,7 @@
-import { createContext, ReactElement, useState, useCallback, useEffect } from 'react';
+import { createContext, ReactElement, useState, useCallback, useEffect, useContext } from 'react';
 import Web3 from 'web3';
 import { ContractProvider } from '../ContractProvider';
+import { Web3ModalContext } from './Web3ModalProvider';
 
 interface IWeb3Context {
   account: string | null;
@@ -26,9 +27,10 @@ type Web3ProviderPropType = {
 
 const Web3Provider = ({ children }: Web3ProviderPropType) => {
   const [account, setAccount] = useState<string | null>(null);
-  const [web3, setWeb3] = useState<Web3 | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
   const [connected, setConnected] = useState<boolean>(false);
+  const [web3, setWeb3] = useState<Web3 | null>(null);
+  const { connect: connectWallet } = useContext(Web3ModalContext);
 
   const reset = useCallback(() => {
     setAccount(null);
@@ -38,10 +40,10 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
   }, []);
 
   const connect = useCallback(async () => {
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const web3 = new Web3(window.ethereum);
+    const web3 = await connectWallet();
+    if (web3 === null) return;
 
-    const provider: any = web3.currentProvider;
+    const provider: any = web3?.currentProvider;
 
     provider.on('accountsChanged', (accounts: string[]) => {
       if (accounts.length === 0) reset();
@@ -63,7 +65,7 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
     setConnected(true);
     setAccount(web3.utils.toChecksumAddress(accounts[0]));
     setChainId(await web3.eth.getChainId());
-  }, [reset]);
+  }, [reset, connectWallet]);
 
   const disconnect = useCallback(async () => {
     if (web3 && web3.currentProvider) {

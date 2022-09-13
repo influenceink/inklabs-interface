@@ -95,7 +95,7 @@ const ModalWrapper = styled(Dialog)`
       min-height: 100%;
       border-radius: 20px;
       width: 100%;
-      max-width: 400px;
+      max-width: 100%;
       & > div {
         padding: 30px 15px;
       }
