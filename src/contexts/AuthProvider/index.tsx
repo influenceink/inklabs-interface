@@ -107,7 +107,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setTotalCount(res.data.total_count);
       setBalances(res.data.balances);
     });
-  }, []);
+  }, [sessionToken]);
   const setLocalStore = useCallback(({ session_token }) => {
     const store = JSON.stringify({ session_token });
     localStorage.setItem('ink', store);
