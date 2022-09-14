@@ -88,13 +88,18 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
 
   const tokenApprove = useCallback(
     async (address: string, amount: BigNumber) => {
-      if (web3 && chainId) {
-        return await new Contract({ web3, account, chainId }, ERC20_ABI, address).send(
-          'approve',
-          null,
-          process.env.REACT_APP_INKPURCHASE_CONTRACT || '',
-          amount
-        );
+      try {
+        if (web3 && chainId) {
+          return await new Contract({ web3, account, chainId }, ERC20_ABI, address).send(
+            'approve',
+            null,
+            process.env.REACT_APP_INKPURCHASE_CONTRACT || '',
+            amount
+          );
+        }
+        return false;
+      } catch (err) {
+        return false;
       }
     },
     [web3, chainId, account]

@@ -48,9 +48,6 @@ export const MenuButton = () => {
       setShowLine(!showLine);
     }, 2000);
   }, [showLine]);
-  useEffect(() => {
-    if (!showAuth && authorized) setPurchase(true);
-  }, [showAuth, setPurchase, authorized]);
   const sm = useMediaQuery('(max-width: 660px)');
   return (
     <MenuButtonWrapper>

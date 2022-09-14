@@ -33,9 +33,8 @@ export const Web3ModalContext = createContext<{ connect: Function }>({
 export const Web3ModalProvider = ({ children }: { children: ReactNode }) => {
   const connect = useCallback(async () => {
     try {
-      console.log(web3Modal.clearCachedProvider());
+      web3Modal.clearCachedProvider();
       const provider = await web3Modal.connect();
-      console.log(web3Modal);
       return new Web3(provider);
     } catch (err) {
       return null;
