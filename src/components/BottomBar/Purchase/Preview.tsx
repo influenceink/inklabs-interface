@@ -95,7 +95,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           </Box>
 
           <Typography mt={3} fontWeight="bold" color="#ffffff88" textAlign="center">
-            WHEN THE CONTRACT GOES LIVE YOU WILL RECIEVE THE INK TOKEN @WALLET
+            WHEN THE CONTRACT GOES LIVE YOU WILL RECEIVE THE INK TOKEN @WALLET
           </Typography>
           <Typography mt={4} fontWeight="bold" color="#ffffff88" textAlign="center">
             WE WILL EMAIL YOU WITH PROJECT AND LAUNCH UPDATES.

@@ -18,7 +18,7 @@ import { Auth } from './Auth';
 export const MenuButton = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showRoadmap, setShowRoadmap] = useState(false);
-  const { showModal: showAuth, setShowModal: setAuth } = useContext(AuthContext);
+  const { showModal: showAuth, setShowModal: setAuth, authorized } = useContext(AuthContext);
   const { showModal: showPurchase, setShowModal: setPurchase } = useContext(PurchaseFlowContext);
   const toggleShowRoadmap = () => {
     setShowMenu(false);
@@ -48,6 +48,9 @@ export const MenuButton = () => {
       setShowLine(!showLine);
     }, 2000);
   }, [showLine]);
+  useEffect(() => {
+    if (!showAuth && authorized) setPurchase(true);
+  }, [showAuth, setPurchase, authorized]);
   const Toggler = ({ children }: { children: ReactElement }) => {
     return (
       <StyledButton

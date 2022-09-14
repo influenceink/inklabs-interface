@@ -45,7 +45,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
   };
   const [tokenAmount, setTokenAmount] = useState<string>('0');
   const handleTokenChange = (ev: any) => {
-    setTokenAmount(ev.target.value);
+    setTokenAmount(ev.target.value.replaceAll(',', ''));
   };
   const [reservedInk, setReservedInk] = useState<number>(0);
   const handleClick = () => {
@@ -104,7 +104,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             $0.002 / $INK
           </Typography>
           <FormControl sx={{ width: '100%' }}>
-            <CustomSelect defaultValue="ether" onChange={handleCurrencyChange}>
+            <CustomSelect id="networkSelector" defaultValue="ether">
               <MenuItem value="ether">
                 <Box width="100%" display="flex" gap={1} justifyContent="flex-start">
                   <img
@@ -169,37 +169,31 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <Typography fontWeight="bold" color="#ffffff88" textAlign="center">
             WHAT CURRENCY WOULD YOU LIKE TO SWAP?
           </Typography>
-          <FormControl sx={{ width: '100%' }}>
-            <CustomSelect value={currency} onChange={handleCurrencyChange}>
-              {chainId &&
-                tokensList.map((token, index) => (
-                  <MenuItem value={index} key={token.address}>
-                    <Box width="100%" display="flex" gap={1} justifyContent="flex-start">
-                      <img
-                        src={token.logoURI}
-                        alt={token.symbol}
-                        width="22px"
-                        height="22px"
-                        style={{ borderRadius: 24 }}
-                        onError={(ev) => (ev.currentTarget.style.visibility = 'hidden')}
-                      />
-                      {`${token.name} (${token.symbol})`}
-                    </Box>
-                  </MenuItem>
-                ))}
-            </CustomSelect>
-          </FormControl>
+          <CustomSelect id="tokenSelector" value={currency} onChange={handleCurrencyChange}>
+            {chainId &&
+              tokensList.map((token, index) => (
+                <MenuItem value={index} key={token.address}>
+                  <Box width="100%" display="flex" gap={1} justifyContent="flex-start">
+                    <img
+                      src={token.logoURI}
+                      alt={token.symbol}
+                      width="22px"
+                      height="22px"
+                      style={{ borderRadius: 24 }}
+                      onError={(ev) => (ev.currentTarget.style.visibility = 'hidden')}
+                    />
+                    {`${token.name} (${token.symbol})`}
+                  </Box>
+                </MenuItem>
+              ))}
+          </CustomSelect>
           <Typography mt={3} fontWeight="bold" color="#ffffff88" textAlign="center">
             HOW MUCH WOULD YOU LIKE TO CONVERT TO INK?
           </Typography>
           <CustomInputWrapper>
             <Box width="100%" display="flex" justifyContent="center">
-              <AmountInput
-                value={USDCAmount.toString()}
-                onChange={handleUSDCChange}
-                thousandSeparator={true}
-                prefix="$  "
-              />
+              $
+              <AmountInput value={USDCAmount.toString()} onChange={handleUSDCChange} thousandSeparator={true} />
             </Box>
             <Typography>/</Typography>
             <Box width="100%" display="flex" gap={1} justifyContent="center">
