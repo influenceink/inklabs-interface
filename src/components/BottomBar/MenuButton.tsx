@@ -51,17 +51,6 @@ export const MenuButton = () => {
   useEffect(() => {
     if (!showAuth && authorized) setPurchase(true);
   }, [showAuth, setPurchase, authorized]);
-  const Toggler = ({ children }: { children: ReactElement }) => {
-    return (
-      <StyledButton
-        onClick={handleClick}
-        className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
-      >
-        {children}
-      </StyledButton>
-    );
-    // else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
-  };
   const sm = useMediaQuery('(max-width: 660px)');
   return (
     <MenuButtonWrapper>
@@ -86,7 +75,10 @@ export const MenuButton = () => {
           <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
             buy ink
           </StyledButton>
-          <Toggler>
+          <StyledButton
+            onClick={handleClick}
+            className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
+          >
             <img
               src={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? cross : arrowTop}
               className={
@@ -94,7 +86,7 @@ export const MenuButton = () => {
               }
               alt="arrow"
             />
-          </Toggler>
+          </StyledButton>
           <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
             roadmap
           </StyledButton>
@@ -135,7 +127,6 @@ const StyledButton = styled(Button)`
     padding: 14px 18px;
   }
   &.close {
-    transition: all 0.3s;
     padding: 8px 14px;
     img {
       width: 80%;
