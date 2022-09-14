@@ -4,28 +4,34 @@ import BigNumber from 'bignumber.js';
 import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
 import { ContractContext, AuthContext } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
+import Loading from '../../../assets/img/loading.gif';
 import InkIcon from '../../../assets/img/ink.png';
 
 export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPrev: () => void; preview: any }) => {
   const { contracts, getTokenDecimals, tokenApprove } = useContext(ContractContext);
   const { purchase } = useContext(AuthContext);
+  const [loadingStatus, setLoading] = useState<boolean>(false);
   const handleClick = async () => {
     if (contracts !== null) {
+      setLoading(true);
       const decimals = await getTokenDecimals(preview.token.address);
       if (preview.token.symbol === 'USDC') {
-        await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)));
-        const tx: any = await contracts['inkpurchase'].send(
-          'purchaseForUSDC',
-          null,
-          BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
-        );
-        await purchase({
-          transaction_id: tx.transactionHash,
-          usd_amount: preview.usdcAmount,
-          reserved_ink: preview.inkAmount,
-          paid_coin: preview.token.symbol,
-          paid_network: 'Metamask',
-        });
+        if (
+          await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)))
+        ) {
+          const tx: any = await contracts['inkpurchase'].send(
+            'purchaseForUSDC',
+            null,
+            BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
+          );
+          await purchase({
+            transaction_id: tx.transactionHash,
+            usd_amount: preview.usdcAmount,
+            reserved_ink: preview.inkAmount,
+            paid_coin: preview.token.symbol,
+            paid_network: 'Metamask',
+          });
+        } else onPrev();
       } else if (preview.token.symbol === 'WETH') {
         const tx: any = await contracts['inkpurchase'].send('purchaseForETH', {
           value: BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)),
@@ -38,21 +44,25 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           paid_network: 'Metamask',
         });
       } else {
-        await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)));
-        const tx: any = await contracts['inkpurchase'].send(
-          'purchaseForToken',
-          null,
-          preview.token.address,
-          BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
-        );
-        await purchase({
-          transaction_id: tx.transactionHash,
-          usd_amount: tx.events.Purchased.returnValues.amount,
-          reserved_ink: preview.inkAmount,
-          paid_coin: preview.token.symbol,
-          paid_network: 'Metamask',
-        });
+        if (
+          await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)))
+        ) {
+          const tx: any = await contracts['inkpurchase'].send(
+            'purchaseForToken',
+            null,
+            preview.token.address,
+            BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
+          );
+          await purchase({
+            transaction_id: tx.transactionHash,
+            usd_amount: tx.events.Purchased.returnValues.amount,
+            reserved_ink: preview.inkAmount,
+            paid_coin: preview.token.symbol,
+            paid_network: 'Metamask',
+          });
+        } else onPrev();
       }
+      setLoading(false);
     }
     onNext();
   };
@@ -101,7 +111,10 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
             WE WILL EMAIL YOU WITH PROJECT AND LAUNCH UPDATES.
           </Typography>
           <Box width="100%" mt={1}>
-            <FormButton onClick={handleClick}>confirm</FormButton>
+            <FormButton onClick={handleClick} disabled={loadingStatus}>
+              confirm
+              {loadingStatus && <img src={Loading} alt="" width="22px" height="22px" />}
+            </FormButton>
           </Box>
         </Box>
       </Box>

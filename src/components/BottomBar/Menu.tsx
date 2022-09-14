@@ -165,7 +165,7 @@ const MenuItem = styled('div')`
   font-family: 'Poppins';
   font-weight: bolder;
   color: white;
-  &:nth-child(2n + 1) {
+  &:nth-of-type(2n + 1) {
     -webkit-text-fill-color: black;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: white;
