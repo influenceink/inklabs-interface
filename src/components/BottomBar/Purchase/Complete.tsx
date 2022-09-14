@@ -1,10 +1,10 @@
-import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
-import { useState } from 'react';
-import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
-import SushiIcon from '../../../assets/img/sushi.png';
+import { Box, Typography } from '@mui/material';
+import { FormButton, FormTitle, Divider } from '.';
 import InkIcon from '../../../assets/img/ink.png';
+import { useHistory } from 'react-router-dom';
 
 export const Complete = ({ preview, onPrev }: { preview: any; onPrev: () => void }) => {
+  const history = useHistory();
   return (
     <>
       <FormTitle>
@@ -44,7 +44,7 @@ export const Complete = ({ preview, onPrev }: { preview: any; onPrev: () => void
             WHATS NEXT?
           </Typography>
           <Box width="100%">
-            <FormButton>visit our faq&lsquo;s</FormButton>
+            <FormButton onClick={() => history.push('/faq')}>visit our faq&lsquo;s</FormButton>
           </Box>
         </Box>
       </Box>

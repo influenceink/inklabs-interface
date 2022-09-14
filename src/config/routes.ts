@@ -10,6 +10,7 @@ import { Vision } from '../pages/Vision';
 import { Convergence } from '../pages/Convergence';
 import { Games } from '../pages/Games';
 import { WOI } from '../pages/WOI';
+import { FAQ } from '../pages/FAQ';
 
 const routes: Array<Route> = [
   // {
@@ -99,6 +100,15 @@ const routes: Array<Route> = [
     description: 'World Of Influence',
     component: WOI,
     path: '/woi',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-faq',
+    title: 'FAQ',
+    description: 'FAQ',
+    component: FAQ,
+    path: '/faq',
     isEnabled: true,
     appendDivider: true,
   },
