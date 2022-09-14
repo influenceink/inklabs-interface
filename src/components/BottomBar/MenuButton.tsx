@@ -50,7 +50,7 @@ export const MenuButton = () => {
   }, [showLine]);
   useEffect(() => {
     if (!showAuth && authorized) setPurchase(true);
-  }, [showAuth]);
+  }, [showAuth, setPurchase, authorized]);
   const Toggler = ({ children }: { children: ReactElement }) => {
     return (
       <StyledButton
