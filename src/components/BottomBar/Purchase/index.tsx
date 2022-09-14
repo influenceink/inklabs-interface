@@ -40,7 +40,7 @@ export const Purchase = ({ show, setShow }: Props) => {
       setPending(false);
       setShow(!show);
     }
-  }, [authorized, show, setAuth, setShow]);
+  }, [authorized, show, setAuth, setShow, pending]);
   useEffect(() => {
     if (preview !== null) setIndex((value) => value + 1);
   }, [preview]);
