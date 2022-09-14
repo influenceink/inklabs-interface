@@ -26,6 +26,7 @@ export const PAGE_TITLE_CONVERGENCE = 'Convergence';
 export const PAGE_TITLE_INFLUENCE = 'World of Influence';
 export const PAGE_TITLE_GAMES = 'Games';
 export const PAGE_TITLE_COIN = 'INK Coin';
+export const PAGE_TITLE_FAQ = 'FAQ';
 // export const PAGE_TITLE_HOME = 'Home';
 // APP THEME
 export const DARK_MODE_THEME = 'dark';
@@ -86,6 +87,36 @@ export const KEYS = [
   {
     value: 'backspace',
     image: cross,
+  },
+];
+
+export const FAQS = [
+  {
+    question: 'What currencies are easiest/best to purchase INK with?',
+    answer:
+      'Buyers can use any token available on Uniswap to purchase INK. The more liquid assets, like USDC or other stablecoins, may have more favorable rates and spreads. ',
+  },
+  {
+    question: 'Will I have to convert anything using Uniswap (or another exchange protocol)?',
+    answer:
+      'When purchasing INK, you will simply connect a compatible wallet (like MetaMask or TrustWallet) and then purchase INK with your favored token. Conversion happens behind the scenes – no need to navigate away from your wallet app. Your INK will be deposited into the connected wallet. ',
+  },
+  {
+    question:
+      'Why did the team decide to make gameplay currency and the platform currency one, instead of having subsidiary currencies in the games tied to INK?',
+    answer:
+      "The INK Token and its associated utility exist at the platform level only (i.e., within World of Influence).  Individual game titles made available on World of Influence do not need to integrate INK in any way in order to take advantage of the Payment & Tracking engine. This is the case for our first title, Prize Kingdoms, as well.%%Through this, we expand the number of titles that can take advantage of the INK platform, because games are not required to change their economy or adopt web3 in any way in order to be on the World of Influence.%%That being said, any game can implement staking bonuses that are made available through World of Influence without adding INK as an in-game currency. For example: Game XYZ (which doesn't use INK inside the game), can add a bonus item that's only available if at least 5 million INK Tokens are staked on Game XYZ through our platform. Down the road, we may develop (or partner to develop) web3 titles that use INK or a subsidiary currency as the main in-game currency.",
+  },
+  {
+    question:
+      'In light of the future plans for 3rd party developers to build upon the World of Influence platform, will their game currency be limited to INK?',
+    answer:
+      'In order to keep the TAM (total addressable market) for our platform as large as possible, we consciously did not make in-game INK token integration a requirement. This means all games can utilize the INK platform, World of Influence, and Payment & Tracking growth engine immediately.',
+  },
+  {
+    question: 'When does the ____ month vestment start?',
+    answer:
+      'The vesting period countdown begins on the day the tokens are generated, and the tokens vest ratably daily for ____ months.',
   },
 ];
 

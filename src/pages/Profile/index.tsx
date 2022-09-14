@@ -338,7 +338,7 @@ export const Profile = () => {
               <Typography variant="subtitle2" fontSize="13px" fontWeight="semibold" color="#fff3">
                 HAVE QUESTIONS??
               </Typography>
-              <StyledButton>faq&lsquo;s</StyledButton>
+              <StyledButton onClick={() => history.push('/faq')}>faq&lsquo;s</StyledButton>
             </Box>
             <SignOutButton
               onClick={() => {
