@@ -96,7 +96,6 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
             process.env.REACT_APP_INKPURCHASE_CONTRACT || '',
             amount
           );
-          return true;
         }
         return false;
       } catch (err) {
