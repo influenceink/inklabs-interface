@@ -18,6 +18,7 @@ export const Purchase = ({ show, setShow }: Props) => {
   const history = useHistory();
   const [index, setIndex] = useState(0);
   const [preview, setPreview] = useState<any>(null);
+  const [pending, setPending] = useState<boolean>(false);
   // useEffect(() => {
   //   if (show) {
   //     if (authorized) setIndex(3);
@@ -29,10 +30,15 @@ export const Purchase = ({ show, setShow }: Props) => {
     if (!authorized && show) {
       setAuth(true);
       setShow(!show);
+      setPending(true);
     }
     if (!show) {
       setIndex(0);
       setPreview(null);
+    }
+    if (authorized && pending) {
+      setPending(false);
+      setShow(!show);
     }
   }, [authorized, show, setAuth, setShow]);
   useEffect(() => {

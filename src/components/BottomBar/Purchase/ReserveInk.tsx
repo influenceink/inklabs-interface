@@ -80,7 +80,6 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     }
   }, [currency, tokenAmount, tokensList, contracts, getTokenDecimals]);
   useEffect(() => {
-    console.log(USDCAmount);
     setReservedInk(Number(USDCAmount) * 3);
   }, [USDCAmount]);
   return (
