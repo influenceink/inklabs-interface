@@ -61,6 +61,8 @@ export const MenuButton = () => {
           </Collapse>
         </Box>
         <Box
+          left={'50%'}
+          style={{ transform: 'translateX(-50%)' }}
           position="fixed"
           display="flex"
           alignItems="flex-end"
