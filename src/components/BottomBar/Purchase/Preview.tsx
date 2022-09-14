@@ -13,7 +13,6 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
   const [loadingStatus, setLoading] = useState<boolean>(false);
   const handleClick = async () => {
     if (contracts !== null) {
-      console.log('purchase confirm');
       setLoading(true);
       const decimals = await getTokenDecimals(preview.token.address);
       if (preview.token.symbol === 'USDC') {
