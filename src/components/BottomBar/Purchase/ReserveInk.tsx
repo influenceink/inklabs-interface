@@ -68,7 +68,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               tokensList[currency].address,
               tokensList[0].address,
               3000,
-              new BigNumber(tokenAmount).times(new BigNumber(10).pow(tokenDecimals)),
+              new BigNumber(tokenAmount).times(new BigNumber(10).pow(tokenDecimals)).toString(),
               0
             )
             .then((res: any) => {
