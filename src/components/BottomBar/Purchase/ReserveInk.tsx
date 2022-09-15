@@ -33,11 +33,11 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             tokensList[0].address,
             tokensList[currency].address,
             3000,
-            BigNumber(USDCAmount).times(BigNumber(10).pow(6)),
+            new BigNumber(USDCAmount).times(new BigNumber(10).pow(6)),
             0
           )
           .then((res: any) => {
-            setTokenAmount(BigNumber(res).dividedBy(BigNumber(10).pow(tokenDecimals)).toFixed(3));
+            setTokenAmount(new BigNumber(res).dividedBy(new BigNumber(10).pow(tokenDecimals)).toFixed(3));
           });
     };
     if (currency === 0) setTokenAmount(ev.target.value.replaceAll(',', ''));
@@ -68,11 +68,11 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               tokensList[currency].address,
               tokensList[0].address,
               3000,
-              BigNumber(tokenAmount).times(BigNumber(10).pow(tokenDecimals)),
+              new BigNumber(tokenAmount).times(new BigNumber(10).pow(tokenDecimals)),
               0
             )
             .then((res: any) => {
-              setUSDCAmount(BigNumber(res).dividedBy(1000000).toFixed(3));
+              setUSDCAmount(new BigNumber(res).dividedBy(1000000).toFixed(3));
             });
         };
         quoterWrapper();

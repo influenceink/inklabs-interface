@@ -114,9 +114,9 @@ export const FAQS = [
       'In order to keep the TAM (total addressable market) for our platform as large as possible, we consciously did not make in-game INK token integration a requirement. This means all games can utilize the INK platform, World of Influence, and Payment & Tracking growth engine immediately.',
   },
   {
-    question: 'When does the ____ month vestment start?',
+    question: 'When does the 18 month vestment start?',
     answer:
-      'The vesting period countdown begins on the day the tokens are generated, and the tokens vest ratably daily for ____ months.',
+      'The vesting period countdown begins on the day the tokens are generated, and the tokens vest ratably daily for 18 months.',
   },
 ];
 
