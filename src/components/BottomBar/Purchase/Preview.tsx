@@ -19,14 +19,14 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
         if (
           await tokenApprove(
             preview.token.address,
-            new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals))
+            new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
           )
         ) {
           try {
             const tx: any = await contracts['inkpurchase'].send(
               'purchaseForUSDC',
               null,
-              new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals))
+              new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
             );
             await purchase({
               transaction_id: tx.transactionHash,
@@ -48,7 +48,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
       } else if (preview.token.symbol === 'WETH') {
         try {
           const tx: any = await contracts['inkpurchase'].send('purchaseForETH', {
-            value: new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)),
+            value: new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString(),
           });
           await purchase({
             transaction_id: tx.transactionHash,
@@ -66,7 +66,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
         if (
           await tokenApprove(
             preview.token.address,
-            new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals))
+            new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
           )
         ) {
           try {
@@ -74,7 +74,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
               'purchaseForToken',
               null,
               preview.token.address,
-              new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals))
+              new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
             );
             await purchase({
               transaction_id: tx.transactionHash,

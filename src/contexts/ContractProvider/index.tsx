@@ -87,7 +87,7 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
   const [contracts, setContracts] = useState<{ [key: string]: Contract }>({});
 
   const tokenApprove = useCallback(
-    async (address: string, amount: BigNumber) => {
+    async (address: string, amount: any) => {
       try {
         if (web3 && chainId) {
           return await new Contract({ web3, account, chainId }, ERC20_ABI, address).send(
@@ -120,9 +120,13 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
         inkpurchase: new Contract(
           { web3, account, chainId },
           INKPURCHASE_ABI,
-          process.env.REACT_APP_INKPURCHASE_CONTRACT || ''
+          process.env.REACT_APP_INKPURCHASE_CONTRACT || '0x4c8aCB9c58C3E44e7165cbdEbf3ED7f9fD8bAEf9'
         ),
-        quoter: new Contract({ web3, account, chainId }, QUOTER_ABI, process.env.REACT_APP_QUOTER_CONTRACT || ''),
+        quoter: new Contract(
+          { web3, account, chainId },
+          QUOTER_ABI,
+          process.env.REACT_APP_QUOTER_CONTRACT || '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6'
+        ),
       });
     }
   }, [connected, web3, chainId, account]);

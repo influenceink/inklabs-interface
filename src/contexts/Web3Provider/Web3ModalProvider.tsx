@@ -9,13 +9,13 @@ const providerOptions = {
     package: CoinbaseWalletSDK,
     options: {
       appName: 'Web 3 Modal Demo',
-      infuraId: process.env.INFURA_KEY,
+      infuraId: process.env.INFURA_KEY || '0d220f908af748caa017c2563e715a71',
     },
   },
   walletconnect: {
     package: WalletConnect,
     options: {
-      infuraId: process.env.INFURA_KEY,
+      infuraId: process.env.INFURA_KEY || '0d220f908af748caa017c2563e715a71',
     },
   },
 };
