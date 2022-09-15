@@ -33,7 +33,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             tokensList[0].address,
             tokensList[currency].address,
             3000,
-            new BigNumber(USDCAmount).times(new BigNumber(10).pow(6)),
+            new BigNumber(USDCAmount).times(new BigNumber(10).pow(6)).toString(),
             0
           )
           .then((res: any) => {
