@@ -17,42 +17,39 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
       const decimals = await getTokenDecimals(preview.token.address);
       if (preview.token.symbol === 'USDC') {
         if (
-          await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)))
-        ) {
-          const tx: any = await contracts['inkpurchase'].send(
-            'purchaseForUSDC',
-            null,
-            BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
-          );
-          await purchase({
-            transaction_id: tx.transactionHash,
-            usd_amount: preview.usdcAmount,
-            reserved_ink: preview.inkAmount,
-            paid_coin: preview.token.symbol,
-            paid_network: 'Metamask',
-          });
-        } else onPrev();
-      } else if (preview.token.symbol === 'WETH') {
-        const tx: any = await contracts['inkpurchase'].send('purchaseForETH', {
-          value: BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)),
-        });
-        await purchase({
-          transaction_id: tx.transactionHash,
-          usd_amount: tx.events.Purchased.returnValues.amount,
-          reserved_ink: preview.inkAmount,
-          paid_coin: preview.token.symbol,
-          paid_network: 'Metamask',
-        });
-      } else {
-        if (
-          await tokenApprove(preview.token.address, BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals)))
-        ) {
-          const tx: any = await contracts['inkpurchase'].send(
-            'purchaseForToken',
-            null,
+          await tokenApprove(
             preview.token.address,
-            BigNumber(preview.tokenAmount).times(BigNumber(10).pow(decimals))
-          );
+            new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals))
+          )
+        ) {
+          try {
+            const tx: any = await contracts['inkpurchase'].send(
+              'purchaseForUSDC',
+              null,
+              new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals))
+            );
+            await purchase({
+              transaction_id: tx.transactionHash,
+              usd_amount: preview.usdcAmount,
+              reserved_ink: preview.inkAmount,
+              paid_coin: preview.token.symbol,
+              paid_network: 'Metamask',
+            });
+          } catch (err) {
+            setLoading(false);
+            onPrev();
+            return;
+          }
+        } else {
+          setLoading(false);
+          onPrev();
+          return;
+        }
+      } else if (preview.token.symbol === 'WETH') {
+        try {
+          const tx: any = await contracts['inkpurchase'].send('purchaseForETH', {
+            value: new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)),
+          });
           await purchase({
             transaction_id: tx.transactionHash,
             usd_amount: tx.events.Purchased.returnValues.amount,
@@ -60,7 +57,42 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
             paid_coin: preview.token.symbol,
             paid_network: 'Metamask',
           });
-        } else onPrev();
+        } catch (err) {
+          setLoading(false);
+          onPrev();
+          return;
+        }
+      } else {
+        if (
+          await tokenApprove(
+            preview.token.address,
+            new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals))
+          )
+        ) {
+          try {
+            const tx: any = await contracts['inkpurchase'].send(
+              'purchaseForToken',
+              null,
+              preview.token.address,
+              new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals))
+            );
+            await purchase({
+              transaction_id: tx.transactionHash,
+              usd_amount: tx.events.Purchased.returnValues.amount,
+              reserved_ink: preview.inkAmount,
+              paid_coin: preview.token.symbol,
+              paid_network: 'Metamask',
+            });
+          } catch (err) {
+            setLoading(false);
+            onPrev();
+            return;
+          }
+        } else {
+          setLoading(false);
+          onPrev();
+          return;
+        }
       }
       setLoading(false);
     }
