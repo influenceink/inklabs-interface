@@ -10,6 +10,7 @@ interface IWeb3Context {
   chainId: number | null;
   disconnect: Function | null;
   web3: Web3 | null;
+  switchNetwork: Function;
 }
 
 export const Web3Context = createContext<IWeb3Context>({
@@ -19,6 +20,7 @@ export const Web3Context = createContext<IWeb3Context>({
   chainId: null,
   disconnect: null,
   web3: null,
+  switchNetwork: () => {},
 });
 
 type Web3ProviderPropType = {
@@ -61,11 +63,24 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
 
     const accounts = await web3.eth.getAccounts();
 
+    setAccount(web3.utils.toChecksumAddress(accounts[0]));
+    setChainId(Number(await web3.eth.getChainId()));
     setWeb3(web3);
     setConnected(true);
-    setAccount(web3.utils.toChecksumAddress(accounts[0]));
-    setChainId(await web3.eth.getChainId());
   }, [reset, connectWallet]);
+
+  const switchNetwork = useCallback(async (chainId: number) => {
+    try {
+      if (chainId) {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x' + chainId.toString(16) }],
+        });
+      }
+    } catch (switchError) {
+      console.log(switchError);
+    }
+  }, []);
 
   const disconnect = useCallback(async () => {
     if (web3 && web3.currentProvider) {
@@ -76,7 +91,7 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
   }, [web3, reset]);
 
   return (
-    <Web3Context.Provider value={{ account, connect, disconnect, chainId, connected, web3 }}>
+    <Web3Context.Provider value={{ account, connect, disconnect, chainId, connected, web3, switchNetwork }}>
       <ContractProvider>{children}</ContractProvider>
     </Web3Context.Provider>
   );

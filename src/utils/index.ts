@@ -5,6 +5,7 @@ import axios from 'axios';
 import Web3 from 'web3';
 // import ethTopTokens from './eth-top-50-tokens.json';
 // import polyTopTokens from './poly-top-50-tokens.json';
+import { TOKENSLIST } from './constants';
 
 export const passwordToHash = (password: string) => {
   const bytes = sha512.array(password);
@@ -14,34 +15,7 @@ export const passwordToHash = (password: string) => {
 
 export const getTopTokensList = async (chainId: number): Promise<Array<any>> => {
   // if (Number(chainId) === 4) {
-  return new Promise((resolve) =>
-    resolve([
-      {
-        address: '0x8a1f7023c743E3d2149FfeA0EBcc685af0e8e9b6',
-        name: 'USD Coin',
-        chainId,
-        symbol: 'USDC',
-        logoURI:
-          'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
-      },
-      {
-        address: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
-        name: 'Wrapped Eth',
-        chainId,
-        symbol: 'WETH',
-        logoURI:
-          'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
-      },
-      {
-        address: '0xbF77b5E9f0195E336690c671c860e3707F60FbEe',
-        name: 'Wrapped BTC',
-        chainId,
-        symbol: 'WBTC',
-        logoURI:
-          'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png',
-      },
-    ])
-  );
+  return new Promise((resolve) => resolve(TOKENSLIST[Number(chainId)]));
   // }
   // const getLogoURI = (address: string, symbol?: string) => {
   //   const token = quickTokensList.find(
