@@ -9,18 +9,23 @@ import { getTopTokensList } from '../../../utils';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () => void }) => {
   const { contracts, getTokenDecimals } = useContext(ContractContext);
-  const { account, connected, connect, chainId } = useContext(Web3Context);
+  const { account, connected, connect, chainId, switchNetwork } = useContext(Web3Context);
   const [currency, setCurrency] = useState<number>(0);
+  const [network, setNetwork] = useState<string>('ether');
   const handleCurrencyChange = (ev: any) => {
     setCurrency(Number(ev.target.value));
   };
   const [tokensList, setTokensList] = useState<Array<any>>([]);
+  const chainValidation = useCallback(() => {
+    const reservedChain = network === 'ether' ? 4 : 80001;
+    return chainId === reservedChain;
+  }, [chainId, network]);
   useEffect(() => {
     const topTokensListWrapper = async () => {
-      setTokensList(await getTopTokensList(chainId || 1));
+      setTokensList(await getTopTokensList(chainId === null ? 1 : chainId));
     };
-    if (connected) topTokensListWrapper();
-  }, [chainId, connected]);
+    if (connected && chainValidation()) topTokensListWrapper();
+  }, [chainId, connected, chainValidation]);
   const [USDCAmount, setUSDCAmount] = useState<string>('0');
   const handleUSDCChange = (ev: any) => {
     const USDCAmount = ev.target.value.replaceAll(',', '').replaceAll('$', '').replaceAll(' ', '');
@@ -52,6 +57,16 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     onNext({ tokenAmount, token: tokensList[currency], inkAmount: reservedInk, usdcAmount: USDCAmount });
   };
   const [tokenDecimals, setTokenDecimals] = useState<number>(18);
+  const handleNetworkChange = (ev: any) => {
+    setNetwork(ev.target.value);
+  };
+  const handleWalletConnect = async () => {
+    await connect!();
+    if (!chainValidation()) {
+      const reservedChain = network === 'ether' ? 4 : 80001;
+      switchNetwork(reservedChain);
+    }
+  };
   useEffect(() => {
     if (tokensList.length > 0 && contracts !== null) {
       if (Number(tokenAmount) === 0) {
@@ -88,7 +103,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
         RESERVE <br />
         INK
       </FormTitle>
-      {account === null && connected === false ? (
+      {(account === null && connected === false) || !chainValidation() ? (
         <Box
           display="flex"
           flexDirection="column"
@@ -103,7 +118,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             $0.002 / $INK
           </Typography>
           <FormControl sx={{ width: '100%' }}>
-            <CustomSelect id="networkSelector" defaultValue="ether">
+            <CustomSelect id="networkSelector" defaultValue="ether" value={network} onChange={handleNetworkChange}>
               <MenuItem value="ether">
                 <Box width="100%" display="flex" gap={1} justifyContent="flex-start">
                   <img
@@ -133,7 +148,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             </CustomSelect>
           </FormControl>
           <Box width="100%" mt={3}>
-            <FormButton onClick={() => connect!()}>connect wallet</FormButton>
+            <FormButton onClick={handleWalletConnect}>connect wallet</FormButton>
           </Box>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
             <Divider>

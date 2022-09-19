@@ -159,3 +159,57 @@ export const ROADMAP = [
     ],
   },
 ];
+
+export const TOKENSLIST: { [key: number]: Array<any> } = {
+  4: [
+    {
+      address: '0x8a1f7023c743E3d2149FfeA0EBcc685af0e8e9b6',
+      name: 'USD Coin',
+      chainId: 4,
+      symbol: 'USDC',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
+    },
+    {
+      address: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
+      name: 'Wrapped Eth',
+      chainId: 4,
+      symbol: 'WETH',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
+    },
+    {
+      address: '0xbF77b5E9f0195E336690c671c860e3707F60FbEe',
+      name: 'Wrapped BTC',
+      chainId: 4,
+      symbol: 'WBTC',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png',
+    },
+  ],
+  80001: [
+    {
+      address: '0xBDEEA7A064934B0cD51BC4564E7c40cda4c669A6',
+      name: 'USD Coin',
+      chainId: 80001,
+      symbol: 'USDC',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
+    },
+    {
+      address: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889',
+      name: 'MATIC',
+      chainId: 80001,
+      symbol: 'MATIC',
+      logoURI: 'https://app.uniswap.org/static/media/matic-token-icon.da7b877d.svg',
+    },
+    {
+      address: '0xd30A75dBBf8A0Cfa8294DF3F4089a9d9D464fff3',
+      name: 'Wrapped BTC',
+      chainId: 80001,
+      symbol: 'WBTC',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png',
+    },
+  ],
+};
