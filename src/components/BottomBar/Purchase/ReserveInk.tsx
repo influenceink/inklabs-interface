@@ -9,29 +9,48 @@ import { getTopTokensList } from '../../../utils';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () => void }) => {
   const { contracts, getTokenDecimals } = useContext(ContractContext);
-  const { account, connected, connect, chainId } = useContext(Web3Context);
+  const { account, connected, connect, chainId, switchNetwork } = useContext(Web3Context);
   const [currency, setCurrency] = useState<number>(0);
+  const [network, setNetwork] = useState<string>('ether');
+  const [focusStatus, setFocusStatus] = useState<number>(0);
+  const [minAmount, setMinAmount] = useState<number>(0);
   const handleCurrencyChange = (ev: any) => {
     setCurrency(Number(ev.target.value));
   };
   const [tokensList, setTokensList] = useState<Array<any>>([]);
+  const chainValidation = useCallback(() => {
+    const reservedChain = network === 'ether' ? 4 : 80001;
+    return chainId === reservedChain;
+  }, [chainId, network]);
   useEffect(() => {
     const topTokensListWrapper = async () => {
-      setTokensList(await getTopTokensList(chainId || 1));
+      setTokensList(await getTopTokensList(chainId === null ? 1 : chainId));
     };
-    if (connected) topTokensListWrapper();
-  }, [chainId, connected]);
+    if (connected && chainValidation()) topTokensListWrapper();
+  }, [chainId, connected, chainValidation]);
+  useEffect(() => {
+    if (contracts !== null) {
+      const minAmountWrapper = async () => {
+        console.log(contracts);
+        await contracts['inkpurchase'].call('minAmount').then((res: any) => {
+          setMinAmount(res);
+        });
+      };
+      minAmountWrapper();
+    }
+  }, [contracts]);
   const [USDCAmount, setUSDCAmount] = useState<string>('0');
-  const handleUSDCChange = (ev: any) => {
+  const handleUSDCAmountChange = (ev: any) => {
     const USDCAmount = ev.target.value.replaceAll(',', '').replaceAll('$', '').replaceAll(' ', '');
+    setFocusStatus(1);
     setUSDCAmount(USDCAmount);
     const quoterWrapper = async () => {
       if (contracts !== null)
         contracts.quoter
           .call(
-            'quoteExactInputSingle',
-            tokensList[0].address,
+            'quoteExactOutputSingle',
             tokensList[currency].address,
+            tokensList[0].address,
             3000,
             new BigNumber(USDCAmount).times(new BigNumber(10).pow(6)).toString(),
             0
@@ -44,7 +63,8 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     else quoterWrapper();
   };
   const [tokenAmount, setTokenAmount] = useState<string>('0');
-  const handleTokenChange = (ev: any) => {
+  const handleTokenAmountChange = (ev: any) => {
+    setFocusStatus(2);
     setTokenAmount(ev.target.value.replaceAll(',', ''));
   };
   const [reservedInk, setReservedInk] = useState<number>(0);
@@ -52,8 +72,18 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     onNext({ tokenAmount, token: tokensList[currency], inkAmount: reservedInk, usdcAmount: USDCAmount });
   };
   const [tokenDecimals, setTokenDecimals] = useState<number>(18);
+  const handleNetworkChange = (ev: any) => {
+    setNetwork(ev.target.value);
+  };
+  const handleWalletConnect = async () => {
+    await connect!();
+    if (!chainValidation()) {
+      const reservedChain = network === 'ether' ? 4 : 80001;
+      switchNetwork(reservedChain);
+    }
+  };
   useEffect(() => {
-    if (tokensList.length > 0 && contracts !== null) {
+    if (focusStatus === 2 && tokensList.length > 0 && contracts !== null) {
       if (Number(tokenAmount) === 0) {
         setUSDCAmount('0');
       } else if (tokensList[currency].symbol === 'USDC') {
@@ -78,7 +108,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
         quoterWrapper();
       }
     }
-  }, [currency, tokenAmount, tokensList, contracts, getTokenDecimals]);
+  }, [currency, tokenAmount, tokensList, contracts, getTokenDecimals, focusStatus]);
   useEffect(() => {
     setReservedInk(Number(USDCAmount) * 3);
   }, [USDCAmount]);
@@ -88,7 +118,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
         RESERVE <br />
         INK
       </FormTitle>
-      {account === null && connected === false ? (
+      {(account === null && connected === false) || !chainValidation() ? (
         <Box
           display="flex"
           flexDirection="column"
@@ -103,7 +133,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             $0.002 / $INK
           </Typography>
           <FormControl sx={{ width: '100%' }}>
-            <CustomSelect id="networkSelector" defaultValue="ether">
+            <CustomSelect id="networkSelector" defaultValue="ether" value={network} onChange={handleNetworkChange}>
               <MenuItem value="ether">
                 <Box width="100%" display="flex" gap={1} justifyContent="flex-start">
                   <img
@@ -133,7 +163,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             </CustomSelect>
           </FormControl>
           <Box width="100%" mt={3}>
-            <FormButton onClick={() => connect!()}>connect wallet</FormButton>
+            <FormButton onClick={handleWalletConnect}>connect wallet</FormButton>
           </Box>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
             <Divider>
@@ -192,7 +222,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <CustomInputWrapper>
             <Box width="100%" display="flex" justifyContent="center">
               $
-              <AmountInput value={USDCAmount.toString()} onChange={handleUSDCChange} thousandSeparator={true} />
+              <AmountInput value={USDCAmount.toString()} onChange={handleUSDCAmountChange} thousandSeparator={true} />
             </Box>
             <Typography>/</Typography>
             <Box width="100%" display="flex" gap={1} justifyContent="center">
@@ -205,7 +235,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
                   style={{ borderRadius: 24 }}
                 />
               )}
-              <AmountInput value={tokenAmount.toString()} onChange={handleTokenChange} thousandSeparator={true} />
+              <AmountInput value={tokenAmount.toString()} onChange={handleTokenAmountChange} thousandSeparator={true} />
             </Box>
           </CustomInputWrapper>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
@@ -224,7 +254,9 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               </Typography>
             </Box>
             <Box width="100%" mt={3}>
-              <FormButton onClick={handleClick}>PREVIEW SWAP</FormButton>
+              <FormButton onClick={handleClick} disabled={Number(USDCAmount) < minAmount}>
+                PREVIEW SWAP
+              </FormButton>
             </Box>
           </Box>
         </Box>

@@ -92,31 +92,44 @@ export const KEYS = [
 
 export const FAQS = [
   {
-    question: 'What currencies are easiest/best to purchase INK with?',
+    question: 'What is the INK token?',
     answer:
-      'Buyers can use any token available on Uniswap to purchase INK. The more liquid assets, like USDC or other stablecoins, may have more favorable rates and spreads. ',
+      'INK is an ERC-20 compliant utility token for INK Games and our suite of on-platform games and projects. INK will power many of the game and project experiences offered on the World of Influence platform, while token holders will enjoy enhanced platform experiences and distinct perks. Find out more about our token and platform: INK Games Litepaper.',
+  },
+  {
+    question: 'What cryptocurrencies are easiest or best to purchase INK with?',
+    answer:
+      'Buyers can use any token available on Uniswap to purchase INK. The more liquid assets, like USDC or similar stablecoins, may have more favorable rates and spreads.',
   },
   {
     question: 'Will I have to convert anything using Uniswap (or another exchange protocol)?',
     answer:
-      'When purchasing INK, you will simply connect a compatible wallet (like MetaMask or TrustWallet) and then purchase INK with your favored token. Conversion happens behind the scenes – no need to navigate away from your wallet app. Your INK will be deposited into the connected wallet. ',
-  },
-  {
-    question:
-      'Why did the team decide to make gameplay currency and the platform currency one, instead of having subsidiary currencies in the games tied to INK?',
-    answer:
-      "The INK Token and its associated utility exist at the platform level only (i.e., within World of Influence).  Individual game titles made available on World of Influence do not need to integrate INK in any way in order to take advantage of the Payment & Tracking engine. This is the case for our first title, Prize Kingdoms, as well.%%Through this, we expand the number of titles that can take advantage of the INK platform, because games are not required to change their economy or adopt web3 in any way in order to be on the World of Influence.%%That being said, any game can implement staking bonuses that are made available through World of Influence without adding INK as an in-game currency. For example: Game XYZ (which doesn't use INK inside the game), can add a bonus item that's only available if at least 5 million INK Tokens are staked on Game XYZ through our platform. Down the road, we may develop (or partner to develop) web3 titles that use INK or a subsidiary currency as the main in-game currency.",
-  },
-  {
-    question:
-      'In light of the future plans for 3rd party developers to build upon the World of Influence platform, will their game currency be limited to INK?',
-    answer:
-      'In order to keep the TAM (total addressable market) for our platform as large as possible, we consciously did not make in-game INK token integration a requirement. This means all games can utilize the INK platform, World of Influence, and Payment & Tracking growth engine immediately.',
+      'To purchase INK, simply connect a compatible wallet (like MetaMask or TrustWallet) and then purchase INK with your favored token. Conversion happens behind the scenes – no need to navigate away from your wallet app. Your INK will be deposited into the connected wallet.',
   },
   {
     question: 'When does the 18 month vestment start?',
     answer:
       'The vesting period countdown begins on the day the tokens are generated, and the tokens vest ratably daily for 18 months.',
+  },
+  {
+    question: 'Does INK provide an ownership stake in your projects?',
+    answer:
+      'INK tokens do not represent equity, debt, a claim on profits, or dividends and does not constitute a financial instrument for ownership of any business or organization. INK is a utility token that offers access to certain services, features, and capabilities within our ecosystem. Value accrued to the token is by virtue of users’ demand to use INK for World of Influence activities.',
+  },
+  {
+    question: 'Can you help me set up a wallet to receive my tokens?',
+    answer:
+      'While we are unable to provide individual setup support, simple instructions are available online. Here’s one for setting up your own MetaMask wallet.',
+  },
+  {
+    question: 'Do you have an INK purchase minimum in place?',
+    answer:
+      'You may purchase tokens using any ERC-20 compatible cryptocurrencies available on the Polygon Network on our website at www.inktoken.com. A minimum purchase value of $5,000 USD is required. We can support wire purchases with a $100,000 USD minimum. Please contact support@inkgames.com for instructions.',
+  },
+  {
+    question: 'Do third party developers have to use INK to build on the World of Influence?',
+    answer:
+      'To keep platform TAM (total addressable market) as large as possible, we do not require in-game token integration. Developers can construct their game ecosystems to utilize INK – and may enjoy a growth advantage due to staking functionality, in-game token mechanics, and expanded earning capabilities.%%However, because we do not require it, a variety of games can immediately participate with the World of Influence and our Payment & Tracking growth engine without having to change their economy.',
   },
 ];
 
@@ -159,3 +172,57 @@ export const ROADMAP = [
     ],
   },
 ];
+
+export const TOKENSLIST: { [key: number]: Array<any> } = {
+  4: [
+    {
+      address: '0x8a1f7023c743E3d2149FfeA0EBcc685af0e8e9b6',
+      name: 'USD Coin',
+      chainId: 4,
+      symbol: 'USDC',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
+    },
+    {
+      address: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
+      name: 'Wrapped Eth',
+      chainId: 4,
+      symbol: 'WETH',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
+    },
+    {
+      address: '0xbF77b5E9f0195E336690c671c860e3707F60FbEe',
+      name: 'Wrapped BTC',
+      chainId: 4,
+      symbol: 'WBTC',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png',
+    },
+  ],
+  80001: [
+    {
+      address: '0xBDEEA7A064934B0cD51BC4564E7c40cda4c669A6',
+      name: 'USD Coin',
+      chainId: 80001,
+      symbol: 'USDC',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
+    },
+    {
+      address: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889',
+      name: 'MATIC',
+      chainId: 80001,
+      symbol: 'MATIC',
+      logoURI: 'https://app.uniswap.org/static/media/matic-token-icon.da7b877d.svg',
+    },
+    {
+      address: '0xd30A75dBBf8A0Cfa8294DF3F4089a9d9D464fff3',
+      name: 'Wrapped BTC',
+      chainId: 80001,
+      symbol: 'WBTC',
+      logoURI:
+        'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png',
+    },
+  ],
+};
