@@ -14,8 +14,10 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
   const [forgot, setForgot] = useState<boolean>(false);
   const [resetSent, setReset] = useState<boolean>(false);
   const handleReset = async () => {
+    setLoading(true);
     await resetPassword({ email });
     setReset(true);
+    setLoading(false);
   };
   const handleForgot = async () => {
     setForgot(true);
@@ -36,7 +38,7 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
   };
   return (
     <>
-      <FormTitle>SIGN IN</FormTitle>
+      <FormTitle>{forgot ? 'RESET PaSSWORD' : 'SIGN IN'}</FormTitle>
       <Box
         display="flex"
         flexDirection="column"
@@ -68,7 +70,7 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
                 }}
               />
               <FormButton onClick={handleClick} disabled={loadingStatus}>
-                Sign In{loadingStatus && <img src={Loading} alt="" style={{marginLeft: '10px'}} width="25px" />}
+                Sign In{loadingStatus && <img src={Loading} alt="" style={{ marginLeft: '10px' }} width="25px" />}
               </FormButton>
               <Typography sx={{ color: 'red' }} display={`${errorEmitted ? 'block' : 'none'}`}>
                 Email or password must be wrong.
@@ -100,7 +102,9 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
                 <Divider />
                 <Box my={8} display="flex" flexDirection="column" alignItems="center" gap="20px" width="100%">
                   <Input placeholder="Email" value={email} onChange={handleEmailChange} />
-                  <FormButton onClick={handleReset}>Send</FormButton>
+                  <FormButton onClick={handleReset} disabled={loadingStatus}>
+                    Send{loadingStatus && <img src={Loading} alt="" style={{ marginLeft: '10px' }} width="25px" />}
+                  </FormButton>
                   <Typography sx={{ color: 'red' }} display={`${errorEmitted ? 'block' : 'none'}`}>
                     Reset is failed.
                   </Typography>
