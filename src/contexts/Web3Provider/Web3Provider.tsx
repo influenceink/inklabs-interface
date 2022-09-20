@@ -53,7 +53,7 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
     });
 
     provider.on('chainChanged', (chainId: number) => {
-      setChainId(chainId);
+      setChainId(Number(chainId));
     });
 
     provider.on('disconnect', (code: number, reason: string) => {
@@ -78,7 +78,7 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
         });
       }
     } catch (switchError) {
-      console.log(switchError);
+      console.log(typeof switchError, 123);
     }
   }, []);
 
