@@ -84,7 +84,7 @@ export const ContractContext = createContext<IContractContext>({
 
 export const ContractProvider = ({ children }: { children: ReactNode }) => {
   const { web3, account, chainId, connected } = useContext(Web3Context);
-  const [contracts, setContracts] = useState<{ [key: string]: Contract }>({});
+  const [contracts, setContracts] = useState<{ [key: string]: Contract } | null>(null);
 
   const tokenApprove = useCallback(
     async (address: string, amount: any) => {
@@ -120,7 +120,7 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
         inkpurchase: new Contract(
           { web3, account, chainId },
           INKPURCHASE_ABI,
-          process.env.REACT_APP_INKPURCHASE_CONTRACT || '0x4c8aCB9c58C3E44e7165cbdEbf3ED7f9fD8bAEf9'
+          process.env.REACT_APP_INKPURCHASE_CONTRACT || '0x15d37C8ED6C6895BE39Ed5D6644BCA4E6Bab8830'
         ),
         quoter: new Contract(
           { web3, account, chainId },

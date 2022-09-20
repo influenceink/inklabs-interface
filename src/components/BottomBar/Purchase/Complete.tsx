@@ -2,9 +2,12 @@ import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Divider } from '.';
 import InkIcon from '../../../assets/img/ink.png';
 import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts';
 
 export const Complete = ({ preview, onPrev }: { preview: any; onPrev: () => void }) => {
   const history = useHistory();
+  const { inkId } = useContext(AuthContext);
   return (
     <>
       <FormTitle>
@@ -32,7 +35,7 @@ export const Complete = ({ preview, onPrev }: { preview: any; onPrev: () => void
           </Box>
           <Divider sx={{ marginTop: 2, marginBottom: 2 }} />
           <Typography fontWeight="bold" color="#ffffff88" textAlign="center">
-            CONGRATS @SKYBURN!
+            CONGRATS @{inkId}!
             <br />
             YOUR TOKENS ARE NOW RESERVED.
           </Typography>
