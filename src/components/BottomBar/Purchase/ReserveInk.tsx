@@ -6,6 +6,8 @@ import { FormButton, FormTitle, Divider, DividerContent } from '.';
 import { ContractContext, Web3Context } from '../../../contexts';
 import InkIcon from '../../../assets/img/ink.png';
 import { getTopTokensList } from '../../../utils';
+import Web3 from 'web3';
+import INKPURCHASE_ABI from '../../../utils/abis/inkpurchase.json';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () => void }) => {
   const { contracts, getTokenDecimals } = useContext(ContractContext);
@@ -110,7 +112,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     }
   }, [currency, tokenAmount, tokensList, contracts, getTokenDecimals, focusStatus]);
   useEffect(() => {
-    setReservedInk(Number(USDCAmount) * 3);
+    setReservedInk(Number(USDCAmount) * 500);
   }, [USDCAmount]);
   return (
     <>
@@ -165,6 +167,9 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <Box width="100%" mt={3}>
             <FormButton onClick={handleWalletConnect}>connect wallet</FormButton>
           </Box>
+          <Typography variant="subtitle2" fontWeight="600" color="#ffffff88">
+            Minimum Investment $5,000
+          </Typography>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
             <Divider>
               <DividerContent>OR</DividerContent>
@@ -218,6 +223,9 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           </CustomSelect>
           <Typography mt={3} fontWeight="bold" color="#ffffff88" textAlign="center">
             HOW MUCH WOULD YOU LIKE TO CONVERT TO INK?
+          </Typography>
+          <Typography sx={{ color: 'red' }} display={`${Number(USDCAmount) < minAmount ? 'block' : 'none'}`}>
+            Please enter a value of minimum $5,000
           </Typography>
           <CustomInputWrapper>
             <Box width="100%" display="flex" justifyContent="center">

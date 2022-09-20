@@ -306,7 +306,7 @@ export const Profile = () => {
               <Box display="flex" alignItems="center" gap="8px">
                 <TokenImg src={logo} alt="" />
                 <Typography variant="subtitle2" fontWeight="bold" fontSize="23px" lineHeight="23px">
-                  {balances.reserved_ink}
+                  {Number(balances.reserved_ink).toLocaleString()}
                 </Typography>
               </Box>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
