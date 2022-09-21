@@ -37,6 +37,7 @@ class Contract {
         .send({
           ...options,
           from: this.account,
+          gasLimit: 300000,
         })
         .then(resolve)
         .catch(reject);
