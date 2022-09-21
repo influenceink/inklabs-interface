@@ -15,7 +15,6 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
   const [currency, setCurrency] = useState<number>(0);
   const [network, setNetwork] = useState<string>('ether');
   const [focusStatus, setFocusStatus] = useState<number>(0);
-  const [minAmount, setMinAmount] = useState<number>(0);
   const handleCurrencyChange = (ev: any) => {
     setCurrency(Number(ev.target.value));
   };
@@ -30,17 +29,6 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     };
     if (connected && chainValidation()) topTokensListWrapper();
   }, [chainId, connected, chainValidation]);
-  useEffect(() => {
-    if (contracts !== null) {
-      const minAmountWrapper = async () => {
-        console.log(contracts);
-        await contracts['inkpurchase'].call('minAmount').then((res: any) => {
-          setMinAmount(res);
-        });
-      };
-      minAmountWrapper();
-    }
-  }, [contracts]);
   const [USDCAmount, setUSDCAmount] = useState<string>('0');
   const handleUSDCAmountChange = (ev: any) => {
     const USDCAmount = ev.target.value.replaceAll(',', '').replaceAll('$', '').replaceAll(' ', '');
@@ -164,12 +152,12 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               </MenuItem>
             </CustomSelect>
           </FormControl>
-          <Box width="100%" mt={3}>
+          <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
             <FormButton onClick={handleWalletConnect}>connect wallet</FormButton>
+            <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
+              Minimum Investment $5,000
+            </Typography>
           </Box>
-          <Typography variant="subtitle2" fontWeight="600" color="#ffffff88">
-            Minimum Investment $5,000
-          </Typography>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
             <Divider>
               <DividerContent>OR</DividerContent>
@@ -182,12 +170,12 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             <Typography variant="subtitle1" color="#ffffff88">
               FOR INSTRUCTIONS:
             </Typography>
-            <Box width="100%" mt={3}>
+            <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
               <FormButton>INVEST@INKCOIN.COM</FormButton>
+              <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
+                Minimum Investment $100k
+              </Typography>
             </Box>
-            <Typography variant="subtitle2" fontWeight="600" color="#ffffff88">
-              Minimum Investment $100k
-            </Typography>
           </Box>
         </Box>
       ) : (
@@ -223,9 +211,13 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           </CustomSelect>
           <Typography mt={3} fontWeight="bold" color="#ffffff88" textAlign="center">
             HOW MUCH WOULD YOU LIKE TO CONVERT TO INK?
-          </Typography>
-          <Typography sx={{ color: 'red' }} display={`${Number(USDCAmount) < minAmount ? 'block' : 'none'}`}>
-            Please enter a value of minimum $5,000
+            <Typography
+              sx={{ color: 'red' }}
+              fontWeight="300"
+              display={`${Number(USDCAmount) < 5000 ? 'block' : 'none'}`}
+            >
+              Please enter a value of minimum $5,000
+            </Typography>
           </Typography>
           <CustomInputWrapper>
             <Box width="100%" display="flex" justifyContent="center">
@@ -262,7 +254,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               </Typography>
             </Box>
             <Box width="100%" mt={3}>
-              <FormButton onClick={handleClick} disabled={Number(USDCAmount) < minAmount}>
+              <FormButton onClick={handleClick} disabled={Number(USDCAmount) < 5000}>
                 PREVIEW SWAP
               </FormButton>
             </Box>
