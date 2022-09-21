@@ -2,19 +2,25 @@ import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/mat
 import { useState, useContext } from 'react';
 import BigNumber from 'bignumber.js';
 import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
-import { ContractContext, AuthContext } from '../../../contexts';
+import { ContractContext, AuthContext, Web3Context } from '../../../contexts';
 import SushiIcon from '../../../assets/img/sushi.png';
 import Loading from '../../../assets/img/loading.gif';
 import InkIcon from '../../../assets/img/ink.png';
+import { TokenLogo } from '../../Logo';
 
 export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPrev: () => void; preview: any }) => {
   const { contracts, getTokenDecimals, tokenApprove } = useContext(ContractContext);
+  const { chainId } = useContext(Web3Context);
   const { purchase } = useContext(AuthContext);
   const [loadingStatus, setLoading] = useState<boolean>(false);
   const handleClick = async () => {
     if (contracts !== null) {
       setLoading(true);
-      const decimals = await getTokenDecimals(preview.token.address);
+      const getGovernToken = () => {
+        if (chainId === 137) return 'WMATIC';
+        return 'WETH';
+      };
+      const decimals = await getTokenDecimals(preview.token.id);
       if (preview.token.symbol === 'USDC') {
         if (
           await tokenApprove(
@@ -45,7 +51,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           onPrev();
           return;
         }
-      } else if (preview.token.symbol === 'WETH') {
+      } else if (preview.token.symbol === getGovernToken()) {
         try {
           const tx: any = await contracts['inkpurchase'].send('purchaseForETH', {
             value: new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString(),
@@ -65,7 +71,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
       } else {
         if (
           await tokenApprove(
-            preview.token.address,
+            preview.token.id,
             new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
           )
         ) {
@@ -73,7 +79,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
             const tx: any = await contracts['inkpurchase'].send(
               'purchaseForToken',
               null,
-              preview.token.address,
+              preview.token.id,
               new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
             );
             await purchase({
@@ -118,7 +124,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
         </Typography>
         <Box display="flex" flexDirection="column" alignItems="center" gap="12px" width="100%">
           <Box display="flex" alignItems="center" gap={2}>
-            <img src={preview.token.logoURI} alt="" width="22px" height="22px" style={{ borderRadius: 24 }} />
+            <TokenLogo address={preview.token.id} symbol={preview.token.symbol} />
             <Typography variant="subtitle2" color="#fff" fontWeight="bold" fontSize="25px" lineHeight="25px">
               {preview.tokenAmount}
             </Typography>
