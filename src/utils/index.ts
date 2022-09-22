@@ -5,7 +5,6 @@ import axios from 'axios';
 import Web3 from 'web3';
 // import ethTopTokens from './eth-top-50-tokens.json';
 // import polyTopTokens from './poly-top-50-tokens.json';
-import { TOKENSLIST } from './constants';
 
 export const passwordToHash = (password: string) => {
   const bytes = sha512.array(password);
@@ -14,7 +13,7 @@ export const passwordToHash = (password: string) => {
 };
 
 export const getTopTokensList = async (chainId: number): Promise<Array<any>> => {
-  return new Promise((resolve)=>resolve([]))
+  return new Promise((resolve) => resolve([]));
 };
 
 export const getState = (zipString: string) => {

@@ -7,6 +7,7 @@ import { Web3Context } from '../Web3Provider';
 import ERC20_ABI from '../../utils/abis/erc20.json';
 import INKPURCHASE_ABI from '../../utils/abis/inkpurchase.json';
 import QUOTER_ABI from '../../utils/abis/quoter.json';
+import { INKPURCHASE_ADDRESSES, QUOTER_ADDRESS } from '../../utils/constants';
 
 export type ContractOptionType = {
   web3: Web3;
@@ -32,13 +33,17 @@ class Contract {
   }
 
   send(method: string, options: object | null, ...params: any[]) {
+    const _options: any = {
+      ...options,
+      from: this.account,
+    };
+    if (this.chainId === 137) {
+      _options['maxPriorityFeePerGas'] = 30000000000;
+      _options['maxFee'] = 35000000000;
+    }
     return new Promise((resolve, reject) => {
       this.contract.methods[method](...params)
-        .send({
-          ...options,
-          from: this.account,
-          gasLimit: 300000,
-        })
+        .send(_options)
         .then(resolve)
         .catch(reject);
     });
@@ -94,7 +99,7 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
           return await new Contract({ web3, account, chainId }, ERC20_ABI, address).send(
             'approve',
             null,
-            process.env.REACT_APP_INKPURCHASE_CONTRACT || '',
+            INKPURCHASE_ADDRESSES[chainId],
             amount
           );
         } else return false;
@@ -118,16 +123,8 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (connected && web3 && chainId) {
       setContracts({
-        inkpurchase: new Contract(
-          { web3, account, chainId },
-          INKPURCHASE_ABI,
-          process.env.REACT_APP_INKPURCHASE_CONTRACT || '0x15d37C8ED6C6895BE39Ed5D6644BCA4E6Bab8830'
-        ),
-        quoter: new Contract(
-          { web3, account, chainId },
-          QUOTER_ABI,
-          process.env.REACT_APP_QUOTER_CONTRACT || '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6'
-        ),
+        inkpurchase: new Contract({ web3, account, chainId }, INKPURCHASE_ABI, INKPURCHASE_ADDRESSES[chainId]),
+        quoter: new Contract({ web3, account, chainId }, QUOTER_ABI, QUOTER_ADDRESS),
       });
     }
   }, [connected, web3, chainId, account]);
