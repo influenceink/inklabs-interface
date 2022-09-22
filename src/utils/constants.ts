@@ -104,7 +104,7 @@ export const FAQS = [
   {
     question: 'Will I have to convert anything using Uniswap (or another exchange protocol)?',
     answer:
-      'To purchase INK, simply connect a compatible wallet (like MetaMask or TrustWallet) and then purchase INK with your favored token. Conversion happens behind the scenes – no need to navigate away from your wallet app. Your INK will be deposited into the connected wallet.',
+      'To reserve or purchase INK, simply connect a compatible wallet (like MetaMask or TrustWallet) and then purchase with your favored token. When the INK tokens are generated, buyers can claim them via a link provided on the web application or user profile.',
   },
   {
     question: 'When does the 18 month vestment start?',
@@ -151,18 +151,18 @@ export const ROADMAP = [
     lists: [
       'Payment & tracking engine build out',
       'INK white paper',
-      'INK District NFTs private pre-sale',
+      'INK ZIPs NFTs private pre-sale',
       '$INK (coin) private offering',
-      'Prize Kingdoms (P2E) technical launch',
+      'Prize Kingdoms (P2E) soft launch',
     ],
   },
   {
     status: 'IN PROGRESS',
     lists: [
       'INK Platform Dashboard + INK Metacard',
-      'INK Districts public sale',
-      '$INK public offering',
-      '$INK staking and swapping functionality',
+      // 'INK Districts public sale',
+      'INK public offering',
+      'INK staking and swapping functionality',
       'INK Crypto Club (alpha)',
       'Prize Kingdoms (P2E) worldwide launch',
       'In-house NFT collections development',
@@ -171,11 +171,7 @@ export const ROADMAP = [
   },
   {
     status: 'PLANNED',
-    lists: [
-      'INK Districts functionality expansion',
-      'New game project (TBA)',
-      'Advanced platform analytics & gamification',
-    ],
+    lists: ['INK ZIPs functionality expansion', 'New game project (TBA)', 'Advanced platform analytics & gamification'],
   },
 ];
 
