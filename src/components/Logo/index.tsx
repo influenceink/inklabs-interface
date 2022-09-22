@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { HelpCircle } from 'react-feather';
 import { ImageProps } from 'rebass';
 import polyTokens from '../../assets/json/quickswap-default.tokenlist.json';
@@ -51,6 +51,6 @@ export const Logo = ({ srcs, alt, ...rest }: LogoProps) => {
 };
 
 export const TokenLogo = ({ address, symbol }: { address: string; symbol: string }) => {
-  const srcs = getTokenLogoURI(address);
+  const srcs = useMemo(() => getTokenLogoURI(address), [address]);
   return <Logo srcs={srcs} alt={symbol} style={{ borderRadius: 24, width: '22px', height: '22px' }} />;
 };

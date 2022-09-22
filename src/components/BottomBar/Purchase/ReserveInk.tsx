@@ -183,6 +183,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           </Typography>
           <CustomSelect id="tokenSelector" value={currency} onChange={handleCurrencyChange}>
             {tokensList &&
+              tokensList.length > 0 &&
               tokensList!.map((token, index) => (
                 <MenuItem value={index} key={token.id}>
                   <Box width="100%" display="flex" gap={1} justifyContent="flex-start">

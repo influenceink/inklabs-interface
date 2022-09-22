@@ -1,7 +1,7 @@
 import { useQuery, gql, ApolloClient, NormalizedCacheObject, InMemoryCache } from '@apollo/client';
 import { useMemo, useContext, useState, useEffect } from 'react';
 import { Web3Context } from '../contexts';
-import { TOKEN_HIDE } from '../utils/constants';
+import { TOKEN_HIDE, TESTNEXT_TOKENSLIST } from '../utils/constants';
 
 export const TOP_TOKENS = gql`
   query topPools {
@@ -185,11 +185,19 @@ export const useTopTokenAddresses = (): { loading: boolean; error: boolean; addr
 
 export const useTopTokenDatas = () => {
   const { dataClient } = useClients();
+  const { chainId } = useContext(Web3Context);
   const { addresses: tokenAddresses } = useTopTokenAddresses();
   const { loading, error, data } = useQuery<TokenDataResponse>(TOKENS_BULK(tokenAddresses || []), {
     client: dataClient,
   });
 
-  const formattedData = useMemo(() => data?.tokens.filter((token) => !TOKEN_HIDE.includes(token.id)), [data]);
+  const formattedData = useMemo(() => {
+    if (chainId === 4 || chainId === 80001) {
+      return TESTNEXT_TOKENSLIST[chainId];
+    }
+    return data?.tokens
+      .filter((token) => !TOKEN_HIDE.includes(token.id))
+      .map((token) => ({ id: token.id, name: token.name, symbol: token.symbol }));
+  }, [data, chainId]);
   return { loading, error, tokenDatas: formattedData };
 };

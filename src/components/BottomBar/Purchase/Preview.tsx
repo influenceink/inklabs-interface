@@ -17,14 +17,14 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
     if (contracts !== null) {
       setLoading(true);
       const getGovernToken = () => {
-        if (chainId === 137) return 'WMATIC';
+        if (chainId === 137 || chainId === 80001) return 'WMATIC';
         return 'WETH';
       };
       const decimals = await getTokenDecimals(preview.token.id);
       if (preview.token.symbol === 'USDC') {
         if (
           await tokenApprove(
-            preview.token.address,
+            preview.token.id,
             new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
           )
         ) {
