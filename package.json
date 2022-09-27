@@ -61,8 +61,9 @@
   },
   "scripts": {
     "contracts:compile:v3": "typechain --target ethers-v5 \"./node_modules/@uniswap/**/artifacts/contracts/**/*[!dbg].json\"",
-    "start": "cd ./node_modules/@uniswap/v3-periphery && yarn && yarn compile && cd ../../.. && react-scripts start",
-    "build": "cd ./node_modules/@uniswap/v3-periphery && yarn && yarn compile && cd ../../.. && react-scripts build",
+    "postinstall": "yarn contracts:compile:v3",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet"
@@ -95,7 +96,6 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.3.2",
-    "ts-node": "^10.9.1"
+    "prettier": "^2.3.2"
   }
 }
