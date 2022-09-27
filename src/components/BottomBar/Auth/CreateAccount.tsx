@@ -11,11 +11,13 @@ export const CreateAccount = ({
 }: {
   account: any;
   onNext: () => void;
-  onPrev: (_?:string) => void;
+  onPrev: (_?: string) => void;
 }) => {
-  const { signUp } = useContext(AuthContext);
+  const { signUp, referrerLookup } = useContext(AuthContext);
   const [loadingStatus, setLoadingStatus] = useState<boolean>(false);
   const [referrer, setReferrer] = useState<string>('');
+  const [isReferrerValid, setReferrerValidation] = useState<boolean>(true);
+  const [ReferrerError, setReferrerError] = useState<string>('');
   const handleClick = useCallback(async () => {
     setLoadingStatus(true);
     const data = await signUp({ ...account, referrer_id: referrer });
@@ -24,6 +26,13 @@ export const CreateAccount = ({
       onPrev(data.error);
     }
   }, [setLoadingStatus, account, onPrev, referrer, signUp]);
+  const handleReferrerChange = async (referrer: string) => {
+    setReferrer(referrer);
+    if ((await referrerLookup({ referrer_id: referrer })).status) {
+      setReferrerError((await referrerLookup({ referrer_id: referrer })).error);
+      setReferrerValidation(false);
+    } else setReferrerValidation(true);
+  };
   return (
     <>
       <FormTitle>
@@ -47,13 +56,18 @@ export const CreateAccount = ({
           <Input
             placeholder="enter ink id"
             value={referrer}
-            onChange={(ev) => setReferrer(ev.target.value)}
+            onChange={(ev) => handleReferrerChange(ev.target.value)}
             onKeyUp={(e) => {
               if (referrer !== '' && (e.key === 'Enter' || e.keyCode === 13)) handleClick();
             }}
           />
-          <FormButton onClick={handleClick} disabled={referrer === '' || loadingStatus}>
-            enter{loadingStatus && <img src={Loading} alt="" width={'15px'} style={{ marginLeft: '10px' }} />}
+          {!isReferrerValid && (
+            <Typography color="red" fontSize={15}>
+              {ReferrerError}
+            </Typography>
+          )}
+          <FormButton onClick={handleClick} disabled={referrer === '' || loadingStatus || !isReferrerValid}>
+            enter{loadingStatus && <img src={Loading} alt="" width={'22px'} style={{ marginLeft: '10px' }} />}
           </FormButton>
         </Box>
         <Divider />

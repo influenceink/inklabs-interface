@@ -1,6 +1,5 @@
-import { Box, Typography, useMediaQuery } from '@mui/material';
+import { Box, Typography, useMediaQuery, styled } from '@mui/material';
 import { Helmet } from 'react-helmet';
-
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_INFLUENCE } from '../utils/constants';
 import influenceImg from '../assets/img/influence.png';
@@ -21,7 +20,7 @@ export const WOI = () => {
       <PageContent title={PAGE_TITLE_INFLUENCE} type="primary">
         <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="center">
           <Box flexGrow={1} width="100%" display="flex" flexDirection="column" justifyContent="center">
-            <Typography variant="h1">world of influence</Typography>
+            <Headline variant="h1">world of influence</Headline>
             <Divider />
             <Paragraph paragraph>
               Starting this fall, users can join and invite others into a world of shareable social gaming projects.
@@ -57,3 +56,18 @@ export const WOI = () => {
     </>
   );
 };
+
+const Headline = styled(Typography)`
+  @media screen and (max-width: 1375px) {
+    font-size: 75px;
+  }
+  @media screen and (max-width: 1200px) {
+    font-size: 90px;
+  }
+  @media screen and (max-width: 790px) {
+    font-size: 72px;
+  }
+  @media screen and (max-width: 670px) {
+    font-size: 42px;
+  }
+`;

@@ -30,7 +30,7 @@ export const Complete = ({ preview, onPrev }: { preview: any; onPrev: () => void
           <Box display="flex" alignItems="center" gap={2}>
             <img src={InkIcon} alt="ink" />
             <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
-              {preview.inkAmount.toFixed(3)}
+              {preview.inkAmount.toLocaleString()}
             </Typography>
           </Box>
           <Divider sx={{ marginTop: 2, marginBottom: 2 }} />

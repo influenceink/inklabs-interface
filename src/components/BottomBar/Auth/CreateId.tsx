@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 import { passwordToHash } from '../../../utils';
+import { AuthContext } from '../../../contexts';
 
 export const CreateId = ({
   onNext,
@@ -19,6 +20,11 @@ export const CreateId = ({
   const [password, setPassword] = useState<string>('');
   const [confirm, setConfirm] = useState<string>('');
   const [displayError, setDisplayError] = useState<boolean>(false);
+  const { authVacancy, userVacancy } = useContext(AuthContext);
+  const [isEmailValid, setEmailValidation] = useState<boolean>(true);
+  const [isIdValid, setIdValidation] = useState<boolean>(true);
+  const [IdError, setIdError] = useState<string>('');
+  const [EmailError, setEmailError] = useState<string>('');
   // useEffect(() => {
   //   if (account !== null) {
   //     setEmail(account.email);
@@ -30,7 +36,14 @@ export const CreateId = ({
   // }, [account]);
   const validation = () => {
     return (
-      username === '' || firstname === '' || lastname === '' || email === '' || password === '' || password !== confirm
+      username === '' ||
+      firstname === '' ||
+      lastname === '' ||
+      email === '' ||
+      password === '' ||
+      password !== confirm ||
+      !isEmailValid ||
+      !isIdValid
     );
   };
   const handleClick = () => {
@@ -42,6 +55,21 @@ export const CreateId = ({
       setTimeout(() => setDisplayError(false), 3000);
     }
   }, [error]);
+  const handleUsernameChange = async (inkId: string) => {
+    setUsername(inkId);
+    if ((await userVacancy({ ink_id: inkId })).status) {
+      setIdError((await userVacancy({ ink_id: inkId })).error);
+      setIdValidation(false);
+    } else setIdValidation(true);
+  };
+  const handleEmailChange = async (email: string) => {
+    setEmail(email);
+    console.log(email);
+    if ((await authVacancy({ email })).status) {
+      setEmailError((await authVacancy({ email })).error);
+      setEmailValidation(false);
+    } else setEmailValidation(true);
+  };
   return (
     <>
       <FormTitle>
@@ -68,11 +96,16 @@ export const CreateId = ({
         <Input
           placeholder="username"
           value={username}
-          onChange={(ev) => setUsername(ev.target.value)}
+          onChange={(ev) => handleUsernameChange(ev.target.value)}
           onKeyUp={(e) => {
             if (!validation() && (e.key === 'Enter' || e.keyCode === 13)) handleClick();
           }}
         />
+        {!isIdValid && (
+          <Typography color="red" fontSize={15}>
+            {IdError}
+          </Typography>
+        )}
         <Divider />
         <Input
           placeholder="first name"
@@ -93,11 +126,16 @@ export const CreateId = ({
         <Input
           placeholder="email"
           value={email}
-          onChange={(ev) => setEmail(ev.target.value)}
+          onChange={(ev) => handleEmailChange(ev.target.value)}
           onKeyUp={(e) => {
             if (!validation() && (e.key === 'Enter' || e.keyCode === 13)) handleClick();
           }}
         />
+        {!isEmailValid && (
+          <Typography color="red" fontSize={15}>
+            {EmailError}
+          </Typography>
+        )}
         <Input
           type="password"
           placeholder="password"

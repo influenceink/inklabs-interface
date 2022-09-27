@@ -1,14 +1,15 @@
 import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
-import { useState, useContext, createRef, ChangeEvent, useEffect, useCallback } from 'react';
+import { useState, useContext, useEffect, useCallback } from 'react';
 import NumberFormat from 'react-number-format';
-import BigNumber from 'bignumber.js';
 import { FormButton, FormTitle, Divider, DividerContent } from '.';
 import { ContractContext, Web3Context } from '../../../contexts';
 import InkIcon from '../../../assets/img/ink.png';
-import { getTopTokensList } from '../../../utils';
 import { SUPPORTED_NETWORKS } from '../../../utils/constants';
 import { useTopTokenDatas } from '../../../data/topTokens';
 import { TokenLogo } from '../../Logo';
+import { SwapRouter } from '../../../data/swap-router';
+import { formPath } from '../../../utils';
+import Loading from '../../../assets/img/loading.gif';
 
 export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () => void }) => {
   const { contracts, getTokenDecimals } = useContext(ContractContext);
@@ -18,8 +19,9 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
   const [USDCAmount, setUSDCAmount] = useState<string>('0');
   const [tokenAmount, setTokenAmount] = useState<string>('0');
   const [reservedInk, setReservedInk] = useState<number>(0);
-  const [tokenDecimals, setTokenDecimals] = useState<number>(18);
   const { loading, error, tokenDatas: tokensList } = useTopTokenDatas();
+  const [fetchingPath, setFetchingPath] = useState<boolean>(false);
+  const [swapPath, setSwapPath] = useState<string>('');
 
   // Validate chainId
   const chainValidation = useCallback(() => {
@@ -35,19 +37,20 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     const USDCAmount = ev.target.value.replaceAll(',', '').replaceAll('$', '').replaceAll(' ', '');
     setUSDCAmount(USDCAmount);
     const quoterWrapper = async () => {
-      if (contracts !== null && Number(USDCAmount) !== 0)
-        contracts.quoter
-          .call(
-            'quoteExactOutputSingle',
-            tokensList![currency].id,
-            tokensList![0].id,
-            3000,
-            new BigNumber(USDCAmount).times(new BigNumber(10).pow(6)).toString(),
-            0
-          )
-          .then((res: any) => {
-            setTokenAmount(new BigNumber(res).dividedBy(new BigNumber(10).pow(tokenDecimals)).toFixed(3));
-          });
+      if (contracts !== null && Number(USDCAmount) !== 0) {
+        setFetchingPath(true);
+        const tokenDecimals = await getTokenDecimals(tokensList![currency].id);
+        const route = await SwapRouter(
+          chainId!,
+          { decimals: Number(tokenDecimals), ...tokensList![currency] },
+          { decimals: 6, ...tokensList![0] },
+          USDCAmount,
+          1
+        );
+        setSwapPath(formPath(route));
+        setTokenAmount(route!.quote.toExact());
+        setFetchingPath(false);
+      }
     };
     if (currency === 0) setTokenAmount(ev.target.value.replaceAll(',', ''));
     else quoterWrapper();
@@ -62,27 +65,25 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     } else {
       const quoterWrapper = async () => {
         if (contracts !== null) {
+          setFetchingPath(true);
           const tokenDecimals = await getTokenDecimals(tokensList![currency].id);
-          setTokenDecimals(tokenDecimals);
-          contracts.quoter
-            .call(
-              'quoteExactInputSingle',
-              tokensList![currency].id,
-              tokensList![0].id,
-              3000,
-              new BigNumber(tokenAmount).times(new BigNumber(10).pow(tokenDecimals)).toString(),
-              0
-            )
-            .then((res: any) => {
-              setUSDCAmount(new BigNumber(res).dividedBy(1000000).toFixed(3));
-            });
+          const route = await SwapRouter(
+            chainId!,
+            { decimals: Number(tokenDecimals), ...tokensList![currency] },
+            { decimals: 6, ...tokensList![0] },
+            Number(tokenAmount),
+            0
+          );
+          setSwapPath(formPath(route));
+          setUSDCAmount(route!.quote.toExact());
+          setFetchingPath(false);
         }
       };
       quoterWrapper();
     }
   };
   const handleClick = () => {
-    onNext({ tokenAmount, token: tokensList![currency], inkAmount: reservedInk, usdcAmount: USDCAmount });
+    onNext({ tokenAmount, token: tokensList![currency], inkAmount: reservedInk, usdcAmount: USDCAmount, swapPath });
   };
   const handleNetworkChange = (ev: any) => {
     setNetwork(ev.target.value);
@@ -208,16 +209,30 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <CustomInputWrapper>
             <Box width="100%" display="flex" justifyContent="center">
               $
-              <AmountInput value={USDCAmount.toString()} onChange={handleUSDCAmountChange} thousandSeparator={true} />
+              <AmountInput
+                value={Number(USDCAmount).toFixed(3)}
+                onChange={handleUSDCAmountChange}
+                thousandSeparator={true}
+              />
             </Box>
             <Typography>/</Typography>
             <Box width="100%" display="flex" gap={1} justifyContent="center">
               {tokensList && tokensList.length > 0 && (
                 <TokenLogo address={tokensList![currency].id} symbol={tokensList![currency].symbol} />
               )}
-              <AmountInput value={tokenAmount.toString()} onChange={handleTokenAmountChange} thousandSeparator={true} />
+              <AmountInput
+                value={Number(tokenAmount).toFixed(3)}
+                onChange={handleTokenAmountChange}
+                thousandSeparator={true}
+              />
             </Box>
           </CustomInputWrapper>
+          {fetchingPath && (
+            <Box display="flex" alignItems="center">
+              <img src={Loading} alt="" width="22px" height="22px" style={{ marginRight: '10px' }} />
+              Fetching best price...
+            </Box>
+          )}
           <Box width="100%" mt={1} display="flex" justifyContent="center">
             <Divider sx={{ marginTop: 3, marginBottom: 3 }}>
               <DividerContent sx={{ color: 'white', fontSize: 22, fontWeight: 'bold' }}>=</DividerContent>
@@ -234,7 +249,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               </Typography>
             </Box>
             <Box width="100%" mt={3}>
-              <FormButton onClick={handleClick} disabled={Number(USDCAmount) < 1}>
+              <FormButton onClick={handleClick} disabled={Number(USDCAmount) < (chainId === 1 ? 5000 : 0)}>
                 PREVIEW SWAP
               </FormButton>
             </Box>

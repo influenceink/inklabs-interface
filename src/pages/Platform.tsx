@@ -1,4 +1,4 @@
-import { Box, Typography, useMediaQuery } from '@mui/material';
+import { Box, Typography, useMediaQuery, styled } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
 import { PageContent } from '../components/PageContent';
@@ -23,7 +23,7 @@ export const Platform = () => {
         <Box>
           <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="center">
             <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
-              <Typography variant="h1">platform</Typography>
+              <Headline variant="h1">platform</Headline>
               <Paragraph paragraph mt="40px">
                 On World of Influence, users get paid for bringing their connections and social following into game and
                 entertainment experiences. To enable this in a user-friendly, profitable, and entertaining way, we’ve
@@ -121,3 +121,18 @@ export const Platform = () => {
     </>
   );
 };
+
+const Headline = styled(Typography)`
+  @media screen and (max-width: 1375px) {
+    font-size: 76px;
+  }
+  @media screen and (max-width: 1200px) {
+    font-size: 90px;
+  }
+  @media screen and (max-width: 780px) {
+    font-size: 72px;
+  }
+  @media screen and (max-width: 660px) {
+    font-size: 42px;
+  }
+`;
