@@ -1,12 +1,11 @@
-import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useState, useContext } from 'react';
-import BigNumber from 'bignumber.js';
 import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
 import { ContractContext, AuthContext, Web3Context } from '../../../contexts';
-import SushiIcon from '../../../assets/img/sushi.png';
 import Loading from '../../../assets/img/loading.gif';
 import InkIcon from '../../../assets/img/ink.png';
 import { TokenLogo } from '../../Logo';
+import { tokenToWei } from '../../../utils';
 
 export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPrev: () => void; preview: any }) => {
   const { contracts, getTokenDecimals, tokenApprove } = useContext(ContractContext);
@@ -22,17 +21,12 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
       };
       const decimals = await getTokenDecimals(preview.token.id);
       if (preview.token.symbol === 'USDC') {
-        if (
-          await tokenApprove(
-            preview.token.id,
-            new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
-          )
-        ) {
+        if (await tokenApprove(preview.token.id, tokenToWei(preview.tokenAmount, decimals))) {
           try {
             const tx: any = await contracts['inkpurchase'].send(
               'purchaseForUSDC',
               null,
-              new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
+              tokenToWei(preview.tokenAmount, decimals)
             );
             await purchase({
               transaction_id: tx.transactionHash,
@@ -42,6 +36,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
               paid_network: 'Metamask',
             });
           } catch (err) {
+            console.log(err);
             setLoading(false);
             onPrev();
             return;
@@ -53,9 +48,13 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
         }
       } else if (preview.token.symbol === getGovernToken()) {
         try {
-          const tx: any = await contracts['inkpurchase'].send('purchaseForETH', {
-            value: new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString(),
-          });
+          const tx: any = await contracts['inkpurchase'].send(
+            'purchaseForETH',
+            {
+              value: tokenToWei(preview.tokenAmount, decimals),
+            },
+            preview.swapPath
+          );
           await purchase({
             transaction_id: tx.transactionHash,
             usd_amount: tx.events.Purchased.returnValues.amount,
@@ -64,23 +63,20 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
             paid_network: 'Metamask',
           });
         } catch (err) {
+          console.log(err);
           setLoading(false);
           onPrev();
           return;
         }
       } else {
-        if (
-          await tokenApprove(
-            preview.token.id,
-            new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
-          )
-        ) {
+        if (await tokenApprove(preview.token.id, tokenToWei(preview.tokenAmount, decimals))) {
           try {
             const tx: any = await contracts['inkpurchase'].send(
               'purchaseForToken',
               null,
               preview.token.id,
-              new BigNumber(preview.tokenAmount).times(new BigNumber(10).pow(decimals)).toString()
+              tokenToWei(preview.tokenAmount, decimals),
+              preview.swapPath //Web3.utils.toUtf8(preview.swapPath)
             );
             await purchase({
               transaction_id: tx.transactionHash,
@@ -90,6 +86,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
               paid_network: 'Metamask',
             });
           } catch (err) {
+            console.log(err);
             setLoading(false);
             onPrev();
             return;

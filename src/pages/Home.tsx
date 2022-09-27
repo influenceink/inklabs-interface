@@ -20,7 +20,7 @@ export const Home = () => {
         width="100%"
         height="100vh"
       >
-        <TypeWrapper>
+        {/* <TypeWrapper>
           <Typewriter
             onInit={(typewriter) => {
               typewriter.typeString('WELCOME TO INKTOKEN').start();
@@ -30,7 +30,7 @@ export const Home = () => {
               loop: false,
             }}
           />
-        </TypeWrapper>
+        </TypeWrapper> */}
       </Box>
     </>
   );

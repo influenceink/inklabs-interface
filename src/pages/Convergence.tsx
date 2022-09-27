@@ -1,4 +1,4 @@
-import { Box, Typography, useMediaQuery } from '@mui/material';
+import { Box, Typography, useMediaQuery, styled } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
 import { PageContent } from '../components/PageContent';
@@ -21,7 +21,7 @@ export const Convergence = () => {
       <PageContent title={PAGE_TITLE_CONVERGENCE} type="primary">
         <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="center">
           <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
-            <Typography variant="h1">convergence</Typography>
+            <Headline variant="h1">convergence</Headline>
             <Divider />
             <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" my={3}>
               OVERVIEW
@@ -69,3 +69,21 @@ export const Convergence = () => {
     </>
   );
 };
+
+const Headline = styled(Typography)`
+  @media screen and (max-width: 1680px) {
+    font-size: 70px;
+  }
+  @media screen and (max-width: 1450px) {
+    font-size: 52px;
+  }
+  @media screen and (max-width: 1200px) {
+    font-size: 90px;
+  }
+  @media screen and (max-width: 980px) {
+    font-size: 50px;
+  }
+  @media screen and (max-width: 660px) {
+    font-size: 42px;
+  }
+`;

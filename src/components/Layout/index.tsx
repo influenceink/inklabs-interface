@@ -8,7 +8,7 @@ import { BottomBar } from '../BottomBar';
 import { LeftBar } from '../LeftBar';
 import { RightBar } from '../RightBar';
 
-import background from '../../assets/img/background.png';
+import background from '../../assets/img/background.jpg';
 import logo from '../../assets/img/logo.png';
 import { AuthContext } from '../../contexts';
 export const Layout: FC = ({ children }) => {
@@ -66,7 +66,7 @@ const ProfileWrapper = styled('div')`
   width: 45px;
   height: 45px;
   border-radius: 100%;
-  background-color: black;
+  background-color: rgba(255, 255, 255, 0.3);
   position: absolute;
   top: 0;
   right: 0;

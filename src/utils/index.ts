@@ -16,6 +16,27 @@ export const getTopTokensList = async (chainId: number): Promise<Array<any>> => 
   return new Promise((resolve) => resolve([]));
 };
 
+export const tokenToWei = (token: string | number, decimals: number) => {
+  const tokenStr = token.toString();
+  const zerosNum = tokenStr.indexOf('.') === -1 ? decimals : decimals - tokenStr.length + tokenStr.indexOf('.') + 1;
+  const zeroArr = '0000000000000000000000000000000000000000000000000000000';
+  return tokenStr.replace('.', '') + zeroArr.slice(0, zerosNum);
+};
+
+export const formPath = (route: any) => {
+  let pools: Array<any> = route.route[0].route.pools;
+  let tokens: Array<any> = route.route[0].route.tokenPath;
+  if (route.route[0].tradeType === 1) {
+    pools = pools.reverse();
+    tokens = tokens.reverse();
+  }
+  let path = tokens[0].address;
+  pools.forEach((pool, index) => {
+    path += ('000000' + Number(pool.fee).toString(16)).slice(-6) + tokens[index + 1].address.slice(-40);
+  });
+  return path;
+};
+
 export const getState = (zipString: string) => {
   /* Ensure param is a string to prevent unpredictable parsing results */
   if (typeof zipString !== 'string') {

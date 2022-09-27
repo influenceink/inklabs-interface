@@ -22,6 +22,9 @@ interface IAuthContext {
   resetPassword: Function;
   balances: any;
   userInfo: Function;
+  authVacancy: Function;
+  userVacancy: Function;
+  referrerLookup: Function;
 }
 
 export const AuthContext = createContext<IAuthContext>({
@@ -45,6 +48,9 @@ export const AuthContext = createContext<IAuthContext>({
   resetPassword: () => {},
   balances: null,
   userInfo: () => {},
+  authVacancy: () => {},
+  userVacancy: () => {},
+  referrerLookup: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -182,7 +188,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       paid_network: string;
     }) => {
       try {
-        return await axios.post('/web3/purchase', props).then((res) => res.data);
+        return axios.post('/web3/purchase', props).then((res) => res.data);
       } catch (err) {
         console.log(err);
       }
@@ -191,7 +197,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
   const resetPassword = useCallback(async (props: { email: string }) => {
     try {
-      return await axios.post('/auth/password-reset', props).then((res) => res.data.status);
+      return axios.post('/auth/password-reset', props).then((res) => res.data.status);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+  const authVacancy = useCallback(async (props: { email: string }) => {
+    try {
+      return axios.post('/auth/vacancy', props).then((res) => res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+  const userVacancy = useCallback(async (props: { ink_id: string }) => {
+    try {
+      return axios.post('/user/vacancy', { web: true, ...props }).then((res) => res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+  const referrerLookup = useCallback(async (props: { referrer_id: string }) => {
+    try {
+      return axios.post('/referrer/lookup', { web: true, ...props }).then((res) => res.data);
     } catch (err) {
       console.log(err);
     }
@@ -234,6 +261,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         resetPassword,
         balances,
         userInfo,
+        authVacancy,
+        userVacancy,
+        referrerLookup,
       }}
     >
       {children}
