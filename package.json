@@ -61,8 +61,7 @@
   },
   "scripts": {
     "contracts:compile:v3": "typechain --target ethers-v5 \"./node_modules/@uniswap/**/artifacts/contracts/**/*[!dbg].json\"",
-    "postinstall": "yarn contracts:compile:v3",
-    "start": "react-scripts start",
+    "postinstall": "cd ./node_modules/@uniswap/v3-periphery && yarn && yarn compile",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
