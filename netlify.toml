@@ -1,2 +1,0 @@
-[build]
-  command = "cd ./node_modules/@uniswap/v3-periphery & ls"
