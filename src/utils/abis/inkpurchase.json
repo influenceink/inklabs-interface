@@ -103,7 +103,13 @@
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "path",
+        "type": "bytes"
+      }
+    ],
     "name": "purchaseForETH",
     "outputs": [],
     "stateMutability": "payable",
@@ -120,6 +126,11 @@
         "internalType": "uint256",
         "name": "_amount",
         "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "path",
+        "type": "bytes"
       }
     ],
     "name": "purchaseForToken",

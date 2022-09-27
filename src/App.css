@@ -8,5 +8,5 @@ html {
 }
 
 .MuiMenu-paper.MuiPopover-paper {
-  max-height: calc(100% - 400px);
+  max-height: 30%;
 }

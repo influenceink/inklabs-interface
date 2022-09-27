@@ -11,7 +11,7 @@ export const CreateAccount = ({
 }: {
   account: any;
   onNext: () => void;
-  onPrev: (_?:string) => void;
+  onPrev: (_?: string) => void;
 }) => {
   const { signUp } = useContext(AuthContext);
   const [loadingStatus, setLoadingStatus] = useState<boolean>(false);
@@ -53,7 +53,7 @@ export const CreateAccount = ({
             }}
           />
           <FormButton onClick={handleClick} disabled={referrer === '' || loadingStatus}>
-            enter{loadingStatus && <img src={Loading} alt="" width={'15px'} style={{ marginLeft: '10px' }} />}
+            enter{loadingStatus && <img src={Loading} alt="" width={'22px'} style={{ marginLeft: '10px' }} />}
           </FormButton>
         </Box>
         <Divider />

@@ -2,6 +2,9 @@ import { useQuery, gql, ApolloClient, NormalizedCacheObject, InMemoryCache } fro
 import { useMemo, useContext, useState, useEffect } from 'react';
 import { Web3Context } from '../contexts';
 import { TOKEN_HIDE, TESTNEXT_TOKENSLIST } from '../utils/constants';
+import { useClients } from './clients';
+import { usePoolDatas } from './topPools';
+import Swap from './swap';
 
 export const TOP_TOKENS = gql`
   query topPools {
@@ -44,7 +47,7 @@ interface TopTokensResponse {
   }[];
 }
 
-interface TokenFields {
+export interface TokenFields {
   id: string;
   symbol: string;
   name: string;
@@ -63,107 +66,6 @@ interface TokenDataResponse {
     ethPriceUSD: string;
   }[];
 }
-
-const ethClient = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
-  cache: new InMemoryCache({
-    typePolicies: {
-      Token: {
-        // Singleton types that have no identifying field can use an empty
-        // array for their keyFields.
-        keyFields: false,
-      },
-      Pool: {
-        // Singleton types that have no identifying field can use an empty
-        // array for their keyFields.
-        keyFields: false,
-      },
-    },
-  }),
-  queryDeduplication: true,
-  defaultOptions: {
-    watchQuery: {
-      fetchPolicy: 'no-cache',
-    },
-    query: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'all',
-    },
-  },
-});
-
-export const ethBlockClient = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks',
-  cache: new InMemoryCache(),
-  queryDeduplication: true,
-  defaultOptions: {
-    watchQuery: {
-      fetchPolicy: 'no-cache',
-    },
-    query: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'all',
-    },
-  },
-});
-
-const polygonClient = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-polygon',
-  cache: new InMemoryCache({
-    typePolicies: {
-      Token: {
-        // Singleton types that have no identifying field can use an empty
-        // array for their keyFields.
-        keyFields: false,
-      },
-      Pool: {
-        // Singleton types that have no identifying field can use an empty
-        // array for their keyFields.
-        keyFields: false,
-      },
-    },
-  }),
-  queryDeduplication: true,
-  defaultOptions: {
-    watchQuery: {
-      fetchPolicy: 'no-cache',
-    },
-    query: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'all',
-    },
-  },
-});
-
-export const polygonBlockClient = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/ianlapham/polygon-blocks',
-  cache: new InMemoryCache(),
-  queryDeduplication: true,
-  defaultOptions: {
-    watchQuery: {
-      fetchPolicy: 'cache-first',
-    },
-    query: {
-      fetchPolicy: 'cache-first',
-      errorPolicy: 'all',
-    },
-  },
-});
-
-export const useClients = () => {
-  const { chainId } = useContext(Web3Context);
-  const [dataClient, setDataClient] = useState<ApolloClient<NormalizedCacheObject>>(ethClient);
-  const [blockClient, setBlockClient] = useState<ApolloClient<NormalizedCacheObject>>(ethBlockClient);
-
-  useEffect(() => {
-    if (Number(chainId) === 137) {
-      setDataClient(polygonClient);
-      setBlockClient(ethBlockClient);
-    }
-  }, [chainId]);
-
-  return { dataClient, blockClient };
-};
 
 export const useTopTokenAddresses = (): { loading: boolean; error: boolean; addresses: string[] | undefined } => {
   const { dataClient } = useClients();
@@ -184,9 +86,12 @@ export const useTopTokenAddresses = (): { loading: boolean; error: boolean; addr
 };
 
 export const useTopTokenDatas = () => {
+  // const poolDatas = usePoolDatas();
+
   const { dataClient } = useClients();
   const { chainId } = useContext(Web3Context);
   const { addresses: tokenAddresses } = useTopTokenAddresses();
+
   const { loading, error, data } = useQuery<TokenDataResponse>(TOKENS_BULK(tokenAddresses || []), {
     client: dataClient,
   });
@@ -195,8 +100,12 @@ export const useTopTokenDatas = () => {
     if (chainId === 4 || chainId === 80001) {
       return TESTNEXT_TOKENSLIST[chainId];
     }
+
+    // const swap = new Swap(tokenAddresses || [], poolDatas);
+    // const USDCaddress = data?.tokens.find((token) => token.symbol === 'USDC')?.id;
+
     return data?.tokens
-      .filter((token) => !TOKEN_HIDE.includes(token.id))
+      .filter((token) => !TOKEN_HIDE.includes(token.id) /* && swap.path(token.id, USDCaddress || '').path !== ''*/)
       .map((token) => ({ id: token.id, name: token.name, symbol: token.symbol }));
   }, [data, chainId]);
   return { loading, error, tokenDatas: formattedData };
