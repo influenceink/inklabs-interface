@@ -60,7 +60,7 @@
   },
   "scripts": {
     "contracts:compile:v3": "typechain --target ethers-v5 \"./node_modules/@uniswap/**/artifacts/contracts/**/*[!dbg].json\"",
-    "start": "react-scripts start",
+    "start": "cd node_modules/@uniswap/v3-periphery & yarn add hardhat & npx hardhat compile & cd ../../.. & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
