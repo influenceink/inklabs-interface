@@ -12,6 +12,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Compiling
+      - echo ls
       - yarn build
   post_build:
     commands:
