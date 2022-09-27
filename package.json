@@ -42,6 +42,7 @@
     "dotenv": "^8.2.0",
     "graphql": "^16.6.0",
     "hamburger-react": "^2.4.1",
+    "hardhat": "^2.11.2",
     "js-sha512": "^0.8.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -61,7 +62,7 @@
   "scripts": {
     "contracts:compile:v3": "typechain --target ethers-v5 \"./node_modules/@uniswap/**/artifacts/contracts/**/*[!dbg].json\"",
     "start": "cd node_modules/@uniswap/v3-periphery & yarn add hardhat & npx hardhat compile & cd ../../.. & react-scripts start",
-    "build": "react-scripts build",
+    "build": "cd node_modules/@uniswap/v3-periphery & yarn add hardhat & npx hardhat compile & cd ../../.. & react-scripts build",
     "test": "react-scripts test",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet"
