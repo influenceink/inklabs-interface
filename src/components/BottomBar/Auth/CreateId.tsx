@@ -154,6 +154,11 @@ export const CreateId = ({
             if (!validation() && (e.key === 'Enter' || e.keyCode === 13)) handleClick();
           }}
         />
+        {password !== confirm && (
+          <Typography color="red" fontSize={15}>
+            Passwords do not match.
+          </Typography>
+        )}
         <Box my={1} width="100%">
           <FormButton onClick={handleClick} disabled={validation()}>
             create ink id
