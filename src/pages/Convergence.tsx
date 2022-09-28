@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_CONVERGENCE } from '../utils/constants';
-import convergenceImg from '../assets/img/convergence.png';
+import convergenceImg from '../assets/img/convergence.jpg';
 import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';
