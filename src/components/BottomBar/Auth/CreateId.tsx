@@ -57,19 +57,30 @@ export const CreateId = ({
   }, [error]);
   const handleUsernameChange = async (inkId: string) => {
     setUsername(inkId);
-    if ((await userVacancy({ ink_id: inkId })).status) {
-      setIdError((await userVacancy({ ink_id: inkId })).error);
-      setIdValidation(false);
-    } else setIdValidation(true);
   };
   const handleEmailChange = async (email: string) => {
     setEmail(email);
-    console.log(email);
-    if ((await authVacancy({ email })).status) {
-      setEmailError((await authVacancy({ email })).error);
-      setEmailValidation(false);
-    } else setEmailValidation(true);
   };
+  useEffect(() => {
+    const userVacancyWrapper = async () => {
+      const res = await userVacancy({ ink_id: username });
+      if (res.status) {
+        setIdError(res.error);
+        setIdValidation(false);
+      } else setIdValidation(true);
+    };
+    userVacancyWrapper();
+  }, [username, userVacancy]);
+  useEffect(() => {
+    const authVacancyWrapper = async () => {
+      const res = await authVacancy({ email });
+      if (res.status) {
+        setEmailError(res.error);
+        setEmailValidation(false);
+      } else setEmailValidation(true);
+    };
+    authVacancyWrapper();
+  }, [email, authVacancy]);
   return (
     <>
       <FormTitle>
@@ -86,7 +97,7 @@ export const CreateId = ({
         gap="15px"
       >
         {displayError && (
-          <Typography color="red" fontSize={15}>
+          <Typography color="red" fontSize={15} textAlign="center">
             {error}
           </Typography>
         )}
@@ -102,7 +113,7 @@ export const CreateId = ({
           }}
         />
         {!isIdValid && (
-          <Typography color="red" fontSize={15}>
+          <Typography color="red" fontSize={15} textAlign="center">
             {IdError}
           </Typography>
         )}
@@ -132,7 +143,7 @@ export const CreateId = ({
           }}
         />
         {!isEmailValid && (
-          <Typography color="red" fontSize={15}>
+          <Typography color="red" fontSize={15} textAlign="center">
             {EmailError}
           </Typography>
         )}

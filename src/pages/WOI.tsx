@@ -2,7 +2,7 @@ import { Box, Typography, useMediaQuery, styled } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_INFLUENCE } from '../utils/constants';
-import influenceImg from '../assets/img/influence.png';
+import influenceImg from '../assets/img/influence.jpg';
 import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';

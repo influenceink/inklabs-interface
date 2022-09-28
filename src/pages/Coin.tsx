@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_COIN } from '../utils/constants';
 import coinImg from '../assets/img/coin.png';
-import coin2 from '../assets/img/coin1.png';
+import coin2 from '../assets/img/coin1.jpg';
 import symbolImg from '../assets/img/symbol.png';
 import completeImg from '../assets/img/complete.png';
 import hereImg from '../assets/img/here.png';
