@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_VISION } from '../utils/constants';
-import visionImg from '../assets/img/vision.png';
+import visionImg from '../assets/img/vision.jpg';
 import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';

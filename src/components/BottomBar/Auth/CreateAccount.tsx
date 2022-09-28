@@ -1,4 +1,4 @@
-import { useState, useContext, useCallback } from 'react';
+import { useState, useContext, useCallback, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 import { AuthContext } from '../../../contexts';
@@ -28,11 +28,17 @@ export const CreateAccount = ({
   }, [setLoadingStatus, account, onPrev, referrer, signUp]);
   const handleReferrerChange = async (referrer: string) => {
     setReferrer(referrer);
-    if ((await referrerLookup({ referrer_id: referrer })).status) {
-      setReferrerError((await referrerLookup({ referrer_id: referrer })).error);
-      setReferrerValidation(false);
-    } else setReferrerValidation(true);
   };
+  useEffect(() => {
+    const referrerLookupWrapper = async () => {
+      const res = await referrerLookup({ referrer_id: referrer });
+      if (res.status) {
+        setReferrerError(res.error);
+        setReferrerValidation(false);
+      } else setReferrerValidation(true);
+    };
+    referrerLookupWrapper();
+  }, [referrer, referrerLookup]);
   return (
     <>
       <FormTitle>
@@ -62,7 +68,7 @@ export const CreateAccount = ({
             }}
           />
           {!isReferrerValid && (
-            <Typography color="red" fontSize={15}>
+            <Typography color="red" fontSize={15} textAlign="center">
               {ReferrerError}
             </Typography>
           )}
