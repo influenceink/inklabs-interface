@@ -66,7 +66,7 @@ export const MenuButton = () => {
           position="fixed"
           display="flex"
           alignItems="flex-end"
-          mb={sm ? '42px' : 2}
+          mb={2}
           bottom={0}
           gap={2}
           zIndex={9999}
@@ -126,9 +126,10 @@ const StyledButton = styled(Button)`
     padding: 14px 18px;
   }
   &.close {
-    padding: 8px 14px;
+    padding: 8px 18px;
     img {
-      width: 80%;
+      width: 38.99px;
+      height: 36.79px;
       filter: invert(1);
     }
     :hover {

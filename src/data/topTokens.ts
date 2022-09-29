@@ -3,8 +3,6 @@ import { useMemo, useContext, useState, useEffect } from 'react';
 import { Web3Context } from '../contexts';
 import { TOKEN_HIDE, TESTNEXT_TOKENSLIST } from '../utils/constants';
 import { useClients } from './clients';
-import { usePoolDatas } from './topPools';
-import Swap from './swap';
 
 export const TOP_TOKENS = gql`
   query topPools {
@@ -104,8 +102,15 @@ export const useTopTokenDatas = () => {
     // const swap = new Swap(tokenAddresses || [], poolDatas);
     // const USDCaddress = data?.tokens.find((token) => token.symbol === 'USDC')?.id;
 
+    let usdcIndex: number = 0;
+    if (data?.tokens && data?.tokens.length > 0 && data?.tokens[0].symbol !== 'USDC')
+      usdcIndex = data?.tokens.findIndex((token) => token.symbol === 'USDC') as number;
     return data?.tokens
-      .filter((token) => !TOKEN_HIDE.includes(token.id) /* && swap.path(token.id, USDCaddress || '').path !== ''*/)
+      .filter(
+        (token, index) =>
+          !TOKEN_HIDE.includes(token.id) &&
+          index >= usdcIndex /* && swap.path(token.id, USDCaddress || '').path !== ''*/
+      )
       .map((token) => ({ id: token.id, name: token.name, symbol: token.symbol }));
   }, [data, chainId]);
   return { loading, error, tokenDatas: formattedData };

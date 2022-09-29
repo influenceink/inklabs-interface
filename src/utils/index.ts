@@ -5,7 +5,14 @@ import axios from 'axios';
 import Web3 from 'web3';
 // import ethTopTokens from './eth-top-50-tokens.json';
 // import polyTopTokens from './poly-top-50-tokens.json';
-
+export const containsSpecialChars = (str: string) => {
+  const specialChars = '[`!@#$%^&*()_+-=[]{};\':"\\|,.<>/?~]/';
+  const numbers = '0123456789';
+  return (
+    specialChars.split('').some((specialChar) => str.includes(specialChar)) &&
+    numbers.split('').some((number) => str.includes(number))
+  );
+};
 export const passwordToHash = (password: string) => {
   const bytes = sha512.array(password);
   const hash = btoa(String.fromCharCode.apply(null, bytes));

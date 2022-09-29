@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_GAMES } from '../utils/constants';
-import gamesImg from '../assets/img/games.png';
+import gamesImg from '../assets/img/games.jpg';
 import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';
