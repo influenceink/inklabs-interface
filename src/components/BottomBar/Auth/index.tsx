@@ -60,10 +60,10 @@ export const Auth = ({ show, setShow }: Props) => {
                 <CreateAccount
                   account={account}
                   onNext={() => setShowModal(false)}
-                  onPrev={(msg?:string) => {
+                  onPrev={(msg?: string) => {
                     setIndex((value) => value - 1);
                     setAccount(null);
-                    if(msg !== undefined) setErrorMsg(msg)
+                    if (msg !== undefined) setErrorMsg(msg);
                   }}
                 />
               )}

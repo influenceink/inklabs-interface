@@ -120,7 +120,14 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           YOU ARE SENDING
         </Typography>
         <Box display="flex" flexDirection="column" alignItems="center" gap="12px" width="100%">
-          <Box display="flex" alignItems="center" gap={2} sx={{ textTransform: 'uppercase' }}>
+          <Box
+            display="flex"
+            alignItems="center"
+            gap={1}
+            sx={{ textTransform: 'uppercase' }}
+            fontWeight="bold"
+            fontSize="20px"
+          >
             <TokenLogo address={preview.token.id} symbol={preview.token.symbol} />
             <Typography variant="subtitle2" color="#fff" fontWeight="bold" fontSize="25px" lineHeight="25px">
               {Number(preview.tokenAmount).toLocaleString()}
@@ -133,8 +140,8 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           YOU ARE RESERVING
         </Typography>
         <Box display="flex" flexDirection="column" alignItems="center" gap="12px" width="100%">
-          <Box display="flex" alignItems="center" gap={2}>
-            <img src={InkIcon} alt="ink" />
+          <Box display="flex" alignItems="center" gap={2} fontWeight="bold" fontSize="24px">
+            <img src={InkIcon} alt="ink" width="85px" />
             <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
               {preview.inkAmount.toLocaleString()}
             </Typography>

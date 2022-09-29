@@ -10,6 +10,7 @@ import { RightBar } from '../RightBar';
 
 import background from '../../assets/img/background.jpg';
 import logo from '../../assets/img/logo.png';
+import profileLogo from '../../assets/img/profile-logo-default.png';
 import { AuthContext } from '../../contexts';
 export const Layout: FC = ({ children }) => {
   const { authorized, avatar, setShowModal } = useContext(AuthContext);
@@ -30,13 +31,7 @@ export const Layout: FC = ({ children }) => {
         </Link>
       </LogoWrapper>
       <ProfileWrapper onClick={handleProfileClick}>
-        <img
-          src={avatar}
-          alt="profile logo"
-          width="100%"
-          height="100%"
-          style={{ visibility: `${authorized ? 'visible' : 'hidden'}` as any }}
-        />
+        <img src={avatar === '' ? profileLogo : avatar} alt="profile logo" width="100%" height="100%" />
       </ProfileWrapper>
       <LeftBar />
       <RightBar />
