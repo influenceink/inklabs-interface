@@ -32,6 +32,7 @@ export const Complete = ({ preview, onPrev }: { preview: any; onPrev: () => void
             <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
               {preview.inkAmount.toLocaleString()}
             </Typography>
+            INK
           </Box>
           <Divider sx={{ marginTop: 2, marginBottom: 2 }} />
           <Typography fontWeight="bold" color="#ffffff88" textAlign="center">

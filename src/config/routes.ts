@@ -8,8 +8,8 @@ import { Route } from '../types/Route';
 import { Profile } from '../pages/Profile';
 import { Vision } from '../pages/Vision';
 import { Convergence } from '../pages/Convergence';
-import { Games } from '../pages/Games';
-import { WOI } from '../pages/WOI';
+import { Products } from '../pages/Products';
+// import { WOI } from '../pages/WOI';
 import { FAQ } from '../pages/FAQ';
 
 const routes: Array<Route> = [
@@ -86,23 +86,23 @@ const routes: Array<Route> = [
     appendDivider: true,
   },
   {
-    key: 'router-games',
-    title: 'Games',
-    description: 'Games',
-    component: Games,
-    path: '/games',
+    key: 'router-products',
+    title: 'Products',
+    description: 'Products',
+    component: Products,
+    path: '/products',
     isEnabled: true,
     appendDivider: true,
   },
-  {
-    key: 'router-woi',
-    title: 'World Of Influence',
-    description: 'World Of Influence',
-    component: WOI,
-    path: '/woi',
-    isEnabled: true,
-    appendDivider: true,
-  },
+  // {
+  //   key: 'router-woi',
+  //   title: 'World Of Influence',
+  //   description: 'World Of Influence',
+  //   component: WOI,
+  //   path: '/woi',
+  //   isEnabled: true,
+  //   appendDivider: true,
+  // },
   {
     key: 'router-faq',
     title: 'FAQ',

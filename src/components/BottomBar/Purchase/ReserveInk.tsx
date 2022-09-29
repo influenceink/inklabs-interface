@@ -122,7 +122,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
         >
           <Typography fontWeight="bold" color="#ffffff88" textAlign="center">
             INK TOKEN CONTRACT IS NOT YET LIVE, BUT YOU CAN RESERVE AN ALLOCATION TODAY AT THE PRE-PUBLIC PRICE OF
-            $0.002 / INK
+            $0.002 USD / INK
           </Typography>
           <FormControl sx={{ width: '100%' }}>
             <CustomSelect
@@ -167,9 +167,11 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               FOR INSTRUCTIONS:
             </Typography>
             <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
-              <FormButton>reserve@inktoken.com</FormButton>
+              <FormButton>
+                <Link href="mailto: reserve@inktoken.com">reserve@inktoken.com</Link>
+              </FormButton>
               <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
-                Minimum Investment $100k
+                Minimum Investment $100k USD
               </Typography>
             </Box>
           </Box>
@@ -269,6 +271,11 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     </>
   );
 };
+
+const Link = styled('a')`
+  text-decoration: none;
+  color: white;
+`;
 
 const AmountInput = styled(NumberFormat)`
   background-color: transparent;
