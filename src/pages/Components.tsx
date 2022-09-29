@@ -59,7 +59,7 @@ export const RedButton = styled(Button)`
     -webkit-clip-path: polygon(var(--path));
     clip-path: polygon(var(--path));
     position: absolute;
-    background: linear-gradient(0.25turn, white 0% 50%, #ff225e 50% 100%);
+    background: linear-gradient(0.25turn, white 0%, white 50%, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
     background-size: 200% 100% !important;
     background-position: right;
     z-index: -1;

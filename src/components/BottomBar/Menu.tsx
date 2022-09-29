@@ -32,8 +32,8 @@ export const Menu = ({ show, setShow }: Props) => {
             >
               <MenuItem onClick={() => goTo('/vision')}>vision</MenuItem>
               <MenuItem onClick={() => goTo('/platform')}>platform</MenuItem>
-              <MenuItem onClick={() => goTo('/games')}>products</MenuItem>
-              <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem>
+              <MenuItem onClick={() => goTo('/products')}>products</MenuItem>
+              {/* <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem> */}
               <MenuItem onClick={() => goTo('/convergence')}>convergence</MenuItem>
               <MenuItem onClick={() => goTo('/coin')}>ink token</MenuItem>
               {mobile && (
