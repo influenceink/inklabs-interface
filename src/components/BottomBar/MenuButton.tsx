@@ -10,7 +10,7 @@ import menuImg from '../../assets/img/menu.png';
 import dotLine from '../../assets/img/dot-line.png';
 import open from '../../assets/img/open.png';
 import cross from '../../assets/img/cross.png';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { Purchase } from './Purchase';
 import { Roadmap } from './Roadmap';
 import { Auth } from './Auth';
@@ -20,6 +20,7 @@ export const MenuButton = () => {
   const [showRoadmap, setShowRoadmap] = useState(false);
   const { showModal: showAuth, setShowModal: setAuth, authorized } = useContext(AuthContext);
   const { showModal: showPurchase, setShowModal: setPurchase } = useContext(PurchaseFlowContext);
+  const history = useHistory();
   const toggleShowRoadmap = () => {
     setShowMenu(false);
     setShowRoadmap((show) => !show);
@@ -38,6 +39,7 @@ export const MenuButton = () => {
     } else setShowMenu(true);
   };
   const toggleShowPurchaseFlow = () => {
+    history.push('/');
     setShowRoadmap(false);
     setShowMenu(false);
     setPurchase((value: boolean) => !value);
@@ -113,7 +115,7 @@ const MenuButtonWrapper = styled('div')`
 const StyledButton = styled(Button)`
   padding: 14px 18px;
   border-radius: 11px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgb(0, 0, 0);
   border: 3px solid white;
   z-index: 9999;
   color: white;

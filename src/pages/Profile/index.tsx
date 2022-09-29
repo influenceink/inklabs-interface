@@ -1,10 +1,8 @@
 import { Box, styled, Typography, useMediaQuery, Button } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import { Logout } from '@mui/icons-material';
 import { PageContent } from '../../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_PROFILE } from '../../utils/constants';
-import profilePic from '../../assets/img/profile.png';
-import logo from '../../assets/img/logo.png';
+import logo from '../../assets/img/ink.png';
 import pinkCard from '../../assets/img/card1.png';
 import blueCard from '../../assets/img/card2.png';
 import greenCard from '../../assets/img/card3.png';
@@ -303,11 +301,12 @@ export const Profile = () => {
               </StatCard>
             </Box>
             <StatCard>
-              <Box display="flex" alignItems="center" gap="8px">
+              <Box display="flex" alignItems="center" gap="8px" fontWeight="bold" fontSize="20px">
                 <TokenImg src={logo} alt="" />
                 <Typography variant="subtitle2" fontWeight="bold" fontSize="23px" lineHeight="23px">
                   {Number(balances.reserved_ink).toLocaleString()}
                 </Typography>
+                INK
               </Box>
               <Typography variant="subtitle2" fontSize="9px" color="#fff5">
                 Total Ink Token Reserved
