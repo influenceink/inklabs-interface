@@ -72,16 +72,16 @@ const ProfileWrapper = styled('div')`
   right: 0;
   margin-top: 46px;
   margin-right: 8px;
-  &:before {
-    right: 0;
-    content: '';
-    width: 12px;
-    height: 12px;
-    background-color: #ff225e;
-    position: absolute;
-    border-radius: 100%;
-    transform: translate(0px, -2px);
-  }
+  // &:before {
+  //   right: 0;
+  //   content: '';
+  //   width: 12px;
+  //   height: 12px;
+  //   background-color: #ff225e;
+  //   position: absolute;
+  //   border-radius: 100%;
+  //   transform: translate(0px, -2px);
+  // }
   @media screen and (max-width: 660px) {
     margin-top: 26px;
     margin-right: 8px;

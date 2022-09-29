@@ -34,7 +34,12 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     setCurrency(Number(ev.target.value));
   };
   const handleUSDCAmountChange = (ev: any) => {
-    const USDCAmount = ev.target.value.replaceAll(',', '').replaceAll('$', '').replaceAll(' ', '');
+    const USDCAmount = ev.target.value
+      .replaceAll(',', '')
+      .replaceAll('$', '')
+      .replaceAll(' ', '')
+      .replaceAll('USD', '')
+      .replaceAll(' ', '');
     setUSDCAmount(USDCAmount);
     const quoterWrapper = async () => {
       if (contracts !== null && Number(USDCAmount) !== 0) {
@@ -52,7 +57,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
         setFetchingPath(false);
       }
     };
-    if (currency === 0) setTokenAmount(ev.target.value.replaceAll(',', ''));
+    if (currency === 0) setTokenAmount(USDCAmount);
     else quoterWrapper();
   };
   const handleTokenAmountChange = (ev: any) => {
@@ -117,7 +122,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
         >
           <Typography fontWeight="bold" color="#ffffff88" textAlign="center">
             INK TOKEN CONTRACT IS NOT YET LIVE, BUT YOU CAN RESERVE AN ALLOCATION TODAY AT THE PRE-PUBLIC PRICE OF
-            $0.002 / $INK
+            $0.002 / INK
           </Typography>
           <FormControl sx={{ width: '100%' }}>
             <CustomSelect
@@ -146,7 +151,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
             <FormButton onClick={handleWalletConnect}>connect wallet</FormButton>
             <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
-              Minimum Investment $5,000
+              Minimum Investment $5,000 USD
             </Typography>
           </Box>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
@@ -162,7 +167,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               FOR INSTRUCTIONS:
             </Typography>
             <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
-              <FormButton>INVEST@INKCOIN.COM</FormButton>
+              <FormButton>reserve@inktoken.com</FormButton>
               <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
                 Minimum Investment $100k
               </Typography>
@@ -203,20 +208,21 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               fontWeight="300"
               display={`${Number(USDCAmount) < 5000 ? 'block' : 'none'}`}
             >
-              Please enter a value of minimum $5,000
+              Please enter a value of minimum $5,000 USD
             </Typography>
           </Box>
           <CustomInputWrapper>
-            <Box width="100%" display="flex" justifyContent="center">
+            <Box width="100%" display="flex" justifyContent="center" alignItems="center" gap={1}>
               $
               <AmountInput
                 value={Number(USDCAmount).toFixed(3)}
                 onChange={handleUSDCAmountChange}
                 thousandSeparator={true}
+                suffix=" USD"
               />
             </Box>
             <Typography>/</Typography>
-            <Box width="100%" display="flex" gap={1} justifyContent="center">
+            <Box width="100%" display="flex" gap={1} justifyContent="center" alignItems="center">
               {tokensList && tokensList.length > 0 && (
                 <TokenLogo address={tokensList![currency].id} symbol={tokensList![currency].symbol} />
               )}
@@ -247,6 +253,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
                 {reservedInk.toLocaleString()}
               </Typography>
+              INK
             </Box>
             <Box width="100%" mt={3}>
               <FormButton

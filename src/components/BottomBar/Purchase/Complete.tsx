@@ -47,7 +47,7 @@ export const Complete = ({ preview, onPrev }: { preview: any; onPrev: () => void
             WHATS NEXT?
           </Typography>
           <Box width="100%">
-            <FormButton onClick={() => history.push('/faq')}>visit our faq&lsquo;s</FormButton>
+            <FormButton onClick={() => history.push('/profile')}>my profile</FormButton>
           </Box>
         </Box>
       </Box>

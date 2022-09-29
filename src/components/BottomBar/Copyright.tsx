@@ -11,11 +11,12 @@ export const Copyright = () => {
             py={sm ? '4px' : 0}
             textAlign={sm ? 'center' : 'left'}
             variant="caption"
+            color="GrayText"
           >
             © 2022 INK Games™. All Rights Reserved.
           </Typography>
           {!sm && (
-            <Typography variant="caption" mt={sm ? 0 : 1}>
+            <Typography variant="caption" mt={sm ? 0 : 1} color="GrayText">
               Reproduction without permission is prohibited.
             </Typography>
           )}

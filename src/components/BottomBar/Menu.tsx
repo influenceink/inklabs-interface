@@ -5,6 +5,7 @@ import instagram from '../../assets/img/instagram.png';
 import twitter from '../../assets/img/twitter.png';
 import facebook from '../../assets/img/facebook.png';
 import youtube from '../../assets/img/youtube.png';
+import { Copyright } from './Copyright';
 interface Props {
   show: boolean;
   setShow: (value: boolean) => void;
@@ -29,12 +30,12 @@ export const Menu = ({ show, setShow }: Props) => {
               justifyContent="center"
               sx={{ gap: { xs: '24px', md: '32px' } }}
             >
-              <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem>
-              <MenuItem onClick={() => goTo('/games')}>games</MenuItem>
-              <MenuItem onClick={() => goTo('/platform')}>platform tech</MenuItem>
-              <MenuItem onClick={() => goTo('/coin')}>ink token</MenuItem>
-              <MenuItem onClick={() => goTo('/convergence')}>convergence</MenuItem>
               <MenuItem onClick={() => goTo('/vision')}>vision</MenuItem>
+              <MenuItem onClick={() => goTo('/platform')}>platform</MenuItem>
+              <MenuItem onClick={() => goTo('/games')}>products</MenuItem>
+              <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem>
+              <MenuItem onClick={() => goTo('/convergence')}>convergence</MenuItem>
+              <MenuItem onClick={() => goTo('/coin')}>ink token</MenuItem>
               {mobile && (
                 <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} px={2}>
                   <img src={twitter} alt="twitter" />
@@ -47,10 +48,21 @@ export const Menu = ({ show, setShow }: Props) => {
           </MenuBar>
           {!mobile && (
             <Box position="absolute" right={0} bottom={0} display="flex" gap={2} mb={2} mr={2} color={'#a0a0a0'}>
-              <Typography onClick={() => goTo('/faq')}>FAQ&apos;s</Typography>|
-              <Link href="mailto: support@inktoken.com" style={{ textDecoration: 'none', color: '#a0a0a0' }}>
+              <Typography onClick={() => goTo('/faq')} sx={{ ':hover': { color: '#ff225e' } }}>
+                FAQ&apos;s
+              </Typography>
+              |
+              <Link
+                href="mailto: support@inktoken.com"
+                sx={{ textDecoration: 'none', color: '#a0a0a0', ':hover': { color: '#ff225e' } }}
+              >
                 SUPPORT
               </Link>
+            </Box>
+          )}
+          {!mobile && (
+            <Box position="fixed" ml="16px" left={0} bottom={0}>
+              <Copyright />
             </Box>
           )}
         </MenuWrapper>

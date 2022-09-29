@@ -1,13 +1,11 @@
 import { styled } from '@mui/material';
 
 import { MenuButton } from './MenuButton';
-import { Copyright } from './Copyright';
 
 export const BottomBar = () => {
   return (
     <FootWrapper>
       <MenuButton />
-      <Copyright />
     </FootWrapper>
   );
 };
