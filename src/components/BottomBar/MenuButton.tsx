@@ -5,7 +5,7 @@ import { styled, Button, Box, Collapse, useMediaQuery } from '@mui/material';
 import { Menu } from './Menu';
 
 import { PurchaseFlowContext, AuthContext } from '../../contexts';
-import arrowTop from '../../assets/img/arrow-up.png';
+import menuImg from '../../assets/img/menu.png';
 // import unlock from '../../assets/img/unlock.png';
 import dotLine from '../../assets/img/dot-line.png';
 import open from '../../assets/img/open.png';
@@ -52,14 +52,14 @@ export const MenuButton = () => {
   return (
     <MenuButtonWrapper>
       <Box display="flex" flexDirection="column" gap={0.5} alignItems="center">
-        <Bounce>
+        {/* <Bounce>
           <img src={open} alt="open" />
         </Bounce>
         <Box minHeight={112} mb={sm ? '110px' : '100px'}>
           <Collapse in={showLine} timeout={1000}>
             <img src={dotLine} alt="dotline" />
           </Collapse>
-        </Box>
+        </Box> */}
         <Box
           left={'50%'}
           style={{ transform: 'translateX(-50%)' }}
@@ -79,7 +79,7 @@ export const MenuButton = () => {
             className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
           >
             <img
-              src={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? cross : arrowTop}
+              src={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? cross : menuImg}
               className={
                 showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'closeBtnAnimation' : ''
               }
@@ -133,7 +133,7 @@ const StyledButton = styled(Button)`
       filter: invert(1);
     }
     :hover {
-      opacity: 0.2;
+      opacity: 0.6;
     }
     background-color: white;
   }
