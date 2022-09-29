@@ -346,7 +346,7 @@ export const Profile = () => {
                 history.push('/');
               }}
             >
-              <Logout sx={{ color: 'white' }} />
+              sign out
             </SignOutButton>
             <CloseButton onClick={() => history.push('/')}>
               <img src={cross} alt="close" />
@@ -514,21 +514,18 @@ const CloseButton = styled(Button)`
 `;
 
 const SignOutButton = styled(Button)`
-  position: absolute;
-  top: 46px;
-  right: 88px;
-  min-width: unset;
+  color: white;
+  margin-top: 16px;
+  align-self: end;
+  font-weight: bold;
+  font-size: 16px;
   width: fit-content;
   z-index: 8888;
   padding: 0;
-  & > svg {
-    font-size: 3rem;
-  }
   @media screen and (max-width: 660px) {
     top: 26px;
-    & > img {
-      width: 26px;
-      height: 26px;
-    }
+    align-self: center;
+    margin-top: 0px;
+    margin-bottom: 8px;
   }
 `;
