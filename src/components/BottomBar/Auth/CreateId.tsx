@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
-import { passwordToHash } from '../../../utils';
+import { passwordToHash, containsSpecialChars } from '../../../utils';
 import { AuthContext } from '../../../contexts';
 
 export const CreateId = ({
@@ -21,10 +21,12 @@ export const CreateId = ({
   const [confirm, setConfirm] = useState<string>('');
   const [displayError, setDisplayError] = useState<boolean>(false);
   const { authVacancy, userVacancy } = useContext(AuthContext);
-  const [isEmailValid, setEmailValidation] = useState<boolean>(true);
-  const [isIdValid, setIdValidation] = useState<boolean>(true);
   const [IdError, setIdError] = useState<string>('');
+  const [isIdValid, setIdValidation] = useState<boolean>(true);
   const [EmailError, setEmailError] = useState<string>('');
+  const [isEmailValid, setEmailValidation] = useState<boolean>(true);
+  const [PasswordError, setPasswordError] = useState<string>('');
+  const [isPasswordValid, setPasswordValidation] = useState<boolean>(true);
   // useEffect(() => {
   //   if (account !== null) {
   //     setEmail(account.email);
@@ -43,7 +45,8 @@ export const CreateId = ({
       password === '' ||
       password !== confirm ||
       !isEmailValid ||
-      !isIdValid
+      !isIdValid ||
+      !isPasswordValid
     );
   };
   const handleClick = () => {
@@ -63,6 +66,7 @@ export const CreateId = ({
   };
   useEffect(() => {
     const userVacancyWrapper = async () => {
+      if (username === '') return;
       const res = await userVacancy({ ink_id: username });
       if (res.status) {
         setIdError(res.error);
@@ -73,6 +77,7 @@ export const CreateId = ({
   }, [username, userVacancy]);
   useEffect(() => {
     const authVacancyWrapper = async () => {
+      if (email === '') return;
       const res = await authVacancy({ email });
       if (res.status) {
         setEmailError(res.error);
@@ -81,6 +86,16 @@ export const CreateId = ({
     };
     authVacancyWrapper();
   }, [email, authVacancy]);
+  useEffect(() => {
+    if (password !== '') {
+      if (password.length < 8 || !containsSpecialChars(password)) {
+        setPasswordError('Password must be at least 8 characters long and include at least 1 number and symbol.');
+        setPasswordValidation(false);
+      } else {
+        setPasswordValidation(true);
+      }
+    }
+  }, [password, authVacancy]);
   return (
     <>
       <FormTitle>
@@ -156,6 +171,11 @@ export const CreateId = ({
             if (!validation() && (e.key === 'Enter' || e.keyCode === 13)) handleClick();
           }}
         />
+        {!isPasswordValid && (
+          <Typography color="red" fontSize={15} textAlign="center">
+            {PasswordError}
+          </Typography>
+        )}
         <Input
           type="password"
           placeholder="confirm password"

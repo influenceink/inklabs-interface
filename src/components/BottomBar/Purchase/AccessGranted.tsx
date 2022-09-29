@@ -1,13 +1,20 @@
 import { Box, Typography } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, createRef, useEffect } from 'react';
 import { AuthContext } from '../../../contexts';
 import { FormButton, FormTitle, Input, Divider } from '.';
 
 export const AccessGranted = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
   const { inkId } = useContext(AuthContext);
+  const idRef = createRef<HTMLElement>();
   const handleClick = () => {
     onNext();
   };
+  useEffect(() => {
+    if (idRef.current && (idRef.current?.parentElement?.clientWidth as number) < (idRef.current?.clientWidth as number))
+      idRef.current.style.scale = (
+        (idRef.current?.parentElement?.clientWidth as number) / (idRef.current?.clientWidth as number)
+      ).toString();
+  }, [inkId, idRef]);
   return (
     <>
       <FormTitle>
@@ -28,7 +35,7 @@ export const AccessGranted = ({ onNext, onPrev }: { onNext: () => void; onPrev: 
           <Typography variant="subtitle1" color="#ffffff88">
             YOUR USERNAME/INK ID
           </Typography>
-          <Typography variant="subtitle2" fontWeight="semibold" fontSize="36px" lineHeight="36px">
+          <Typography ref={idRef} variant="subtitle2" fontWeight="semibold" fontSize="36px" lineHeight="36px">
             @{inkId}
           </Typography>
           <Box width="100%" mt={3}>
