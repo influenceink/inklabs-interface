@@ -9,9 +9,10 @@ import { LeftBar } from '../LeftBar';
 import { RightBar } from '../RightBar';
 
 import background from '../../assets/img/background.jpg';
-import logo from '../../assets/img/logo.png';
+import logo from '../../assets/img/ink.png';
 import profileLogo from '../../assets/img/profile-logo-default.png';
 import { AuthContext } from '../../contexts';
+
 export const Layout: FC = ({ children }) => {
   const { authorized, avatar, setShowModal } = useContext(AuthContext);
   const history = useHistory();
@@ -46,13 +47,13 @@ const LogoWrapper = styled('div')`
   padding-top: 46px;
   padding-left: 16px;
   & img {
-    width: 65%;
+    width: 50px;
   }
   @media screen and (max-width: 660px) {
     padding-top: 26px;
     padding-left: 8px;
     & img {
-      width: 35%;
+      width: 30px;
     }
   }
   z-index: 1;
@@ -94,7 +95,7 @@ const ProfileWrapper = styled('div')`
 `;
 const LayoutWrapper = styled('div')`
   min-height: 100vh;
-  background: url(${background}), rgba(0, 0, 0, 0.44);
+  // background: url(${background}), rgba(0, 0, 0, 0.44);
   background-size: cover;
   background-position: center;
   position: relative;

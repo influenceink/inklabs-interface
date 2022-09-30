@@ -126,7 +126,7 @@ const CloseButton = styled(Button)`
 `;
 
 const ModalWrapper = styled(Dialog)`
-  z-index: 3;
+  z-index: 1;
   .MuiDialog-container {
     & > div {
       background: transparent;

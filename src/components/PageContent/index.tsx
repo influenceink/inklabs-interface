@@ -1,7 +1,7 @@
 import { Box, Button, styled, Slide, useMediaQuery } from '@mui/material';
 import { ReactNode, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import logo from '../../assets/img/logo.png';
+import logo from '../../assets/img/ink.png';
 import { Link } from 'react-router-dom';
 import cross from '../../assets/img/cross.png';
 
@@ -56,14 +56,14 @@ const HeadWrapper = styled(Box)`
   z-index: 3;
   padding: 46px 8px 0px 16px;
   & > a > img {
-    width: 45.5px;
-    height: 48.75px;
+    width: 50px;
+    height: 50px;
   }
   @media screen and (max-width: 660px) {
     padding: 26px 8px 0px 8px;
     & > a > img {
-      width: 24.5px;
-      height: 26.25px;
+      width: 30px;
+      height: 30px;
     }
   }
 `;
