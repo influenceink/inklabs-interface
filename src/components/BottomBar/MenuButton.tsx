@@ -129,7 +129,7 @@ const StyledButton = styled(Button)`
     padding: 14px 18px;
   }
   &:hover > span:nth-of-type(odd) {
-    background: linear-gradient(0.25turn, white 0%, white 50%, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
+    background: linear-gradient(0.25turn, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -142,7 +142,7 @@ const StyledButton = styled(Button)`
     right: -3px;
     z-index: -1;
     border-radius: 11px;
-    background: linear-gradient(0.25turn, white 0%, white 50%, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
+    background: linear-gradient(0.25turn, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
   }
   :hover:after {
     content: '';
