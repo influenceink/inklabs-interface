@@ -74,7 +74,7 @@ export const MenuButton = () => {
           zIndex={9999}
         >
           <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
-            <span>test</span>
+            <span>buy ink</span>
           </StyledButton>
           <StyledButton
             onClick={handleClick}
