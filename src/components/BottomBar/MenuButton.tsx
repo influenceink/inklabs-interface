@@ -74,7 +74,7 @@ export const MenuButton = () => {
           zIndex={9999}
         >
           <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
-            buy ink
+            <span>buy ink</span>
           </StyledButton>
           <StyledButton
             onClick={handleClick}
@@ -89,7 +89,7 @@ export const MenuButton = () => {
             />
           </StyledButton>
           <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
-            roadmap
+            <span>roadmap</span>
           </StyledButton>
         </Box>
       </Box>
@@ -113,6 +113,7 @@ const MenuButtonWrapper = styled('div')`
 `;
 
 const StyledButton = styled(Button)`
+  position: relative;
   padding: 14px 18px;
   border-radius: 11px;
   background-color: rgb(0, 0, 0);
@@ -127,6 +128,33 @@ const StyledButton = styled(Button)`
   @media screen and (max-width: 400px) {
     padding: 14px 18px;
   }
+  &:hover > span:nth-of-type(odd) {
+    background: linear-gradient(0.25turn, white 0%, white 50%, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  :hover:before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    left: -3px;
+    right: -3px;
+    z-index: -1;
+    border-radius: 11px;
+    background: linear-gradient(0.25turn, white 0%, white 50%, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
+  }
+  :hover:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    border-radius: 9px;
+    background-color: rgb(0, 0, 0);
+  }
   &.close {
     padding: 8px 18px;
     img {
@@ -136,6 +164,12 @@ const StyledButton = styled(Button)`
     }
     :hover {
       opacity: 0.6;
+    }
+    :hover:after {
+      display: none;
+    }
+    :hover:before {
+      display: none;
     }
     background-color: white;
   }

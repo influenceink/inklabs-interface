@@ -54,16 +54,16 @@ const HeadWrapper = styled(Box)`
   justify-content: space-between;
   width: 100%;
   z-index: 3;
-  padding: 46px 8px 0px 16px;
+  padding: 46px 8px 0px 4px;
   & > a > img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
   }
   @media screen and (max-width: 660px) {
-    padding: 26px 8px 0px 8px;
+    padding: 26px 8px 0px 0px;
     & > a > img {
-      width: 30px;
-      height: 30px;
+      width: 45px;
+      height: 45px;
     }
   }
 `;
