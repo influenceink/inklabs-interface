@@ -22,30 +22,39 @@ export const Coin = () => {
         </title>
       </Helmet>
       <PageContent title={PAGE_TITLE_COIN} type="primary">
-        <Box>
-          <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="flex-center">
-            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
-              <Typography variant="h1">ink token</Typography>
-              <Divider />
-              <Box display="flex" width="100%" justifyContent="space-between" flexWrap="wrap">
-                <TokenWrapper>
-                  <Typography variant="h6">TOKEN NAME:</Typography>
-                  <Typography variant="h6">INK</Typography>
-                </TokenWrapper>
-                <TokenWrapper>
-                  <Typography variant="h6">TOKEN SUPPLY:</Typography>
-                  <Typography variant="h6">350,000,000,000</Typography>
-                </TokenWrapper>
-                <TokenWrapper>
-                  <Typography variant="h6">NETWORK:</Typography>
-                  <Typography variant="h6">POLYGON &amp; ETHEREUM</Typography>
-                </TokenWrapper>
-                <TokenWrapper>
-                  <Typography variant="h6">PRIVATE OFFERING PRICE:</Typography>
-                  <Typography variant="h6">$0.002 USD/INK</Typography>
-                </TokenWrapper>
-              </Box>
-              <Divider />
+        <Box width="100%">
+          <Box width="100%">
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              sx={{ float: 'right' }}
+              width={!xl ? '30%' : '100%'}
+            >
+              <CustomImage src={coinImg} alt="gray" height="100%" width="100%" />
+            </Box>
+            <Typography variant="h1">ink token</Typography>
+            <Divider />
+            <Box display="flex" justifyContent="space-between" flexWrap="wrap">
+              <TokenWrapper>
+                <Typography variant="h6">TOKEN NAME:</Typography>
+                <Typography variant="h6">INK</Typography>
+              </TokenWrapper>
+              <TokenWrapper>
+                <Typography variant="h6">TOKEN SUPPLY:</Typography>
+                <Typography variant="h6">350,000,000,000</Typography>
+              </TokenWrapper>
+              <TokenWrapper>
+                <Typography variant="h6">NETWORK:</Typography>
+                <Typography variant="h6">POLYGON &amp; ETHEREUM</Typography>
+              </TokenWrapper>
+              <TokenWrapper>
+                <Typography variant="h6">PRIVATE OFFERING PRICE:</Typography>
+                <Typography variant="h6">$0.002 USD/INK</Typography>
+              </TokenWrapper>
+            </Box>
+            <Divider />
+            <Box width={!xl ? 'max-content' : 'auto'} maxWidth="100%">
               <Grid container mb={3} spacing={4} flexWrap="wrap">
                 <Grid item xs={12} xl={4}>
                   <CardBox>
@@ -169,70 +178,47 @@ export const Coin = () => {
                   </CardBox>
                 </Grid>
               </Grid>
-              <Paragraph paragraph>
-                INK is an ERC-20 compliant utility token for INK Games and our suite of game and platform projects. With
-                this standard, we ensure interoperability with popular decentralized applications, digital assets, and
-                wallet services. INK holders will be able to unlock exclusive perks and upgrades on the platform through
-                two primary methods: (a) upgrading World of Influence membership by spending INK, or (b) staking INK to
-                unlock rewards. While INK is not necessary for basic platform participation, we’ve designed the World of
-                Influence in such a way that token holders enjoy enhanced experiences and distinct perks leading to
-                token demand.
-              </Paragraph>
-              <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
-                <RedButton
-                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
-                >
-                  read our litepaper
-                </RedButton>
-              </Box>
             </Box>
-            <Box display="flex" justifyContent="center" alignItems="center" width={!xl ? 'auto' : '100%'}>
-              <CustomImage src={coinImg} alt="gray" height="100%" width="100%" />
-            </Box>
+            <Paragraph paragraph>
+              INK is an ERC-20 compliant utility token for INK Games and our suite of game and platform projects. With
+              this standard, we ensure interoperability with popular decentralized applications, digital assets, and
+              wallet services. INK holders will be able to unlock exclusive perks and upgrades on the platform through
+              two primary methods: (a) upgrading World of Influence membership by spending INK, or (b) staking INK to
+              unlock rewards. While INK is not necessary for basic platform participation, we’ve designed the World of
+              Influence in such a way that token holders enjoy enhanced experiences and distinct perks leading to token
+              demand.
+            </Paragraph>
           </Box>
-          <Box
-            display="flex"
-            flexDirection={xl ? 'column-reverse' : 'row'}
-            gap={xl ? 2 : 6}
-            alignItems="flex-center"
-            mt={12}
-          >
-            <Box width="100%" display="flex" justifyContent="center">
-              <Image src={coin2} alt="gray" />
-            </Box>
-            <Box flexGrow={1} width="100%" display="flex" flexDirection="column" justifyContent="center">
-              <Divider />
-              <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
-                Supply
-              </Typography>
-              <Paragraph paragraph mt="20px">
-                The INK project is designed to ensure a balance of token supply and demand. On the supply side, outside
-                of the initial token sales, the primary way INK will be distributed is as a reward currency for platform
-                activities.
-              </Paragraph>
-              <Paragraph paragraph>
-                When a user{"'"}s social network generates revenue on our platform, we will reward the originating user
-                a fixed number of tokens for a corresponding amount of $USD (or equivalent) spend. In this way, INK
-                distribution happens as a result of real economic value creation.
-              </Paragraph>
-              <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
-                Proceeds
-              </Typography>
-              <Paragraph paragraph>
-                Token sale proceeds will fund the roadmap of platform functionality (discussed below). For security and
-                to efficiently fund future operating costs, we expect to continuously rebalance currency holdings to
-                achieve an approximate 75% exposure to fiat currency (USD held in corporate accounts) and 25%
-                cryptocurrency.
-              </Paragraph>
-              <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
-                <RedButton
-                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
-                >
-                  read our litepaper
-                </RedButton>
-              </Box>
+          <Box flexGrow={1} width="100%" display="flex" flexDirection="column" justifyContent="center">
+            <Divider />
+            <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
+              Supply
+            </Typography>
+            <Paragraph paragraph mt="20px">
+              The INK project is designed to ensure a balance of token supply and demand. On the supply side, outside of
+              the initial token sales, the primary way INK will be distributed is as a reward currency for platform
+              activities.
+            </Paragraph>
+            <Paragraph paragraph>
+              When a user{"'"}s social network generates revenue on our platform, we will reward the originating user a
+              fixed number of tokens for a corresponding amount of $USD (or equivalent) spend. In this way, INK
+              distribution happens as a result of real economic value creation.
+            </Paragraph>
+            <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
+              Proceeds
+            </Typography>
+            <Paragraph paragraph>
+              Token sale proceeds will fund the roadmap of platform functionality (discussed below). For security and to
+              efficiently fund future operating costs, we expect to continuously rebalance currency holdings to achieve
+              an approximate 75% exposure to fiat currency (USD held in corporate accounts) and 25% cryptocurrency.
+            </Paragraph>
+            <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
+              <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+              <RedButton
+                onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
+              >
+                read our litepaper
+              </RedButton>
             </Box>
           </Box>
         </Box>

@@ -22,8 +22,11 @@ export const Platform = () => {
       </Helmet>
       <PageContent title={PAGE_TITLE_PLATFORM} type="primary">
         <Box>
-          <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="center">
-            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
+          <Box>
+            <Box width="100%">
+              <Box width={xl ? '100%' : '50%'} display="flex" justifyContent="center" sx={{ float: 'right' }}>
+                <Image src={influenceImg} alt="gray" />
+              </Box>
               <Headline variant="h1">the platform</Headline>
               <Paragraph paragraph mt="40px">
                 On the INK platform users get paid for bringing their connections and social following into shareable
@@ -61,32 +64,9 @@ export const Platform = () => {
                 identifier, as well as their permanent referral code. Importantly, users may invite an unlimited number
                 of users, expanding their earning potential.
               </Paragraph>
-              <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
-                <RedButton
-                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
-                >
-                  read our litepaper
-                </RedButton>
-              </Box>
             </Box>
-            <Box width="100%" display="flex" justifyContent="center">
-              <Image src={influenceImg} alt="gray" />
-            </Box>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection={xl ? 'column-reverse' : 'row'}
-            gap={xl ? 2 : 6}
-            alignItems="center"
-            mt={12}
-          >
-            <Box width="100%" display="flex" justifyContent="center">
-              <Image src={platformImg1} alt="gray" />
-            </Box>
-            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
-              <Divider />
-              <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
+            <Box flexGrow={1} width="100%" display="flex" flexDirection="column" mt={3}>
+              <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold">
                 PAYMENT &amp; TRACKING
               </Typography>
               <Paragraph paragraph mt="20px">
@@ -100,7 +80,7 @@ export const Platform = () => {
                 because activities and payments map to a user’s unique INK ID, as the platform grows, users will earn
                 simultaneously across our growing set of products or services.
               </Paragraph>
-              <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
+              <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mt={2} mb={2}>
                 DASHBOARDS
               </Typography>
               <Paragraph paragraph>
@@ -124,40 +104,6 @@ export const Platform = () => {
               </Box>
             </Box>
           </Box>
-          {/* <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="center" mt={12}>
-            <Box flexGrow={1} width="100%" display="flex" flexDirection="column" justifyContent="center">
-              <Headline variant="h1">world of influence</Headline>
-              <Divider />
-              <Paragraph paragraph>
-                Starting this fall, users can join and invite others into a world of shareable social gaming projects.
-                With revolutionary payment technology, we’ve unlocked limitless attribution, tracking, and revenue
-                sharing based on connectivity and viral reach. No game or social platform incentivizes users like we do.
-                The more that users participate and invite others into games and projects, the more they earn.
-              </Paragraph>
-              <Paragraph paragraph>
-                As we develop AAA-quality games, we will become the first game or social platform to reward the full
-                extent of users’ connections and followers.
-              </Paragraph>
-              <Paragraph paragraph>
-                Within the World of Influence we are incorporating web3 principles to enhance economic value and
-                usability for users. Enabling this innovation is INK – our native platform token and currency.
-              </Paragraph>
-              <Paragraph paragraph>
-                We’re living in a world where users create all the value. INK ensures they’re now paid for it.
-              </Paragraph>
-              <Box display="flex" gap="24px" justifyContent="start" mb={4} sx={{ marginTop: { md: '64px' } }}>
-                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
-                <RedButton
-                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
-                >
-                  read our litepaper
-                </RedButton>
-              </Box>
-            </Box>
-            <Box width="100%" display="flex" justifyContent="center">
-              <Image src={influenceImg} alt="gray" />
-            </Box>
-          </Box> */}
         </Box>
       </PageContent>
     </>
