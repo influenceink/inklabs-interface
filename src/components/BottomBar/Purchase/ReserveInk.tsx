@@ -251,7 +251,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           </Typography>
           <Box display="flex" flexDirection="column" alignItems="center" gap="12px" width="100%">
             <Box display="flex" alignItems="center" gap={2} fontWeight="bold" fontSize="24px">
-              <img src={InkIcon} alt="ink" width="85px" />
+              <img src={InkIcon} alt="ink" width="45px" />
               <Typography variant="subtitle2" color="#BAFF31" fontWeight="bold" fontSize="30px" lineHeight="30px">
                 {reservedInk.toLocaleString()}
               </Typography>
