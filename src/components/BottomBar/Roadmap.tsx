@@ -5,7 +5,7 @@ import cross from '../../assets/img/cross.png';
 
 import arrowRight from '../../assets/img/arrow-right.png';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/img/logo.png';
+import logo from '../../assets/img/ink.png';
 
 interface Props {
   show: boolean;

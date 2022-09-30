@@ -3,7 +3,7 @@ import { Box, styled, TextField, Button, Slide, Snackbar, Alert, SlideProps } fr
 
 import { KEYS } from '../../utils/constants';
 
-import logo from '../../assets/img/logo.png';
+import logo from '../../assets/img/ink.png';
 import blueBtn from '../../assets/img/button.png';
 import cross from '../../assets/img/cross.png';
 import { useHistory } from 'react-router-dom';

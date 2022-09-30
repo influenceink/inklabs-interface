@@ -5,7 +5,7 @@ import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_COIN } from '../utils/constants';
 import coinImg from '../assets/img/coin.png';
 import coin2 from '../assets/img/coin1.jpg';
-import symbolImg from '../assets/img/symbol.png';
+import symbolImg from '../assets/img/ink.png';
 import completeImg from '../assets/img/complete.png';
 import hereImg from '../assets/img/here.png';
 import { Divider, Image, Paragraph, RedButton } from './Components';
@@ -42,7 +42,7 @@ export const Coin = () => {
                 </TokenWrapper>
                 <TokenWrapper>
                   <Typography variant="h6">PRIVATE OFFERING PRICE:</Typography>
-                  <Typography variant="h6">$0.002/INK</Typography>
+                  <Typography variant="h6">$0.002 USD/INK</Typography>
                 </TokenWrapper>
               </Box>
               <Divider />
