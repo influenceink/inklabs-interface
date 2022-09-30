@@ -231,7 +231,7 @@ export const SUPPORTED_NETWORKS = [
   {
     chainId: 80001,
     name: 'Mumbai',
-    logoURI: '/assets/img/polygon.svg',
+    logoURI: '/assets/polygon.svg',
   },
   {
     chainId: 4,
@@ -242,7 +242,7 @@ export const SUPPORTED_NETWORKS = [
   {
     chainId: 137,
     name: 'Polygon',
-    logoURI: '/assets/img/polygon.svg',
+    logoURI: '/assets/polygon.svg',
   },
 ];
 

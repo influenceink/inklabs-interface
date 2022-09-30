@@ -21,8 +21,11 @@ export const Products = () => {
       </Helmet>
       <PageContent title={PAGE_TITLE_PRODUCTS} type="primary">
         <Box>
-          <Box display="flex" flexDirection={xl ? 'column' : 'row'} gap={xl ? 2 : 6} alignItems="center">
-            <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
+          <Box>
+            <Box width="100%">
+              <Box width={xl ? '100%' : '50%'} display="flex" justifyContent="center" sx={{ float: 'right' }}>
+                <Image src={productsImg} alt="gray" />
+              </Box>
               <Typography variant="h1">products</Typography>
               <Divider />
               <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
@@ -42,32 +45,8 @@ export const Products = () => {
                 set of technology and APIs. Our platform, including payment and tracking capabilities, will eventually
                 be licensable or available to other game developers.
               </Paragraph>
-
-              <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
-                <RedButton
-                  onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
-                >
-                  read our litepaper
-                </RedButton>
-              </Box>
-            </Box>
-            <Box width="100%" display="flex" justifyContent="center">
-              <Image src={gamesImg} alt="gray" />
-            </Box>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection={xl ? 'column-reverse' : 'row'}
-            gap={xl ? 2 : 6}
-            alignItems="center"
-            mt={12}
-          >
-            <Box width="100%" display="flex" justifyContent="center">
-              <Image src={productsImg} alt="gray" />
             </Box>
             <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
-              <Divider />
               <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
                 ZIP CODES &amp; POSTALS
               </Typography>
