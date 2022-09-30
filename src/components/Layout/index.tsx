@@ -45,15 +45,15 @@ const LogoWrapper = styled('div')`
   top: 0;
   left: 0;
   padding-top: 46px;
-  padding-left: 16px;
+  padding-left: 4px;
   & img {
-    width: 50px;
+    width: 70px;
   }
   @media screen and (max-width: 660px) {
     padding-top: 26px;
-    padding-left: 8px;
+    padding-left: 0px;
     & img {
-      width: 30px;
+      width: 45px;
     }
   }
   z-index: 1;
