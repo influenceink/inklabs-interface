@@ -76,48 +76,15 @@ export const MenuButton = () => {
             <span>buy ink</span>
           </StyledButton>
           <StyledButton
-            onClick={(ev) => {
-              let menuButton = ev.target as HTMLButtonElement;
-              if (menuButton.id !== 'menu-button') menuButton = menuButton.parentNode! as HTMLButtonElement;
-              if (!(showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth))) {
-                const hoverImg = document.createElement('img');
-                hoverImg.src = cross;
-                menuButton.replaceChild(hoverImg, menuButton.firstChild!);
-              } else {
-                const hoverImg = document.createElement('img');
-                hoverImg.src = menuHoverImg;
-                menuButton.replaceChild(hoverImg, menuButton.firstChild!);
-              }
-              handleClick();
-            }}
+            onClick={handleClick}
             className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
             id="menu-button"
-            onPointerOver={(ev) => {
-              if ((ev.target as HTMLButtonElement).id === 'menu-button') {
-                if (!(showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth))) {
-                  const hoverImg = document.createElement('img');
-                  hoverImg.src = menuHoverImg;
-                  (ev.target as HTMLButtonElement).replaceChild(hoverImg, (ev.target as HTMLButtonElement).firstChild!);
-                }
-              }
-            }}
-            onPointerLeave={(ev) => {
-              if ((ev.target as HTMLButtonElement).id === 'menu-button') {
-                if (!(showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth))) {
-                  const hoverImg = document.createElement('img');
-                  hoverImg.src = menuImg;
-                  (ev.target as HTMLButtonElement).replaceChild(hoverImg, (ev.target as HTMLButtonElement).firstChild!);
-                }
-              }
-            }}
           >
-            <img
-              src={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? cross : menuImg}
-              className={
-                showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'closeBtnAnimation' : ''
-              }
-              alt="arrow"
-            />
+            {showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? (
+              <img src={cross} className="closeBtnAnimation" alt="menu close" />
+            ) : (
+              <img src={menuImg} alt="menu open" />
+            )}
           </StyledButton>
           <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
             <span>roadmap</span>
@@ -189,6 +156,11 @@ const StyledButton = styled(Button)`
     border-radius: 9px;
     background-color: rgb(0, 0, 0);
   }
+
+  :hover > img:not([class^='close']) {
+    content: url(${menuHoverImg});
+  }
+
   &.close {
     padding: 8px 18px;
     img {
