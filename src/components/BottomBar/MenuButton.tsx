@@ -1,14 +1,13 @@
 import { ReactElement, useEffect, useState, useContext } from 'react';
 import { styled, Button, Box, Collapse, useMediaQuery } from '@mui/material';
-
 // import { KeyPad } from './KeyPad';
 import { Menu } from './Menu';
-
 import { PurchaseFlowContext, AuthContext } from '../../contexts';
 import menuImg from '../../assets/img/menu.png';
+import menuHoverImg from '../../assets/img/menu-hover.png';
 // import unlock from '../../assets/img/unlock.png';
-import dotLine from '../../assets/img/dot-line.png';
-import open from '../../assets/img/open.png';
+// import dotLine from '../../assets/img/dot-line.png';
+// import open from '../../assets/img/open.png';
 import cross from '../../assets/img/cross.png';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Purchase } from './Purchase';
@@ -77,8 +76,40 @@ export const MenuButton = () => {
             <span>buy ink</span>
           </StyledButton>
           <StyledButton
-            onClick={handleClick}
+            onClick={(ev) => {
+              let menuButton = ev.target as HTMLButtonElement;
+              if (menuButton.id !== 'menu-button') menuButton = menuButton.parentNode! as HTMLButtonElement;
+              if (!(showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth))) {
+                const hoverImg = document.createElement('img');
+                hoverImg.src = cross;
+                menuButton.replaceChild(hoverImg, menuButton.firstChild!);
+              } else {
+                const hoverImg = document.createElement('img');
+                hoverImg.src = menuHoverImg;
+                menuButton.replaceChild(hoverImg, menuButton.firstChild!);
+              }
+              handleClick();
+            }}
             className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
+            id="menu-button"
+            onPointerOver={(ev) => {
+              if ((ev.target as HTMLButtonElement).id === 'menu-button') {
+                if (!(showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth))) {
+                  const hoverImg = document.createElement('img');
+                  hoverImg.src = menuHoverImg;
+                  (ev.target as HTMLButtonElement).replaceChild(hoverImg, (ev.target as HTMLButtonElement).firstChild!);
+                }
+              }
+            }}
+            onPointerLeave={(ev) => {
+              if ((ev.target as HTMLButtonElement).id === 'menu-button') {
+                if (!(showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth))) {
+                  const hoverImg = document.createElement('img');
+                  hoverImg.src = menuImg;
+                  (ev.target as HTMLButtonElement).replaceChild(hoverImg, (ev.target as HTMLButtonElement).firstChild!);
+                }
+              }
+            }}
           >
             <img
               src={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? cross : menuImg}
@@ -128,8 +159,11 @@ const StyledButton = styled(Button)`
   @media screen and (max-width: 400px) {
     padding: 14px 18px;
   }
+  &:hover {
+    background-color: rgb(0, 0, 0);
+  }
   &:hover > span:nth-of-type(odd) {
-    background: linear-gradient(0.25turn, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
+    background: linear-gradient(0.25turn, rgb(255, 53, 93) 0%, rgb(255, 191, 53) 150%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -142,7 +176,7 @@ const StyledButton = styled(Button)`
     right: -3px;
     z-index: -1;
     border-radius: 11px;
-    background: linear-gradient(0.25turn, rgb(255, 53, 93) 5%, rgb(255, 191, 53) 150%);
+    background: linear-gradient(0.25turn, rgb(255, 53, 93) 0%, rgb(255, 191, 53) 150%);
   }
   :hover:after {
     content: '';
