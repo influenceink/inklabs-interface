@@ -55,7 +55,7 @@ export const Coin = () => {
             </Box>
             <Divider />
             <Box width={!xl ? '70%' : 'auto'} maxWidth="100%">
-              <Grid container mb={3} spacing={4} flexWrap="wrap" width="100%">
+              <Grid container mb={3} rowSpacing={!xl ? 3 : 0} flexWrap="wrap" width="100%">
                 {/* <Grid item xs={12} xl={4}>
                   <CardBox>
                     <Typography fontSize={18}>PRIVATE - RD. 1</Typography>
