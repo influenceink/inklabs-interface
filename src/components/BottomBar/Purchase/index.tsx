@@ -111,9 +111,6 @@ const ContentWrapper = styled(Box)`
   ::-webkit-scrollbar-thumb {
     background: #ff0000;
   }
-  @media screen and (max-width: 660px) {
-    margin-bottom: 110px;
-  }
 `;
 const CloseButton = styled(Button)`
   position: absolute;
@@ -155,22 +152,24 @@ const ModalWrapper = styled(Dialog)`
   }
   @media screen and (max-width: 600px) {
     .MuiDialog-container {
+      position: fixed;
+      top: 0;
+      bottom: 0;
       background: black;
       width: 100%;
-      height: 100vh;
       display: flex;
       align-items: flex-start;
       & > div {
-        max-height: 100vh;
+        max-height: 100%;
         width: 100%;
         & > div {
-          height: 100vh;
+          height: 100%;
           width: 100%;
           & > div {
             min-width: 0px;
             max-width: 100%;
-            min-height: unset;
-            padding: 40px 24px 24px 24px;
+            min-height: stretch;
+            padding: 40px 24px 110px 24px;
           }
         }
       }
