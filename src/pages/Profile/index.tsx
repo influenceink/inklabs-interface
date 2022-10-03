@@ -259,7 +259,6 @@ export const Profile = () => {
             flexDirection="column"
             position="relative"
             overflow="hidden auto"
-            pb={3}
           >
             <AvatarWrapper htmlFor="upload_avatar">
               <Avatar src={avatar} alt="" />
@@ -407,9 +406,10 @@ const ScrollWrapper = styled(Box)`
 `;
 
 const ProfileWrapper = styled(Box)`
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   padding-bottom: 110px;
   background-color: #111111;
 `;

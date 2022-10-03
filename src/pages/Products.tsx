@@ -42,8 +42,7 @@ export const Products = () => {
                 Prize Kingdoms is our flagship mobile game product integrating a traditional “big funnel, low-friction”
                 approach of free-to-play gaming. We’ve improved the game experience with a revolutionary rewards system
                 offering real prizes, cash, and tokens. Prize Kingdoms relies on our proprietary Prize Engine, a custom
-                set of technology and APIs. Our platform, including payment and tracking capabilities, will eventually
-                be licensable or available to other game developers.
+                set of technology and APIs.
               </Paragraph>
             </Box>
             <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
@@ -57,11 +56,11 @@ export const Products = () => {
                 real-world asset ownership.
               </Paragraph>
               <Paragraph paragraph>
-                On our platform, every digital parcel would map to an actual location. Through this, we can support the
-                only digital real-estate opportunity that both confers permanent ownership of NFT-based assets, and
-                allows owners to participate in a web3 economy. A limited number of these ZIP and Postal codes are
-                available – each purchasable and represented by a non-fungible, transferable, digital asset stored in a
-                smart contract.
+                On our platform, every digital parcel maps to an actual location. Through this, we can support the only
+                digital real-estate opportunity that both confers permanent ownership of NFT-based assets, and allows
+                owners to participate in a web3 economy. A limited number of these ZIP and Postal codes are available –
+                each purchasable and represented by a non-fungible, transferable, digital asset stored in a smart
+                contract.
               </Paragraph>
               <Typography variant="subtitle2" fontSize={xl ? '34px' : '40px'} fontWeight="bold" mb={2}>
                 CRYPTO CLUB
@@ -78,7 +77,7 @@ export const Products = () => {
                 expertise.
               </Paragraph>
               <Paragraph paragraph>
-                Our team is also considering other opportunities to incentivize subscribers with members-only NFT
+                Our team is constantly exploring new opportunities to incentivize subscribers with members-only NFT
                 promotions, access to in-house gaming titles, and real world events.
               </Paragraph>
               <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>

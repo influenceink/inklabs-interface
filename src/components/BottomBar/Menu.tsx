@@ -1,21 +1,28 @@
 import { useHistory } from 'react-router-dom';
 import { Box, styled, Button, Slide, useMediaQuery, Typography, Link } from '@mui/material';
+import { useContext } from 'react';
 import cross from '../../assets/img/cross.png';
 import instagram from '../../assets/img/instagram.png';
 import twitter from '../../assets/img/twitter.png';
 import facebook from '../../assets/img/facebook.png';
 import youtube from '../../assets/img/youtube.png';
 import { Copyright } from './Copyright';
+import { PurchaseFlowContext, AuthContext } from '../../contexts';
+
 interface Props {
   show: boolean;
   setShow: (value: boolean) => void;
 }
 
 export const Menu = ({ show, setShow }: Props) => {
+  const { setShowModal: setAuth } = useContext(AuthContext);
+  const { setShowModal: setPurchase } = useContext(PurchaseFlowContext);
   const mobile = useMediaQuery('(max-width: 600px)');
   const history = useHistory();
   const goTo = (path: string) => {
     setShow(false);
+    setAuth(false);
+    setPurchase(false);
     history.push(path);
   };
   return (
