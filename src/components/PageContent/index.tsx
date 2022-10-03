@@ -105,8 +105,9 @@ const PageWrapper = styled('div')`
   @media screen and (max-width: 660px) {
     -webkit-clip-path: none;
     clip-path: none;
-    padding: 80px 24px 136px 24px;
+    padding: 80px 24px 110px 24px;
     position: fixed;
+    height: 100%;
     left: 0;
   }
 `;
@@ -118,6 +119,7 @@ const PageWrapperFluid = styled('div')`
   width: 100%;
   height: 100vh;
   z-index: 3;
+  box-sizing: border-box;
   // & > div {
   //   ::-webkit-scrollbar {
   //     width: 0; /* Remove scrollbar space */
@@ -130,7 +132,11 @@ const PageWrapperFluid = styled('div')`
   @media screen and (max-width: 660px) {
     -webkit-clip-path: none;
     clip-path: none;
+    background-clip: padding-box;
     position: fixed;
+    height: 100%;
+    top: 0;
+    bottom: 0;
     left: 0;
   }
 `;
