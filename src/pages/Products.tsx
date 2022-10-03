@@ -42,8 +42,7 @@ export const Products = () => {
                 Prize Kingdoms is our flagship mobile game product integrating a traditional “big funnel, low-friction”
                 approach of free-to-play gaming. We’ve improved the game experience with a revolutionary rewards system
                 offering real prizes, cash, and tokens. Prize Kingdoms relies on our proprietary Prize Engine, a custom
-                set of technology and APIs. Our platform, including payment and tracking capabilities, will eventually
-                be licensable or available to other game developers.
+                set of technology and APIs.
               </Paragraph>
             </Box>
             <Box flexGrow={1} width="100%" display="flex" flexDirection="column">
