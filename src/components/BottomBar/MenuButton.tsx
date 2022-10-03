@@ -77,14 +77,16 @@ export const MenuButton = () => {
           </StyledButton>
           <StyledButton
             onClick={(ev) => {
+              let menuButton = ev.target as HTMLButtonElement;
+              if (menuButton.id !== 'menu-button') menuButton = menuButton.parentNode! as HTMLButtonElement;
               if (!(showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth))) {
                 const hoverImg = document.createElement('img');
                 hoverImg.src = cross;
-                (ev.target as HTMLButtonElement).replaceChild(hoverImg, (ev.target as HTMLButtonElement).firstChild!);
+                menuButton.replaceChild(hoverImg, menuButton.firstChild!);
               } else {
                 const hoverImg = document.createElement('img');
                 hoverImg.src = menuHoverImg;
-                (ev.target as HTMLButtonElement).replaceChild(hoverImg, (ev.target as HTMLButtonElement).firstChild!);
+                menuButton.replaceChild(hoverImg, menuButton.firstChild!);
               }
               handleClick();
             }}
