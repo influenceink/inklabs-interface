@@ -54,9 +54,9 @@ export const Coin = () => {
               </TokenWrapper>
             </Box>
             <Divider />
-            <Box width={!xl ? 'max-content' : 'auto'} maxWidth="100%">
-              <Grid container mb={3} spacing={4} flexWrap="wrap">
-                <Grid item xs={12} xl={4}>
+            <Box width={!xl ? '70%' : 'auto'} maxWidth="100%">
+              <Grid container mb={3} spacing={4} flexWrap="wrap" width="100%">
+                {/* <Grid item xs={12} xl={4}>
                   <CardBox>
                     <Typography fontSize={18}>PRIVATE - RD. 1</Typography>
                     <Box display="flex" justifyContent="space-between" alignItems="start">
@@ -104,20 +104,20 @@ export const Coin = () => {
                       <SymbolImg src={completeImg} alt="complete" />
                     </Box>
                   </CardBox>
-                </Grid>
-                <Grid item xs={12} xl={4}>
+                </Grid> */}
+                <Grid item xs={12} xl={6}>
                   <Box display="flex" flexDirection="column" alignItems="center" minWidth="290px" width="100%">
                     <Box borderRadius="20px" padding="18px 15px 30px" bgcolor="#212130" width="100%">
-                      <Typography fontSize={18}>PRIVATE - RD. 2</Typography>
-                      <Box display="flex" justifyContent="space-between" alignItems="start">
-                        <Typography fontSize={14} color="#787878">
+                      <Typography fontSize={18}>PRIVATE PRESALE</Typography>
+                      <Box display="flex" justifyContent="end">
+                        {/* <Typography fontSize={14} color="#787878">
                           Institutional
-                        </Typography>
+                        </Typography> */}
                         <Box display="flex" flexDirection="column" alignItems="end" color="#29FF3E">
                           <Typography fontSize={10} lineHeight="12px">
                             18 MONTHS VEST
                           </Typography>
-                          <Typography fontSize={5} lineHeight="8px">
+                          <Typography fontSize={9} lineHeight="10px">
                             DAILY BLOCK
                           </Typography>
                         </Box>
@@ -136,7 +136,7 @@ export const Coin = () => {
                           <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">
                             4.3%
                           </Typography>
-                          <Typography fontSize={5} lineHeight="8px" pr="10px" color="#707070">
+                          <Typography fontSize={8} lineHeight="9px" color="#707070">
                             OF TOTAL SUPPLY
                           </Typography>
                         </Box>
@@ -150,7 +150,7 @@ export const Coin = () => {
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={12} xl={4}>
+                <Grid item xs={12} xl={6}>
                   <CardBox>
                     <Typography fontSize={18}>PUBLIC SALE</Typography>
                     <Typography fontSize={14} color="#787878">
@@ -170,7 +170,7 @@ export const Coin = () => {
                         <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">
                           12.5%
                         </Typography>
-                        <Typography fontSize={5} lineHeight="8px" pr="10px" color="#707070">
+                        <Typography fontSize={8} lineHeight="9px" color="#707070">
                           OF TOTAL SUPPLY
                         </Typography>
                       </Box>
