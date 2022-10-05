@@ -24,7 +24,7 @@ export const FAQ = () => {
             <Divider />
             {FAQS.map((faq, index) => (
               <Box mt={2} key={index}>
-                <Typography variant="subtitle2" fontSize={xl ? '22px' : '24px'} fontWeight="bold" my={3}>
+                <Typography variant="subtitle2" fontSize={xl ? '22px' : '24px'} fontWeight="bold" mt={3} mb={2}>
                   {faq.question}
                 </Typography>
                 {faq.answer.split('%%').map((answer, _index) => (
@@ -33,7 +33,7 @@ export const FAQ = () => {
               </Box>
             ))}
 
-            <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
+            <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px', xs: '32px' } }} mb={4}>
               <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
               <RedButton
                 onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}

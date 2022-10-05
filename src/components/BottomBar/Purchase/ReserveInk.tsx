@@ -260,7 +260,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             <Box width="100%" mt={3}>
               <FormButton
                 onClick={handleClick}
-                disabled={Number(USDCAmount) < (chainId === 4 || chainId === 80001 || chainId === 137 ? 1 : 5000)}
+                disabled={Number(USDCAmount) < (chainId === 4 || chainId === 80001 || chainId === 137 ? 5 : 5000)}
               >
                 PREVIEW SWAP
               </FormButton>
