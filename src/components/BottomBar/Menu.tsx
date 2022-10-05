@@ -53,20 +53,18 @@ export const Menu = ({ show, setShow }: Props) => {
               )}
             </Box>
           </MenuBar>
-          {!mobile && (
-            <Box position="absolute" right={0} bottom={0} display="flex" gap={2} mb={2} mr={2} color={'#a0a0a0'}>
-              <Typography onClick={() => goTo('/faq')} sx={{ ':hover': { color: '#ff225e' } }}>
-                FAQ&apos;s
-              </Typography>
-              |
-              <Link
-                href="mailto: support@inktoken.com"
-                sx={{ textDecoration: 'none', color: '#a0a0a0', ':hover': { color: '#ff225e' } }}
-              >
-                SUPPORT
-              </Link>
-            </Box>
-          )}
+          <Box position="absolute" right={0} bottom={0} display="flex" gap={2} mb={!mobile ? 2 : '110px'} mr={2} color={'#a0a0a0'}>
+            <Typography onClick={() => goTo('/faq')} sx={{ ':hover': { color: '#ff225e' } }}>
+              FAQ&apos;s
+            </Typography>
+            |
+            <Link
+              href="mailto: support@inktoken.com"
+              sx={{ textDecoration: 'none', color: '#a0a0a0', ':hover': { color: '#ff225e' } }}
+            >
+              SUPPORT
+            </Link>
+          </Box>
           {!mobile && (
             <Box position="fixed" ml="16px" left={0} bottom={0}>
               <Copyright />
