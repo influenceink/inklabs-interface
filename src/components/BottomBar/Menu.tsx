@@ -59,7 +59,7 @@ export const Menu = ({ show, setShow }: Props) => {
             bottom={0}
             display="flex"
             gap={2}
-            mb={!mobile ? 2 : '100px'}
+            mb={!mobile ? 2 : '110px'}
             mr={2}
             color={'#a0a0a0'}
           >
