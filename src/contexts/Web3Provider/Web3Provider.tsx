@@ -27,6 +27,53 @@ type Web3ProviderPropType = {
   children: ReactElement | ReactElement[];
 };
 
+const CHAIN: { [key: number]: object } = {
+  1: {
+    chainId: '0x1',
+    rpcUrls: ['https://mainnet.infura.io/v3/'],
+    chainName: 'Ethereum Mainnet',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://etherscan.io'],
+  },
+  4: {
+    chainId: '0x4',
+    rpcUrls: ['https://rinkeby.infura.io/v3/'],
+    chainName: 'Ethereum Testnet Rinkeby',
+    nativeCurrency: {
+      name: 'RinkebyETH',
+      symbol: 'RinkebyETH',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://rinkeby.etherscan.io'],
+  },
+  137: {
+    chainId: '0x89',
+    rpcUrls: ['https://polygon-rpc.com'],
+    chainName: 'Polygon Mainnet',
+    nativeCurrency: {
+      name: 'MATIC',
+      symbol: 'MATIC',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://polygonscan.com/'],
+  },
+  80001: {
+    chainId: '0x13881',
+    rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
+    chainName: 'Polygon Testnet Mumbai',
+    nativeCurrency: {
+      name: 'tMATIC',
+      symbol: 'tMATIC',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
+  },
+};
+
 const Web3Provider = ({ children }: Web3ProviderPropType) => {
   const [account, setAccount] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
@@ -78,7 +125,12 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
         });
       }
     } catch (switchError) {
-      console.log(typeof switchError, 123);
+      if ((switchError as any).message.includes('Unrecognized chain ID')) {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [CHAIN[chainId]],
+        });
+      } else console.log(switchError);
     }
   }, []);
 
