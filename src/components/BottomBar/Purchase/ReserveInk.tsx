@@ -54,7 +54,16 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
         );
         setSwapPath(formPath(route));
         setTokenAmount(route!.quote.toExact());
-        setFetchingPath(false);
+        if (
+          USDCAmount ===
+          ev.target.value
+            .replaceAll(',', '')
+            .replaceAll('$', '')
+            .replaceAll(' ', '')
+            .replaceAll('USD', '')
+            .replaceAll(' ', '')
+        )
+          setFetchingPath(false);
       }
     };
     if (currency === 0) setTokenAmount(USDCAmount);
@@ -260,7 +269,10 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             <Box width="100%" mt={3}>
               <FormButton
                 onClick={handleClick}
-                disabled={Number(USDCAmount) < (chainId === 4 || chainId === 80001 || chainId === 137 ? 5 : 5000)}
+                disabled={
+                  Number(USDCAmount) < (chainId === 4 || chainId === 80001 || chainId === 137 ? 5 : 5000) ||
+                  fetchingPath
+                }
               >
                 PREVIEW SWAP
               </FormButton>

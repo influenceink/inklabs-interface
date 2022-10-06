@@ -40,6 +40,7 @@ class Contract {
     if (this.chainId === 137) {
       _options['maxPriorityFeePerGas'] = 30000000000;
       _options['maxFee'] = 35000000000;
+      _options['chainId'] = 137;
     }
     return new Promise((resolve, reject) => {
       this.contract.methods[method](...params)
