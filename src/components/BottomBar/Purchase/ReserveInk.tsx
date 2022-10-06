@@ -1,5 +1,5 @@
 import { Box, FormControl, MenuItem, Select, styled, Typography } from '@mui/material';
-import { useState, useContext, useEffect, useCallback } from 'react';
+import { useState, useContext, useEffect, useCallback, useRef } from 'react';
 import NumberFormat from 'react-number-format';
 import { FormButton, FormTitle, Divider, DividerContent } from '.';
 import { ContractContext, Web3Context } from '../../../contexts';
@@ -22,6 +22,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
   const { loading, error, tokenDatas: tokensList } = useTopTokenDatas();
   const [fetchingPath, setFetchingPath] = useState<boolean>(false);
   const [swapPath, setSwapPath] = useState<string>('');
+  const timer = useRef<number>();
 
   // Validate chainId
   const chainValidation = useCallback(() => {
@@ -43,27 +44,30 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     setUSDCAmount(USDCAmount);
     const quoterWrapper = async () => {
       if (contracts !== null && Number(USDCAmount) !== 0) {
-        setFetchingPath(true);
-        const tokenDecimals = await getTokenDecimals(tokensList![currency].id);
-        const route = await SwapRouter(
-          chainId!,
-          { decimals: Number(tokenDecimals), ...tokensList![currency] },
-          { decimals: 6, ...tokensList![0] },
-          USDCAmount,
-          1
-        );
-        setSwapPath(formPath(route));
-        setTokenAmount(route!.quote.toExact());
-        if (
-          USDCAmount ===
-          ev.target.value
-            .replaceAll(',', '')
-            .replaceAll('$', '')
-            .replaceAll(' ', '')
-            .replaceAll('USD', '')
-            .replaceAll(' ', '')
-        )
-          setFetchingPath(false);
+        clearTimeout(timer.current);
+        timer.current = window.setTimeout(async () => {
+          setFetchingPath(true);
+          const tokenDecimals = await getTokenDecimals(tokensList![currency].id);
+          const route = await SwapRouter(
+            chainId!,
+            { decimals: Number(tokenDecimals), ...tokensList![currency] },
+            { decimals: 6, ...tokensList![0] },
+            USDCAmount,
+            1
+          );
+          setSwapPath(formPath(route));
+          setTokenAmount(route!.quote.toExact());
+          if (
+            USDCAmount ===
+            ev.target.value
+              .replaceAll(',', '')
+              .replaceAll('$', '')
+              .replaceAll(' ', '')
+              .replaceAll('USD', '')
+              .replaceAll(' ', '')
+          )
+            setFetchingPath(false);
+        }, 600);
       }
     };
     if (currency === 0) setTokenAmount(USDCAmount);
@@ -79,18 +83,21 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     } else {
       const quoterWrapper = async () => {
         if (contracts !== null) {
-          setFetchingPath(true);
-          const tokenDecimals = await getTokenDecimals(tokensList![currency].id);
-          const route = await SwapRouter(
-            chainId!,
-            { decimals: Number(tokenDecimals), ...tokensList![currency] },
-            { decimals: 6, ...tokensList![0] },
-            Number(tokenAmount),
-            0
-          );
-          setSwapPath(formPath(route));
-          setUSDCAmount(route!.quote.toExact());
-          setFetchingPath(false);
+          clearTimeout(timer.current);
+          timer.current = window.setTimeout(async () => {
+            setFetchingPath(true);
+            const tokenDecimals = await getTokenDecimals(tokensList![currency].id);
+            const route = await SwapRouter(
+              chainId!,
+              { decimals: Number(tokenDecimals), ...tokensList![currency] },
+              { decimals: 6, ...tokensList![0] },
+              Number(tokenAmount),
+              0
+            );
+            setSwapPath(formPath(route));
+            setUSDCAmount(route!.quote.toExact());
+            setFetchingPath(false);
+          }, 600);
         }
       };
       quoterWrapper();
@@ -106,7 +113,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     await connect!();
     if (!chainValidation()) {
       const reservedChain = SUPPORTED_NETWORKS.find((value) => value.name === network)?.chainId;
-      switchNetwork(reservedChain);
+      await switchNetwork(reservedChain);
     }
   };
 
