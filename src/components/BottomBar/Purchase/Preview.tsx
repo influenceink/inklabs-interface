@@ -16,8 +16,8 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
     if (contracts !== null) {
       setLoading(true);
       const getGovernToken = () => {
-        if (chainId === 137 || chainId === 80001) return 'WMATIC';
-        return 'WETH';
+        if (chainId === 137 || chainId === 80001) return 'MATIC';
+        return 'ETH';
       };
       const decimals = await getTokenDecimals(preview.token.id);
       if (preview.token.symbol === 'USDC') {
@@ -128,7 +128,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
             fontWeight="bold"
             fontSize="20px"
           >
-            <TokenLogo address={preview.token.id} symbol={preview.token.symbol} />
+            <TokenLogo token={preview.token} />
             <Typography variant="subtitle2" color="#fff" fontWeight="bold" fontSize="25px" lineHeight="25px">
               {Number(preview.tokenAmount).toLocaleString()}
             </Typography>
@@ -157,7 +157,7 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           <Box width="100%" mt={1}>
             <FormButton onClick={handleClick} disabled={loadingStatus}>
               confirm
-              {loadingStatus && <img src={Loading} alt="" width="22px" height="22px" />}
+              {loadingStatus && <img src={Loading} alt="" width="22px" height="22px" style={{ marginLeft: '10px' }} />}
             </FormButton>
           </Box>
         </Box>

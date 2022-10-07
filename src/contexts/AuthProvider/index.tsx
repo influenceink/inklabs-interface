@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [totalCount, setTotalCount] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [balances, setBalances] = useState<any>(null);
-  axios.defaults.baseURL = 'https://ip-api.ip.d.inksrv.com';
+  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || 'https://ip-api.ip.d.inksrv.com';
   useEffect(() => {
     const initialize = async () => {
       try {

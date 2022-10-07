@@ -90,7 +90,7 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
 
   const connect = useCallback(async () => {
     const web3 = await connectWallet();
-    if (web3 === null) return;
+    if (web3 === null) return false;
 
     const provider: any = web3?.currentProvider;
 
@@ -114,6 +114,7 @@ const Web3Provider = ({ children }: Web3ProviderPropType) => {
     setChainId(Number(await web3.eth.getChainId()));
     setWeb3(web3);
     setConnected(true);
+    return true;
   }, [reset, connectWallet]);
 
   const switchNetwork = useCallback(async (chainId: number) => {
