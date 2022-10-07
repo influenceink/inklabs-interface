@@ -3,7 +3,7 @@ import { Box, styled, TextField, Button, Slide, Snackbar, Alert, SlideProps } fr
 
 import { KEYS } from '../../utils/constants';
 
-import logo from '../../assets/img/logo.png';
+import logo from '../../assets/img/ink.png';
 import blueBtn from '../../assets/img/button.png';
 import cross from '../../assets/img/cross.png';
 import { useHistory } from 'react-router-dom';
@@ -53,7 +53,7 @@ export const KeyPad = ({ show, setShow, setLock }: Props) => {
       setToastState({ open: true, success: true });
       setLock(false);
       setShow(false);
-      history.push('/home');
+      history.push('/');
     } else {
       setToastState({ open: true, success: false });
     }

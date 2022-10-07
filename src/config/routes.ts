@@ -5,23 +5,38 @@ import { Coin } from '../pages/Coin';
 import { Enter } from '../pages/Enter';
 
 import { Route } from '../types/Route';
+import { Profile } from '../pages/Profile';
+import { Vision } from '../pages/Vision';
+import { Convergence } from '../pages/Convergence';
+import { Products } from '../pages/Products';
+// import { WOI } from '../pages/WOI';
+import { FAQ } from '../pages/FAQ';
 
 const routes: Array<Route> = [
-  {
-    key: 'router-enter',
-    title: 'Enter',
-    description: 'Enter',
-    component: Enter,
-    path: '/',
-    isEnabled: true,
-    appendDivider: true,
-  },
+  // {
+  //   key: 'router-enter',
+  //   title: 'Enter',
+  //   description: 'Enter',
+  //   component: Enter,
+  //   path: '/',
+  //   isEnabled: true,
+  //   appendDivider: true,
+  // },
   {
     key: 'router-home',
     title: 'Home',
     description: 'Home',
     component: Home,
-    path: '/home',
+    path: '/',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-profile',
+    title: 'Profile',
+    description: 'Profile',
+    component: Profile,
+    path: '/profile',
     isEnabled: true,
     appendDivider: true,
   },
@@ -49,6 +64,51 @@ const routes: Array<Route> = [
     description: 'Platform',
     component: Platform,
     path: '/platform',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-vision',
+    title: 'Vision',
+    description: 'Vision',
+    component: Vision,
+    path: '/vision',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-convergence',
+    title: 'Convergence',
+    description: 'Convergence',
+    component: Convergence,
+    path: '/convergence',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-products',
+    title: 'Products',
+    description: 'Products',
+    component: Products,
+    path: '/products',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  // {
+  //   key: 'router-woi',
+  //   title: 'World Of Influence',
+  //   description: 'World Of Influence',
+  //   component: WOI,
+  //   path: '/woi',
+  //   isEnabled: true,
+  //   appendDivider: true,
+  // },
+  {
+    key: 'router-faq',
+    title: 'FAQ',
+    description: 'FAQ',
+    component: FAQ,
+    path: '/faq',
     isEnabled: true,
     appendDivider: true,
   },

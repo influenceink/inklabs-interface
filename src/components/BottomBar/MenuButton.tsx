@@ -1,55 +1,101 @@
-import { ReactElement, useEffect, useState } from 'react';
-import { styled, Button, Box, Collapse } from '@mui/material';
-
-import { KeyPad } from './KeyPad';
+import { ReactElement, useEffect, useState, useContext } from 'react';
+import { styled, Button, Box, Collapse, useMediaQuery } from '@mui/material';
+// import { KeyPad } from './KeyPad';
 import { Menu } from './Menu';
+import { PurchaseFlowContext, AuthContext } from '../../contexts';
+import menuImg from '../../assets/img/menu.png';
+import menuHoverImg from '../../assets/img/menu-hover.png';
+// import unlock from '../../assets/img/unlock.png';
+// import dotLine from '../../assets/img/dot-line.png';
+// import open from '../../assets/img/open.png';
+import cross from '../../assets/img/cross.png';
+import { useLocation, useHistory } from 'react-router-dom';
+import { Purchase } from './Purchase';
+import { Roadmap } from './Roadmap';
+import { Auth } from './Auth';
 
-import arrowTop from '../../assets/img/arrow-up.png';
-import unlock from '../../assets/img/unlock.png';
-import dotLine from '../../assets/img/dot-line.png';
-import open from '../../assets/img/open.png';
-import { useLocation } from 'react-router-dom';
-interface Props {
-  lock: boolean;
-  setLock: (value: boolean) => void;
-}
-
-export const MenuButton = ({ lock, setLock }: Props) => {
-  const [showKeyPad, setShowKeyPad] = useState(false);
+export const MenuButton = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [showRoadmap, setShowRoadmap] = useState(false);
+  const { showModal: showAuth, setShowModal: setAuth, authorized } = useContext(AuthContext);
+  const { showModal: showPurchase, setShowModal: setPurchase } = useContext(PurchaseFlowContext);
+  const history = useHistory();
+  const toggleShowRoadmap = () => {
+    setShowMenu(false);
+    setShowRoadmap((show) => !show);
+    setPurchase(false);
+    setAuth(false);
+  };
+  type visibilityType = 'hidden' | 'visible' | 'collapse';
   const { pathname } = useLocation();
   const [showLine, setShowLine] = useState(false);
   const handleClick = () => {
-    if (lock) {
-      setShowKeyPad(true);
-    } else {
-      setShowMenu(true);
-    }
+    if (showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth)) {
+      setShowMenu(false);
+      setShowRoadmap(false);
+      setPurchase(false);
+      setAuth(false);
+    } else setShowMenu(true);
+  };
+  const toggleShowPurchaseFlow = () => {
+    history.push('/');
+    setShowRoadmap(false);
+    setShowMenu(false);
+    setPurchase((value: boolean) => !value);
+    setAuth(false);
   };
   useEffect(() => {
     setTimeout(() => {
       setShowLine(!showLine);
     }, 2000);
   }, [showLine]);
-  const Toggler = ({ children }: { children: ReactElement }) => {
-    if (pathname === '/' || pathname === '/home') return <MenuToggler onClick={handleClick}>{children}</MenuToggler>;
-    else return <LightToggler onClick={handleClick}>{children}</LightToggler>;
-  };
+  const sm = useMediaQuery('(max-width: 660px)');
   return (
     <MenuButtonWrapper>
       <Box display="flex" flexDirection="column" gap={0.5} alignItems="center">
-        <Bounce>
+        {/* <Bounce>
           <img src={open} alt="open" />
         </Bounce>
-        <Box minHeight={112}>
+        <Box minHeight={112} mb={sm ? '110px' : '100px'}>
           <Collapse in={showLine} timeout={1000}>
             <img src={dotLine} alt="dotline" />
           </Collapse>
+        </Box> */}
+        <Box
+          left={'50%'}
+          style={{ transform: 'translateX(-50%)' }}
+          position="fixed"
+          display="flex"
+          alignItems="flex-end"
+          mb={2}
+          bottom={0}
+          gap={2}
+          zIndex={9999}
+        >
+          <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
+            <span>buy ink</span>
+          </StyledButton>
+          <StyledButton
+            onClick={handleClick}
+            className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
+            id="menu-button"
+          >
+            {showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? (
+              <img src={cross} className="closeBtnAnimation" alt="menu close" />
+            ) : (
+              <img src={menuImg} alt="menu open" />
+            )}
+          </StyledButton>
+          <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
+            <span>roadmap</span>
+          </StyledButton>
         </Box>
-        <Toggler>{!lock ? <img src={arrowTop} alt="arrow" /> : <img src={unlock} alt="unlock" />}</Toggler>
       </Box>
-      <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} />
+      {/* <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} /> */}
       <Menu show={showMenu} setShow={setShowMenu} />
+      <Purchase show={showPurchase} setShow={setPurchase} />
+      <Roadmap show={showRoadmap} setShow={toggleShowRoadmap} />
+      <Auth show={showAuth} setShow={setAuth} />
     </MenuButtonWrapper>
   );
 };
@@ -59,17 +105,82 @@ const MenuButtonWrapper = styled('div')`
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
+  align-items: flex-end;
   left: 0;
 `;
 
-const MenuToggler = styled(Button)`
-  padding: 18px 22px;
-  border-radius: 35px 35px 0 0;
-  background-color: black;
-  z-index: 8888;
+const StyledButton = styled(Button)`
+  position: relative;
+  padding: 14px 18px;
+  border-radius: 11px;
+  background-color: rgb(0, 0, 0);
+  border: 3px solid white;
+  z-index: 9999;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  img {
+    margin: 8px 0;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 14px 18px;
+  }
+  &:hover {
+    background-color: rgb(0, 0, 0);
+  }
+  &:hover > span:nth-of-type(odd) {
+    background: linear-gradient(0.25turn, rgb(255, 53, 93) 0%, rgb(255, 191, 53) 150%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  :hover:before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    left: -3px;
+    right: -3px;
+    z-index: -1;
+    border-radius: 11px;
+    background: linear-gradient(0.25turn, rgb(255, 53, 93) 0%, rgb(255, 191, 53) 150%);
+  }
+  :hover:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    border-radius: 9px;
+    background-color: rgb(0, 0, 0);
+  }
+
+  :hover > img:not([class^='close']) {
+    content: url(${menuHoverImg});
+  }
+
+  &.close {
+    padding: 8px 18px;
+    img {
+      width: 38.99px;
+      height: 36.79px;
+      filter: invert(1);
+    }
+    :hover {
+      opacity: 0.6;
+    }
+    :hover:after {
+      display: none;
+    }
+    :hover:before {
+      display: none;
+    }
+    background-color: white;
+  }
 `;
-const LightToggler = styled(MenuToggler)`
+const LightToggler = styled(StyledButton)`
   background-color: white;
   img {
     filter: invert(1);
