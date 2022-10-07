@@ -35,15 +35,16 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     setCurrency(Number(ev.target.value));
   };
   const handleUSDCAmountChange = (ev: any) => {
-    const USDCAmount = ev.target.value
+    const _USDCAmount = ev.target.value
       .replaceAll(',', '')
       .replaceAll('$', '')
       .replaceAll(' ', '')
       .replaceAll('USD', '')
       .replaceAll(' ', '');
-    setUSDCAmount(USDCAmount);
+    if (Number(USDCAmount) === Number(_USDCAmount)) return;
+    setUSDCAmount(_USDCAmount);
     const quoterWrapper = async () => {
-      if (contracts !== null && Number(USDCAmount) !== 0) {
+      if (contracts !== null && Number(_USDCAmount) !== 0) {
         clearTimeout(timer.current);
         timer.current = window.setTimeout(async () => {
           setFetchingPath(true);
@@ -52,13 +53,13 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             chainId!,
             { decimals: Number(tokenDecimals), ...tokensList![currency] },
             { decimals: 6, ...tokensList![0] },
-            USDCAmount,
+            _USDCAmount,
             1
           );
           setSwapPath(formPath(route));
           setTokenAmount(route!.quote.toExact());
           if (
-            USDCAmount ===
+            _USDCAmount ===
             ev.target.value
               .replaceAll(',', '')
               .replaceAll('$', '')
@@ -70,17 +71,17 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
         }, 600);
       }
     };
-    if (currency === 0) setTokenAmount(USDCAmount);
+    if (currency === 0) setTokenAmount(_USDCAmount);
     else quoterWrapper();
   };
   const handleTokenAmountChange = (ev: any) => {
     setTokenAmount(ev.target.value.replaceAll(',', ''));
-    const tokenAmount = ev.target.value.replaceAll(',', '');
-    if (Number(tokenAmount) === 0) {
+    const _tokenAmount = ev.target.value.replaceAll(',', '');
+    if (Number(_tokenAmount) === 0) {
       setUSDCAmount('0');
     } else if (tokensList![currency].symbol === 'USDC') {
-      setUSDCAmount(tokenAmount);
-    } else {
+      setUSDCAmount(_tokenAmount);
+    } else if (Number(_tokenAmount) !== Number(tokenAmount)) {
       const quoterWrapper = async () => {
         if (contracts !== null) {
           clearTimeout(timer.current);
@@ -91,7 +92,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               chainId!,
               { decimals: Number(tokenDecimals), ...tokensList![currency] },
               { decimals: 6, ...tokensList![0] },
-              Number(tokenAmount),
+              Number(_tokenAmount),
               0
             );
             setSwapPath(formPath(route));
@@ -110,8 +111,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     setNetwork(ev.target.value);
   };
   const handleWalletConnect = async () => {
-    await connect!();
-    if (!chainValidation()) {
+    if ((await connect!()) && !chainValidation()) {
       const reservedChain = SUPPORTED_NETWORKS.find((value) => value.name === network)?.chainId;
       await switchNetwork(reservedChain);
     }

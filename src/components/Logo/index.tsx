@@ -14,7 +14,7 @@ export const getTokenLogoURI = (address: string) => {
   const arbi = arbiTokens.tokens.find((token) => token.address === checkSumed)?.logoURI;
   const poly = polyTokens.tokens.find((token) => token.address === checkSumed)?.logoURI;
   return [
-    `https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/${address}/logo.png`,
+    `https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/${checkSumed}/logo.png`,
     opti,
     celo,
     arbi,

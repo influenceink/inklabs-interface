@@ -1,7 +1,7 @@
 import { useQuery, gql, ApolloClient, NormalizedCacheObject, InMemoryCache } from '@apollo/client';
 import { useMemo, useContext, useState, useEffect } from 'react';
 import { Web3Context } from '../contexts';
-import { TOKEN_HIDE, TESTNEXT_TOKENSLIST } from '../utils/constants';
+import { TOKEN_HIDE, TESTNET_TOKENSLIST } from '../utils/constants';
 import { useClients } from './clients';
 
 export const TOP_TOKENS = gql`
@@ -96,7 +96,7 @@ export const useTopTokenDatas = () => {
 
   const formattedData = useMemo(() => {
     if (chainId === 4 || chainId === 80001) {
-      return TESTNEXT_TOKENSLIST[chainId];
+      return TESTNET_TOKENSLIST[chainId];
     }
 
     // const swap = new Swap(tokenAddresses || [], poolDatas);
