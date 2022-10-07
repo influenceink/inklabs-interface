@@ -19,7 +19,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
   const [USDCAmount, setUSDCAmount] = useState<string>('0');
   const [tokenAmount, setTokenAmount] = useState<string>('0');
   const [reservedInk, setReservedInk] = useState<number>(0);
-  const { loading, error, tokenDatas: tokensList } = useTopTokenDatas();
+  const { tokenDatas: tokensList } = useTopTokenDatas();
   const [fetchingPath, setFetchingPath] = useState<boolean>(false);
   const [swapPath, setSwapPath] = useState<string>('');
   const timer = useRef<number>();
@@ -35,15 +35,16 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     setCurrency(Number(ev.target.value));
   };
   const handleUSDCAmountChange = (ev: any) => {
-    const USDCAmount = ev.target.value
+    const _USDCAmount = ev.target.value
       .replaceAll(',', '')
       .replaceAll('$', '')
       .replaceAll(' ', '')
       .replaceAll('USD', '')
       .replaceAll(' ', '');
-    setUSDCAmount(USDCAmount);
+    if (Number(USDCAmount) === Number(_USDCAmount)) return;
+    setUSDCAmount(_USDCAmount);
     const quoterWrapper = async () => {
-      if (contracts !== null && Number(USDCAmount) !== 0) {
+      if (contracts !== null && Number(_USDCAmount) !== 0) {
         clearTimeout(timer.current);
         timer.current = window.setTimeout(async () => {
           setFetchingPath(true);
@@ -52,35 +53,29 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             chainId!,
             { decimals: Number(tokenDecimals), ...tokensList![currency] },
             { decimals: 6, ...tokensList![0] },
-            USDCAmount,
+            _USDCAmount,
             1
           );
-          setSwapPath(formPath(route));
-          setTokenAmount(route!.quote.toExact());
-          if (
-            USDCAmount ===
-            ev.target.value
-              .replaceAll(',', '')
-              .replaceAll('$', '')
-              .replaceAll(' ', '')
-              .replaceAll('USD', '')
-              .replaceAll(' ', '')
-          )
-            setFetchingPath(false);
+          const _path = formPath(route);
+          if (_path !== null) {
+            setSwapPath(_path);
+            setTokenAmount(route!.quote.toExact());
+          }
+          setFetchingPath(false);
         }, 600);
       }
     };
-    if (currency === 0) setTokenAmount(USDCAmount);
+    if (currency === 0) setTokenAmount(_USDCAmount);
     else quoterWrapper();
   };
   const handleTokenAmountChange = (ev: any) => {
     setTokenAmount(ev.target.value.replaceAll(',', ''));
-    const tokenAmount = ev.target.value.replaceAll(',', '');
-    if (Number(tokenAmount) === 0) {
+    const _tokenAmount = ev.target.value.replaceAll(',', '');
+    if (Number(_tokenAmount) === 0) {
       setUSDCAmount('0');
     } else if (tokensList![currency].symbol === 'USDC') {
-      setUSDCAmount(tokenAmount);
-    } else {
+      setUSDCAmount(_tokenAmount);
+    } else if (Number(_tokenAmount) !== Number(tokenAmount)) {
       const quoterWrapper = async () => {
         if (contracts !== null) {
           clearTimeout(timer.current);
@@ -91,11 +86,14 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               chainId!,
               { decimals: Number(tokenDecimals), ...tokensList![currency] },
               { decimals: 6, ...tokensList![0] },
-              Number(tokenAmount),
+              Number(_tokenAmount),
               0
             );
-            setSwapPath(formPath(route));
-            setUSDCAmount(route!.quote.toExact());
+            const _path = formPath(route);
+            if (_path !== null) {
+              setSwapPath(_path);
+              setUSDCAmount(route!.quote.toExact());
+            }
             setFetchingPath(false);
           }, 600);
         }
@@ -110,9 +108,9 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
     setNetwork(ev.target.value);
   };
   const handleWalletConnect = async () => {
-    await connect!();
-    if (!chainValidation()) {
-      const reservedChain = SUPPORTED_NETWORKS.find((value) => value.name === network)?.chainId;
+    if ((await connect!()) && !chainValidation()) {
+      const reservedChain = SUPPORTED_NETWORKS.find((value) => value.name === network && value.enabled === true)
+        ?.chainId;
       await switchNetwork(reservedChain);
     }
   };
@@ -143,11 +141,11 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <FormControl sx={{ width: '100%' }}>
             <CustomSelect
               id="networkSelector"
-              defaultValue={SUPPORTED_NETWORKS[0].name}
+              defaultValue={SUPPORTED_NETWORKS.find((network) => network.enabled === true)!.name}
               value={network}
               onChange={handleNetworkChange}
             >
-              {SUPPORTED_NETWORKS.map((network) => (
+              {SUPPORTED_NETWORKS.filter((network) => network.enabled === true).map((network) => (
                 <MenuItem value={network.name} key={network.name}>
                   <Box display="flex" alignItems="center" gap={1} sx={{ textTransform: 'uppercase' }}>
                     <img
@@ -167,7 +165,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
             <FormButton onClick={handleWalletConnect}>connect wallet</FormButton>
             <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
-              Minimum Investment $5,000 USD
+              Minimum Investment ${Number(process.env.REACT_APP_MIN_AMOUNT || '5000').toLocaleString()} USD
             </Typography>
           </Box>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
@@ -211,7 +209,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
               tokensList!.map((token, index) => (
                 <MenuItem value={index} key={token.id}>
                   <Box width="100%" display="flex" gap={1} justifyContent="flex-start">
-                    <TokenLogo address={token.id} symbol={token.symbol} />
+                    <TokenLogo token={token} />
                     {`${token.name} (${token.symbol})`}
                   </Box>
                 </MenuItem>
@@ -224,9 +222,9 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             <Typography
               sx={{ color: 'red' }}
               fontWeight="300"
-              display={`${Number(USDCAmount) < 5000 ? 'block' : 'none'}`}
+              display={`${Number(USDCAmount) < Number(process.env.REACT_APP_MIN_AMOUNT || '5000') ? 'block' : 'none'}`}
             >
-              Please enter a value of minimum $5,000 USD
+              Please enter a value of minimum ${Number(process.env.REACT_APP_MIN_AMOUNT || '5000').toLocaleString()} USD
             </Typography>
           </Box>
           <CustomInputWrapper>
@@ -241,9 +239,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             </Box>
             <Typography>/</Typography>
             <Box width="100%" display="flex" gap={1} justifyContent="center" alignItems="center">
-              {tokensList && tokensList.length > 0 && (
-                <TokenLogo address={tokensList![currency].id} symbol={tokensList![currency].symbol} />
-              )}
+              {tokensList && tokensList.length > 0 && <TokenLogo token={tokensList![currency]} />}
               <AmountInput
                 value={Number(tokenAmount).toFixed(3)}
                 onChange={handleTokenAmountChange}
@@ -276,10 +272,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             <Box width="100%" mt={3}>
               <FormButton
                 onClick={handleClick}
-                disabled={
-                  Number(USDCAmount) < (chainId === 4 || chainId === 80001 || chainId === 137 ? 5 : 5000) ||
-                  fetchingPath
-                }
+                disabled={Number(USDCAmount) < Number(process.env.REACT_APP_MIN_AMOUNT || '5000') || fetchingPath}
               >
                 PREVIEW SWAP
               </FormButton>
