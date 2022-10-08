@@ -203,7 +203,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <Typography fontWeight="bold" color="#ffffff88" textAlign="center">
             WHAT CURRENCY WOULD YOU LIKE TO SWAP?
           </Typography>
-          <CustomSelect id="tokenSelector" value={currency} onChange={handleCurrencyChange}>
+          <CustomSelect id="tokenSelector" value={currency} onChange={handleCurrencyChange} disabled={fetchingPath}>
             {tokensList &&
               tokensList.length > 0 &&
               tokensList!.map((token, index) => (
