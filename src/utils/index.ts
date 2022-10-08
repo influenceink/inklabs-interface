@@ -22,13 +22,9 @@ export const tokenToWei = (token: string | number, decimals: number) => {
 };
 
 export const formPath = (route: any) => {
-  let pools: Array<any> = route.route[0].route.pools;
-  let tokens: Array<any> = route.route[0].route.tokenPath;
+  let pools: Array<any> = route.trade.swaps[0].route.pools;
+  let tokens: Array<any> = route.trade.swaps[0].route.tokenPath;
   if (tokens.length === 0) return null;
-  if (route.route[0].tradeType === 1) {
-    pools = pools.reverse();
-    tokens = tokens.reverse();
-  }
   let path = tokens[0].address;
   pools.forEach((pool, index) => {
     path += ('000000' + Number(pool.fee).toString(16)).slice(-6) + tokens[index + 1].address.slice(-40);
