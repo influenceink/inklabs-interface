@@ -327,7 +327,7 @@ export const TOKENS_LIST: { [key: number]: Array<any> } = {
   137: [
     {
       id: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-      name: 'USD Coin (PoS)',
+      name: 'USD Coin',
       symbol: 'USDC',
       logoURI:
         'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
@@ -341,7 +341,7 @@ export const TOKENS_LIST: { [key: number]: Array<any> } = {
     },
     {
       id: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
-      name: 'WETH',
+      name: 'Wrapped ETH',
       symbol: 'WETH',
       logoURI:
         'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png',
@@ -355,14 +355,14 @@ export const TOKENS_LIST: { [key: number]: Array<any> } = {
     },
     {
       id: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
-      name: '(PoS) Tether USD',
+      name: 'Tether USD',
       symbol: 'USDT',
       logoURI:
         'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png',
     },
     {
       id: '0x8f3cf7ad23cd3cadbd9735aff958023239c6a063',
-      name: '(PoS) Dai Stablecoin',
+      name: 'Dai Stablecoin',
       symbol: 'DAI',
       logoURI:
         'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png',
@@ -375,14 +375,14 @@ export const TOKENS_LIST: { [key: number]: Array<any> } = {
     },
     {
       id: '0xb33eaad8d922b1083446dc23f610c2567fb5180f',
-      name: 'Uniswap (PoS)',
+      name: 'Uniswap',
       symbol: 'UNI',
       logoURI:
         'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984/logo.png',
     },
     {
       id: '0x172370d5cd63279efa6d502dab29171933a610af',
-      name: 'CRV (PoS)',
+      name: 'Curve DAO Token',
       symbol: 'CRV',
       logoURI:
         'https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/0xD533a949740bb3306d119CC777fa900bA034cd52/logo.png',
