@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts';
 import cross from '../../assets/img/cross.png';
 import { ImageUpload } from '../../components/ImageUpload';
-import { getState } from '../../utils';
+import { getZIPState } from '../../utils';
 
 export const connectionData = [
   {
@@ -384,7 +384,7 @@ export const Cards = ({ data }: any) => {
             {code}
           </Typography>
           <Typography variant="subtitle2" fontSize="9px" color="#fff">
-            {getState(code)}
+            {getZIPState(code)}
           </Typography>
           <Typography variant="subtitle2" fontSize="9px" color="#FF9318">
             Legendary

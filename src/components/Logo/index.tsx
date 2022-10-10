@@ -14,7 +14,7 @@ export const getTokenLogoURI = (address: string) => {
   const arbi = arbiTokens.tokens.find((token) => token.address === checkSumed)?.logoURI;
   const poly = polyTokens.tokens.find((token) => token.address === checkSumed)?.logoURI;
   return [
-    `https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/${address}/logo.png`,
+    `https://raw.githubusercontent.com/uniswap/assets/master/blockchains/ethereum/assets/${checkSumed}/logo.png`,
     opti,
     celo,
     arbi,
@@ -50,7 +50,7 @@ export const Logo = ({ srcs, alt, ...rest }: LogoProps) => {
   return <HelpCircle {...rest} />;
 };
 
-export const TokenLogo = ({ address, symbol }: { address: string; symbol: string }) => {
-  const srcs = useMemo(() => getTokenLogoURI(address), [address]);
-  return <Logo srcs={srcs} alt={symbol} style={{ borderRadius: 24, width: '22px', height: '22px' }} />;
+export const TokenLogo = ({ token }: { token: any }) => {
+  // const srcs = useMemo(() => getTokenLogoURI(address), [address]);
+  return <Logo srcs={[token.logoURI]} alt={token.symbol} style={{ borderRadius: 24, width: '22px', height: '22px' }} />;
 };

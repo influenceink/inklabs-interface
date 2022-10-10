@@ -1,10 +1,5 @@
 import { sha512 } from 'js-sha512';
-import { TOP_TOKENS_URI } from './constants';
-// import quickTokensList from './quickswap-tokenlist.json';
-import axios from 'axios';
-import Web3 from 'web3';
-// import ethTopTokens from './eth-top-50-tokens.json';
-// import polyTopTokens from './poly-top-50-tokens.json';
+
 export const containsSpecialChars = (str: string) => {
   const specialChars = '[`!@#$%^&*()_+-=[]{};\':"\\|,.<>/?~]/';
   const numbers = '0123456789';
@@ -19,10 +14,6 @@ export const passwordToHash = (password: string) => {
   return hash;
 };
 
-export const getTopTokensList = async (chainId: number): Promise<Array<any>> => {
-  return new Promise((resolve) => resolve([]));
-};
-
 export const tokenToWei = (token: string | number, decimals: number) => {
   const tokenStr = token.toString();
   const zerosNum = tokenStr.indexOf('.') === -1 ? decimals : decimals - tokenStr.length + tokenStr.indexOf('.') + 1;
@@ -31,12 +22,9 @@ export const tokenToWei = (token: string | number, decimals: number) => {
 };
 
 export const formPath = (route: any) => {
-  let pools: Array<any> = route.route[0].route.pools;
-  let tokens: Array<any> = route.route[0].route.tokenPath;
-  if (route.route[0].tradeType === 1) {
-    pools = pools.reverse();
-    tokens = tokens.reverse();
-  }
+  let pools: Array<any> = route.trade.swaps[0].route.pools;
+  let tokens: Array<any> = route.trade.swaps[0].route.tokenPath;
+  if (tokens.length === 0) return null;
   let path = tokens[0].address;
   pools.forEach((pool, index) => {
     path += ('000000' + Number(pool.fee).toString(16)).slice(-6) + tokens[index + 1].address.slice(-40);
@@ -44,7 +32,7 @@ export const formPath = (route: any) => {
   return path;
 };
 
-export const getState = (zipString: string) => {
+export const getZIPState = (zipString: string) => {
   /* Ensure param is a string to prevent unpredictable parsing results */
   if (typeof zipString !== 'string') {
     console.log('Must pass the zipcode as a string.');

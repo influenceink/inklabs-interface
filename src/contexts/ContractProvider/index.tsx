@@ -2,12 +2,10 @@ import { createContext, useState, ReactNode, useContext, useEffect, useCallback 
 import Web3 from 'web3';
 import { AbiItem } from 'web3-utils';
 import { Contract as Web3Contract } from 'web3-eth-contract';
-import BigNumber from 'bignumber.js';
 import { Web3Context } from '../Web3Provider';
 import ERC20_ABI from '../../utils/abis/erc20.json';
 import INKPURCHASE_ABI from '../../utils/abis/inkpurchase.json';
-import QUOTER_ABI from '../../utils/abis/quoter.json';
-import { INKPURCHASE_ADDRESSES, QUOTER_ADDRESS } from '../../utils/constants';
+import { INKPURCHASE_ADDRESSES } from '../../utils/constants';
 
 export type ContractOptionType = {
   web3: Web3;
@@ -125,7 +123,6 @@ export const ContractProvider = ({ children }: { children: ReactNode }) => {
     if (connected && web3 && chainId) {
       setContracts({
         inkpurchase: new Contract({ web3, account, chainId }, INKPURCHASE_ABI, INKPURCHASE_ADDRESSES[chainId]),
-        quoter: new Contract({ web3, account, chainId }, QUOTER_ABI, QUOTER_ADDRESS),
       });
     }
   }, [connected, web3, chainId, account]);
