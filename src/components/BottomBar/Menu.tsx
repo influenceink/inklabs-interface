@@ -54,15 +54,29 @@ export const Menu = ({ show, setShow }: Props) => {
             </Box>
           </MenuBar>
           <Box
-            position="absolute"
-            right={0}
-            bottom={0}
-            display="flex"
+            display='flex'
             gap={2}
-            mb={!mobile ? 2 : '110px'}
-            mr={2}
+            style={!mobile?{
+              position: 'absolute',
+              right: 0,
+              bottom: 0,
+            }:{
+              margin: 'auto',
+              marginTop: '-200px',
+              width: 'fit-content'
+            }}
+            mb={!mobile?2:0}
+            mr={!mobile?2:0}
             color={'#a0a0a0'}
           >
+            <Typography onClick={() => goTo('/terms')} sx={{ ':hover': { color: '#ff225e' } }}>
+              TERMS OF <span style={{display: mobile?'table':'contents'}}>SERVICE</span>
+            </Typography>
+            |
+            <Typography onClick={() => goTo('/policy')} sx={{ ':hover': { color: '#ff225e' } }}>
+              PRIVACY <span style={{display: mobile?'table':'contents'}}>POLICY</span>
+            </Typography>
+            |
             <Typography onClick={() => goTo('/faq')} sx={{ ':hover': { color: '#ff225e' } }}>
               FAQ&apos;s
             </Typography>

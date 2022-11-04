@@ -26,6 +26,8 @@ export const PAGE_TITLE_INFLUENCE = 'World of Influence';
 export const PAGE_TITLE_PRODUCTS = 'Products';
 export const PAGE_TITLE_COIN = 'INK Coin';
 export const PAGE_TITLE_FAQ = 'FAQ';
+export const PAGE_TITLE_TERMS = 'TERMS OF SERVICE';
+export const PAGE_TITLE_POLICY = 'PRIVACY POLICY';
 // export const PAGE_TITLE_HOME = 'Home';
 // APP THEME
 export const DARK_MODE_THEME = 'dark';
