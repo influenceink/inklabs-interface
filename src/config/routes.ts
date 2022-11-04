@@ -11,6 +11,8 @@ import { Convergence } from '../pages/Convergence';
 import { Products } from '../pages/Products';
 // import { WOI } from '../pages/WOI';
 import { FAQ } from '../pages/FAQ';
+import { Terms } from '../pages/Terms';
+import { Policy } from '../pages/Policy';
 
 const routes: Array<Route> = [
   // {
@@ -109,6 +111,24 @@ const routes: Array<Route> = [
     description: 'FAQ',
     component: FAQ,
     path: '/faq',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-terms',
+    title: 'TERMS OF SERVICE',
+    description: 'TERMS OF SERVICE',
+    component: Terms,
+    path: '/terms',
+    isEnabled: true,
+    appendDivider: true,
+  },
+  {
+    key: 'router-policy',
+    title: 'PRIVACY POLICY',
+    description: 'PRIVACY POLICY',
+    component: Policy,
+    path: '/policy',
     isEnabled: true,
     appendDivider: true,
   },

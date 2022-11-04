@@ -63,6 +63,14 @@ export const Menu = ({ show, setShow }: Props) => {
             mr={2}
             color={'#a0a0a0'}
           >
+            <Typography onClick={() => goTo('/terms')} sx={{ ':hover': { color: '#ff225e' } }}>
+              TERMS OF <span style={{display: mobile?'table':'contents'}}>SERVICE</span>
+            </Typography>
+            |
+            <Typography onClick={() => goTo('/policy')} sx={{ ':hover': { color: '#ff225e' } }}>
+              PRIVACY <span style={{display: mobile?'table':'contents'}}>POLICY</span>
+            </Typography>
+            |
             <Typography onClick={() => goTo('/faq')} sx={{ ':hover': { color: '#ff225e' } }}>
               FAQ&apos;s
             </Typography>

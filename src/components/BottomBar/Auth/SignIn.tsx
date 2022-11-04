@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Checkbox, FormControlLabel } from '@mui/material';
 import React, { useState, useContext, useCallback } from 'react';
 import { FormButton, FormTitle, Input, Divider } from '.';
 import Loading from '../../../assets/img/loading.gif';
@@ -51,7 +51,7 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
         {!forgot ? (
           <>
             <Divider />
-            <Box my={8} display="flex" flexDirection="column" alignItems="center" gap="20px" width="100%">
+            <Box my={6} display="flex" flexDirection="column" alignItems="center" gap="20px" width="100%">
               <Input
                 placeholder="Email"
                 value={email}
@@ -75,6 +75,7 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
               <Typography sx={{ color: 'red' }} display={`${errorEmitted ? 'block' : 'none'}`}>
                 Email or password must be wrong.
               </Typography>
+              <FormControlLabel control={<Checkbox/>} label="Accept Terms" />
             </Box>
             <Divider />
             <Typography variant="subtitle2" fontWeight="bold" py={0} mt={2}>
