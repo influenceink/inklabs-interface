@@ -5,6 +5,7 @@ import { Menu } from './Menu';
 import { PurchaseFlowContext, AuthContext } from '../../contexts';
 import menuImg from '../../assets/img/menu.png';
 import menuHoverImg from '../../assets/img/menu-hover.png';
+import reserveButton from '../../assets/img/reserve-button.png';
 // import unlock from '../../assets/img/unlock.png';
 // import dotLine from '../../assets/img/dot-line.png';
 // import open from '../../assets/img/open.png';
@@ -72,9 +73,9 @@ export const MenuButton = () => {
           gap={2}
           zIndex={9999}
         >
-          <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
+          {/* <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
             <span>buy ink</span>
-          </StyledButton>
+          </StyledButton> */}
           <StyledButton
             onClick={handleClick}
             className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
@@ -86,9 +87,12 @@ export const MenuButton = () => {
               <img src={menuImg} alt="menu open" />
             )}
           </StyledButton>
-          <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
+          {/* <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
             <span>roadmap</span>
-          </StyledButton>
+          </StyledButton> */}
+          {/* <StyledImageButton onClick={toggleShowPurchaseFlow}>
+            <img alt="Reserve INK Token" src={reserveButton}/>
+          </StyledImageButton> */}
         </Box>
       </Box>
       {/* <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} /> */}
@@ -180,6 +184,14 @@ const StyledButton = styled(Button)`
     background-color: white;
   }
 `;
+
+const StyledImageButton = styled('div')`
+  position: relative;
+  & img {
+    height: 77px
+  }
+`;
+
 const LightToggler = styled(StyledButton)`
   background-color: white;
   img {

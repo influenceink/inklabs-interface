@@ -25,7 +25,7 @@ export const Terms = () => {
             </p>
             <p>
               Please read these Terms of Service (the &quot;Terms&quot;) and our &nbsp;
-              <Link href="/privacy" sx={{ ':hover': { color: '#ff225e' } }}>Privacy Policy</Link> &nbsp; carefully, as they constitute a legally binding agreement between you (&quot;you,&quot; your,&quot; or &quot;User&quot;) and INK Games (&quot;INK&quot;, &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
+              <Link href="/policy" sx={{ ':hover': { color: '#ff225e' } }}>Privacy Policy</Link> &nbsp; carefully, as they constitute a legally binding agreement between you (&quot;you,&quot; your,&quot; or &quot;User&quot;) and INK Games (&quot;INK&quot;, &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
             </p>
             <p>
               These Terms and the Privacy Policy set out the terms on which INK offers you access to and use of (a) the website located at www.inktoken.com and all relevant sub-pages associated with the foregoing URL or any content and functionalities accessible through such URL or its sub-pages (collectively, the &quot;Site&quot;)<small>[1]</small>.
@@ -162,7 +162,7 @@ export const Terms = () => {
             </p>
             <p>
               You acknowledge and agree to the collection, use, and disclosure of your personal information in accordance with our &nbsp;
-              <Link href="/privacy" sx={{ ':hover': { color: '#ff225e' } }}>Privacy Policy</Link>, which is incorporated into these Terms.
+              <Link href="/policy" sx={{ ':hover': { color: '#ff225e' } }}>Privacy Policy</Link>, which is incorporated into these Terms.
             </p>
             <p>
               <b>12. Modifications.</b>
