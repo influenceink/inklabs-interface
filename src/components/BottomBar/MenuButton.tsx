@@ -90,11 +90,13 @@ export const MenuButton = () => {
           {/* <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
             <span>roadmap</span>
           </StyledButton> */}
-          {/* <StyledImageButton onClick={toggleShowPurchaseFlow}>
-            <img alt="Reserve INK Token" src={reserveButton}/>
-          </StyledImageButton> */}
         </Box>
       </Box>
+      <ReserveButtonBox>
+        <StyledImageButton onClick={toggleShowPurchaseFlow}>
+          <img alt="Reserve INK Token" src={reserveButton}/>
+        </StyledImageButton>
+      </ReserveButtonBox>
       {/* <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} /> */}
       <Menu show={showMenu} setShow={setShowMenu} />
       <Purchase show={showPurchase} setShow={setPurchase} />
@@ -185,11 +187,28 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const ReserveButtonBox = styled(Box)`
+  position: fixed;
+  display: flex;
+  alignItems: flex-end;
+  right: 0;
+  bottom: 0;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  gap: 2;
+
+  @media screen and (max-width: 600px) {
+    right: 50%;
+    bottom: 50%;
+    transform: translateX(50%) translateY(50%);
+    margin-right: 0;
+    margin-bottom: -100px;
+  }
+`;
+
 const StyledImageButton = styled('div')`
   position: relative;
-  & img {
-    height: 77px
-  }
+  cursor: pointer;
 `;
 
 const LightToggler = styled(StyledButton)`

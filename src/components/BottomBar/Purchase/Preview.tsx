@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material';
-import { useState, useContext } from 'react';
+import { Box, Typography, Checkbox, FormControlLabel, Link } from '@mui/material';
+import React, { useState, useContext } from 'react';
 import { FormButton, FormTitle, Input, Divider, DividerContent } from '.';
 import { ContractContext, AuthContext, Web3Context } from '../../../contexts';
 import Loading from '../../../assets/img/loading.gif';
@@ -12,8 +12,15 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
   const { chainId } = useContext(Web3Context);
   const { purchase } = useContext(AuthContext);
   const [loadingStatus, setLoading] = useState<boolean>(false);
+  const [accepted, setAccepted] = useState<boolean>(false);
+  const [mustAccept, setMustAccept] = useState<boolean>(false);
   const handleClick = async () => {
     if (contracts !== null) {
+      if (!accepted) {
+        setMustAccept(true);
+        setTimeout(() => setMustAccept(false), 3000);
+        return;
+      }
       setLoading(true);
       const getGovernToken = () => {
         if (chainId === 137 || chainId === 80001) return 'MATIC';
@@ -101,6 +108,12 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
     }
     onNext();
   };
+
+  const handleAcceptChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    setAccepted(ev.target.checked);
+    setMustAccept(false);
+  };
+
   return (
     <>
       <FormTitle>
@@ -153,6 +166,13 @@ export const Preview = ({ onNext, onPrev, preview }: { onNext: () => void; onPre
           </Typography>
           <Typography mt={4} fontWeight="bold" color="#ffffff88" textAlign="center">
             WE WILL EMAIL YOU WITH PROJECT AND LAUNCH UPDATES.
+          </Typography>
+          <FormControlLabel 
+            control={<Checkbox checked={accepted} onChange={handleAcceptChange}/>} 
+            label={<div>Accept&nbsp;<Link href="/terms" target='_blank' sx={{ color: 'white', ':hover': { color: '#ff225e' } }}>Terms</Link></div>} 
+          />
+          <Typography sx={{ color: 'red' }} display={`${mustAccept ? 'block' : 'none'}`}>
+            You must accept Terms before entering.
           </Typography>
           <Box width="100%" mt={1}>
             <FormButton onClick={handleClick} disabled={loadingStatus}>
