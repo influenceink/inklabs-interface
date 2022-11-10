@@ -5,6 +5,7 @@ import { Menu } from './Menu';
 import { PurchaseFlowContext, AuthContext } from '../../contexts';
 import menuImg from '../../assets/img/menu.png';
 import menuHoverImg from '../../assets/img/menu-hover.png';
+import reserveButton from '../../assets/img/reserve-button.png';
 // import unlock from '../../assets/img/unlock.png';
 // import dotLine from '../../assets/img/dot-line.png';
 // import open from '../../assets/img/open.png';
@@ -72,9 +73,9 @@ export const MenuButton = () => {
           gap={2}
           zIndex={9999}
         >
-          <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
+          {/* <StyledButton sx={{ minWidth: 110 }} onClick={toggleShowPurchaseFlow}>
             <span>buy ink</span>
-          </StyledButton>
+          </StyledButton> */}
           <StyledButton
             onClick={handleClick}
             className={showMenu || (sm && showRoadmap) || (sm && showPurchase) || (sm && showAuth) ? 'close' : ''}
@@ -86,11 +87,16 @@ export const MenuButton = () => {
               <img src={menuImg} alt="menu open" />
             )}
           </StyledButton>
-          <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
+          {/* <StyledButton onClick={toggleShowRoadmap} sx={{ minWidth: 110 }}>
             <span>roadmap</span>
-          </StyledButton>
+          </StyledButton> */}
         </Box>
       </Box>
+      <ReserveButtonBox>
+        <StyledImageButton onClick={toggleShowPurchaseFlow}>
+          <img alt="Reserve INK Token" src={reserveButton}/>
+        </StyledImageButton>
+      </ReserveButtonBox>
       {/* <KeyPad show={showKeyPad} setShow={setShowKeyPad} setLock={setLock} /> */}
       <Menu show={showMenu} setShow={setShowMenu} />
       <Purchase show={showPurchase} setShow={setPurchase} />
@@ -180,6 +186,31 @@ const StyledButton = styled(Button)`
     background-color: white;
   }
 `;
+
+const ReserveButtonBox = styled(Box)`
+  position: fixed;
+  display: flex;
+  alignItems: flex-end;
+  right: 0;
+  bottom: 0;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  gap: 2;
+
+  @media screen and (max-width: 600px) {
+    right: 50%;
+    bottom: 50%;
+    transform: translateX(50%) translateY(50%);
+    margin-right: 0;
+    margin-bottom: -100px;
+  }
+`;
+
+const StyledImageButton = styled('div')`
+  position: relative;
+  cursor: pointer;
+`;
+
 const LightToggler = styled(StyledButton)`
   background-color: white;
   img {
