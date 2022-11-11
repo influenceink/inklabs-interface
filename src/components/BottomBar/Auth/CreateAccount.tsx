@@ -12,8 +12,15 @@ export const CreateAccount = ({
 }) => {
   const { referrerLookup } = useContext(AuthContext);
   const [referrer, setReferrer] = useState<string>('');
-  const [isReferrerValid, setReferrerValidation] = useState<boolean>(true);
+  const [isReferrerValid, setReferrerValidation] = useState<boolean>(false);
   const [ReferrerError, setReferrerError] = useState<string>('');
+  const referrerLookupWrapper = useCallback(async () => {
+    const res = await referrerLookup({ referrer_id: referrer });
+    if (res.status) {
+      setReferrerError(res.error);
+      setReferrerValidation(false);
+    } else setReferrerValidation(true);
+  }, [referrer, setReferrerError, setReferrerValidation, referrerLookup]);
   const handleClick = useCallback(() => {
     const data = { referrer_id: referrer };
     onNext(data);
@@ -22,15 +29,9 @@ export const CreateAccount = ({
     setReferrer(referrer);
   };
   useEffect(() => {
-    const referrerLookupWrapper = async () => {
-      const res = await referrerLookup({ referrer_id: referrer });
-      if (res.status) {
-        setReferrerError(res.error);
-        setReferrerValidation(false);
-      } else setReferrerValidation(true);
-    };
-    referrerLookupWrapper();
-  }, [referrer, referrerLookup]);
+    if (ReferrerError || referrer)
+      referrerLookupWrapper();
+  }, [referrer, ReferrerError, referrerLookupWrapper]);
   return (
     <>
       <FormTitle>
