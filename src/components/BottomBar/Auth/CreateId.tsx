@@ -1,18 +1,21 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 import { passwordToHash, containsSpecialChars } from '../../../utils';
 import { AuthContext } from '../../../contexts';
+import Loading from '../../../assets/img/loading.gif';
 
 export const CreateId = ({
+  account,
   onNext,
-  onSignIn,
-  error,
+  onSignIn
 }: {
-  onNext: (_: any) => void;
+  account: any;
+  onNext: () => void;
   onSignIn: () => void;
-  error: string;
 }) => {
+  const { authVacancy, userVacancy, signUp } = useContext(AuthContext);
+
   const [username, setUsername] = useState<string>('');
   const [firstname, setFirstname] = useState<string>('');
   const [lastname, setLastname] = useState<string>('');
@@ -20,22 +23,15 @@ export const CreateId = ({
   const [password, setPassword] = useState<string>('');
   const [confirm, setConfirm] = useState<string>('');
   const [displayError, setDisplayError] = useState<boolean>(false);
-  const { authVacancy, userVacancy } = useContext(AuthContext);
+  const [error, setError] = useState<string>('');
   const [IdError, setIdError] = useState<string>('');
   const [isIdValid, setIdValidation] = useState<boolean>(true);
   const [EmailError, setEmailError] = useState<string>('');
   const [isEmailValid, setEmailValidation] = useState<boolean>(true);
   const [PasswordError, setPasswordError] = useState<string>('');
   const [isPasswordValid, setPasswordValidation] = useState<boolean>(true);
-  // useEffect(() => {
-  //   if (account !== null) {
-  //     setEmail(account.email);
-  //     setPassword(account.password);
-  //     setUsername(account.ink_id);
-  //     setFirstname((account.display_name || '').split(' ')[0]);
-  //     setLastname((account.display_name || '').split(' ')[1]);
-  //   }
-  // }, [account]);
+  const [loadingStatus, setLoadingStatus] = useState<boolean>(false);
+
   const validation = () => {
     return (
       username === '' ||
@@ -49,15 +45,16 @@ export const CreateId = ({
       !isPasswordValid
     );
   };
-  const handleClick = () => {
-    onNext({ email, password: passwordToHash(password), display_name: `${firstname} ${lastname}`, ink_id: username });
-  };
-  useEffect(() => {
-    if (error !== '') {
+  const handleClick = useCallback(async () => {
+    setLoadingStatus(true);
+    const data = await signUp({ ...account, email, password: passwordToHash(password), display_name: `${firstname} ${lastname}`, ink_id: username });
+    setLoadingStatus(false);
+    if (data.status !== 0) {
+      setError(data.error);
       setDisplayError(true);
       setTimeout(() => setDisplayError(false), 3000);
     }
-  }, [error]);
+  }, [setLoadingStatus, setDisplayError, setError, account, email, password, firstname, lastname, username, signUp]);
   const handleUsernameChange = async (inkId: string) => {
     setUsername(inkId);
   };
@@ -182,7 +179,7 @@ export const CreateId = ({
           value={confirm}
           onChange={(ev) => setConfirm(ev.target.value)}
           onKeyUp={(e) => {
-            if (!validation() && (e.key === 'Enter' || e.keyCode === 13)) handleClick();
+            if (!loadingStatus && !validation() && (e.key === 'Enter' || e.keyCode === 13)) handleClick();
           }}
         />
         {password !== confirm && (
@@ -191,8 +188,9 @@ export const CreateId = ({
           </Typography>
         )}
         <Box my={1} width="100%">
-          <FormButton onClick={handleClick} disabled={validation()}>
+          <FormButton onClick={handleClick} disabled={loadingStatus || validation()}>
             create ink id
+            {loadingStatus && <img src={Loading} alt="" width={'22px'} style={{ marginLeft: '10px' }} />}
           </FormButton>
         </Box>
         <Typography variant="subtitle2" fontWeight="bold" py={0}>

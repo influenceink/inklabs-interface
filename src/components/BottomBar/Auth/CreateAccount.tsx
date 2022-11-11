@@ -2,30 +2,22 @@ import { useState, useContext, useCallback, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { FormButton, FormTitle, Input, Divider } from '.';
 import { AuthContext } from '../../../contexts';
-import Loading from '../../../assets/img/loading.gif';
 
 export const CreateAccount = ({
   onNext,
-  onPrev,
-  account,
+  onSignIn,
 }: {
-  account: any;
-  onNext: () => void;
-  onPrev: (_?: string) => void;
+  onNext: (_: any) => void;
+  onSignIn: () => void;
 }) => {
-  const { signUp, referrerLookup } = useContext(AuthContext);
-  const [loadingStatus, setLoadingStatus] = useState<boolean>(false);
+  const { referrerLookup } = useContext(AuthContext);
   const [referrer, setReferrer] = useState<string>('');
   const [isReferrerValid, setReferrerValidation] = useState<boolean>(true);
   const [ReferrerError, setReferrerError] = useState<string>('');
-  const handleClick = useCallback(async () => {
-    setLoadingStatus(true);
-    const data = await signUp({ ...account, referrer_id: referrer });
-    setLoadingStatus(false);
-    if (data.status !== 0) {
-      onPrev(data.error);
-    }
-  }, [setLoadingStatus, account, onPrev, referrer, signUp]);
+  const handleClick = useCallback(() => {
+    const data = { referrer_id: referrer };
+    onNext(data);
+  }, [referrer, onNext]);
   const handleReferrerChange = async (referrer: string) => {
     setReferrer(referrer);
   };
@@ -72,8 +64,8 @@ export const CreateAccount = ({
               {ReferrerError}
             </Typography>
           )}
-          <FormButton onClick={handleClick} disabled={referrer === '' || loadingStatus || !isReferrerValid}>
-            enter{loadingStatus && <img src={Loading} alt="" width={'22px'} style={{ marginLeft: '10px' }} />}
+          <FormButton onClick={handleClick} disabled={referrer === '' || !isReferrerValid}>
+            enter
           </FormButton>
         </Box>
         <Divider />
@@ -84,7 +76,7 @@ export const CreateAccount = ({
           variant="subtitle1"
           color="#2984FF"
           sx={{ cursor: 'pointer', ':hover': { textDecoration: 'underline' } }}
-          onClick={() => onPrev()}
+          onClick={() => onSignIn()}
         >
           Sign-in
         </Typography>
