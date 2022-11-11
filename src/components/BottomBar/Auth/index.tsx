@@ -46,7 +46,7 @@ export const Auth = ({ show, setShow }: Props) => {
           >
             <ContentWrapper>
               {index == 0 && <SignIn onPrev={() => setIndex((value) => value + 1)} />}
-              {index === 1 && (
+              {/* {index === 1 && (
                 <CreateId
                   onNext={(account) => {
                     setIndex((value) => value + 1);
@@ -65,6 +65,22 @@ export const Auth = ({ show, setShow }: Props) => {
                     setAccount(null);
                     if (msg !== undefined) setErrorMsg(msg);
                   }}
+                />
+              )} */}
+              {index === 1 && (
+                <CreateAccount
+                  onNext={(account) => {
+                    setIndex((value) => value + 1);
+                    setAccount(account);
+                  }}
+                  onSignIn={() => setIndex((value) => value - 1)}
+                />
+              )}
+              {index === 2 && (
+                <CreateId
+                  account={account}
+                  onNext={() => setShowModal(false)}
+                  onSignIn={() => setIndex((value) => value - 2)}
                 />
               )}
             </ContentWrapper>

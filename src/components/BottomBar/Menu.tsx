@@ -6,6 +6,7 @@ import instagram from '../../assets/img/instagram.png';
 import twitter from '../../assets/img/twitter.png';
 import facebook from '../../assets/img/facebook.png';
 import youtube from '../../assets/img/youtube.png';
+import referral from '../../assets/img/referral-button.png';
 import { Copyright } from './Copyright';
 import { PurchaseFlowContext, AuthContext } from '../../contexts';
 
@@ -43,6 +44,9 @@ export const Menu = ({ show, setShow }: Props) => {
               {/* <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem> */}
               <MenuItem onClick={() => goTo('/convergence')}>convergence</MenuItem>
               <MenuItem onClick={() => goTo('/coin')}>ink token</MenuItem>
+              <MenuItemImage onClick={() => goTo('/referral-program')}>
+                <img style={{width: '100%'}} alt="Referral Program" src={referral}/>
+              </MenuItemImage>
               {mobile && (
                 <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} px={2}>
                   <img src={twitter} alt="twitter" />
@@ -199,8 +203,8 @@ const PageTitleText = styled('span')`
 
 const MenuItem = styled('div')`
   width: 100%;
-  font-size: 60px;
-  line-height: 60px;
+  font-size: 50px;
+  line-height: 50px;
   text-transform: uppercase;
   font-family: 'Poppins';
   font-weight: bolder;
@@ -219,5 +223,13 @@ const MenuItem = styled('div')`
   @media screen and (max-width: 660px) {
     font-size: 25px;
     line-height: 25px;
+  }
+`;
+
+const MenuItemImage = styled('div')`
+  width: 400px;
+  cursor: pointer;
+  @media screen and (max-width: 660px) {
+    width: 200px;
   }
 `;

@@ -1,4 +1,4 @@
-import { Box, Typography, Checkbox, FormControlLabel } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useState, useContext, useCallback } from 'react';
 import { FormButton, FormTitle, Input, Divider } from '.';
 import Loading from '../../../assets/img/loading.gif';
@@ -10,9 +10,7 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
   const [email, setEmail] = useState<string>('');
   const [loadingStatus, setLoading] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
-  const [accepted, setAccepted] = useState<boolean>(false);
   const [errorEmitted, setErrorEmitted] = useState<boolean>(false);
-  const [mustAccept, setMustAccept] = useState<boolean>(false);
   const [forgot, setForgot] = useState<boolean>(false);
   const [resetSent, setReset] = useState<boolean>(false);
   const handleReset = async () => {
@@ -25,28 +23,19 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
     setForgot(true);
   };
   const handleSignin = useCallback(async () => {
-    if (!accepted) {
-      setMustAccept(true);
-      setTimeout(() => setMustAccept(false), 3000);
-      return;
-    }
     setLoading(true);
     if (!(await signIn(email, passwordToHash(password)))) {
       setErrorEmitted(true);
       setTimeout(() => setErrorEmitted(false), 3000);
     }
     setLoading(false);
-  }, [setLoading, email, password, signIn, accepted]);
+  }, [setLoading, email, password, signIn]);
   const handleEmailChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(ev.target.value);
   };
   const handlePasswordChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(ev.target.value);
   };
-  const handleAcceptChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setAccepted(ev.target.checked);
-    setMustAccept(false);
-  }
   return (
     <>
       <FormTitle>{forgot ? 'RESET PaSSWORD' : 'SIGN IN'}</FormTitle>
@@ -85,10 +74,6 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
               </FormButton>
               <Typography sx={{ color: 'red' }} display={`${errorEmitted ? 'block' : 'none'}`}>
                 Email or password must be wrong.
-              </Typography>
-              <FormControlLabel control={<Checkbox checked={accepted} onChange={handleAcceptChange}/>} label="Accept Terms" />
-              <Typography sx={{ color: 'red' }} display={`${mustAccept ? 'block' : 'none'}`}>
-                You must accept Terms before entering.
               </Typography>
             </Box>
             <Divider />
