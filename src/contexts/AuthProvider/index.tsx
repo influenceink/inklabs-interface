@@ -21,6 +21,7 @@ interface IAuthContext {
   purchase: Function;
   resetPassword: Function;
   balances: any;
+  directUsers: Array<any>;
   userInfo: Function;
   authVacancy: Function;
   userVacancy: Function;
@@ -47,6 +48,7 @@ export const AuthContext = createContext<IAuthContext>({
   purchase: () => {},
   resetPassword: () => {},
   balances: null,
+  directUsers: [],
   userInfo: () => {},
   authVacancy: () => {},
   userVacancy: () => {},
@@ -66,6 +68,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [totalCount, setTotalCount] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [balances, setBalances] = useState<any>(null);
+  const [directUsers, setDirectUsers] = useState<Array<any>>([]);
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || 'https://ip-api.ip.d.inksrv.com';
   useEffect(() => {
     const initialize = async () => {
@@ -89,6 +92,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setDirectCount(res.data.direct_count);
                 setTotalCount(res.data.total_count);
                 setBalances(res.data.balances);
+                setDirectUsers(res.data.direct_users);
               });
           }
         }
@@ -112,6 +116,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setDirectCount(res.data.direct_count);
       setTotalCount(res.data.total_count);
       setBalances(res.data.balances);
+      setDirectUsers(res.data.direct_users);
     });
   }, [sessionToken]);
   const setLocalStore = useCallback(({ session_token }) => {
@@ -137,6 +142,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setDirectCount(res.data.direct_count);
             setTotalCount(res.data.total_count);
             setBalances(res.data.balances);
+            setDirectUsers(res.data.direct_users);
           });
           setShowModal(false);
           return true;
@@ -168,6 +174,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setDirectCount(res.data.direct_count);
             setTotalCount(res.data.total_count);
             setBalances(res.data.balances);
+            setDirectUsers(res.data.direct_users);
           });
           setShowModal(false);
           return { status: 0 };
@@ -237,6 +244,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setShowModal(false);
     setBalances(null);
     setLocalStore({});
+    setDirectUsers([]);
   }, [setLocalStore]);
   return (
     <AuthContext.Provider
@@ -260,6 +268,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         purchase,
         resetPassword,
         balances,
+        directUsers,
         userInfo,
         authVacancy,
         userVacancy,
