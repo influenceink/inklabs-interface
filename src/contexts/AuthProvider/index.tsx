@@ -2,7 +2,7 @@ import { createContext, ReactNode, useState, useCallback, useEffect } from 'reac
 import axios from 'axios';
 
 interface IAuthContext {
-  authorized: boolean;
+  authorized: boolean | null;
   avatar: string;
   email: string;
   fullName: string;
@@ -30,7 +30,7 @@ interface IAuthContext {
 
 export const AuthContext = createContext<IAuthContext>({
   sessionToken: '',
-  authorized: false,
+  authorized: null,
   avatar: '',
   setAvatar: () => {},
   email: '',
@@ -57,7 +57,7 @@ export const AuthContext = createContext<IAuthContext>({
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [sessionToken, setSessionToken] = useState<string>('');
-  const [authorized, setAuthorized] = useState<boolean>(false);
+  const [authorized, setAuthorized] = useState<boolean | null>(null);
   const [avatar, setAvatar] = useState<string>('');
   const [inkId, setInkId] = useState<string>('');
   const [zipCodes, setZipCodes] = useState<Array<any>>([]);
@@ -93,11 +93,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setTotalCount(res.data.total_count);
                 setBalances(res.data.balances);
                 setDirectUsers(res.data.direct_users);
-              });
+              })
           }
+          else {
+            setAuthorized(false);
+          }
+        }
+        else {
+          setAuthorized(false);
         }
       } catch (err) {
         console.log(err);
+        setAuthorized(false);
       }
     };
     initialize();

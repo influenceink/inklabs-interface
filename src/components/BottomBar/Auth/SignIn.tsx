@@ -123,7 +123,7 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
                 </Typography>
               </>
             ) : (
-              <Typography>We&apos;ve just sent a rest link to your email address.</Typography>
+              <Typography>We&apos;ve just sent a reset link to your email address.</Typography>
             )}
           </>
         )}
