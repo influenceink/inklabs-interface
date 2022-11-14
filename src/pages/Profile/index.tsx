@@ -16,204 +16,6 @@ import cross from '../../assets/img/cross.png';
 import { ImageUpload } from '../../components/ImageUpload';
 import { getZIPState } from '../../utils';
 
-export const connectionData = [
-  {
-    id: 0,
-    name: 'RICKY BOBBY1',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 1,
-    name: 'RICKY BOBBY2',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 2,
-    name: 'RICKY BOBBY3',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 3,
-    name: 'RICKY BOBBY4',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 4,
-    name: 'RICKY BOBBY5',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 5,
-    name: 'RICKY BOBBY6',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 6,
-    name: 'RICKY BOBBY7',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 7,
-    name: 'RICKY BOBBY8',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 8,
-    name: 'RICKY BOBBY9',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 9,
-    name: 'RICKY BOBBY0',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 10,
-    name: 'RICKY BOBBY1',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 11,
-    name: 'RICKY BOBBY3',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 12,
-    name: 'RICKY BOBBY5',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 13,
-    name: 'RICKY BOBBY7',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 14,
-    name: 'RICKY BOBBY9',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 15,
-    name: 'RICKY BOBBY0',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 16,
-    name: 'RICKY BOBBY2',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 17,
-    name: 'RICKY BOBBY4',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 18,
-    name: 'RICKY BOBBY6',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 19,
-    name: 'RICKY BOBBY8',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 20,
-    name: 'RICKY BOBBY0',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 21,
-    name: 'RICKY BOBBY1',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 22,
-    name: 'RICKY BOBBY2',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 23,
-    name: 'RICKY BOBBY3',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 24,
-    name: 'RICKY BOBBY4',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 25,
-    name: 'RICKY BOBBY5',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 26,
-    name: 'RICKY BOBBY6',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 27,
-    name: 'RICKY BOBBY7',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 28,
-    name: 'RICKY BOBBY8',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 29,
-    name: 'RICKY BOBBY9',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 30,
-    name: 'RICKY BOBBY10',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 31,
-    name: 'RICKY BOBBY11',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 32,
-    name: 'RICKY BOBBY14',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 33,
-    name: 'RICKY BOBBY15',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 34,
-    name: 'RICKY BOBBY1',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 35,
-    name: 'RICKY BOBBY2',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 36,
-    name: 'RICKY BOBBY3',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 37,
-    name: 'RICKY BOBBY4',
-    date: 'Nov 21st, 2020',
-  },
-  {
-    id: 38,
-    name: 'RICKY BOBBY5',
-    date: 'Nov 21st, 2020',
-  },
-];
-
 export const Profile = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
   const [showZip, setShowZip] = useState(false);
@@ -236,8 +38,10 @@ export const Profile = () => {
     if (ev.target && ev.target.files) setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
   };
   useEffect(() => {
-    if (!authorized) history.push('/');
-    else userInfo();
+    if (authorized !== null) {
+      if (!authorized) history.push('/');
+      else userInfo();
+    }
   }, [authorized, history, userInfo]);
 
   return (
@@ -248,6 +52,7 @@ export const Profile = () => {
         </title>
       </Helmet>
       <PageContent title={PAGE_TITLE_PROFILE} type="secondary">
+      { authorized !== null &&
         <ProfileWrapper>
           <ScrollWrapper
             pt="168px"
@@ -259,6 +64,8 @@ export const Profile = () => {
             flexDirection="column"
             position="relative"
             overflow="hidden auto"
+            width="100%"
+            maxWidth={1024}
           >
             <AvatarWrapper htmlFor="upload_avatar">
               <Avatar src={avatar} alt="" />
@@ -303,7 +110,7 @@ export const Profile = () => {
               <Box display="flex" alignItems="center" gap="8px" fontWeight="bold" fontSize="20px">
                 <TokenImg src={logo} alt="" />
                 <Typography variant="subtitle2" fontWeight="bold" fontSize="23px" lineHeight="23px">
-                  {Number(balances.reserved_ink).toLocaleString()}
+                  {balances && Number(balances.reserved_ink).toLocaleString()}
                 </Typography>
                 INK
               </Box>
@@ -350,7 +157,8 @@ export const Profile = () => {
               <img src={cross} alt="close" />
             </CloseButton>
           </ScrollWrapper>
-        </ProfileWrapper>
+        </ProfileWrapper> 
+      }
       </PageContent>
       <ZipCodes show={showZip} setShow={setShowZip} />
       <Connections show={showConnection} setShow={setShowConnection} />
@@ -408,6 +216,7 @@ const ScrollWrapper = styled(Box)`
 const ProfileWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding-bottom: 110px;
