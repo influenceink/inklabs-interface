@@ -38,8 +38,10 @@ export const Profile = () => {
     if (ev.target && ev.target.files) setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
   };
   useEffect(() => {
-    if (!authorized) history.push('/');
-    else userInfo();
+    if (authorized !== null) {
+      if (!authorized) history.push('/');
+      else userInfo();
+    }
   }, [authorized, history, userInfo]);
 
   return (
@@ -50,6 +52,7 @@ export const Profile = () => {
         </title>
       </Helmet>
       <PageContent title={PAGE_TITLE_PROFILE} type="secondary">
+      { authorized !== null &&
         <ProfileWrapper>
           <ScrollWrapper
             pt="168px"
@@ -61,6 +64,8 @@ export const Profile = () => {
             flexDirection="column"
             position="relative"
             overflow="hidden auto"
+            width="100%"
+            maxWidth={1024}
           >
             <AvatarWrapper htmlFor="upload_avatar">
               <Avatar src={avatar} alt="" />
@@ -105,7 +110,7 @@ export const Profile = () => {
               <Box display="flex" alignItems="center" gap="8px" fontWeight="bold" fontSize="20px">
                 <TokenImg src={logo} alt="" />
                 <Typography variant="subtitle2" fontWeight="bold" fontSize="23px" lineHeight="23px">
-                  {Number(balances.reserved_ink).toLocaleString()}
+                  {balances && Number(balances.reserved_ink).toLocaleString()}
                 </Typography>
                 INK
               </Box>
@@ -152,7 +157,8 @@ export const Profile = () => {
               <img src={cross} alt="close" />
             </CloseButton>
           </ScrollWrapper>
-        </ProfileWrapper>
+        </ProfileWrapper> 
+      }
       </PageContent>
       <ZipCodes show={showZip} setShow={setShowZip} />
       <Connections show={showConnection} setShow={setShowConnection} />
@@ -210,6 +216,7 @@ const ScrollWrapper = styled(Box)`
 const ProfileWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding-bottom: 110px;
