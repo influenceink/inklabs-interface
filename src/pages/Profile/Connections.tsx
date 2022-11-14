@@ -22,7 +22,7 @@ interface Props {
   setShow: (value: boolean) => void;
 }
 
-const ROWS_PER_PAGE = 9;
+const ROWS_PER_PAGE = 10;
 
 export const Connections = ({ show, setShow }: Props) => {
   const [type, setType] = useState('Newest');
