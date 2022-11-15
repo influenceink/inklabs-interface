@@ -10,23 +10,24 @@ import {
   DialogContent,
   Select,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import cross from '../../assets/img/cross.png';
 import React from 'react';
-import { connectionData } from '.';
 import { Pagination } from '../../components/Pagination';
+import { AuthContext } from '../../contexts';
 
 interface Props {
   show: boolean;
   setShow: (value: boolean) => void;
 }
 
-const ROWS_PER_PAGE = 9;
+const ROWS_PER_PAGE = 10;
 
 export const Connections = ({ show, setShow }: Props) => {
   const [type, setType] = useState('Newest');
   const [page, setPage] = useState(1);
+  const { directUsers } = useContext(AuthContext);
 
   const handleChange = (event: any) => {
     setType(event.target.value as string);
@@ -37,6 +38,21 @@ export const Connections = ({ show, setShow }: Props) => {
       setShow(false);
     }
   };
+
+  const toDateStr = (date: Date) => {
+    let monthNames =["Jan","Feb","Mar","Apr",
+                      "May","Jun","Jul","Aug",
+                      "Sep", "Oct","Nov","Dec"];
+    
+    let day = date.getDate();
+    
+    let monthIndex = date.getMonth();
+    let monthName = monthNames[monthIndex];
+    
+    let year = date.getFullYear();
+    
+    return `${monthName} ${day}, ${year}`;
+  }
   return (
     <>
       <ModalWrapper open={show} onClose={handleClose}>
@@ -62,9 +78,9 @@ export const Connections = ({ show, setShow }: Props) => {
               </CloseButton>
             </Box>
             <ConnectionsWrapper>
-              {connectionData.slice(ROWS_PER_PAGE * (page - 1), ROWS_PER_PAGE * page).map((connection) => (
+              {directUsers.slice(ROWS_PER_PAGE * (page - 1), ROWS_PER_PAGE * page).map((connection) => (
                 <Box
-                  key={connection.id}
+                  key={connection.ink_id}
                   display="flex"
                   justifyContent="space-between"
                   borderBottom={1}
@@ -72,18 +88,18 @@ export const Connections = ({ show, setShow }: Props) => {
                   py="14px"
                   width="100%"
                 >
-                  <Typography fontSize="12px">{connection.name}</Typography>
-                  <Typography fontSize="12px">{connection.date}</Typography>
+                  <Typography fontSize="12px">{connection.full_name}</Typography>
+                  <Typography fontSize="12px">{toDateStr(new Date(connection.created_on))}</Typography>
                 </Box>
               ))}
             </ConnectionsWrapper>
             <Pagination
               page={page}
-              total={Math.ceil(connectionData.length / ROWS_PER_PAGE)}
+              total={Math.ceil(directUsers.length / ROWS_PER_PAGE)}
               onChange={(value: number) => setPage(value)}
             />
             <Typography textAlign="center" fontSize="8px" fontWeight="semibold" mt={1}>
-              PAGE {`${page}/${Math.ceil(connectionData.length / ROWS_PER_PAGE)}`}
+              PAGE {`${page}/${Math.ceil(directUsers.length / ROWS_PER_PAGE)}`}
             </Typography>
           </Box>
         </DialogContent>

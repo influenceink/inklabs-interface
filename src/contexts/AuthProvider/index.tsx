@@ -2,7 +2,7 @@ import { createContext, ReactNode, useState, useCallback, useEffect } from 'reac
 import axios from 'axios';
 
 interface IAuthContext {
-  authorized: boolean;
+  authorized: boolean | null;
   avatar: string;
   email: string;
   fullName: string;
@@ -21,6 +21,7 @@ interface IAuthContext {
   purchase: Function;
   resetPassword: Function;
   balances: any;
+  directUsers: Array<any>;
   userInfo: Function;
   authVacancy: Function;
   userVacancy: Function;
@@ -29,7 +30,7 @@ interface IAuthContext {
 
 export const AuthContext = createContext<IAuthContext>({
   sessionToken: '',
-  authorized: false,
+  authorized: null,
   avatar: '',
   setAvatar: () => {},
   email: '',
@@ -47,6 +48,7 @@ export const AuthContext = createContext<IAuthContext>({
   purchase: () => {},
   resetPassword: () => {},
   balances: null,
+  directUsers: [],
   userInfo: () => {},
   authVacancy: () => {},
   userVacancy: () => {},
@@ -55,7 +57,7 @@ export const AuthContext = createContext<IAuthContext>({
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [sessionToken, setSessionToken] = useState<string>('');
-  const [authorized, setAuthorized] = useState<boolean>(false);
+  const [authorized, setAuthorized] = useState<boolean | null>(null);
   const [avatar, setAvatar] = useState<string>('');
   const [inkId, setInkId] = useState<string>('');
   const [zipCodes, setZipCodes] = useState<Array<any>>([]);
@@ -66,6 +68,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [totalCount, setTotalCount] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [balances, setBalances] = useState<any>(null);
+  const [directUsers, setDirectUsers] = useState<Array<any>>([]);
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || 'https://ip-api.ip.d.inksrv.com';
   useEffect(() => {
     const initialize = async () => {
@@ -89,11 +92,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setDirectCount(res.data.direct_count);
                 setTotalCount(res.data.total_count);
                 setBalances(res.data.balances);
-              });
+                setDirectUsers(res.data.direct_users);
+              })
           }
+          else {
+            setAuthorized(false);
+          }
+        }
+        else {
+          setAuthorized(false);
         }
       } catch (err) {
         console.log(err);
+        setAuthorized(false);
       }
     };
     initialize();
@@ -112,6 +123,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setDirectCount(res.data.direct_count);
       setTotalCount(res.data.total_count);
       setBalances(res.data.balances);
+      setDirectUsers(res.data.direct_users);
     });
   }, [sessionToken]);
   const setLocalStore = useCallback(({ session_token }) => {
@@ -137,6 +149,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setDirectCount(res.data.direct_count);
             setTotalCount(res.data.total_count);
             setBalances(res.data.balances);
+            setDirectUsers(res.data.direct_users);
           });
           setShowModal(false);
           return true;
@@ -168,6 +181,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setDirectCount(res.data.direct_count);
             setTotalCount(res.data.total_count);
             setBalances(res.data.balances);
+            setDirectUsers(res.data.direct_users);
           });
           setShowModal(false);
           return { status: 0 };
@@ -237,6 +251,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setShowModal(false);
     setBalances(null);
     setLocalStore({});
+    setDirectUsers([]);
   }, [setLocalStore]);
   return (
     <AuthContext.Provider
@@ -260,6 +275,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         purchase,
         resetPassword,
         balances,
+        directUsers,
         userInfo,
         authVacancy,
         userVacancy,
