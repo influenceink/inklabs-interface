@@ -186,16 +186,16 @@ export const Cards = ({ data }: any) => {
         bgcolor="#111"
         borderRadius="11px"
       >
-        <CardImage src={randomCardImg()} alt="" />
+        <CardImage src={code.icon} alt="" />
         <Box display="flex" flexDirection="column" alignItems="center">
           <Typography variant="subtitle2" fontSize="19px" fontWeight="bold" color="#fff">
-            {code}
+            {code.zip_code}
           </Typography>
           <Typography variant="subtitle2" fontSize="9px" color="#fff">
-            {getZIPState(code)}
+            {code.location}
           </Typography>
           <Typography variant="subtitle2" fontSize="9px" color="#FF9318">
-            Legendary
+            {code.rarity}
           </Typography>
         </Box>
       </Box>
@@ -227,6 +227,7 @@ const TokenImg = styled('img')`
 `;
 const CardImage = styled('img')`
   min-width: 0px;
+  max-width: 75px;
 `;
 const Avatar = styled('img')`
   width: 155px;
