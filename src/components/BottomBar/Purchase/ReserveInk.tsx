@@ -165,7 +165,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
             <FormButton onClick={handleWalletConnect}>connect wallet</FormButton>
             <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
-              Minimum Investment ${Number(process.env.REACT_APP_MIN_AMOUNT || '5000').toLocaleString()} USD
+              Minimum Amount ${Number(process.env.REACT_APP_MIN_AMOUNT || '5000').toLocaleString()} USD
             </Typography>
           </Box>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
@@ -185,7 +185,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
                 <Link href="mailto: reserve@inktoken.com">reserve@inktoken.com</Link>
               </FormButton>
               <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
-                Minimum Investment $100k USD
+                Minimum Amount $50k USD
               </Typography>
             </Box>
           </Box>
