@@ -113,6 +113,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await axios.post('/user/info', {}, { headers: { Authorization: 'SessionToken=' + sessionToken } }).then((res) => {
       if (res.data.status) return;
       axios.defaults.headers.common['Authorization'] = 'SessionToken=' + sessionToken;
+      console.log(res.data);
       setAvatar(res.data.avatar);
       setSessionToken(sessionToken);
       setInkId(res.data.ink_id);
