@@ -136,12 +136,12 @@ export const Profile = () => {
               <Typography variant="subtitle2" fontSize="13px" fontWeight="semibold" color="#fff3">
                 YOUR ZIP CODES
               </Typography>
-              {/* <CardListWrapper>
+              <CardListWrapper>
                 <Cards data={zipCodes.slice(0, 6)} />
-              </CardListWrapper> */}
+              </CardListWrapper>
               <Box mt={1} px="6px" width="100%">
                 {
-                  zipCodes.length === 0 ? 
+                  zipCodes.length > 0 ? 
                     <StyledButton onClick={() => setShowZip(true)}>View all</StyledButton>
                   :
                     <StyledText>You have no zip code</StyledText>
