@@ -6,7 +6,7 @@ import instagram from '../../assets/img/instagram.png';
 import twitter from '../../assets/img/twitter.png';
 import facebook from '../../assets/img/facebook.png';
 import youtube from '../../assets/img/youtube.png';
-import referral from '../../assets/img/referral-button.png';
+import referral from '../../assets/img/referral-button-2.png';
 import { Copyright } from './Copyright';
 import { PurchaseFlowContext, AuthContext } from '../../contexts';
 

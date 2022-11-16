@@ -1,6 +1,7 @@
 {
   "name": "inklabs-interface",
   "version": "1.0.0",
+  "license": "UNLICENSED",
   "description": "React, TypeScript, Material-UI.",
   "author": {
     "name": "Michael",

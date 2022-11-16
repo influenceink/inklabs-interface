@@ -3,7 +3,10 @@ import { Helmet } from 'react-helmet';
 import { useContext } from 'react';
 import { PageContent } from '../components/PageContent';
 import { APP_TITLE, PAGE_TITLE_COIN } from '../utils/constants';
-import coinImg from '../assets/img/coin.png';
+// import coinImg from '../assets/img/coin.png';
+import coinImg from '../assets/img/spacer.png';
+import tokenomics1 from '../assets/img/tokenomics-graph1.png';
+import tokenomics2 from '../assets/img/tokenomics-graph1b.png';
 import coin2 from '../assets/img/coin1.jpg';
 import symbolImg from '../assets/img/ink.png';
 import completeImg from '../assets/img/complete.png';
@@ -106,76 +109,78 @@ export const Coin = () => {
                   </CardBox>
                 </Grid> */}
                 <Grid item xs={12} xl={6}>
-                  <Box display="flex" flexDirection="column" alignItems="center" minWidth="290px" width="100%">
-                    <Box borderRadius="20px" padding="18px 15px 30px" bgcolor="#212130" width="100%">
-                      <Typography fontSize={18}>PRIVATE PRESALE</Typography>
-                      <Box display="flex" justifyContent="end">
-                        {/* <Typography fontSize={14} color="#787878">
-                          Institutional
-                        </Typography> */}
-                        <Box display="flex" flexDirection="column" alignItems="end" color="#29FF3E">
-                          <Typography fontSize={10} lineHeight="12px">
-                            18 MONTHS VEST
-                          </Typography>
-                          <Typography fontSize={9} lineHeight="10px">
-                            DAILY BLOCK
-                          </Typography>
-                        </Box>
-                      </Box>
-                      <Box borderRadius={20} bgcolor="#2E2E40" height="15px" mt={3} mb={3}>
-                        <Box width="28px" bgcolor="#F90F95" height="15px" borderRadius={20}></Box>
-                      </Box>
-                      <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Box display="flex" alignItems="center">
-                          <SymbolImg src={symbolImg} height="19px" />
-                          <Typography fontSize={14} lineHeight="18px" ml={1}>
-                            15,000,000,000
-                          </Typography>
-                        </Box>
-                        <Box display="flex" alignItems="end" flexDirection="column">
-                          <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">
-                            4.3%
-                          </Typography>
-                          <Typography fontSize={8} lineHeight="9px" color="#707070">
-                            OF TOTAL SUPPLY
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </Box>
-                    <Box>
-                      <SymbolImg src={hereImg} alt="you are here" />
-                    </Box>
-                    <Typography color="#11FF60" fontSize="10px">
-                      YOU ARE HERE
-                    </Typography>
-                  </Box>
+                  <CustomImage src={tokenomics1} alt="gray" height="100%" width="100%" />
+                  {/*<Box display="flex" flexDirection="column" alignItems="center" minWidth="290px" width="100%">*/}
+                  {/*  <Box borderRadius="20px" padding="18px 15px 30px" bgcolor="#212130" width="100%">*/}
+                  {/*    <Typography fontSize={18}>PRIVATE PRESALE</Typography>*/}
+                  {/*    <Box display="flex" justifyContent="end">*/}
+                  {/*      /!* <Typography fontSize={14} color="#787878">*/}
+                  {/*        Institutional*/}
+                  {/*      </Typography> *!/*/}
+                  {/*      <Box display="flex" flexDirection="column" alignItems="end" color="#29FF3E">*/}
+                  {/*        <Typography fontSize={10} lineHeight="12px">*/}
+                  {/*          18 MONTHS VEST*/}
+                  {/*        </Typography>*/}
+                  {/*        <Typography fontSize={9} lineHeight="10px">*/}
+                  {/*          DAILY BLOCK*/}
+                  {/*        </Typography>*/}
+                  {/*      </Box>*/}
+                  {/*    </Box>*/}
+                  {/*    <Box borderRadius={20} bgcolor="#2E2E40" height="15px" mt={3} mb={3}>*/}
+                  {/*      <Box width="28px" bgcolor="#F90F95" height="15px" borderRadius={20}></Box>*/}
+                  {/*    </Box>*/}
+                  {/*    <Box display="flex" justifyContent="space-between" alignItems="center">*/}
+                  {/*      <Box display="flex" alignItems="center">*/}
+                  {/*        <SymbolImg src={symbolImg} height="19px" />*/}
+                  {/*        <Typography fontSize={14} lineHeight="18px" ml={1}>*/}
+                  {/*          15,000,000,000*/}
+                  {/*        </Typography>*/}
+                  {/*      </Box>*/}
+                  {/*      <Box display="flex" alignItems="end" flexDirection="column">*/}
+                  {/*        <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">*/}
+                  {/*          4.3%*/}
+                  {/*        </Typography>*/}
+                  {/*        <Typography fontSize={8} lineHeight="9px" color="#707070">*/}
+                  {/*          OF TOTAL SUPPLY*/}
+                  {/*        </Typography>*/}
+                  {/*      </Box>*/}
+                  {/*    </Box>*/}
+                  {/*  </Box>*/}
+                  {/*  <Box>*/}
+                  {/*    <SymbolImg src={hereImg} alt="you are here" />*/}
+                  {/*  </Box>*/}
+                  {/*  <Typography color="#11FF60" fontSize="10px">*/}
+                  {/*    YOU ARE HERE*/}
+                  {/*  </Typography>*/}
+                  {/*</Box>*/}
                 </Grid>
                 <Grid item xs={12} xl={6}>
-                  <CardBox>
-                    <Typography fontSize={18}>PUBLIC SALE</Typography>
-                    <Typography fontSize={14} color="#787878">
-                      {'(liquidity bootstrap)*'}
-                    </Typography>
-                    <Box borderRadius={20} bgcolor="#2E2E40" height="15px" mt={3} mb={3}>
-                      <Box width="64px" bgcolor="#29FF3E" height="15px" borderRadius={20}></Box>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between" alignItems="center">
-                      <Box display="flex" alignItems="center">
-                        <SymbolImg src={symbolImg} height="19px" />
-                        <Typography fontSize={14} lineHeight="18px" ml={1}>
-                          43,750,000,000
-                        </Typography>
-                      </Box>
-                      <Box display="flex" alignItems="end" flexDirection="column">
-                        <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">
-                          12.5%
-                        </Typography>
-                        <Typography fontSize={8} lineHeight="9px" color="#707070">
-                          OF TOTAL SUPPLY
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </CardBox>
+                  <CustomImage src={tokenomics2} alt="gray" height="100%" width="100%" />
+                  {/*<CardBox>*/}
+                  {/*  <Typography fontSize={18}>PUBLIC SALE</Typography>*/}
+                  {/*  <Typography fontSize={14} color="#787878">*/}
+                  {/*    {'(liquidity bootstrap)*'}*/}
+                  {/*  </Typography>*/}
+                  {/*  <Box borderRadius={20} bgcolor="#2E2E40" height="15px" mt={3} mb={3}>*/}
+                  {/*    <Box width="64px" bgcolor="#29FF3E" height="15px" borderRadius={20}></Box>*/}
+                  {/*  </Box>*/}
+                  {/*  <Box display="flex" justifyContent="space-between" alignItems="center">*/}
+                  {/*    <Box display="flex" alignItems="center">*/}
+                  {/*      <SymbolImg src={symbolImg} height="19px" />*/}
+                  {/*      <Typography fontSize={14} lineHeight="18px" ml={1}>*/}
+                  {/*        43,750,000,000*/}
+                  {/*      </Typography>*/}
+                  {/*    </Box>*/}
+                  {/*    <Box display="flex" alignItems="end" flexDirection="column">*/}
+                  {/*      <Typography fontSize={17} lineHeight="20px" color="#B1C1C8">*/}
+                  {/*        12.5%*/}
+                  {/*      </Typography>*/}
+                  {/*      <Typography fontSize={8} lineHeight="9px" color="#707070">*/}
+                  {/*        OF TOTAL SUPPLY*/}
+                  {/*      </Typography>*/}
+                  {/*    </Box>*/}
+                  {/*  </Box>*/}
+                  {/*</CardBox>*/}
                 </Grid>
               </Grid>
             </Box>
