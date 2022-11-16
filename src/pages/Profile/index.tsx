@@ -106,18 +106,32 @@ export const Profile = () => {
                 </Typography>
               </StatCard>
             </Box>
-            <StatCard>
-              <Box display="flex" alignItems="center" gap="8px" fontWeight="bold" fontSize="20px">
-                <TokenImg src={logo} alt="" />
-                <Typography variant="subtitle2" fontWeight="bold" fontSize="23px" lineHeight="23px">
-                  {balances && Number(balances.reserved_ink).toLocaleString()}
+            <Box display="flex" alignItems="center" width="100%">
+              <StatCard sx={{marginRight: 1}}>
+                <Box display="flex" alignItems="center" gap="8px" fontWeight="bold" fontSize="20px">
+                  <TokenImg src={logo} alt="" />
+                  <Typography variant="subtitle2" fontWeight="bold" fontSize="23px" lineHeight="23px">
+                    {balances && Number(balances.reserved_ink).toLocaleString()}
+                  </Typography>
+                  INK
+                </Box>
+                <Typography variant="subtitle2" fontSize="9px" color="#fff5">
+                  Ink Token Reserved
                 </Typography>
-                INK
-              </Box>
-              <Typography variant="subtitle2" fontSize="9px" color="#fff5">
-                Total Ink Token Reserved
-              </Typography>
-            </StatCard>
+              </StatCard>
+              <StatCard>
+                <Box display="flex" alignItems="center" gap="8px" fontWeight="bold" fontSize="20px">
+                  <TokenImg src={logo} alt="" />
+                  <Typography variant="subtitle2" fontWeight="bold" fontSize="23px" lineHeight="23px">
+                    {balances && Number(balances.bonus_ink).toLocaleString()}
+                  </Typography>
+                  INK
+                </Box>
+                <Typography variant="subtitle2" fontSize="9px" color="#fff5">
+                  Ink Token Bonus
+                </Typography>
+              </StatCard>
+            </Box>
             <StatCard>
               <Typography variant="subtitle2" fontSize="13px" fontWeight="semibold" color="#fff3">
                 YOUR ZIP CODES
@@ -126,7 +140,12 @@ export const Profile = () => {
                 <Cards data={zipCodes.slice(0, 6)} />
               </CardListWrapper>
               <Box mt={1} px="6px" width="100%">
-                <StyledButton onClick={() => setShowZip(true)}>view all</StyledButton>
+                {
+                  zipCodes.length > 0 ? 
+                    <StyledButton onClick={() => setShowZip(true)}>View all</StyledButton>
+                  :
+                    <StyledButton>You have no zip codes</StyledButton>
+                }
               </Box>
             </StatCard>
             <Box
@@ -186,16 +205,16 @@ export const Cards = ({ data }: any) => {
         bgcolor="#111"
         borderRadius="11px"
       >
-        <CardImage src={randomCardImg()} alt="" />
+        <CardImage src={code.icon} alt="" />
         <Box display="flex" flexDirection="column" alignItems="center">
           <Typography variant="subtitle2" fontSize="19px" fontWeight="bold" color="#fff">
-            {code}
+            {code.zip_code}
           </Typography>
           <Typography variant="subtitle2" fontSize="9px" color="#fff">
-            {getZIPState(code)}
+            {code.location}
           </Typography>
           <Typography variant="subtitle2" fontSize="9px" color="#FF9318">
-            Legendary
+            {code.rarity}
           </Typography>
         </Box>
       </Box>
@@ -227,6 +246,7 @@ const TokenImg = styled('img')`
 `;
 const CardImage = styled('img')`
   min-width: 0px;
+  max-width: 75px;
 `;
 const Avatar = styled('img')`
   width: 155px;
