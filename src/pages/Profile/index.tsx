@@ -144,7 +144,7 @@ export const Profile = () => {
                   zipCodes.length > 0 ? 
                     <StyledButton onClick={() => setShowZip(true)}>View all</StyledButton>
                   :
-                    <StyledButton>You have no zip codes</StyledButton>
+                    <StyledText>You have no zip code</StyledText>
                 }
               </Box>
             </StatCard>
@@ -356,4 +356,11 @@ const SignOutButton = styled(Button)`
     margin-top: 0px;
     margin-bottom: 8px;
   }
+`;
+
+const StyledText = styled('span')`
+  font-family: 'Montserrat';
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
 `;
