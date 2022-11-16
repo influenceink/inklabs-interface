@@ -362,5 +362,5 @@ const StyledText = styled('span')`
   font-family: 'Montserrat';
   font-size: 16px;
   font-weight: bold;
-  color: white;
+  color: gray;
 `;
