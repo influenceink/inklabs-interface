@@ -57,6 +57,7 @@ export const AuthContext = createContext<IAuthContext>({
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [sessionToken, setSessionToken] = useState<string>('');
+  const [refreshToken, setRefreshToken] = useState<string>('');
   const [authorized, setAuthorized] = useState<boolean | null>(null);
   const [avatar, setAvatar] = useState<string>('');
   const [inkId, setInkId] = useState<string>('');
@@ -76,14 +77,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const store = localStorage.getItem('ink');
         if (store !== null) {
           const sessionToken = JSON.parse(store).session_token;
+          const refreshToken = JSON.parse(store).refresh_token;
           if (sessionToken !== undefined && sessionToken !== '') {
             await axios
               .post('/user/info', {}, { headers: { Authorization: 'SessionToken=' + sessionToken } })
               .then((res) => {
                 if (res.data.status) return;
                 axios.defaults.headers.common['Authorization'] = 'SessionToken=' + sessionToken;
-                setAvatar(res.data.avatar);
                 setSessionToken(sessionToken);
+                setRefreshToken(refreshToken);
+
+                setAvatar(res.data.avatar);
                 setInkId(res.data.ink_id);
                 setAuthorized(true);
                 setZipCodes(res.data.zip_codes);
@@ -109,13 +113,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
     initialize();
   }, []);
-  const userInfo = useCallback(async () => {
-    await axios.post('/user/info', {}, { headers: { Authorization: 'SessionToken=' + sessionToken } }).then((res) => {
+  const userInfo = useCallback(() => {
+    axios.post('/user/info', {}, { headers: { Authorization: 'SessionToken=' + sessionToken } }).then((res) => {
       if (res.data.status) return;
       axios.defaults.headers.common['Authorization'] = 'SessionToken=' + sessionToken;
-      console.log(res.data);
       setAvatar(res.data.avatar);
-      setSessionToken(sessionToken);
       setInkId(res.data.ink_id);
       setAuthorized(true);
       setZipCodes(res.data.zip_codes);
@@ -127,18 +129,42 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setDirectUsers(res.data.direct_users);
     });
   }, [sessionToken]);
-  const setLocalStore = useCallback(({ session_token }) => {
-    const store = JSON.stringify({ session_token });
+  const setLocalStore = useCallback(({ session_token, refresh_token }) => {
+    const store = JSON.stringify({ session_token, refresh_token });
     localStorage.setItem('ink', store);
   }, []);
+  const doRefresh = useCallback(async () => {
+    if (!inkId || !refreshToken) return "";
+    const data = await axios.post('/user/session-refresh', { ig_app_id: inkId, refresh_token: refreshToken }).then((res) => res.data);
+    if (data.status) return "";
+    setLocalStore({session_token: data.session_token, refresh_token: refreshToken});
+    setSessionToken(data.session_token);
+    return data.session_token;
+  }, [inkId, refreshToken, setLocalStore])
+  useEffect(() => {
+    const _interval = setInterval(() => {
+      doRefresh()
+      // .then((newToken) => {
+      //   if (newToken)
+      //     console.log("Session token is refreshed into", newToken);
+      //   else
+      //     console.log("Token refresh failed");
+      // })
+      // .catch(() => {
+      //   console.log("Error while refreshing token");
+      // })
+    }, 300 * 1000);
+    return () => { clearInterval(_interval); }
+  }, [doRefresh])
   const signIn = useCallback(
     async (email, password) => {
       try {
         const data = await axios.post('/auth/login', { email, password }).then((res) => res.data);
         if (data.status === 0) {
           setSessionToken(data.session_token);
+          setRefreshToken(data.refresh_token);
           setEmail(email);
-          setLocalStore({ session_token: data.session_token });
+          setLocalStore({ session_token: data.session_token, refresh_token: data.refresh_token });
           axios.defaults.headers.common['Authorization'] = 'SessionToken=' + data.session_token;
           await axios.post('/user/info').then((res) => {
             setAvatar(res.data.avatar);
@@ -168,9 +194,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const data = await axios.post('/auth/create', props).then((res) => res.data);
         if (data.status === 0) {
           setSessionToken(data.session_token);
+          setRefreshToken(data.refresh_token);
           setFullName(data.display_name);
           setEmail(data.email);
-          setLocalStore({ session_token: data.session_token });
+          setLocalStore({ session_token: data.session_token, refresh_token: data.refresh_token });
           axios.defaults.headers.common['Authorization'] = 'SessionToken=' + data.session_token;
           await axios.post('/user/info').then((res) => {
             setAvatar(res.data.avatar);
@@ -240,6 +267,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
   const signOut = useCallback(async () => {
     setSessionToken('');
+    setRefreshToken('');
     setAuthorized(false);
     setAvatar('');
     setInkId('');
