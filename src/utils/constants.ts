@@ -13,7 +13,7 @@ import cross from '../assets/img/cross.png';
 
 // APP TEXT
 export const APP_TITLE = 'Influence INK';
-export const APP_DESCRIPTION = 'React, TypeScript, Material-UI.';
+export const APP_DESCRIPTION = '';
 // PAGES TITLE
 export const PAGE_TITLE_ENTER = 'Enter';
 export const PAGE_TITLE_HOME = 'Home';
@@ -88,7 +88,7 @@ export const FAQS = [
   {
     question: 'What is the INK token?',
     answer:
-      'INK is an ERC-20 compliant utility token for INK Games and our suite of on-platform games and projects. INK will power many of the game and project experiences offered on the World of Influence platform, while token holders will enjoy enhanced platform experiences and distinct perks. Find out more about our token and platform: INK Games Litepaper.',
+      'INK is an ERC-20 compliant utility token for INK Games and our suite of on-platform games and projects. INK will power many of the game and project experiences offered on the World of Influence platform, while token holders will enjoy enhanced platform experiences and distinct perks. Find out more about our token and platform: <a href="https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/" target="_blank" style="color: white;">INK Games Litepaper</a>.',
   },
   {
     question: 'What cryptocurrencies are easiest or best to purchase INK with?',
@@ -113,7 +113,7 @@ export const FAQS = [
   {
     question: 'Can you help me set up a wallet to receive my tokens?',
     answer:
-      'While we are unable to provide individual setup support, simple instructions are available online. Here’s one for setting up your own MetaMask wallet.',
+      'While we are unable to provide individual setup support, simple instructions are available online. Here’s one for setting up your own <a href="https://www.coindesk.com/learn/how-to-set-up-a-metamask-wallet/" target="_blank" style="color: white">MetaMask wallet</a>.',
   },
   {
     question: 'Do you have an INK purchase minimum in place?',

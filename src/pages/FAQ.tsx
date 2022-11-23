@@ -28,7 +28,9 @@ export const FAQ = () => {
                   {faq.question}
                 </Typography>
                 {faq.answer.split('%%').map((answer, _index) => (
-                  <Paragraph key={_index}>{answer}</Paragraph>
+                  <Paragraph key={_index} dangerouslySetInnerHTML={{
+                    __html: answer
+                  }}></Paragraph>
                 ))}
               </Box>
             ))}
