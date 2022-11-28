@@ -131,6 +131,11 @@ export const FAQS = [
         'To keep platform TAM (total addressable market) as large as possible, we do not require in-game token integration. Developers can construct their game ecosystems to utilize INK – and may enjoy a growth advantage due to staking functionality, in-game token mechanics, and expanded earning capabilities.%%However, because we do not require it, a variety of games can immediately integrate with our platform and our Payment & Tracking growth engine without having to change their economy.',
   },
   {
+    question: 'How does the token referral bonus work?',
+    answer:
+        'INK Games has established a policy of awarding a referral bonus equivalent to 20% of the referred user\'s total token purchase. Your bonus will be distributed in the form of INK token following the token generation event. We may discontinue the referral bonus or modify terms and conditions at our discretion.',
+  },
+  {
     question: 'Who do I contact with other questions?',
     answer:
         'For non-purchasing related token questions, please contact support@inktoken.com.',
