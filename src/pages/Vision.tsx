@@ -97,8 +97,8 @@ export const Vision = () => {
                 <div>
                   <ul>
                     <li>INK ZIPs functionality expansion</li>
-                    <li>New game prject (TBA)</li>
-                    <li>Advanced platform analytics & gamfication</li>
+                    <li>New game project (TBA)</li>
+                    <li>Advanced platform analytics & gamefication</li>
                   </ul>
                 </div>
               </StepBox>

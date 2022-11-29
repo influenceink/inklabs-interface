@@ -182,7 +182,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             </Typography>
             <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
               <FormButton>
-                <Link href="mailto: reserve@inktoken.com">reserve@inktoken.com</Link>
+                <Link href="mailto: support@inktoken.com">support@inktoken.com</Link>
               </FormButton>
               <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
                 Minimum Amount $50k USD
