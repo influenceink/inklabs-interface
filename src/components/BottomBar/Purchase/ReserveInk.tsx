@@ -175,7 +175,7 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           </Box>
           <Box display="flex" flexDirection="column" alignItems="center" gap="12px" width="100%">
             <Typography variant="subtitle2" fontWeight="bold" fontSize="24px" lineHeight="24px">
-              SEND A WIRE OR ACH
+              SEND A WIRE
             </Typography>
             <Typography variant="subtitle1" color="#ffffff88">
               FOR INSTRUCTIONS, EMAIL US AT:
