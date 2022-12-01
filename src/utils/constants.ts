@@ -123,7 +123,7 @@ export const FAQS = [
   {
     question: 'Do you have an INK purchase minimum in place?',
     answer:
-      'You may purchase tokens using any ERC-20 compatible cryptocurrencies available on the Polygon Network on our website at <a href="https://www.inktoken.com" style="color: white">www.inktoken.com</a>. A minimum purchase value of $5,000 USD is required. We can support wire purchases with a $50,000 USD minimum. Please contact reserve@inktoken.com for purchasing instructions.',
+      'You may purchase tokens using any ERC-20 compatible cryptocurrencies available on the Polygon Network on our website at <a href="https://www.inktoken.com" style="color: white">www.inktoken.com</a>. A minimum purchase value of $5,000 USD is required. We can support wire purchases with a $50,000 USD minimum. Please contact support@inktoken.com for purchasing instructions.',
   },
   {
     question: 'Do third party developers have to use INK to build on the World of Influence?',
