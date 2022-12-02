@@ -8,6 +8,7 @@ interface IAuthContext {
   fullName: string;
   inkId: string;
   sessionToken: string;
+  igSessionToken: string;
   zipCodes: Array<any>;
   signIn: Function;
   signUp: Function;
@@ -18,6 +19,8 @@ interface IAuthContext {
   showModal: boolean;
   setShowModal: Function;
   setAvatar: Function;
+  avatarUploadRequest: Function;
+  web3UserUploadRequestUrl: string;
   purchase: Function;
   resetPassword: Function;
   balances: any;
@@ -26,13 +29,18 @@ interface IAuthContext {
   authVacancy: Function;
   userVacancy: Function;
   referrerLookup: Function;
+  avatarUploading: boolean;
+  setAvatarUploading: Function;
 }
 
 export const AuthContext = createContext<IAuthContext>({
   sessionToken: '',
+  igSessionToken: '',
   authorized: null,
   avatar: '',
   setAvatar: () => {},
+  avatarUploadRequest: () => {},
+  web3UserUploadRequestUrl: '',
   email: '',
   fullName: '',
   inkId: '',
@@ -53,13 +61,17 @@ export const AuthContext = createContext<IAuthContext>({
   authVacancy: () => {},
   userVacancy: () => {},
   referrerLookup: () => {},
+  avatarUploading: false,
+  setAvatarUploading: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [sessionToken, setSessionToken] = useState<string>('');
+  const [igSessionToken, setIgSessionToken] = useState<string>('');
   const [refreshToken, setRefreshToken] = useState<string>('');
   const [authorized, setAuthorized] = useState<boolean | null>(null);
   const [avatar, setAvatar] = useState<string>('');
+  const [web3UserUploadRequestUrl, setWeb3UserUploadRequestUrl] = useState<string>('');
   const [inkId, setInkId] = useState<string>('');
   const [zipCodes, setZipCodes] = useState<Array<any>>([]);
   const [fullName, setFullName] = useState<string>('');
@@ -70,7 +82,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [balances, setBalances] = useState<any>(null);
   const [directUsers, setDirectUsers] = useState<Array<any>>([]);
+  const [avatarUploading, setAvatarUploading] = useState<boolean>(false);
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || 'https://ip-api.ip.d.inksrv.com';
+  const igUrl = process.env.REACT_APP_IG_URL || 'https://ig-api.ip.d.inksrv.com';
   useEffect(() => {
     const initialize = async () => {
       try {
@@ -78,6 +92,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (store !== null) {
           const sessionToken = JSON.parse(store).session_token;
           const refreshToken = JSON.parse(store).refresh_token;
+          const igSessionToken = JSON.parse(store).ig_session_token;
           if (sessionToken !== undefined && sessionToken !== '') {
             await axios
               .post('/user/info', {}, { headers: { Authorization: 'SessionToken=' + sessionToken } })
@@ -86,7 +101,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 axios.defaults.headers.common['Authorization'] = 'SessionToken=' + sessionToken;
                 setSessionToken(sessionToken);
                 setRefreshToken(refreshToken);
-
+                setIgSessionToken(igSessionToken);
                 setAvatar(res.data.avatar);
                 setInkId(res.data.ink_id);
                 setAuthorized(true);
@@ -129,8 +144,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setDirectUsers(res.data.direct_users);
     });
   }, [sessionToken]);
-  const setLocalStore = useCallback(({ session_token, refresh_token }) => {
-    const store = JSON.stringify({ session_token, refresh_token });
+  const updateAvatarUrl = useCallback(async(avatarUrl: string) => {
+    await axios.post('/user/update', {"avatar_url": avatarUrl}).then((res) => {
+      if(res.data.status) return;
+      setAvatar(res.data.avatar);
+      setAvatarUploading(false);
+    })
+  }, [])
+
+  const avatarUploadPut = useCallback(async(file: File, putUrl: string, avatarUrl: string) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    var instance = axios.create();
+    delete instance.defaults.headers.common['Authorization'];
+    await instance.put(putUrl, file, {headers: {'Content-Type': 'image/png'}}).then((res) => {
+      if(res.data.status) return;
+      updateAvatarUrl(avatarUrl + "?" + file.lastModified);
+      return true;
+    });
+  }, [updateAvatarUrl])
+  const avatarUploadRequest = useCallback(async(file: File) =>{
+    await axios.post(igUrl + '/user/avatar-upload-request', {}, {headers: {Authorization: 'SessionToken=' + igSessionToken}}).then(async(res) => {
+      if(res.data.status) return;
+      setWeb3UserUploadRequestUrl(res.data.uploadUrl);
+      await avatarUploadPut(file, res.data.uploadUrl, res.data.avatarProcessingUrl);
+    });
+  }, [igSessionToken, avatarUploadPut, igUrl]);
+  const setLocalStore = useCallback(({ session_token, refresh_token, ig_session_token }) => {
+    const store = JSON.stringify({ session_token, refresh_token, ig_session_token });
     localStorage.setItem('ink', store);
   }, []);
   const doRefresh = useCallback(async () => {
@@ -163,8 +204,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (data.status === 0) {
           setSessionToken(data.session_token);
           setRefreshToken(data.refresh_token);
+          setIgSessionToken(data.ig_session_token);
           setEmail(email);
-          setLocalStore({ session_token: data.session_token, refresh_token: data.refresh_token });
+          setLocalStore({ session_token: data.session_token, refresh_token: data.refresh_token, ig_session_token: data.ig_session_token });
           axios.defaults.headers.common['Authorization'] = 'SessionToken=' + data.session_token;
           await axios.post('/user/info').then((res) => {
             setAvatar(res.data.avatar);
@@ -195,6 +237,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (data.status === 0) {
           setSessionToken(data.session_token);
           setRefreshToken(data.refresh_token);
+          setIgSessionToken(data.ig_session_token);
           setFullName(data.display_name);
           setEmail(data.email);
           setLocalStore({ session_token: data.session_token, refresh_token: data.refresh_token });
@@ -287,6 +330,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       value={{
         authorized,
         sessionToken,
+        igSessionToken,
         avatar,
         inkId,
         email,
@@ -301,6 +345,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         showModal,
         setShowModal,
         setAvatar,
+        avatarUploadRequest,
+        web3UserUploadRequestUrl,
         purchase,
         resetPassword,
         balances,
@@ -309,6 +355,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         authVacancy,
         userVacancy,
         referrerLookup,
+        avatarUploading,
+        setAvatarUploading
       }}
     >
       {children}

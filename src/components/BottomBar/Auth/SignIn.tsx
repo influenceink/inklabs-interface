@@ -78,7 +78,7 @@ export const SignIn = ({ onPrev }: { onPrev: () => void }) => {
             </Box>
             <Divider />
             <Typography variant="subtitle2" fontWeight="bold" py={0} mt={2}>
-              Not account yet?
+              No account yet?
             </Typography>
             <Typography
               variant="subtitle1"
