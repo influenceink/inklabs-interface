@@ -135,11 +135,11 @@ export const Policy = () => {
             <p>
               We use this Personal Information and Non-Personal Information to:
               <ul>
-                <li>fulfill our contractual obligations set forth in our Terms of Service and comply with applicable law;</li>
-                <li>track the transactions you have made via the INK GAMES™ Services;</li>
-                <li>remember which products you have added to your basket;</li>
-                <li>provide customer service to you in relation to your use of the INK GAMES™ Services, to deal with enquiries and complaints relating to the use of the INK GAMES™ Services and to notify you about any changes to the services that we provide via the INK GAMES™ Services;</li>
-                <li>send you reminder and verification notifications such as password reminders.</li>
+                <li>Fulfill our contractual obligations set forth in our Terms of Service and comply with applicable law;</li>
+                <li>Track the transactions you have made via the INK GAMES™ Services;</li>
+                <li>Remember which products you have added to your basket;</li>
+                <li>Provide customer service to you in relation to your use of the INK GAMES™ Services, to deal with enquiries and complaints relating to the use of the INK GAMES™ Services and to notify you about any changes to the services that we provide via the INK GAMES™ Services;</li>
+                <li>Send you reminder and verification notifications such as password reminders.</li>
               </ul>
             </p>
             <p>
@@ -154,14 +154,14 @@ export const Policy = () => {
             <p>
               When you use the platform, in addition to the information we collect under Section 3.1 and 3.2 above we may also collect the following Personal Information and Non-Personal Information:
               <ul>
-                <li>feature usage</li>
-                <li>game play statistics and scores (including game progress)</li>
-                <li>performance data of the game client (including use of CPU, GPU and memory)</li>
-                <li>user rankings</li>
-                <li>click paths</li>
-                <li>data that you may provide in surveys</li>
-                <li>your account preferences</li>
-                <li>online profiles</li>
+                <li>Feature usage</li>
+                <li>Game play statistics and scores (including game progress)</li>
+                <li>Performance data of the game client (including use of CPU, GPU and memory)</li>
+                <li>User rankings</li>
+                <li>Click paths</li>
+                <li>Data that you may provide in surveys</li>
+                <li>Your account preferences</li>
+                <li>Online profiles</li>
               </ul>
             </p>
             <p>
@@ -183,12 +183,12 @@ export const Policy = () => {
               In addition to Sections 3.1 to 3.3, if we reasonably suspect that any of the INK GAMES™ Services or your Account is being, or has been, misused, including without limitation, by virtue of any:
               <ul>
                 <li>DoS attacks</li>
-                <li>hacking</li>
-                <li>cheating</li>
-                <li>fraud</li>
-                <li>distribution of spam and/or viruses</li>
-                <li>defamation, racism, hate speech etc.</li>
-                <li>other violations of our Terms of Service</li>
+                <li>Hacking</li>
+                <li>Cheating</li>
+                <li>Fraud</li>
+                <li>Distribution of spam and/or viruses</li>
+                <li>Defamation, racism, hate speech etc.</li>
+                <li>Other violations of our Terms of Service</li>
               </ul>
             </p>
             <p>
@@ -219,11 +219,11 @@ export const Policy = () => {
             <p>
               INK GAMES™ may share your Personal Information with:
               <ul>
-                <li>any of our affiliated companies, including INK Games™, InfluenceInk</li>
-                <li>third party service providers under our control and monitoring where such disclosure is necessary or helpful to enable us to provide you with any of the INK GAMES™ Services and such third parties are contractually bound to process your Personal Information and/or Non-Personal Information under the same restrictions as are set forth in this Privacy Policy</li>
-                <li>third party payment providers which are bound by strict privacy policies to carry out payment transactions with you</li>
-                <li>any person to whom disclosure is necessary to enable us to enforce our rights under this Privacy Policy or under our Terms of Service; and/or</li>
-                <li>any person to whom disclosure is necessary to enable us to enforce our rights under this Privacy Policy or under our Terms of Service (such as law enforcement authorities in case of fraud investigations)</li>
+                <li>Any of our affiliated companies, including INK Games™, InfluenceInk</li>
+                <li>Third party service providers under our control and monitoring where such disclosure is necessary or helpful to enable us to provide you with any of the INK GAMES™ Services and such third parties are contractually bound to process your Personal Information and/or Non-Personal Information under the same restrictions as are set forth in this Privacy Policy</li>
+                <li>Third party payment providers which are bound by strict privacy policies to carry out payment transactions with you</li>
+                <li>Any person to whom disclosure is necessary to enable us to enforce our rights under this Privacy Policy or under our Terms of Service; and/or</li>
+                <li>Any person to whom disclosure is necessary to enable us to enforce our rights under this Privacy Policy or under our Terms of Service (such as law enforcement authorities in case of fraud investigations)</li>
               </ul>
             </p>
             <p>

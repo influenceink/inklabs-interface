@@ -13,7 +13,7 @@ import cross from '../assets/img/cross.png';
 
 // APP TEXT
 export const APP_TITLE = 'Influence INK';
-export const APP_DESCRIPTION = 'React, TypeScript, Material-UI.';
+export const APP_DESCRIPTION = '';
 // PAGES TITLE
 export const PAGE_TITLE_ENTER = 'Enter';
 export const PAGE_TITLE_HOME = 'Home';
@@ -88,7 +88,7 @@ export const FAQS = [
   {
     question: 'What is the INK token?',
     answer:
-      'INK is an ERC-20 compliant utility token for INK Games and our suite of on-platform games and projects. INK will power many of the game and project experiences offered on the World of Influence platform, while token holders will enjoy enhanced platform experiences and distinct perks. Find out more about our token and platform: INK Games Litepaper.',
+      'INK is an ERC-20 compliant utility token for INK Games and our suite of on-platform games and projects. INK will power many of the game and project experiences offered on the World of Influence platform, while token holders will enjoy enhanced platform experiences and distinct perks. Find out more about our token and platform: <a href="https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/" target="_blank" style="color: white;">INK Games Litepaper</a>.',
   },
   {
     question: 'What cryptocurrencies are easiest or best to purchase INK with?',
@@ -96,9 +96,14 @@ export const FAQS = [
       'Buyers can use any token available on Uniswap to purchase INK. The more liquid assets, like USDC or similar stablecoins, may have more favorable rates and spreads.',
   },
   {
+    question: 'When do I get my tokens?',
+    answer:
+      'When INK tokens are generated (the "TGE" or token generation event), buyers can claim them via a link provided on the web application or user profile. Purchasers will be notified that tokens are ready to claim.'
+  },
+  {
     question: 'Will I have to convert anything using Uniswap (or another exchange protocol)?',
     answer:
-      'To reserve or purchase INK, simply connect a compatible wallet (like MetaMask or TrustWallet) and then purchase with your favored token. When the INK tokens are generated, buyers can claim them via a link provided on the web application or user profile.',
+      'To reserve or purchase INK, simply connect a compatible wallet (like MetaMask or TrustWallet) and then purchase with your favored token.',
   },
   {
     question: 'When does the 18 month vestment start?',
@@ -108,22 +113,32 @@ export const FAQS = [
   {
     question: 'Does INK provide an ownership stake in your projects?',
     answer:
-      'INK tokens do not represent equity, debt, a claim on profits, or dividends and does not constitute a financial instrument for ownership of any business or organization. INK is a utility token that offers access to certain services, features, and capabilities within our ecosystem. Value accrued to the token is by virtue of users’ demand to use INK for World of Influence activities.',
+      'INK tokens do not represent equity, debt, a claim on profits, or dividends and does not constitute a financial instrument for ownership of any business or organization. INK is a <u>utility</u> token that offers access to certain services, features, and capabilities within our ecosystem. Value accrued to the token is by virtue of users’ demand to use INK for platform activities.',
   },
   {
     question: 'Can you help me set up a wallet to receive my tokens?',
     answer:
-      'While we are unable to provide individual setup support, simple instructions are available online. Here’s one for setting up your own MetaMask wallet.',
+      'While we are unable to provide individual setup support, simple instructions are available online.%%Here’s <a href="https://www.coindesk.com/learn/how-to-set-up-a-metamask-wallet/" target="_blank" style="color: white">one for setting up your own MetaMask wallet</a>.',
   },
   {
     question: 'Do you have an INK purchase minimum in place?',
     answer:
-      'You may purchase tokens using any ERC-20 compatible cryptocurrencies available on the Polygon Network on our website at www.inktoken.com. A minimum purchase value of $5,000 USD is required. We can support wire purchases with a $100,000 USD minimum. Please contact support@inkgames.com for instructions.',
+      'You may purchase tokens using any ERC-20 compatible cryptocurrencies available on the Polygon Network on our website at <a href="https://www.inktoken.com" style="color: white">www.inktoken.com</a>. A minimum purchase value of $5,000 USD is required. We can support wire purchases with a $50,000 USD minimum. Please contact support@inktoken.com for purchasing instructions.',
   },
   {
     question: 'Do third party developers have to use INK to build on the World of Influence?',
     answer:
-      'To keep platform TAM (total addressable market) as large as possible, we do not require in-game token integration. Developers can construct their game ecosystems to utilize INK – and may enjoy a growth advantage due to staking functionality, in-game token mechanics, and expanded earning capabilities.%%However, because we do not require it, a variety of games can immediately participate with the World of Influence and our Payment & Tracking growth engine without having to change their economy.',
+        'To keep platform TAM (total addressable market) as large as possible, we do not require in-game token integration. Developers can construct their game ecosystems to utilize INK – and may enjoy a growth advantage due to staking functionality, in-game token mechanics, and expanded earning capabilities.%%However, because we do not require it, a variety of games can immediately integrate with our platform and our Payment & Tracking growth engine without having to change their economy.',
+  },
+  {
+    question: 'How does the token referral bonus work?',
+    answer:
+        'INK Games has established a policy of awarding a referral bonus equivalent to 20% of the referred user\'s total token purchase. Your bonus will be distributed in the form of INK token following the token generation event. We may discontinue the referral bonus or modify terms and conditions at our discretion.',
+  },
+  {
+    question: 'Who do I contact with other questions?',
+    answer:
+        'For non-purchasing related token questions, please contact support@inktoken.com.',
   },
 ];
 
