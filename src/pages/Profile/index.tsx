@@ -15,6 +15,11 @@ import { AuthContext } from '../../contexts';
 import cross from '../../assets/img/cross.png';
 import { ImageUpload } from '../../components/ImageUpload';
 import { getZIPState } from '../../utils';
+import loadingSpin from '../../assets/img/loading.gif';
+
+type LoadingAvatarProp = {
+  uploading: boolean
+}
 
 export const Profile = () => {
   const xl = useMediaQuery('(max-width: 1660px)');
@@ -33,9 +38,16 @@ export const Profile = () => {
     zipCodes,
     signOut,
     userInfo,
+    avatarUploadRequest,
+    avatarUploading,
+    setAvatarUploading
   } = useContext(AuthContext);
-  const handleAvatarUpload = (ev: ChangeEvent<HTMLInputElement>) => {
-    if (ev.target && ev.target.files) setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
+  const handleAvatarUpload = async (ev: ChangeEvent<HTMLInputElement>) => {
+    if (ev.target && ev.target.files){
+      setAvatarUploading(true);
+			await avatarUploadRequest(ev.target.files[0]);
+			//setAvatar(window.URL.createObjectURL(ev.target!.files[0]) || '');
+		}
   };
   useEffect(() => {
     if (authorized !== null) {
@@ -68,9 +80,13 @@ export const Profile = () => {
             maxWidth={1024}
           >
             <AvatarWrapper htmlFor="upload_avatar">
-              <Avatar src={avatar} alt="" />
-              <ImageUpload />
-              <input type="file" id="upload_avatar" accept="image/png, image/jpeg" onChange={handleAvatarUpload} />
+              <Avatar src={avatar} alt="" uploading={avatarUploading}/>
+              {avatarUploading ? <LoadingImg src={loadingSpin} alt="Loading"/> :
+                <>
+                  <ImageUpload />
+                  <input type="file" id="upload_avatar" accept="image/png, image/jpeg" onChange={handleAvatarUpload} />  
+                </>
+              }
             </AvatarWrapper>
             <Typography variant="subtitle2" mt={1} fontWeight="semibold" fontSize="18px" lineHeight="18px">
               @{inkId}
@@ -248,13 +264,16 @@ const CardImage = styled('img')`
   min-width: 0px;
   max-width: 75px;
 `;
-const Avatar = styled('img')`
-  width: 155px;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-top: -90px;
-`;
+const Avatar = styled('img')<LoadingAvatarProp>(({uploading}) => ({
+  width: '155px',
+  aspectRatio: '1',
+  objectFit: 'cover',
+  borderRadius: '10px',
+  marginTop: '-90px',
+  ...(uploading && {
+    opacity: '0.5'
+  })
+}));
 const AvatarWrapper = styled('label')`
   position: relative;
   & > input {
@@ -364,3 +383,10 @@ const StyledText = styled('span')`
   font-weight: bold;
   color: gray;
 `;
+
+const LoadingImg = styled('img')`
+  position: absolute;
+  top: -32px;
+  left: calc(50% - 25px);
+  width: 50px;
+`
