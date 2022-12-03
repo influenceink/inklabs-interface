@@ -1,4 +1,5 @@
 import { Box, Typography, useMediaQuery, styled, Grid } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useContext } from 'react';
 import { PageContent } from '../components/PageContent';
@@ -17,6 +18,11 @@ import { PurchaseFlowContext } from '../contexts';
 export const Coin = () => {
   const xl = useMediaQuery('(max-width: 1200px)');
   const { setShowModal } = useContext(PurchaseFlowContext);
+  const history = useHistory();
+  const toggleShowPurchaseFlow = () => {
+    history.push('/');
+    setShowModal((value: boolean) => !value);
+  };
   return (
     <>
       <Helmet>
@@ -218,7 +224,7 @@ export const Coin = () => {
               an approximate 75% exposure to fiat currency (USD held in corporate accounts) and 25% cryptocurrency.
             </Paragraph>
             <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-              <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+              <RedButton onClick={() => toggleShowPurchaseFlow() }>reserve ink</RedButton>
               <RedButton
                 onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
               >

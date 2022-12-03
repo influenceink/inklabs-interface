@@ -26,6 +26,12 @@ export const Menu = ({ show, setShow }: Props) => {
     setPurchase(false);
     history.push(path);
   };
+  const toggleShowPurchaseFlow = () => {
+    history.push('/');
+    setShow(false);
+    setAuth(false);
+    setPurchase((value: boolean) => !value);
+  };
   return (
     <>
       <Slide direction="up" in={show} mountOnEnter unmountOnExit>
@@ -44,7 +50,7 @@ export const Menu = ({ show, setShow }: Props) => {
               {/* <MenuItem onClick={() => goTo('/woi')}>world of influence</MenuItem> */}
               <MenuItem onClick={() => goTo('/convergence')}>convergence</MenuItem>
               <MenuItem onClick={() => goTo('/coin')}>ink token</MenuItem>
-              <MenuItemImage onClick={() => goTo('/referral-program')}>
+              <MenuItemImage onClick={toggleShowPurchaseFlow}>
                 <img style={{width: '100%'}} alt="Referral Program" src={referral}/>
               </MenuItemImage>
               {mobile && (
