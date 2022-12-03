@@ -16,7 +16,7 @@ export const SocialButtonGroup = () => {
         <SocialButton href="https://www.facebook.com/INKGamesOfficial" target="_blank" rel="noreferrer">
           <img src={facebook} alt="facebook" />
         </SocialButton>
-        <SocialButton href="https://www.instagram.com/inkgamesofficial" target="_blank" rel="noreferrer">
+        <SocialButton href="https://www.instagram.com/inkplatform" target="_blank" rel="noreferrer">
           <img src={instagram} alt="instagram" />
         </SocialButton>
         <SocialButton href="https://www.youtube.com/channel/UCzu24Zhl-t2Fw2gEG5sGLGg" target="_blank" rel="noreferrer">

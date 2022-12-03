@@ -10,10 +10,16 @@ import stepImg3 from '../assets/img/step3.png';
 import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';
+import {useHistory} from "react-router-dom";
 
 export const Vision = () => {
   const xl = useMediaQuery('(max-width: 1200px)');
   const { setShowModal } = useContext(PurchaseFlowContext);
+  const history = useHistory();
+  const toggleShowPurchaseFlow = () => {
+    history.push('/');
+    setShowModal((value: boolean) => !value);
+  };
   return (
     <>
       <Helmet>
@@ -51,7 +57,7 @@ export const Vision = () => {
                 mb={4}
                 sx={{ marginTop: { xs: '16px', md: '64px' } }}
               >
-                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+                <RedButton onClick={() => toggleShowPurchaseFlow()}>reserve ink</RedButton>
                 <RedButton
                   onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
                 >

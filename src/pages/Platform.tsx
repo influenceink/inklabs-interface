@@ -9,10 +9,16 @@ import platformImg1 from '../assets/img/platform1.jpg';
 import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';
+import {useHistory} from "react-router-dom";
 
 export const Platform = () => {
   const xl = useMediaQuery('(max-width: 1200px)');
   const { setShowModal } = useContext(PurchaseFlowContext);
+  const history = useHistory();
+  const toggleShowPurchaseFlow = () => {
+    history.push('/');
+    setShowModal((value: boolean) => !value);
+  };
   return (
     <>
       <Helmet>
@@ -95,7 +101,7 @@ export const Platform = () => {
                 web3 projects, games, and other platform experiences into monetizable campaigns.
               </Paragraph>
               <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+                <RedButton onClick={() => toggleShowPurchaseFlow()}>reserve ink</RedButton>
                 <RedButton
                   onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
                 >
