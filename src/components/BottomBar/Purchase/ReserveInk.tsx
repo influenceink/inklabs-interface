@@ -165,7 +165,8 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
           <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
             <FormButton onClick={handleWalletConnect}>connect wallet</FormButton>
             <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
-              Minimum Amount ${Number(process.env.REACT_APP_MIN_AMOUNT || '5000').toLocaleString()} USD
+              Minimum amount ${Number(process.env.REACT_APP_MIN_AMOUNT || '5000').toLocaleString()} USD
+              Minimum amount ${Number(process.env.REACT_APP_MIN_AMOUNT || '5000').toLocaleString()} USD
             </Typography>
           </Box>
           <Box width="100%" mt={1} display="flex" justifyContent="center">
@@ -177,15 +178,15 @@ export const ReserveInk = ({ onNext, onPrev }: { onNext: Function; onPrev: () =>
             <Typography variant="subtitle2" fontWeight="bold" fontSize="24px" lineHeight="24px">
               SEND A WIRE
             </Typography>
-            <Typography variant="subtitle1" color="#ffffff88">
-              FOR INSTRUCTIONS:
+            <Typography align="center" variant="subtitle1" color="#ffffff88">
+              TO INQUIRE ABOUT WIRE TRANSFERS AND OTHER METHODS OF PAYMENT EMAIL US AT:
             </Typography>
             <Box width="100%" mt={3} display="flex" flexDirection="column" alignItems="center">
               <FormButton>
-                <Link href="mailto: reserve@inktoken.com">reserve@inktoken.com</Link>
+                <Link href="mailto: support@inktoken.com">support@inktoken.com</Link>
               </FormButton>
               <Typography variant="subtitle2" fontWeight="600" color="#ffffff88" mt={2}>
-                Minimum Amount $50k USD
+                Minimum wire amount $50k USD
               </Typography>
             </Box>
           </Box>

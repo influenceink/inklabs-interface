@@ -8,10 +8,16 @@ import productsImg from '../assets/img/products.jpg';
 import { Divider, Image, Paragraph, RedButton } from './Components';
 import { PurchaseFlowContext } from '../contexts';
 import { useContext } from 'react';
+import {useHistory} from "react-router-dom";
 
 export const Products = () => {
   const xl = useMediaQuery('(max-width: 1200px)');
   const { setShowModal } = useContext(PurchaseFlowContext);
+  const history = useHistory();
+  const toggleShowPurchaseFlow = () => {
+    history.push('/');
+    setShowModal((value: boolean) => !value);
+  };
   return (
     <>
       <Helmet>
@@ -81,7 +87,7 @@ export const Products = () => {
                 promotions, access to in-house gaming titles, and real world events.
               </Paragraph>
               <Box display="flex" gap="24px" justifyContent="start" sx={{ marginTop: { md: '64px' } }} mb={4}>
-                <RedButton onClick={() => setShowModal(true)}>reserve ink</RedButton>
+                <RedButton onClick={() => toggleShowPurchaseFlow()}>reserve ink</RedButton>
                 <RedButton
                   onClick={() => window.open('https://ink-games.gitbook.io/ink-games-litepaper/y1oSbwlz4PSu8kIHeuHp/')}
                 >
